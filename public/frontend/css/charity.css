@@ -1,0 +1,400 @@
+@charset "UTF-8";
+.charity .custom-container {
+  max-width: 1520px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.charity .bg-logo {
+  width: 218px;
+  height: 110px;
+  background: linear-gradient(104deg, #ecab23 0%, #2c2e3c 100%);
+  box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+.charity-home-section-2 .shape-img-1 img {
+  width: 350px;
+  height: 220px;
+  transform: rotate(11deg);
+}
+.charity-home-section-2 .shape-img-2 img {
+  width: 350px;
+  height: 300px;
+  transform: rotate(-25deg);
+  opacity: 0.2;
+}
+.charity-home-section-2 .shape-img-3 img {
+  width: 350px;
+  height: 300px;
+  transform: rotate(15deg);
+}
+.charity-home-section-2 .shape-img-4 img {
+  width: 350px;
+  height: 220px;
+  transform: rotate(-17deg);
+}
+
+@media (min-width: 1400px) {
+  .charity-home-section-3 .card-feature:nth-child(odd) {
+    margin-top: 40px !important;
+  }
+}
+.charity-home-section-3 .card-feature .line {
+  width: 50px;
+  height: 1px;
+  background: var(--tc-theme-primary);
+  transition: all 0.3s ease;
+}
+.charity-home-section-3 .card-feature:hover .bg-white {
+  border-radius: 10px;
+  border: 1px solid var(--Black-2, #2c2e3c) !important;
+  box-shadow: 0px 30px 60px 0px rgba(0, 0, 0, 0.1);
+}
+.charity-home-section-3 .card-feature:hover .line {
+  width: 110px;
+  height: 1px;
+  background: var(--tc-theme-primary);
+}
+
+.card-listing {
+  box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
+}
+.card-listing:hover {
+  border-color: var(--tc-system-black) !important;
+}
+
+.progress,
+.progress-stacked {
+  --bs-progress-height: 4px;
+  --bs-progress-font-size: 0.75rem;
+  --bs-progress-bg: #e9e9e9;
+  --bs-progress-border-radius: 20px;
+  --bs-progress-box-shadow: var(--bs-box-shadow-inset);
+  --bs-progress-bar-color: #fff;
+  --bs-progress-bar-bg: var(--tc-theme-primary);
+  --bs-progress-bar-transition: width 0.6s ease;
+  display: flex;
+  height: var(--bs-progress-height);
+  overflow: hidden;
+  font-size: var(--bs-progress-font-size);
+  background-color: var(--bs-progress-bg);
+  border-radius: var(--bs-progress-border-radius);
+}
+
+.masonary-active .card-listing {
+  margin: 15px 0;
+}
+
+.grid-sizer,
+.grid-item {
+  width: 50%;
+}
+
+@media (min-width: 1400px) {
+  .grid-sizer,
+  .grid-item {
+    width: 33.33%;
+  }
+}
+/* 2 columns */
+.grid-item--width2 {
+  width: 66.66%;
+}
+
+.charity-home-section-5 .avatar-1 {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--tc-system-white);
+}
+.charity-home-section-5 .avatar-2 {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--tc-system-white);
+  margin-left: -20px;
+}
+
+.charity-become-a-volunteer-section-1 .progress,
+.charity-become-a-volunteer-section-1 .progress-stacked {
+  --bs-progress-height: 12px;
+}
+
+.charity-home-section-6 .content {
+  color: #aeb0c1;
+}
+.charity-home-section-6 .pb-380px {
+  padding-bottom: 380px;
+}
+@media (max-width: 991.98px) {
+  .charity-home-section-6 .pb-380px {
+    padding-bottom: 250px;
+  }
+}
+.charity-home-section-6 .swiper-slide:nth-child(odd) {
+  padding: 50px;
+}
+
+.section-footer-19 .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-body-text-secondary);
+  opacity: 0.5;
+}
+.section-footer-19 .icon:hover svg {
+  fill: var(--tc-system-black);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+.section-footer-19 .form-element input {
+  display: none;
+}
+.section-footer-19 .form-element input:checked + label {
+  border: 1px solid var(--tc-theme-primary);
+}
+.section-footer-19 .form-element input:checked + label span {
+  color: var(--tc-theme-primary) !important;
+}
+.section-footer-19 .form-control {
+  color: white;
+  height: 54px;
+}
+
+.card-team .card-team-img {
+  border-radius: 16px;
+  background: #f3f3f3;
+  min-height: 370px;
+  width: 100%;
+}
+.card-team .card-team-content .btn-share .icon-shape::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 118px;
+  bottom: 0;
+  z-index: -2;
+}
+.card-team .card-team-content .btn-share .social-group {
+  transition: all 0.4s linear;
+  transform: translateY(-150%);
+  z-index: -1;
+}
+@media (min-width: 1400px) {
+  .card-team .card-team-content .btn-share .social-group {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+.card-team .card-team-content .btn-share .social-group .icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+.card-team .card-team-content .btn-share .social-group .icon svg {
+  height: 20px;
+  width: 20px;
+}
+.card-team .card-team-content .btn-share .social-group .icon svg path {
+  fill: var(--tc-system-black);
+}
+.card-team .card-team-content .btn-share .social-group .icon:hover {
+  background: var(--tc-theme-primary);
+}
+.card-team .card-team-content .btn-share .social-group .icon:hover svg path {
+  fill: var(--tc-system-white);
+  transition-duration: 0.2s;
+}
+.card-team .card-team-content .btn-share:hover .social-group {
+  transform: translateY(-150%);
+  opacity: 1;
+}
+.card-team .card-team-content {
+  background: var(--tc-system-white);
+  transform: translateY(-50%);
+  width: 85%;
+  padding: 29px 24px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.09);
+}
+
+.accordion .card {
+  transition: all 0.35s ease-in-out;
+}
+.accordion .card .card-header {
+  background-color: transparent;
+}
+.accordion .card .card-header a {
+  background-color: var(--tc-theme-primary);
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+}
+.accordion .card .card-header a .arrow {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--tc-system-white);
+  transition: 0.35s;
+  transform: rotate(0deg);
+}
+.accordion .card .card-header a .arrow::before {
+  font-family: bootstrap-icons;
+  content: "\f282";
+  color: var(--tc-system-black);
+  font-size: 18px;
+}
+.accordion .card .card-header a.collapsed {
+  border-radius: 9px;
+  background-color: var(--tc-system-white);
+}
+.accordion .card .card-header a.collapsed .arrow {
+  background-color: var(--tc-theme-primary);
+  transform: rotate(180deg);
+  transition: 0.35s;
+}
+.accordion .card .card-header a.collapsed .arrow::before {
+  color: var(--tc-system-black);
+  content: "\f282";
+}
+.accordion .card .collapse.show {
+  background-color: var(--tc-theme-primary);
+}
+.accordion .card .collapsing {
+  background-color: var(--tc-theme-primary) !important;
+}
+
+.pagination_item {
+  background: var(--tc-bg-light);
+  color: var(--tc-system-black);
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+.pagination_item svg path {
+  stroke: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active {
+  background: var(--tc-theme-primary) !important;
+  color: var(--tc-bg-light) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active svg path {
+  stroke: var(--tc-bg-light) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover {
+  background: var(--tc-theme-primary) !important;
+  color: var(--tc-bg-light) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover svg path {
+  stroke: var(--tc-bg-light) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus {
+  box-shadow: none;
+  background-color: var(--tc-theme-primary) !important;
+  color: var(--tc-bg-light) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus svg path {
+  stroke: var(--tc-bg-light) !important;
+  transition: 0.3s ease-in-out;
+}
+
+.charity-causes-details-section-1 .socials .icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+.charity-causes-details-section-1 .socials .icon svg {
+  height: 20px;
+  width: 20px;
+}
+.charity-causes-details-section-1 .socials .icon svg path {
+  fill: var(--tc-system-black);
+}
+.charity-causes-details-section-1 .socials .icon:hover {
+  background: var(--tc-theme-primary);
+}
+.charity-causes-details-section-1 .socials .icon:hover svg path {
+  fill: var(--tc-system-white);
+  transition-duration: 0.2s;
+}
+.charity-causes-details-section-1:hover .social-group {
+  transform: translateY(-150%);
+  opacity: 1;
+}
+.charity-causes-details-section-1 .form-donation {
+  margin-top: -40px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.charity-causes-details-section-1 .form-donation .progressbar .progress-bar-info {
+  left: 26%;
+}
+.charity-causes-details-section-1 .form-donation .form-element-select .form-element input {
+  display: none;
+}
+.charity-causes-details-section-1 .form-donation .form-element-select .form-element input:checked + label {
+  background: var(--tc-theme-primary) !important;
+}
+.charity-causes-details-section-1 .form-donation .form-control {
+  color: white;
+  height: 54px;
+}
+.charity-causes-details-section-1 .form-donation .custom-radio .form-check-input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e6a500; /* Màu viền vàng */
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  box-shadow: none;
+  background-color: transparent;
+}
+.charity-causes-details-section-1 .form-donation .custom-radio .form-check-input:checked {
+  background-color: white; /* Màu nền khi chọn */
+  box-shadow: none;
+}
+.charity-causes-details-section-1 .form-donation .custom-radio .form-check-input:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #e6a500; /* Chấm trắng bên trong */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.charity-causes-details-section-1 .form-donation .custom-radio .form-check-label {
+  margin-left: 8px;
+  font-weight: bold;
+  color: #2b2e3b; /* Màu chữ đen đậm */
+  font-size: 16px;
+}
+
+.card-contact-2 .form-control {
+  color: var(--tc-system-black);
+  border-radius: 8px;
+  background: #fff;
+}
+.card-contact-2 textarea {
+  min-height: 120px;
+}
+/*# sourceMappingURL=charity.css.map */

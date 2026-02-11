@@ -1,0 +1,446 @@
+.crypto-agency-home-section-1 .progress {
+  --bs-progress-height: 4px;
+  --bs-progress-bg: #151c4e;
+}
+.crypto-agency-home-section-1 .progress-bar {
+  background-color: var(--tc-theme-primary);
+}
+
+.crypto-agency-home-section-2 {
+  --bs-border-color: #222859;
+}
+
+.crypto-agency-home-section-3 svg {
+  margin-top: -10px;
+}
+.crypto-agency-home-section-3 svg text {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.8px;
+  fill: transparent;
+  stroke: var(--tc-theme-primary);
+  stroke-width: 2px;
+  animation: animated-stroke 2s;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+@media (max-width: 575.98px) {
+  .crypto-agency-home-section-3 svg text {
+    text-anchor: start;
+  }
+}
+
+.crypto-agency-home-section-4 .card-service:hover {
+  background: linear-gradient(#03061c, #03061c) padding-box, linear-gradient(to top, rgba(177, 227, 70, 0.3), rgba(26, 28, 76, 0)) border-box;
+}
+
+.crypto-agency-home-section-5 {
+  --bs-border-color: #1b214a !important;
+}
+.crypto-agency-home-section-5 .logo-event {
+  min-height: 200px;
+}
+.crypto-agency-home-section-5 .logo-event a {
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+.crypto-agency-home-section-5 .logo-event:hover a {
+  opacity: 1;
+}
+
+.crypto-agency-home-section-6 .card-service:hover {
+  background: linear-gradient(#03061c, #03061c) padding-box, linear-gradient(to top, rgba(177, 227, 70, 0.3), rgba(26, 28, 76, 0)) border-box;
+}
+.crypto-agency-home-section-6 .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  background: #5a5a5a;
+}
+.crypto-agency-home-section-6 .swiper-pagination-bullet-active {
+  width: 6px;
+  height: 6px;
+  background: var(--tc-theme-primary);
+}
+
+.crypto-agency-home-section-8 .swiper-button-next,
+.crypto-agency-home-section-8 .swiper-button-prev {
+  --swiper-navigation-size: 16px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
+  --swiper-navigation-color: var(--tc-system-black);
+  display: flex;
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+  font-size: 16px;
+  border-radius: 50px;
+  background-color: #03061c;
+  border: 1px solid #1f2446;
+}
+.crypto-agency-home-section-8 .swiper-button-next svg,
+.crypto-agency-home-section-8 .swiper-button-prev svg {
+  width: 16px;
+  height: 16px;
+}
+.crypto-agency-home-section-8 .swiper-button-next:hover,
+.crypto-agency-home-section-8 .swiper-button-next :active,
+.crypto-agency-home-section-8 .swiper-button-prev:hover,
+.crypto-agency-home-section-8 .swiper-button-prev :active {
+  background-color: var(--tc-theme-primary);
+  border-color: var(--tc-theme-primary);
+}
+.crypto-agency-home-section-8 .swiper-button-next:hover svg path,
+.crypto-agency-home-section-8 .swiper-button-next :active svg path,
+.crypto-agency-home-section-8 .swiper-button-prev:hover svg path,
+.crypto-agency-home-section-8 .swiper-button-prev :active svg path {
+  fill: var(--tc-system-navy-blue-3);
+}
+
+.section-footer-26 .form-control::-moz-placeholder {
+  color: var(--tc-system-white);
+  opacity: 0.3;
+}
+
+.section-footer-26 .form-control::placeholder {
+  color: var(--tc-system-white);
+  opacity: 0.3;
+}
+.section-footer-26 .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-system-white);
+  opacity: 0.5;
+}
+.section-footer-26 .icon:hover svg {
+  fill: var(--tc-system-white);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+
+.crypto-agency-home-section-4 .swiper-slide {
+  width: auto !important;
+}
+
+.crypto-agency-home-section-7 .download-app {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.crypto-agency-about-section-1 .solutions-list .line {
+  border-left: 1px dashed rgba(255, 255, 255, 0.3);
+  margin-left: 30px;
+}
+.crypto-agency-about-section-1 .solutions-list .solutions-item {
+  cursor: pointer;
+}
+.crypto-agency-about-section-1 .solutions-list .solutions-item .icon-shape {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.crypto-agency-about-section-1 .solutions-list .solutions-item:hover .icon-shape {
+  background-color: var(--tc-theme-primary);
+}
+.crypto-agency-about-section-1 .solutions-list .solutions-item:hover .icon-shape svg path {
+  stroke: var(--tc-system-black);
+  transition: all 0.3s ease-in-out;
+}
+.crypto-agency-about-section-1 .solutions-description-img {
+  position: relative;
+}
+.crypto-agency-about-section-1 .solutions-description-img .circle {
+  width: 500px;
+  height: 500px;
+  border-radius: 500px;
+  opacity: 0.5;
+  background: linear-gradient(180deg, #50eefa 0%, rgba(255, 255, 255, 0) 100%);
+}
+.crypto-agency-about-section-1 .solutions-description-img .images {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+.crypto-agency-about-section-4 .btn-industries {
+  transition: all 0.3s linear;
+  background: rgba(255, 255, 255, 0.1);
+}
+.crypto-agency-about-section-4 .btn-industries:hover {
+  background: var(--tc-theme-primary);
+}
+.crypto-agency-about-section-4 .btn-industries:hover .icon-shape {
+  background: #03060a !important;
+}
+.crypto-agency-about-section-4 .btn-industries:hover .icon-shape svg path {
+  stroke: var(--tc-theme-primary);
+}
+.crypto-agency-about-section-4 .btn-industries:hover h6 {
+  color: var(--tc-system-black);
+}
+
+.crypto-agency-about-section-5 .form-group,
+.crypto-agency-blog-details-section-2 .form-group {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+.crypto-agency-about-section-5 .form-group .form-control,
+.crypto-agency-blog-details-section-2 .form-group .form-control {
+  color: var(--tc-system-white);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+.crypto-agency-about-section-5 .form-group textarea,
+.crypto-agency-blog-details-section-2 .form-group textarea {
+  min-height: 170px;
+}
+.crypto-agency-about-section-5 .form-group .form-select,
+.crypto-agency-blog-details-section-2 .form-group .form-select {
+  color: var(--tc-system-white);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+.crypto-agency-about-section-5 .form-group .form-select:focus,
+.crypto-agency-blog-details-section-2 .form-group .form-select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.crypto-agency-about-section-1 .row,
+.crypto-agency-our-services-section-1 .row {
+  --bs-gutter-x: 40px;
+  --bs-gutter-y: 80px;
+}
+
+.card-services {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 70px 32px 32px 32px;
+  transition: all 0.2s linear;
+}
+.card-services:hover {
+  background: var(--tc-theme-primary);
+}
+.card-services:hover a h6 {
+  transition: all 0.3s ease-in-out;
+  color: var(--tc-system-black);
+}
+.card-services:hover p {
+  color: var(--tc-system-black) !important;
+}
+.card-services .icon-shape {
+  border: 4px solid #03061c;
+}
+.card-services .card-body {
+  padding-top: 24px;
+}
+
+.card-industries {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 24px 24px 40px 24px;
+  transition: all 0.2s linear;
+}
+.card-industries:hover {
+  border-color: var(--tc-theme-primary);
+}
+.card-industries:hover a h6 {
+  transition: all 0.2s ease-in-out;
+  color: var(--tc-theme-primary);
+}
+.card-industries .card-img {
+  border-radius: 16px;
+}
+.card-industries .card-body {
+  padding-top: 24px;
+}
+.card-industries .card-body .card-information .time {
+  position: relative;
+}
+.card-industries .card-body .card-information .time::after {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 14px;
+  transform: rotate(90deg);
+  background-color: rgb(255, 255, 255);
+  opacity: 0.1;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0px;
+}
+.card-industries .card-body .btn-linear {
+  --bs-btn-bg: linear-gradient(#121529, #121529) padding-box, linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(26, 28, 76, 0)) border-box;
+  --bs-btn-hover-bg: linear-gradient(#121529, #121529) padding-box, linear-gradient(to bottom, rgba(80, 238, 250, 1), rgba(26, 28, 76, 0)) border-box;
+}
+
+.card-contact {
+  padding: 32px;
+  transition: all 0.2s linear;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+.card-contact .text-opacity-90 {
+  opacity: 0.9;
+}
+.card-contact:hover {
+  border-color: var(--tc-theme-primary);
+}
+
+.card-pricing {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 32px;
+}
+
+.card-pricing-primary {
+  border-radius: 16px;
+  background: var(--tc-theme-primary);
+  padding: 32px;
+}
+
+.card-team {
+  transition: all 0.2s linear;
+}
+.card-team .card-img {
+  border-radius: 16px;
+  border: 1px solid rgba(80, 238, 250, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+.card-team .card-img .logo {
+  transition: all 0.2s linear;
+  opacity: 0.34;
+}
+.card-team .card-img .social-group {
+  transition: all 0.2s linear;
+  transform: translateY(100%);
+  opacity: 0;
+}
+@media (max-width: 991.98px) {
+  .card-team .card-img .social-group {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.card-team .card-img .social-group .icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+.card-team .card-img .social-group .icon svg {
+  height: 22px;
+  width: 22px;
+}
+.card-team .card-img .social-group .icon svg path {
+  fill: var(--tc-system-white);
+  opacity: 0.5;
+}
+.card-team .card-img .social-group .icon:hover {
+  background: var(--tc-theme-primary);
+}
+.card-team .card-img .social-group .icon:hover svg path {
+  fill: var(--tc-system-black);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+.card-team .card-body {
+  padding-top: 32px;
+}
+.card-team .card-body .btn-share {
+  transition: all 0.2s linear;
+  background-color: var(--tc-system-white);
+}
+.card-team .card-body .btn-share:hover {
+  background-color: var(--tc-theme-primary);
+}
+.card-team:hover .logo {
+  opacity: 1;
+}
+.card-team:hover .social-group {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.accordion .card {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  transition: all 0.3s linear;
+  overflow: hidden;
+}
+.accordion .card .card-header {
+  background: transparent;
+  border-bottom: 0;
+}
+.accordion .card .card-header a {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  transition: all 0.3s ease-in-out;
+}
+.accordion .card .card-header a .arrow::before {
+  transform: rotate(0deg) !important;
+  font-family: "remixicon";
+  content: "\ea4e";
+  transition: 0.3s;
+  color: var(--tc-system-white);
+  font-size: 24px;
+  font-weight: 300;
+}
+.accordion .card .card-header a.collapsed .arrow::before {
+  content: "\ea4e";
+  transition: 0.3s;
+  transform: rotate(180deg) !important;
+}
+.accordion .active {
+  border-color: var(--tc-theme-primary) !important;
+}
+
+.pagination_item {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--tc-system-white);
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+}
+.pagination_item svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active svg path {
+  stroke: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover svg path {
+  stroke: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus {
+  box-shadow: none;
+  background-color: var(--tc-theme-primary) !important;
+  color: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus svg path {
+  stroke: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+/*# sourceMappingURL=crypto-agency.css.map */

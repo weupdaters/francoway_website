@@ -1,0 +1,296 @@
+.yoga-section-header {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.yoga-section-header::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-color: #0a0004;
+  opacity: 0.5;
+}
+
+.yoga-section-2 .card-service {
+  transition: all 0.2s ease-in-out;
+}
+.yoga-section-2 .card-service:hover {
+  border-color: var(--tc-theme-primary) !important;
+}
+
+.text-section-about {
+  margin-bottom: -110px;
+}
+
+.yoga-section-3 .carouselTicker__item {
+  margin: 0 20px;
+}
+
+.yoga-home-section-4 .swiper-button-next,
+.yoga-home-section-4 .swiper-button-prev,
+.yoga-about-section-5 .swiper-button-next,
+.yoga-about-section-5 .swiper-button-prev,
+.yoga-blog-section-1 .swiper-button-next,
+.yoga-blog-section-1 .swiper-button-prev {
+  --swiper-navigation-size: 16px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
+  --swiper-navigation-color: var(--tc-system-black);
+  display: flex;
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+  font-size: 16px;
+  border-radius: 50px;
+  background-color: var(--tc-system-white);
+  border: 1px solid var(--tc-system-navy-blue-3);
+}
+.yoga-home-section-4 .swiper-button-next svg,
+.yoga-home-section-4 .swiper-button-prev svg,
+.yoga-about-section-5 .swiper-button-next svg,
+.yoga-about-section-5 .swiper-button-prev svg,
+.yoga-blog-section-1 .swiper-button-next svg,
+.yoga-blog-section-1 .swiper-button-prev svg {
+  width: 16px;
+  height: 16px;
+}
+.yoga-home-section-4 .swiper-button-next:hover,
+.yoga-home-section-4 .swiper-button-next :active,
+.yoga-home-section-4 .swiper-button-prev:hover,
+.yoga-home-section-4 .swiper-button-prev :active,
+.yoga-about-section-5 .swiper-button-next:hover,
+.yoga-about-section-5 .swiper-button-next :active,
+.yoga-about-section-5 .swiper-button-prev:hover,
+.yoga-about-section-5 .swiper-button-prev :active,
+.yoga-blog-section-1 .swiper-button-next:hover,
+.yoga-blog-section-1 .swiper-button-next :active,
+.yoga-blog-section-1 .swiper-button-prev:hover,
+.yoga-blog-section-1 .swiper-button-prev :active {
+  background-color: var(--tc-system-black);
+}
+.yoga-home-section-4 .swiper-button-next:hover svg path,
+.yoga-home-section-4 .swiper-button-next :active svg path,
+.yoga-home-section-4 .swiper-button-prev:hover svg path,
+.yoga-home-section-4 .swiper-button-prev :active svg path,
+.yoga-about-section-5 .swiper-button-next:hover svg path,
+.yoga-about-section-5 .swiper-button-next :active svg path,
+.yoga-about-section-5 .swiper-button-prev:hover svg path,
+.yoga-about-section-5 .swiper-button-prev :active svg path,
+.yoga-blog-section-1 .swiper-button-next:hover svg path,
+.yoga-blog-section-1 .swiper-button-next :active svg path,
+.yoga-blog-section-1 .swiper-button-prev:hover svg path,
+.yoga-blog-section-1 .swiper-button-prev :active svg path {
+  fill: var(--tc-system-white);
+}
+
+.yoga-section-5 .select-form select {
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 60px;
+  border-radius: 0;
+  padding-left: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-image: url(../imgs/template/icons/arrow-down.svg);
+}
+.yoga-section-5 .select-form select:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.yoga-section-5 .btn.show {
+  color: var(--tc-system-white);
+}
+.yoga-section-5 .form-control {
+  color: var(--tc-system-white);
+}
+
+.swiper-group-slide-text .swiper-slide {
+  width: auto !important;
+}
+
+.section-footer-25 .social-icons .icon {
+  transition: all 0.3s ease-in-out;
+}
+.section-footer-25 .social-icons .icon svg {
+  height: 14px;
+  width: 14px;
+}
+.section-footer-25 .social-icons .icon svg path {
+  fill: var(--tc-system-black);
+}
+.section-footer-25 .social-icons .icon:hover {
+  background-color: var(--tc-theme-primary);
+  border-color: var(--tc-theme-primary) !important;
+}
+.section-footer-25 .social-icons .icon:hover svg path {
+  fill: var(--tc-system-white);
+}
+
+.yoga-about-section-1 .img-2-sec2 {
+  border: 9px solid #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+}
+
+.card-wellness .icon .icon-shape {
+  background-color: #f5dfe3;
+  z-index: 0;
+}
+
+.card-experts .experts-overlay {
+  content: "";
+  position: absolute;
+  transition: all 0.3s linear;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  bottom: 0;
+}
+.card-experts .experts-overlay::before {
+  content: "";
+  position: absolute;
+  transition: all 0.3s linear;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--tc-theme-primary);
+  opacity: 0;
+  transform: translateX(-50%);
+}
+.card-experts .experts-overlay .icon {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 34px;
+}
+.card-experts .experts-overlay .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-system-white);
+  opacity: 0.5;
+}
+.card-experts .experts-overlay .icon:hover {
+  background: var(--tc-system-white);
+}
+.card-experts .experts-overlay .icon:hover svg {
+  fill: var(--tc-theme-primary);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+.card-experts:hover .experts-overlay {
+  opacity: 1;
+}
+.card-experts:hover .experts-overlay::before {
+  opacity: 0.9;
+  transform: translateX(0%);
+}
+
+.form-element-select .form-element input {
+  display: none;
+}
+.form-element-select .form-element input:checked + label {
+  background: var(--tc-theme-primary) !important;
+  color: var(--tc-system-white);
+}
+
+.form-control {
+  height: 60px;
+}
+
+.yoga-contact-section-1 .form-group .form-control {
+  color: var(--tc-system-black);
+  border-radius: 0px;
+  border: 1px solid #fff;
+  background: #fff;
+}
+.yoga-contact-section-1 .form-group textarea {
+  min-height: 170px;
+}
+.yoga-contact-section-1 .form-group .form-select {
+  color: #666;
+  background-color: #fff;
+  height: 60px;
+  border-radius: 0;
+  padding-left: 3rem;
+  border: 0;
+}
+.yoga-contact-section-1 .form-group .form-select:focus {
+  outline: none;
+  box-shadow: none;
+  border: 0;
+}
+
+.yoga-about-section-6 .select-form select {
+  color: #666;
+  background-color: rgb(255, 255, 255);
+  height: 60px;
+  border-radius: 0;
+  padding-left: 3rem;
+  border: 0;
+}
+.yoga-about-section-6 .select-form select:focus {
+  outline: none;
+  box-shadow: none;
+  border: 0;
+}
+
+.yoga-blog-section-2 .pagination_item {
+  background: #ffffff;
+  font-weight: 600 !important;
+}
+
+.pagination_item {
+  background: #f8f2f3;
+  font-weight: 600 !important;
+}
+
+.btn-secondary {
+  --bs-btn-bg: #f5f7f8;
+}
+
+.btn-white {
+  --bs-btn-hover-color: var(--tc-system-black);
+}
+
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px; /*Fix for safari gap*/
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+}
+/*# sourceMappingURL=yoga.css.map */

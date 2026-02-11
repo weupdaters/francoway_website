@@ -1,0 +1,338 @@
+.coworking-space-section-header .bg-img-coworking {
+  background-size: cover;
+  background-position: center;
+}
+.coworking-space-section-header .bg-img-coworking::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(44, 46, 60, 0.9);
+  z-index: 0;
+}
+.coworking-space-section-header .logo {
+  opacity: 0.04;
+}
+
+.coworking-space .custom-container {
+  max-width: 1520px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.coworking-space .stroke {
+  text-align: center;
+  -webkit-text-stroke-width: 2;
+  -webkit-text-stroke-color: var(--tc-system-green);
+  line-height: 100%;
+  background: var(--tc-system-green);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px var(--tc-system-green);
+  font-weight: 700;
+  color: var(--tc-system-white);
+  font-optical-sizing: auto;
+  paint-order: stroke fill;
+}
+
+.tag-recommended {
+  display: flex;
+  width: 136px;
+  height: 28px;
+  top: 0;
+  left: 164px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: var(--tc-theme-primary);
+}
+
+.coworking-space-home-section-1 .logo-bg {
+  bottom: -280px;
+  opacity: 0.04;
+}
+.coworking-space-home-section-1 .number-step {
+  margin-bottom: 150px;
+}
+@media (min-width: 1400px) {
+  .coworking-space-home-section-1 .number-step {
+    margin-bottom: 320px;
+  }
+}
+.coworking-space-home-section-1 .number-step .line-num {
+  width: 30px;
+  height: 1.171px;
+  background: var(--tc-system-green);
+}
+.coworking-space-home-section-1 .box-bottom-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.coworking-space-home-section-1 .dropdown-toggle::after {
+  margin-left: 70px;
+}
+.coworking-space-home-section-1 .location-search::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../imgs/pages/coworking-space/template/location.svg) no-repeat left center;
+}
+.coworking-space-home-section-1 .table-search::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../imgs/pages/coworking-space/template/table.svg) no-repeat left center;
+}
+.coworking-space-home-section-1 .dollar-search::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../imgs/pages/coworking-space/template/dollar.svg) no-repeat left center;
+}
+.coworking-space-home-section-1 .btn.show {
+  color: var(--tc-system-black);
+}
+.coworking-space-home-section-1 .banner {
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 900px;
+}
+@media (max-width: 575.98px) {
+  .coworking-space-home-section-1 .banner {
+    min-height: 500px;
+  }
+}
+
+.coworking-space-home-section-4 svg {
+  margin-top: -10px;
+}
+.coworking-space-home-section-4 svg text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.8px;
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 2px;
+  animation: animated-stroke 3s;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+.coworking-space-home-section-4 .banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 640px;
+}
+@media (max-width: 575.98px) {
+  .coworking-space-home-section-4 .banner {
+    min-height: 500px;
+  }
+}
+
+.coworking-space-home-section-6 .change-price-plan {
+  height: 54px;
+}
+.coworking-space-home-section-6 .monthly,
+.coworking-space-home-section-6 .yearly {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  display: inline-flex;
+  padding: 20px 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--Stroke, #e2e2e2);
+  background: var(--White, #fff);
+}
+.coworking-space-home-section-6 .monthly.active,
+.coworking-space-home-section-6 .yearly.active {
+  background: var(--tc-system-black-2) !important;
+  border: 1px solid var(--tc-system-black-2);
+  color: var(--tc-system-white) !important;
+  transition: 0.3s;
+}
+
+.coworking-space-home-section-8 .form-control {
+  background-color: #f1f3f8;
+}
+
+.section-footer-17 .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-body-text-secondary);
+  opacity: 0.5;
+}
+.section-footer-17 .icon:hover svg {
+  fill: var(--tc-theme-primary);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+
+.coworking-space-about-section-5 .gallery-thumbs .icon-shape {
+  border: 2px solid transparent;
+}
+.coworking-space-about-section-5 .gallery-thumbs .swiper-slide-thumb-active .about-thumbs {
+  background: var(--tc-theme-primary) !important;
+}
+.coworking-space-about-section-5 .gallery-thumbs .swiper-slide-thumb-active .about-thumbs h6 {
+  color: var(--tc-system-white);
+}
+.coworking-space-about-section-5 .gallery-thumbs .swiper-slide-thumb-active .about-thumbs p {
+  color: var(--tc-system-white);
+}
+.coworking-space-about-section-5 .gallery-thumbs .swiper-slide-thumb-active .icon-shape {
+  border: 2px solid var(--tc-system-white);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 40px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 10px;
+  --swiper-navigation-color: var(--tc-system-black);
+  display: flex;
+  width: 75px;
+  height: 75px;
+  padding: 0px;
+  font-size: 16px;
+  border-radius: 75px;
+  background-color: rgba(26, 170, 89, 0.2) !important;
+  border: 1px solid transparent;
+}
+.swiper-button-next svg,
+.swiper-button-prev svg {
+  width: 40px;
+  height: 40px;
+}
+.swiper-button-next:hover,
+.swiper-button-next :active,
+.swiper-button-prev:hover,
+.swiper-button-prev :active {
+  background-color: var(--tc-theme-primary) !important;
+  border: 1px solid var(--tc-theme-primary);
+}
+.swiper-button-next:hover svg path,
+.swiper-button-next :active svg path,
+.swiper-button-prev:hover svg path,
+.swiper-button-prev :active svg path {
+  fill: var(--tc-system-white);
+}
+
+.pagination_item {
+  background: var(--tc-bg-light);
+  color: var(--tc-system-black);
+  border-radius: 8px !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+.pagination_item svg path {
+  stroke: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus {
+  box-shadow: none;
+  background-color: var(--tc-theme-primary) !important;
+  color: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+
+.coworking-space-services-details-section-1 .card {
+  border-radius: 16px;
+  border: 0;
+  background-color: #f1f3f8;
+  transition: all 0.2s linear;
+  overflow: hidden;
+}
+.coworking-space-services-details-section-1 .card .card-header {
+  background: transparent;
+  border-bottom: 0;
+}
+.coworking-space-services-details-section-1 .card .card-header a .arrow::before {
+  transform: rotate(0deg) !important;
+  font-family: "remixicon";
+  content: "\ea4e";
+  transition: 0.3s;
+  color: var(--tc-system-black-2);
+  font-size: 24px;
+  font-weight: 300;
+}
+.coworking-space-services-details-section-1 .card .card-header a.collapsed .arrow::before {
+  content: "\ea4e";
+  transition: 0.3s;
+  transform: rotate(180deg) !important;
+}
+.coworking-space-services-details-section-1 .card .collapse.show p {
+  color: var(--tc-system-white);
+}
+.coworking-space-services-details-section-1 .active {
+  background-color: var(--tc-theme-primary);
+}
+.coworking-space-services-details-section-1 .active .card-header a h6 {
+  color: var(--tc-system-white);
+}
+.coworking-space-services-details-section-1 .active .card-header a .arrow::before {
+  color: var(--tc-system-white);
+}
+
+.blog-item:hover {
+  background: var(--tc-theme-primary) !important;
+  color: var(--tc-system-white) !important;
+  transition: 0.2s linear;
+}
+
+.card-project::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 46, 60, 0.8);
+  transition: all 0.2s linear;
+}
+.card-project .card-project-info {
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+@media (max-width: 991.98px) {
+  .card-project .card-project-info {
+    opacity: 1;
+  }
+}
+.card-project:hover::before {
+  opacity: 1;
+}
+.card-project:hover .card-project-info {
+  opacity: 1;
+}
+/*# sourceMappingURL=coworking-space.css.map */

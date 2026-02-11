@@ -1,0 +1,94 @@
+.seo-agency-home-section-1 .star-group .ri-star-fill {
+  color: var(--tc-system-yellow);
+}
+.seo-agency-home-section-1 .avatar-1 {
+  width: 60px;
+  height: 60px;
+}
+.seo-agency-home-section-1 .avatar-2 {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #f9f5f0;
+  margin-left: -20px;
+}
+
+.seo-agency-home-section-3 .card {
+  transition: all 0.3s ease-in-out;
+}
+.seo-agency-home-section-3 .card .icon .icon-shape {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(148deg, #0d6efd 12.87%, #fff 85.35%);
+  opacity: 0.1;
+}
+.seo-agency-home-section-3 .card .link {
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+.seo-agency-home-section-3 .card:hover {
+  border-color: var(--tc-theme-primary) !important;
+}
+.seo-agency-home-section-3 .card:hover .link {
+  opacity: 1;
+}
+
+.seo-agency-home-section-4 .pattern-2 {
+  width: 176px;
+  height: 176px;
+  background: linear-gradient(214deg, #eff6ff 11.18%, #fff 85.65%);
+  border-radius: 50%;
+}
+
+.card-pricing .sale-off {
+  border-radius: 0px 0px 6px 6px;
+  border: 1px solid var(--tc-theme-primary);
+  border-top: 0;
+  background: rgba(13, 110, 253, 0.1);
+}
+
+.seo-agency-home-section-6 .icon svg,
+.section-footer-2 .icon svg,
+.section-footer-3 .icon svg,
+.section-footer-6 .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-system-white);
+  opacity: 0.5;
+}
+.seo-agency-home-section-6 .icon:hover svg,
+.section-footer-2 .icon:hover svg,
+.section-footer-3 .icon:hover svg,
+.section-footer-6 .icon:hover svg {
+  fill: var(--tc-system-white);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+
+.seo-agency-home-section-7 .card-testimonial {
+  background: linear-gradient(180deg, #eff6ff 0%, #fff 112.68%);
+}
+.seo-agency-home-section-7 .card-testimonial .founder {
+  transition: all 0.2s ease-in-out;
+}
+.seo-agency-home-section-7 .card-testimonial .quote {
+  transition: all 0.2s ease-in-out;
+}
+.seo-agency-home-section-7 .card-testimonial .quote svg path {
+  transition: all 0.2s ease-in-out;
+}
+.seo-agency-home-section-7 .card-testimonial:hover {
+  background: linear-gradient(180deg, #fff 0%, #eff6ff 112.68%);
+}
+.seo-agency-home-section-7 .card-testimonial:hover .founder {
+  border-color: var(--tc-theme-primary) !important;
+  transition: all 0.2s ease-in-out;
+}
+.seo-agency-home-section-7 .card-testimonial:hover .quote {
+  background-color: var(--tc-theme-primary) !important;
+  transition: all 0.2s ease-in-out;
+}
+.seo-agency-home-section-7 .card-testimonial:hover .quote svg path {
+  transition: all 0.2s ease-in-out;
+  fill: var(--tc-system-white) !important;
+}
+/*# sourceMappingURL=seo-agency-home.css.map */

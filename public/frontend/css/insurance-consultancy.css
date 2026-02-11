@@ -1,0 +1,286 @@
+.insurance-consultancy-home-section-1 .line-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../imgs/pages/insurance-consultancy/page-home/home-section-1/line-bg.png);
+}
+.insurance-consultancy-home-section-1 .form-element input {
+  display: none;
+}
+.insurance-consultancy-home-section-1 .form-element label {
+  border: 1px solid #d7e0e3;
+}
+.insurance-consultancy-home-section-1 .form-element input:checked + label {
+  border: 1px solid var(--tc-theme-primary);
+}
+.insurance-consultancy-home-section-1 .picture-bg {
+  margin-top: -270px;
+  right: -157px;
+}
+
+.insurance-consultancy-home-section-2 .client .icon-shape:not(:first-child) {
+  margin-top: -17px;
+}
+.insurance-consultancy-home-section-2 .client .icon-shape:last-child {
+  background: #e6edee !important;
+}
+
+.insurance-consultancy-home-section-3 .cards {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: repeat(var(--cards-count), var(--card-height));
+  gap: 40px 0;
+}
+.insurance-consultancy-home-section-3 .cards .card-custom {
+  position: sticky;
+  top: 0;
+  border: none;
+}
+.insurance-consultancy-home-section-3 .cards .card-custom .card__inner {
+  will-change: transform;
+  display: flex;
+  transform-origin: center top;
+}
+.insurance-consultancy-home-section-3 .custom-container {
+  max-width: 1720px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.insurance-consultancy-home-section-3 .line-primary {
+  width: 150px;
+  height: 1px;
+  background: var(--tc-theme-primary);
+}
+.insurance-consultancy-home-section-3 .card-service-1 {
+  width: 100%;
+  background: #e6edee;
+}
+.insurance-consultancy-home-section-3 .card-service-1 .stroke {
+  text-align: center;
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: #bed0d2;
+  line-height: 100%; /* 120px */
+  background: #bed0d2;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+  text-wrap: nowrap;
+  font-weight: 700;
+  color: #e6edee;
+  font-optical-sizing: auto;
+  paint-order: stroke fill;
+}
+.insurance-consultancy-home-section-3 .card-service-2 {
+  width: 100%;
+}
+.insurance-consultancy-home-section-3 .card-service-2 .stroke {
+  text-align: center;
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: #bed0d2;
+  line-height: 100%; /* 120px */
+  background: #bed0d2;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+  text-wrap: nowrap;
+  font-weight: 700;
+  color: var(--tc-system-radish);
+  font-optical-sizing: auto;
+  paint-order: stroke fill;
+}
+.insurance-consultancy-home-section-3 .card-service-3 {
+  width: 100%;
+}
+.insurance-consultancy-home-section-3 .card-service-3 .stroke {
+  text-align: center;
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: #bed0d2;
+  line-height: 100%; /* 120px */
+  background: #bed0d2;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+  text-wrap: nowrap;
+  font-weight: 700;
+  color: #e6edee;
+  font-optical-sizing: auto;
+  paint-order: stroke fill;
+}
+.insurance-consultancy-home-section-3 .stroke {
+  text-align: center;
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: var(--tc-system-radish);
+  line-height: 100%; /* 120px */
+  background: var(--tc-system-radish);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+  text-wrap: nowrap;
+  font-weight: 700;
+  color: white;
+  font-optical-sizing: auto;
+  paint-order: stroke fill;
+}
+
+.insurance-consultancy-home-section-4 .card-process {
+  border-bottom: 1px solid var(--tc-system-stroke);
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  transition: all 0.3s ease-in-out;
+}
+.insurance-consultancy-home-section-4 .card-process:hover {
+  border-bottom: 1px solid var(--tc-theme-primary);
+}
+
+.insurance-consultancy-home-section-5 .picture:not(:first-child) {
+  margin-left: -20px;
+}
+.insurance-consultancy-home-section-5 .swiper-pagination-bullet-active {
+  width: 6px;
+  height: 6px;
+  background: var(--tc-theme-primary);
+}
+.insurance-consultancy-home-section-5 .border-custom {
+  --bs-border-color: #bbcfd2;
+}
+
+.section-footer-15 .rotate-90 p {
+  margin-top: 395px;
+}
+.section-footer-15 .bottom {
+  background: #004647;
+}
+.section-footer-15 .social-icons a {
+  transition: all 0.3s ease-in-out;
+}
+.section-footer-15 .social-icons a i {
+  transition: all 0.3s ease-in-out;
+  color: #fff;
+}
+.section-footer-15 .social-icons a:hover {
+  background: #fff;
+}
+.section-footer-15 .social-icons a:hover i {
+  color: var(--tc-system-radish);
+}
+
+.insurance-consultancy-about-section-1 .nav-tabs {
+  --bs-nav-tabs-border-width: var(--bs-border-width);
+  --bs-nav--border-color: var(--tc-system-stroke);
+  --bs-nav-tabs-border-radius: 0;
+  --bs-nav-tabs-link-active-color: var(--tc-system-white);
+  --bs-nav-tabs-link-hover-border-color: var(--tc-system-stroke);
+}
+.insurance-consultancy-about-section-1 .nav {
+  --bs-nav-link-padding-x: 30px;
+  --bs-nav-link-padding-y: 18px;
+  --bs-nav-link-font-weight: var(--tc-fw-bold);
+  --bs-nav-link-color: var(--tc-system-radish);
+  --bs-nav-link-hover-color: var(--tc-system-radish);
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+@media (max-width: 767px) {
+  .insurance-consultancy-about-section-1 .nav {
+    --bs-nav-link-padding-x: 20px;
+    --bs-nav-link-padding-y: 12px;
+  }
+}
+.insurance-consultancy-about-section-1 .nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bs-nav-link-color);
+  background-color: var(--tc-system-white);
+  border: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color) !important;
+}
+.insurance-consultancy-about-section-1 .nav-tabs .nav-item.show .nav-link,
+.insurance-consultancy-about-section-1 .nav-tabs .nav-link.active {
+  color: var(--bs-nav-tabs-link-active-color);
+  background-color: var(--tc-theme-primary);
+  border-color: var(--tc-system-stroke);
+}
+
+.card-services:hover .link-article {
+  text-decoration: underline !important;
+}
+
+.insurance-consultancy-portfolio-section-1 {
+  /* 2 columns */
+}
+.insurance-consultancy-portfolio-section-1 .masonary-active .card-portfolio {
+  margin: 30px 40px;
+}
+.insurance-consultancy-portfolio-section-1 .grid-sizer,
+.insurance-consultancy-portfolio-section-1 .grid-item {
+  width: 50%;
+}
+@media (min-width: 1400px) {
+  .insurance-consultancy-portfolio-section-1 .grid-sizer,
+  .insurance-consultancy-portfolio-section-1 .grid-item {
+    width: 50%;
+  }
+}
+.insurance-consultancy-portfolio-section-1 .grid-item--width2 {
+  width: 66.66%;
+}
+.insurance-consultancy-portfolio-section-1 .btn-filter {
+  --bs-btn-color: var(--tc-system-radish);
+  --bs-btn-bg: var(--tc-system-white);
+  --bs-btn-border-color: var(--tc-system-stroke);
+  --bs-btn-hover-color: var(--tc-system-radish);
+  --bs-btn-hover-bg: var(--tc-system-white);
+  --bs-btn-hover-border-color: var(--tc-system-stroke);
+  --bs-btn-focus-shadow-rgb: 108, 117, 125;
+  --bs-btn-active-color: var(--tc-system-white);
+  --bs-btn-active-bg: var(--tc-system-radish);
+  --bs-btn-active-border-color: var(--tc-system-radish);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  padding: 19px 30px;
+  text-transform: uppercase;
+}
+
+.insurance-consultancy-blog-details-section-1 .social-icons a {
+  background: var(--tc-system-radish);
+  transition: all 0.3s ease-in-out;
+}
+.insurance-consultancy-blog-details-section-1 .social-icons a i {
+  transition: all 0.3s ease-in-out;
+  color: var(--tc-system-white);
+}
+.insurance-consultancy-blog-details-section-1 .social-icons a:hover {
+  background: var(--tc-system-white);
+}
+.insurance-consultancy-blog-details-section-1 .social-icons a:hover i {
+  color: var(--tc-system-radish);
+}
+
+.form-control:focus {
+  border-color: var(--tc-system-radish);
+}
+
+.pagination_item {
+  background: var(--tc-bg-light);
+  color: var(--tc-system-radish) !important;
+  font-weight: 600 !important;
+}
+.pagination_item.active {
+  background: var(--tc-system-orange);
+  color: var(--tc-system-white) !important;
+}
+.pagination_item:hover {
+  background: var(--tc-system-orange);
+  color: var(--tc-system-white) !important;
+}
+.pagination_item:focus {
+  background-color: var(--tc-system-orange) !important;
+  color: var(--tc-system-white) !important;
+}
+
+@media (min-width: 992px) {
+  .insurance-consultancy-contact-section-1 .pb-lg-650 {
+    margin-bottom: 350px;
+  }
+}
+/*# sourceMappingURL=insurance-consultancy.css.map */

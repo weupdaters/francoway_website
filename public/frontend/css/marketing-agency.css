@@ -1,0 +1,198 @@
+.marketing-agency .custom-container {
+  max-width: 1720px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.marketing-agency-home-section-1 .custom-container,
+.marketing-agency-section-header .custom-container {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.marketing-agency-home-section-1 .socials-group,
+.marketing-agency-section-header .socials-group {
+  margin-left: -228px;
+}
+.marketing-agency-home-section-1 .bg-overlay,
+.marketing-agency-section-header .bg-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, #000 100%);
+  opacity: 0.4;
+}
+.marketing-agency-home-section-1 .content-top .line,
+.marketing-agency-section-header .content-top .line {
+  width: 20px;
+  height: 1px;
+  opacity: 0.3;
+  background: var(--White, #fff);
+  margin-right: 14px;
+}
+
+.marketing-agency-home-section-3 .swiper-slide:nth-child(odd) {
+  padding: 40px;
+}
+.marketing-agency-home-section-3 .card-service::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.5;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+}
+
+.marketing-agency-home-section-4 .change-price-plan {
+  height: 54px;
+}
+.marketing-agency-home-section-4 .monthly,
+.marketing-agency-home-section-4 .yearly {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  display: inline-flex;
+  padding: 20px 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--Stroke, #e2e2e2);
+  background: var(--White, #fff);
+}
+.marketing-agency-home-section-4 .monthly.active,
+.marketing-agency-home-section-4 .yearly.active {
+  background: var(--tc-theme-primary) !important;
+  border: 1px solid var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+  transition: 0.3s;
+}
+
+.tag-recommended {
+  display: flex;
+  width: 136px;
+  height: 28px;
+  top: 0;
+  left: 164px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: var(--tc-theme-primary);
+}
+
+.marketing-agency-home-section-6 {
+  background: #f0f4fd;
+}
+.marketing-agency-home-section-6 .avatar-1 {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #f0f4fd;
+}
+.marketing-agency-home-section-6 .avatar-2 {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #f0f4fd;
+  margin-left: -20px;
+}
+
+.marketing-agency-home-section-9 .cta {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.marketing-agency-home-section-9 .cta .bg-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background: var(--Indigo, #794aff);
+  mix-blend-mode: multiply;
+}
+
+.marketing-agency-services-details-section-2 .accordion .card {
+  background: transparent;
+  transition: all 0.3s linear;
+}
+.marketing-agency-services-details-section-2 .accordion .card .card-header {
+  background: transparent;
+}
+.marketing-agency-services-details-section-2 .accordion .card .card-header a {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--tc-system-white);
+  transition: all 0.3s ease-in-out;
+}
+.marketing-agency-services-details-section-2 .accordion .card .card-header a .arrow::before {
+  transition: 0.3s;
+  transform: rotate(0deg);
+  font-family: remixicon;
+  content: "\f1af";
+  color: var(--tc-system-black);
+  font-size: 14px;
+  font-weight: 300;
+}
+.marketing-agency-services-details-section-2 .accordion .card .card-header a.collapsed {
+  background-color: transparent;
+}
+.marketing-agency-services-details-section-2 .accordion .card .card-header a.collapsed .arrow {
+  background-color: transparent;
+}
+.marketing-agency-services-details-section-2 .accordion .card .card-header a.collapsed .arrow::before {
+  transition: 0.3s;
+  color: var(--tc-system-black);
+  transform: rotate(180deg);
+  content: "\ea13";
+}
+
+.section-footer-14 {
+  background: #f0f4fd;
+}
+.section-footer-14 .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-body-text-secondary);
+  opacity: 0.5;
+}
+.section-footer-14 .icon:hover svg {
+  fill: var(--tc-system-black);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+
+.pagination_item {
+  background: var(--tc-system-white);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 0px !important;
+}
+.pagination_item.active {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+}
+.pagination_item:hover {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+}
+.pagination_item:focus {
+  background-color: var(--tc-theme-primary) !important;
+  color: var(--tc-system-white) !important;
+}
+
+.input-group .form-control {
+  color: var(--tc-system-black);
+}
+.input-group .form-control:hover, .input-group .form-control:focus {
+  background-color: var(--tc-system-white) !important;
+  border: 1px solid var(--tc-theme-primary) !important;
+}
+/*# sourceMappingURL=marketing-agency.css.map */

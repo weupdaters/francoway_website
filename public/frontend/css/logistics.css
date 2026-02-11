@@ -1,0 +1,456 @@
+.menu-wrapper {
+  margin-left: 315px;
+}
+
+.logistics-section-header .bg-img-logistic::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(15, 49, 58, 0.8);
+  z-index: 0;
+}
+
+.logistics-home-section-1 .bg-img-logistic {
+  clip-path: polygon(0% 0%, 100% 0, 100% 82%, 95% 100%, 0% 100%);
+  min-height: 580px;
+}
+
+.logo-logistics {
+  min-height: 200px;
+}
+.logo-logistics a {
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+.logo-logistics:hover a {
+  opacity: 1;
+}
+
+.logistics-home-section-3 {
+  clip-path: polygon(0% 0%, 100% 0, 100% 85%, 95% 100%, 0% 100%);
+  min-height: 580px;
+}
+
+.logistics-services-section-2 {
+  clip-path: polygon(0% 0%, 100% 0, 100% 90%, 95% 100%, 0% 100%);
+  min-height: 580px;
+}
+
+.card-services {
+  background-color: #163d47;
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 80% 100%, 0% 100%);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid transparent;
+  position: relative;
+}
+.card-services .content {
+  background-color: #163d47;
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 80% 100%, 0% 100%);
+  z-index: 1000;
+}
+.card-services .line-border {
+  content: "";
+  width: 102%;
+  height: 102%;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 80% 100%, 0% 100%);
+  z-index: -100;
+}
+.card-services:hover {
+  background-color: var(--tc-theme-primary);
+}
+.card-services:hover .content-top {
+  --bs-border-opacity: 1 !important;
+}
+.card-services:hover .line-border {
+  background-color: var(--tc-theme-primary);
+}
+.card-services .content-bottom {
+  transition: all 0.3s ease-in-out;
+}
+.card-services .content-bottom p {
+  opacity: 0.7;
+}
+.card-services .content-bottom a:hover span {
+  text-decoration: underline;
+}
+
+.logistics-home-section-4 .img-feature {
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 80% 100%, 0% 100%);
+}
+
+.logistics-home-section-5 .link-country i {
+  opacity: 0;
+}
+.logistics-home-section-5 .link-country:hover p {
+  color: var(--tc-system-navy-blue-2);
+  transition: all 0.2s ease-in-out;
+}
+.logistics-home-section-5 .link-country:hover i {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+.logistics-home-section-5 .box-bottom-search {
+  align-items: flex-end;
+  gap: 10px;
+}
+.logistics-home-section-5 .box-bottom-search .username-2 {
+  background-image: url(../imgs/template/icons/user-w.svg);
+}
+.logistics-home-section-5 .box-bottom-search .email-2 {
+  background-image: url(../imgs/template/icons/email-white.svg);
+}
+.logistics-home-section-5 .dropdown-toggle::after {
+  margin-left: 35px;
+}
+.logistics-home-section-5 .dollar-search::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../imgs/pages/logistics/template/type-box.svg) no-repeat left center;
+}
+.logistics-home-section-5 .btn.show {
+  color: var(--tc-system-white);
+}
+.logistics-home-section-5 .btn:hover {
+  color: var(--tc-system-white) !important;
+}
+.logistics-home-section-5 .form-control {
+  color: var(--tc-system-white);
+  max-width: 200px;
+}
+
+.logistics-home-section-6 .custom-container {
+  clip-path: polygon(0% 0%, 100% 0, 100% 92%, 95% 100%, 0% 100%);
+}
+.logistics-home-section-6 .card-project {
+  clip-path: polygon(0% 0%, 100% 0, 100% 90%, 95% 100%, 0% 100%);
+}
+
+.logistics-home-section-7 {
+  margin-top: -200px;
+}
+.logistics-home-section-7 .img-bg {
+  background-position: center;
+  background-size: cover;
+  min-height: 940px;
+  clip-path: polygon(0% 0%, 100% 0, 100% 90%, 95% 100%, 0% 100%);
+  position: relative;
+}
+.logistics-home-section-7 .bg-overlay {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+}
+.logistics-home-section-7 svg {
+  margin-top: -10px;
+}
+.logistics-home-section-7 svg text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.8px;
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 2px;
+  animation: animated-stroke 2s;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.card-news-body {
+  background-color: #fff;
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 90% 100%, 0% 100%);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid transparent;
+  position: relative;
+}
+.card-news-body .content {
+  background-color: white;
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 90% 100%, 0% 100%);
+  z-index: 1000;
+}
+.card-news-body .line-border {
+  content: "";
+  width: 102%;
+  height: 102%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  background-color: #e2e2e2;
+  clip-path: polygon(0% 0%, 100% 0, 100% 80%, 90% 100%, 0% 100%);
+  z-index: -100;
+}
+.card-news-body .content-bottom {
+  transition: all 0.3s ease-in-out;
+}
+.card-news-body .content-bottom p {
+  opacity: 0.7;
+}
+.card-news-body .content-bottom a:hover span {
+  text-decoration: underline;
+}
+
+.section-footer-20 {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.section-footer-20::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--Navy-Blue-2, #0f313a);
+  opacity: 0.94;
+}
+.section-footer-20 .social-icons .icon {
+  transition: all 0.3s ease-in-out;
+}
+.section-footer-20 .social-icons .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-system-white);
+}
+.section-footer-20 .social-icons .icon:hover {
+  background-color: var(--tc-theme-primary);
+  border-color: var(--tc-theme-primary) !important;
+}
+.section-footer-20 .form-control {
+  background-image: url(../imgs/template/icons/pen-w.svg);
+  background-position: left 18px center;
+  background-repeat: no-repeat;
+  padding-left: 45px;
+  color: var(--tc-system-white);
+}
+.section-footer-20 .form-control::-moz-placeholder {
+  color: var(--tc-system-white);
+  opacity: 0.3;
+}
+.section-footer-20 .form-control::placeholder {
+  color: var(--tc-system-white);
+  opacity: 0.3;
+}
+
+.card-team .card-team-img {
+  border-radius: 16px;
+  background: #f3f3f3;
+  min-height: 320px;
+}
+.card-team .social-group {
+  transition: all 0.3s linear;
+  opacity: 0;
+  top: 100%;
+}
+@media (max-width: 991px) {
+  .card-team .social-group {
+    opacity: 1;
+    top: 80%;
+  }
+}
+.card-team .social-group .icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--tc-system-white);
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+.card-team .social-group .icon svg {
+  height: 20px;
+  width: 20px;
+}
+.card-team .social-group .icon svg path {
+  fill: var(--tc-system-black);
+}
+.card-team .social-group .icon:hover {
+  background: var(--tc-theme-primary);
+}
+.card-team .social-group .icon:hover svg path {
+  fill: var(--tc-system-white);
+  transition-duration: 0.2s;
+}
+.card-team:hover .social-group {
+  opacity: 1;
+  top: 80%;
+}
+
+.steps-logistics {
+  position: relative;
+  cursor: pointer;
+}
+.steps-logistics::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--tc-system-navy-blue-2);
+  opacity: 0.1;
+  bottom: 82px;
+  z-index: -1;
+}
+@media (max-width: 1400px) {
+  .steps-logistics::before {
+    display: none;
+  }
+}
+.steps-logistics:first-child::before {
+  width: 50%;
+}
+.steps-logistics:last-child::before {
+  left: 0;
+  width: 50%;
+}
+.steps-logistics:hover .icon-shape {
+  transition: all 0.3s linear;
+  background: var(--tc-theme-primary) !important;
+}
+
+.logistics-services-details-section-1 .card {
+  border-radius: 0px;
+  border: 0;
+  background-color: var(--tc-bg-light);
+  transition: all 0.2s linear;
+  overflow: hidden;
+}
+.logistics-services-details-section-1 .card .card-header {
+  background: transparent;
+  border-bottom: 0;
+}
+.logistics-services-details-section-1 .card .card-header a .arrow::before {
+  transform: rotate(0deg) !important;
+  font-family: "remixicon";
+  content: "\ea4e";
+  transition: 0.3s;
+  color: var(--tc-system-black-2);
+  font-size: 24px;
+  font-weight: 300;
+}
+.logistics-services-details-section-1 .card .card-header a.collapsed .arrow::before {
+  content: "\ea4e";
+  transition: 0.3s;
+  transform: rotate(180deg) !important;
+}
+.logistics-services-details-section-1 .active {
+  background-color: var(--tc-system-navy-blue-2);
+}
+.logistics-services-details-section-1 .active .card-header a h6 {
+  color: var(--tc-system-white);
+}
+.logistics-services-details-section-1 .active .card-header a .arrow::before {
+  color: var(--tc-system-white);
+}
+
+.card-case-study .card-content {
+  transition: all 0.3s linear;
+}
+@media (min-width: 1400px) {
+  .card-case-study .card-content {
+    opacity: 0;
+  }
+}
+.card-case-study::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.2s linear;
+  background: rgba(15, 49, 58, 0.7);
+}
+.card-case-study:hover::before {
+  opacity: 1;
+  transition: all 0.2s linear;
+}
+.card-case-study:hover .card-content {
+  opacity: 1;
+  transition: all 0.3s linear;
+}
+
+.pagination_item {
+  background: var(--tc-bg-light);
+  color: var(--tc-system-black);
+  border-radius: 8px !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+.pagination_item svg path {
+  stroke: var(--tc-system-black) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item.active svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover {
+  background: var(--tc-theme-primary);
+  color: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:hover svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus {
+  box-shadow: none;
+  background-color: var(--tc-theme-primary) !important;
+  color: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+.pagination_item:focus svg path {
+  stroke: var(--tc-system-white) !important;
+  transition: 0.3s ease-in-out;
+}
+
+.blog-item:hover {
+  background: var(--tc-theme-primary) !important;
+  color: var(--tc-system-white) !important;
+  transition: 0.2s linear;
+}
+
+.logistics-contact-section-1 .form-group {
+  border-radius: 16px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  background: var(--tc-bg-light);
+}
+.logistics-contact-section-1 .form-group .form-control {
+  color: var(--tc-system-black);
+  border-radius: 8px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+.logistics-contact-section-1 .form-group textarea {
+  min-height: 170px;
+}
+.logistics-contact-section-1 .form-group .form-select {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 8px;
+}
+.logistics-contact-section-1 .form-group .form-select:focus {
+  outline: none;
+  box-shadow: none;
+}
+/*# sourceMappingURL=logistics.css.map */

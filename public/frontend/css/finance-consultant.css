@@ -1,0 +1,389 @@
+.finance-consultant-home-section-2 .card-services {
+  min-height: 400px;
+}
+@media (min-width: 1400px) {
+  .finance-consultant-home-section-2 .card-services .card-content {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(40px);
+  }
+  .finance-consultant-home-section-2 .card-services .card-link {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  .finance-consultant-home-section-2 .card-services:hover .card-content {
+    transform: translateY(0px);
+  }
+  .finance-consultant-home-section-2 .card-services:hover .card-content .card-link {
+    opacity: 1;
+  }
+}
+
+.progress,
+.progress-stacked {
+  --bs-progress-height: 2px;
+  --bs-progress-font-size: 0.75rem;
+  --bs-progress-bg: rgba(255, 255, 255, 0.6);
+  --bs-progress-border-radius: 20px;
+  --bs-progress-box-shadow: var(--bs-box-shadow-inset);
+  --bs-progress-bar-color: #fff;
+  --bs-progress-bar-bg: var(--tc-theme-primary);
+  --bs-progress-bar-transition: width 0.6s ease;
+  display: flex;
+  height: var(--bs-progress-height);
+  overflow: hidden;
+  font-size: var(--bs-progress-font-size);
+  background-color: var(--bs-progress-bg);
+  border-radius: var(--bs-progress-border-radius);
+}
+
+.finance-consultant-about-section-3 .progress,
+.finance-consultant-about-section-3 .progress-stacked {
+  --bs-progress-height: 4px;
+  --bs-progress-font-size: 0.75rem;
+  --bs-progress-bg: rgba(255, 255, 255, 0);
+  --bs-progress-border-radius: 20px;
+  --bs-progress-box-shadow: var(--bs-box-shadow-inset);
+  --bs-progress-bar-color: #fff;
+  --bs-progress-bar-bg: var(--tc-system-green-5);
+  --bs-progress-bar-transition: width 0.6s ease;
+  display: flex;
+  height: var(--bs-progress-height);
+  overflow: hidden;
+  font-size: var(--bs-progress-font-size);
+  background-color: var(--bs-progress-bg);
+  border-radius: var(--bs-progress-border-radius);
+}
+
+.finance-consultant-home-section-3 .nav-tabs {
+  gap: 14px;
+  --bs-nav-tabs-border-radius: 0;
+  --bs-nav-tabs-link-active-color: var(--tc-theme-primary);
+  --bs-nav-tabs-link-hover-border-color: transparent;
+}
+.finance-consultant-home-section-3 .nav {
+  --bs-nav-link-padding-x: 20px;
+  --bs-nav-link-padding-y: 10px;
+  --bs-nav-link-font-weight: var(--tc-fw-bold);
+  --bs-nav-link-color: var(--tc-system-green-5);
+  --bs-nav-link-hover-color: var(--tc-theme-primary);
+}
+.finance-consultant-home-section-3 .nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tc-system-green-5);
+  border: 1px solid var(--Stroke, #e2e2e2);
+  background: var(--White, #fff);
+}
+.finance-consultant-home-section-3 .nav-link:hover {
+  border: 1px solid var(--Stroke, #e2e2e2);
+  background: var(--White, #fff);
+}
+.finance-consultant-home-section-3 .nav-tabs .nav-item.show .nav-link,
+.finance-consultant-home-section-3 .nav-tabs .nav-link.active {
+  color: var(--tc-system-green-5);
+  background-color: var(--tc-theme-primary);
+}
+
+.finance-consultant-home-section-4 .card-portfolio {
+  min-height: 151px;
+  cursor: pointer;
+}
+@media (min-width: 1400px) {
+  .finance-consultant-home-section-4 .card-portfolio .card-content {
+    transform: translateX(-350px);
+    transition: all 0.4s ease-in-out;
+  }
+  .finance-consultant-home-section-4 .card-portfolio .img {
+    transform: translateX(-350px);
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+  }
+  .finance-consultant-home-section-4 .card-portfolio:hover .card-content {
+    transform: translateX(40px);
+  }
+  .finance-consultant-home-section-4 .card-portfolio:hover .img {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.finance-consultant-home-section-7 {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.finance-consultant-home-section-7 .bg-green-5 {
+  opacity: 0.9;
+}
+.finance-consultant-home-section-7 .collapsible {
+  background-color: transparent;
+  color: var(--tc-system-white);
+  cursor: pointer;
+  padding: 24px 0px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.finance-consultant-home-section-7 .active {
+  border-bottom: none !important;
+}
+.finance-consultant-home-section-7 .collapsible:after {
+  content: "+";
+  color: var(--tc-system-white);
+  font-weight: bold;
+  float: left;
+  margin-right: 5px;
+}
+.finance-consultant-home-section-7 .content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.finance-consultant-home-section-7 .collapse-content {
+  border-bottom-color: var(--tc-theme-primary) !important;
+}
+
+.finance-consultant-home-section-8 label.text-sm-medium {
+  color: var(--tc-system-green-5);
+  font-family: "Epilogue", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+  text-transform: initial;
+}
+.finance-consultant-home-section-8 .form-control {
+  background-color: #f5f6ff;
+}
+
+.section-footer-13 {
+  background-color: var(--tc-system-green-5);
+}
+.section-footer-13 .logo-bg {
+  opacity: 0.02;
+  z-index: 1;
+}
+
+.finance-consultant-projects-section-2 {
+  /* 2 columns */
+}
+.finance-consultant-projects-section-2 .progress,
+.finance-consultant-projects-section-2 .progress-stacked {
+  --bs-progress-height: 4px;
+  --bs-progress-font-size: 0.75rem;
+  --bs-progress-bg: #e9e9e9;
+  --bs-progress-border-radius: 20px;
+  --bs-progress-box-shadow: var(--bs-box-shadow-inset);
+  --bs-progress-bar-color: #fff;
+  --bs-progress-bar-bg: var(--tc-theme-primary);
+  --bs-progress-bar-transition: width 0.6s ease;
+  display: flex;
+  height: var(--bs-progress-height);
+  overflow: hidden;
+  font-size: var(--bs-progress-font-size);
+  background-color: var(--bs-progress-bg);
+  border-radius: var(--bs-progress-border-radius);
+}
+.finance-consultant-projects-section-2 .masonary-active .card-news {
+  margin: 15px 0;
+}
+.finance-consultant-projects-section-2 .grid-sizer,
+.finance-consultant-projects-section-2 .grid-item {
+  width: 50%;
+}
+@media (min-width: 1400px) {
+  .finance-consultant-projects-section-2 .grid-sizer,
+  .finance-consultant-projects-section-2 .grid-item {
+    width: 33.33%;
+  }
+}
+.finance-consultant-projects-section-2 .grid-item--width2 {
+  width: 66.66%;
+}
+
+.finance-consultant-services-details-section-2 .input-group .form-control {
+  color: var(--tc-system-black);
+  background-color: var(--tc-system-white) !important;
+}
+.finance-consultant-services-details-section-2 .input-group .form-control:focus {
+  background-color: var(--tc-system-white) !important;
+}
+.finance-consultant-services-details-section-2 .accordion .card {
+  background: transparent;
+  transition: all 0.3s linear;
+}
+.finance-consultant-services-details-section-2 .accordion .card .card-header {
+  background: transparent;
+}
+.finance-consultant-services-details-section-2 .accordion .card .card-header a {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--tc-system-white);
+  transition: all 0.3s ease-in-out;
+}
+.finance-consultant-services-details-section-2 .accordion .card .card-header a .arrow::before {
+  transition: 0.3s;
+  transform: rotate(0deg);
+  font-family: remixicon;
+  content: "\f1af";
+  color: var(--tc-system-black);
+  font-size: 14px;
+  font-weight: 300;
+}
+.finance-consultant-services-details-section-2 .accordion .card .card-header a.collapsed {
+  background-color: transparent;
+}
+.finance-consultant-services-details-section-2 .accordion .card .card-header a.collapsed .arrow {
+  background-color: transparent;
+}
+.finance-consultant-services-details-section-2 .accordion .card .card-header a.collapsed .arrow::before {
+  transition: 0.3s;
+  color: var(--tc-system-black);
+  transform: rotate(180deg);
+  content: "\ea13";
+}
+
+.finance-consultant-pricing-section-3 .accordion .card .card-header a {
+  background-color: var(--tc-system-white);
+  transition: all 0.3s ease-in-out;
+}
+.finance-consultant-pricing-section-3 .accordion .card .card-header a .arrow::before {
+  transition: 0.3s;
+  transform: rotate(0deg);
+  font-family: remixicon;
+  content: "\f1af";
+  color: var(--tc-system-black);
+  font-size: 14px;
+  font-weight: 300;
+}
+.finance-consultant-pricing-section-3 .accordion .card .card-header a.collapsed .arrow::before {
+  transition: 0.3s;
+  color: var(--tc-system-black);
+  transform: rotate(180deg);
+  content: "\ea13";
+}
+
+.change-price-plan .btn-switch {
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid var(--Black, #292929);
+  background: var(--tc-theme-primary);
+}
+.change-price-plan .btn-switch .switch {
+  width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  background: var(--tc-system-black);
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+}
+
+.monthly.active,
+.yearly.active {
+  background: transparent !important;
+  color: var(--tc-system-green-5) !important;
+  transition: 0.3s;
+}
+
+.yearly.active .switch {
+  left: unset;
+  right: 8% !important;
+}
+
+.sale-off {
+  border-radius: 0px;
+  border: 1px solid var(--tc-system-green-5);
+  border-top: 0;
+  background: rgba(121, 74, 255, 0.1);
+}
+
+.finance-consultant-section-2 .input-group .form-control {
+  color: var(--tc-system-black);
+}
+.finance-consultant-section-2 .input-group .form-control:hover, .finance-consultant-section-2 .input-group .form-control:focus {
+  background-color: var(--tc-system-white) !important;
+  border: 1px solid var(--tc-system-black) !important;
+}
+
+.pricing__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.pricing__tab-btn {
+  cursor: pointer;
+  color: var(--tc-system-green-5);
+  font-weight: 600;
+  font-size: 18px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: all 0.3s ease-out 0s;
+}
+
+.pricing__tab-switcher {
+  height: 30px;
+  width: 60px;
+  display: inline-block;
+  border-radius: 30px;
+  position: relative;
+  margin: 0 15px;
+  transform: translateY(0px);
+  cursor: pointer;
+  border: 1px solid var(--tc-system-green-5);
+  background: var(--tc-theme-primary);
+}
+
+.pricing__tab-switcher::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: 26px;
+  border-radius: 50%;
+  background: var(--tc-system-green-5);
+  transition: all 0.3s ease-out 0s;
+}
+
+.pricing__tab-switcher.active:before {
+  left: calc(100% - 28px);
+}
+
+.pricing__box {
+  background: #fff;
+  border: 1px solid #cfdde2;
+  border-radius: 15px;
+  padding: 50px 65px;
+  margin-bottom: 30px;
+}
+
+.pricing__price .price.annual_price {
+  display: none;
+}
+
+.pricing__price.change-subs-duration .monthly_price {
+  display: none;
+}
+
+.pricing__price.change-subs-duration .annual_price {
+  display: flex;
+}
+
+.btn-filter.active {
+  background: var(--tc-theme-primary);
+  border-color: var(--tc-theme-primary);
+}
+/*# sourceMappingURL=finance-consultant.css.map */

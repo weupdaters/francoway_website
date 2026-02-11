@@ -1,0 +1,170 @@
+.data-analysis .custom-container {
+  max-width: 1600px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.data-analysis-home-section-1 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.data-analysis-section-header {
+  background-color: #f7f5ff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.data-analysis-section-header::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f7f5ff;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.data-analysis-home-section-1 .input-group {
+  box-shadow: 0px 10px 80px 0px rgba(0, 0, 0, 0.06);
+}
+
+.card-provide {
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+.card-provide:hover {
+  border: 1px solid var(--tc-theme-primary);
+}
+.card-provide:hover .link {
+  color: var(--tc-theme-primary);
+}
+
+.data-analysis-home-section-4 .card-project {
+  filter: drop-shadow(0px 30px 60px rgba(0, 0, 0, 0.06));
+}
+
+.data-analysis-home-section-6 .swiper-button-next svg,
+.data-analysis-home-section-6 .swiper-button-prev svg {
+  width: 16px;
+  height: 16px;
+}
+.data-analysis-home-section-6 .swiper-button-next:hover,
+.data-analysis-home-section-6 .swiper-button-next :active,
+.data-analysis-home-section-6 .swiper-button-prev:hover,
+.data-analysis-home-section-6 .swiper-button-prev :active {
+  border-color: var(--tc-system-white) !important;
+}
+.data-analysis-home-section-6 .swiper-button-next:hover svg path,
+.data-analysis-home-section-6 .swiper-button-next :active svg path,
+.data-analysis-home-section-6 .swiper-button-prev:hover svg path,
+.data-analysis-home-section-6 .swiper-button-prev :active svg path {
+  fill: var(--tc-system-white);
+}
+.data-analysis-home-section-6 .ellipse-1 {
+  width: 320px;
+  height: 320px;
+  border-radius: 320px;
+  z-index: -1;
+  background: linear-gradient(217deg, var(--tc-theme-primary) 14.68%, #fff 83.09%);
+}
+.data-analysis-home-section-6 .ellipse-2 {
+  width: 482px;
+  height: 482px;
+  border-radius: 482px;
+  z-index: -1;
+  border: 1px solid var(--tc-system-stroke);
+}
+
+.data-analysis-about-section-2 .nav-tabs {
+  --bs-nav-tabs-border-width: var(--bs-border-width);
+  --bs-nav-tabs-border-color: var(--bs-border-color);
+  --bs-nav-tabs-border-radius: 0;
+  --bs-nav-tabs-link-active-color: var(--tc-theme-primary);
+  --bs-nav-tabs-link-hover-border-color: transparent;
+}
+.data-analysis-about-section-2 .nav-tabs .underline {
+  width: 95px;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 0;
+  background: var(--tc-system-yellow);
+  transition: 0.3s ease-in-out;
+}
+.data-analysis-about-section-2 .nav {
+  --bs-nav-link-padding-x: 20px;
+  --bs-nav-link-padding-y: 10px;
+  --bs-nav-link-font-weight: var(--tc-fw-bold);
+  --bs-nav-link-color: var(--tc-system-black);
+}
+.data-analysis-about-section-2 .nav-link {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--tc-system-stroke) !important;
+  color: var(--bs-nav-link-color);
+}
+.data-analysis-about-section-2 .nav-tabs .nav-item.show .nav-link,
+.data-analysis-about-section-2 .nav-tabs .nav-link.active {
+  background-color: transparent;
+  border-bottom: 1px solid var(--tc-theme-primary) !important;
+}
+
+.card {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--tc-system-stroke);
+}
+.card .card-header {
+  background: white;
+}
+.card .card-header a .arrow::before {
+  font-family: bootstrap-icons;
+  content: "\f2ea";
+  color: #282828;
+  font-size: 24px;
+}
+.card .card-header a.collapsed .arrow {
+  background-color: transparent;
+}
+.card .card-header a.collapsed .arrow::before {
+  content: "\f4fe";
+}
+.card .collapse {
+  background: white;
+}
+.card .collapsing {
+  background: white;
+}
+
+.card-blog-sec1 {
+  border-radius: 10px;
+  border: 1px solid var(--tc-system-stroke);
+  background: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+}
+@media (min-width: 1400px) {
+  .card-blog-sec1 .content {
+    width: 70%;
+  }
+}
+.card-blog-sec1 .content .tag {
+  display: inline-flex;
+  padding: 7px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #177b3e 0%, #14b253 100%);
+}
+/*# sourceMappingURL=data-analysis.css.map */

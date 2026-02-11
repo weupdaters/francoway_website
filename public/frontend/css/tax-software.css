@@ -1,0 +1,234 @@
+.tax-software-section-1 .img-bg img {
+  box-shadow: 0px 30px 60px 0px rgba(0, 0, 0, 0.1);
+}
+
+.tax-software-section-5 .accordion .card {
+  background: transparent;
+  transition: all 0.3s linear;
+}
+.tax-software-section-5 .accordion .card .card-header {
+  background: transparent;
+}
+.tax-software-section-5 .accordion .card .card-header a {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--tc-system-white);
+  transition: all 0.3s ease-in-out;
+}
+.tax-software-section-5 .accordion .card .card-header a .arrow::before {
+  transition: 0.3s;
+  transform: rotate(0deg);
+  font-family: remixicon;
+  content: "\f1af";
+  color: var(--tc-theme-primary);
+  font-size: 14px;
+  font-weight: 300;
+}
+.tax-software-section-5 .accordion .card .card-header a.collapsed {
+  background-color: transparent;
+}
+.tax-software-section-5 .accordion .card .card-header a.collapsed .arrow {
+  background-color: transparent;
+}
+.tax-software-section-5 .accordion .card .card-header a.collapsed .arrow::before {
+  transition: 0.3s;
+  color: var(--tc-system-black);
+  transform: rotate(180deg);
+  content: "\ea13";
+}
+.tax-software-section-5 .accordion .card .collapse {
+  background: linear-gradient(180deg, #fff 0%, #eff6ff 113.64%);
+  transition: all 0.3s linear;
+}
+.tax-software-section-5 .accordion .card .collapse.show {
+  border-bottom: 0;
+}
+.tax-software-section-5 .accordion .card .collapsing {
+  background: linear-gradient(180deg, #fff 0%, #eff6ff 113.64%) !important;
+  transition: all 0.3s linear;
+}
+
+.tax-software-section-7 .logo-top {
+  margin-bottom: 140px;
+}
+.tax-software-section-7 .logo-top .ellipse-1 {
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
+  border: 1px solid var(--tc-system-stroke);
+}
+.tax-software-section-7 .logo-top .ellipse-2 {
+  width: 220px;
+  height: 220px;
+  border-radius: 220px;
+  border: 1px solid var(--tc-system-stroke);
+  opacity: 0.6;
+}
+.tax-software-section-7 .logo-top .ellipse-3 {
+  width: 328px;
+  height: 328px;
+  border-radius: 328px;
+  border: 1px solid var(--tc-system-stroke);
+  opacity: 0.3;
+}
+
+.section-footer-7 .bg-linear {
+  background: linear-gradient(180deg, #eff6ff 0%, #fff 100.3%);
+}
+.section-footer-7 .icon svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--tc-body-text-secondary);
+  opacity: 0.5;
+}
+.section-footer-7 .icon:hover svg {
+  fill: var(--tc-system-black);
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+
+.card-pricing .sale-off {
+  border-radius: 0px 0px 6px 6px;
+  border: 1px solid var(--tc-theme-primary);
+  border-top: 0;
+  background: rgba(121, 74, 255, 0.1);
+}
+
+.change-price-plan .btn-switch {
+  width: 64px;
+  height: 32px;
+  border-radius: 15px;
+  background: var(--tc-theme-primary);
+}
+.change-price-plan .btn-switch .switch {
+  width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  background: var(--tc-system-white);
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+}
+.change-price-plan .monthly.active,
+.change-price-plan .yearly.active {
+  background: transparent !important;
+  color: var(--tc-theme-primary) !important;
+  transition: 0.3s;
+}
+
+.card-contact .icon-60 {
+  transition: all 0.3s linear;
+}
+.card-contact:hover {
+  background-color: var(--tc-theme-primary) !important;
+}
+.card-contact:hover .icon-60 {
+  background-color: var(--tc-system-white) !important;
+}
+.card-contact:hover .icon-60 svg path {
+  stroke: var(--tc-theme-primary);
+}
+.card-contact:hover .card-contact-content h6 {
+  color: var(--tc-system-white);
+}
+.card-contact:hover .card-contact-content p {
+  color: var(--tc-system-white);
+}
+
+.form-group .form-control {
+  color: var(--tc-system-black);
+  border-radius: 8px;
+  background: white;
+}
+.form-group .form-control::-moz-placeholder {
+  color: var(--tc-system-black);
+}
+.form-group .form-control::placeholder {
+  color: var(--tc-system-black);
+}
+.form-group textarea {
+  min-height: 140px;
+}
+.form-group .form-select {
+  background-color: white;
+  border-radius: 8px;
+}
+.form-group .form-select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tax-software-contact-section-1 .contact-map {
+  max-height: 440px;
+  position: relative;
+}
+
+.pricing__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.pricing__tab-btn {
+  cursor: pointer;
+  color: var(--tc-system-black);
+  font-weight: 400;
+  font-size: 18px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: all 0.3s ease-out 0s;
+}
+
+.pricing__tab-switcher {
+  height: 30px;
+  width: 60px;
+  display: inline-block;
+  border-radius: 30px;
+  position: relative;
+  margin: 0 15px;
+  transform: translateY(0px);
+  cursor: pointer;
+  border: 1px solid var(--tc-theme-primary);
+  background: var(--tc-theme-primary);
+}
+
+.pricing__tab-switcher::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: 26px;
+  border-radius: 50%;
+  background: var(--tc-system-white);
+  transition: all 0.3s ease-out 0s;
+}
+
+.pricing__tab-switcher.active:before {
+  left: calc(100% - 28px);
+}
+
+.pricing__box {
+  background: #fff;
+  border: 1px solid #cfdde2;
+  border-radius: 15px;
+  padding: 50px 65px;
+  margin-bottom: 30px;
+}
+
+.pricing__price .price.annual_price {
+  display: none;
+}
+
+.pricing__price.change-subs-duration .monthly_price {
+  display: none;
+}
+
+.pricing__price.change-subs-duration .annual_price {
+  display: flex;
+}
+/*# sourceMappingURL=tax-software.css.map */
