@@ -578,8 +578,16 @@
             const loaderOverlay = document.getElementById("preloader-overlay");
 
             let progress = 0;
+            let pageLoaded = false;
+
             const interval = setInterval(function() {
-                progress += Math.floor(Math.random() * 15) + 5;
+                if (pageLoaded) {
+                    progress += 20;
+                } else {
+                    progress += Math.floor(Math.random() * 8) + 2;
+                    if (progress > 90) progress = 90;
+                }
+
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(interval);
@@ -592,13 +600,23 @@
                         loaderOverlay.style.visibility = "hidden";
                         setTimeout(function() {
                             loaderOverlay.style.display = "none";
-                        }, 400);
-                    }, 200);
+                        }, 300);
+                    }, 100);
                 } else {
                     progressBar.style.width = progress + "%";
                     percentageText.textContent = progress + "%";
                 }
-            }, 35); // Ticks up very fast but smoothly
+            }, 30);
+
+            // Fast forward when page loaded
+            window.addEventListener('load', function() {
+                pageLoaded = true;
+            });
+
+            // Fallback force exit
+            setTimeout(function() {
+                pageLoaded = true;
+            }, 2000);
         })();
     </script>
     <!-- End Preloader Area -->
