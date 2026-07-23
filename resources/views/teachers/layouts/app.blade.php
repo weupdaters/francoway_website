@@ -518,19 +518,7 @@
 
         /* Fullscreen Preloader Overlay Styles */
         .preloader-overlay {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background-color: #071530 !important; /* Premium brand navy */
-            z-index: 999999 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.4s ease, visibility 0.4s ease !important;
+            display: none !important;
         }
 
         .preloader-content-box {
