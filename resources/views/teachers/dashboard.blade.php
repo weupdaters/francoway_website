@@ -428,29 +428,7 @@
         </nav>
       </div>
       
-      {{-- Vector graphic illustration --}}
-      <div class="d-none d-xl-block">
-        <svg width="180" height="90" viewBox="0 0 220 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="110" cy="115" rx="90" ry="10" fill="#EEF2FF" />
-          <path d="M25 90 L30 110 L45 110 L50 90 Z" fill="#C7D2FE" />
-          <path d="M37.5 90 C30 75 20 78 22 68 C27 75 35 80 37.5 90 Z" fill="#818CF8" />
-          <path d="M37.5 90 C45 72 55 75 53 65 C48 72 40 80 37.5 90 Z" fill="#A5B4FC" />
-          <path d="M37.5 90 C35 70 37.5 60 37.5 58 C40 70 38 82 37.5 90 Z" fill="#6366F1" />
-          <rect x="65" y="25" width="70" height="85" rx="8" fill="#E0E7FF" stroke="#A5B4FC" stroke-width="2" />
-          <rect x="85" y="18" width="30" height="12" rx="3" fill="#6366F1" />
-          <circle cx="100" cy="24" r="3" fill="#FFFFFF" />
-          <circle cx="80" cy="45" r="6" fill="#818CF8" />
-          <rect x="92" y="42" width="32" height="6" rx="3" fill="#C7D2FE" />
-          <circle cx="80" cy="62" r="6" fill="#818CF8" />
-          <rect x="92" y="59" width="32" height="6" rx="3" fill="#C7D2FE" />
-          <circle cx="80" cy="79" r="6" fill="#818CF8" />
-          <rect x="92" y="76" width="32" height="6" rx="3" fill="#C7D2FE" />
-          <path d="M135 60 L175 45 L215 60 L175 75 Z" fill="#312E81" />
-          <path d="M152 68 L152 82 C152 90 198 90 198 82 L198 68 Z" fill="#4338CA" />
-          <path d="M175 60 L205 78 L202 92" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" />
-          <circle cx="202" cy="94" r="3" fill="#F59E0B" />
-        </svg>
-      </div>
+
     </div>
 
   </div>
