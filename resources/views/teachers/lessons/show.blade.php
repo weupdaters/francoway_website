@@ -138,28 +138,22 @@
                         </div>
                       </form>
 
-                      {{-- Action Links (Reply, Edit, Delete) --}}
-                      <div class="d-flex align-items-center gap-3 mb-2">
+                      {{-- Action Links (Only Reply for student comments, Edit/Delete for own comments) --}}
+                      <div class="d-flex align-items-center gap-3 mb-2 mt-2">
                         @if(auth()->check() && $comment->user_id !== auth()->id())
-                          <button class="btn btn-sm text-danger p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1"
-                                  onclick="toggleReplyForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
+                          <a href="javascript:void(0)" onclick="toggleReplyForm({{ $comment->id }})" class="text-danger fw-semibold text-decoration-none d-inline-flex align-items-center gap-1" style="font-size: 12.5px;">
                             <i class="bi bi-reply-fill"></i> Reply as Teacher
-                          </button>
+                          </a>
                         @endif
 
                         @if(auth()->check() && $comment->user_id == auth()->id())
-                          <button class="btn btn-sm text-primary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1"
-                                  onclick="toggleEditForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
+                          <a href="javascript:void(0)" onclick="toggleEditForm({{ $comment->id }})" class="text-primary fw-semibold text-decoration-none d-inline-flex align-items-center gap-1" style="font-size: 12.5px;">
                             <i class="bi bi-pencil-square"></i> Edit
-                          </button>
-                        @endif
-
-                        @if(auth()->check() && ($comment->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
+                          </a>
                           <form method="POST" action="{{ route('users.comment.destroy', $comment->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this comment?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm text-secondary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1"
-                                    style="font-size: 12px; font-weight: 600;">
+                            <button type="submit" class="border-0 bg-transparent text-secondary fw-semibold p-0 d-inline-flex align-items-center gap-1" style="font-size: 12.5px;">
                               <i class="bi bi-trash-fill"></i> Delete
                             </button>
                           </form>
@@ -198,24 +192,21 @@
                                 </div>
                               </form>
 
-                              {{-- Reply Edit / Delete Action Buttons --}}
-                              @if(auth()->check() && $reply->user_id == auth()->id())
-                                <button class="btn btn-sm text-primary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1"
-                                        onclick="toggleEditForm({{ $reply->id }})" style="font-size: 11.5px; font-weight: 600;">
-                                  <i class="bi bi-pencil-square"></i> Edit
-                                </button>
-                              @endif
-
-                              @if(auth()->check() && ($reply->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
-                                <form method="POST" action="{{ route('users.comment.destroy', $reply->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this reply?');">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-sm text-secondary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1"
-                                          style="font-size: 11.5px; font-weight: 600;">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                  </button>
-                                </form>
-                              @endif
+                              {{-- Reply Action Buttons (Edit / Delete for own replies) --}}
+                              <div class="d-flex gap-3 align-items-center mt-1">
+                                @if(auth()->check() && $reply->user_id == auth()->id())
+                                  <a href="javascript:void(0)" onclick="toggleEditForm({{ $reply->id }})" class="text-primary fw-semibold text-decoration-none d-inline-flex align-items-center gap-1" style="font-size: 12px;">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                  </a>
+                                  <form method="POST" action="{{ route('users.comment.destroy', $reply->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this reply?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="border-0 bg-transparent text-secondary fw-semibold p-0 d-inline-flex align-items-center gap-1" style="font-size: 12px;">
+                                      <i class="bi bi-trash-fill"></i> Delete
+                                    </button>
+                                  </form>
+                                @endif
+                              </div>
                             </div>
                           @endforeach
                         </div>
