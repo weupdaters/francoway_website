@@ -29,32 +29,34 @@ class ForgotPasswordController extends Controller
             return back()->with('status', 'If an account exists with that email address, a 6-digit OTP code has been sent.');
         }
 
-        // Generate 6-digit numeric OTP code
-        $otp = str_pad(mt_rand(100000, 999999), 6, '0', STR_PAD_LEFT);
+        // Delete any previous tokens for this email to ensure fresh state
+        DB::table('password_reset_tokens')->where('email', $user->email)->delete();
 
-        // Save OTP to password_reset_tokens table
-        DB::table('password_reset_tokens')->updateOrInsert(
-            ['email' => $user->email],
-            [
-                'token' => Hash::make($otp),
-                'created_at' => now(),
-            ]
-        );
+        // Generate a new 6-digit numeric OTP code
+        $otp = (string) random_int(100000, 999999);
 
-        // Send OTP via Email
+        // Save fresh OTP to password_reset_tokens table
+        DB::table('password_reset_tokens')->insert([
+            'email' => $user->email,
+            'token' => Hash::make($otp),
+            'created_at' => now(),
+        ]);
+
+        // Send fresh OTP via Email (including OTP in Subject so Gmail doesn't group threads)
         try {
             Mail::send('emails.password-otp', [
                 'otp' => $otp,
                 'name' => $user->name,
-            ], function ($message) use ($user) {
+            ], function ($message) use ($user, $otp) {
                 $message->to($user->email)
-                        ->subject('Your Password Reset OTP - Francoway Academy');
+                        ->subject("Your Password Reset OTP Code: {$otp} - Francoway Academy");
             });
+            Log::info("Sent new OTP {$otp} to {$user->email}");
         } catch (\Throwable $e) {
             Log::error('Failed to send OTP email: ' . $e->getMessage());
         }
 
         return redirect()->route('password.reset', ['email' => $user->email])
-            ->with('status', 'A 6-digit OTP code has been sent to your email address.');
+            ->with('status', 'A new 6-digit OTP code has been sent to your email address.');
     }
 }
