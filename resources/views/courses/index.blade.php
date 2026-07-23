@@ -101,19 +101,8 @@
                                 </div>
 
                                 @php
-                                    $titleLower = strtolower($course->title);
-                                    if (strpos($titleLower, 'delf') !== false || strpos($titleLower, 'dalf') !== false || strpos($titleLower, 'exam') !== false || strpos($titleLower, 'prep') !== false) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=600';
-                                    } elseif (strpos($titleLower, 'business') !== false || strpos($titleLower, 'pro') !== false || strpos($titleLower, 'profession') !== false) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600';
-                                    } elseif (strpos($titleLower, 'a1') !== false || strpos($titleLower, 'a2') !== false || strpos($titleLower, 'begin') !== false) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=600';
-                                    } elseif (strpos($titleLower, 'intermediate') !== false || strpos($titleLower, 'upper') !== false) {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&q=80&w=600';
-                                    } else {
-                                        $imgUrl = 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&q=80&w=600';
-                                    }
-                                    $courseImage = $course->thumbnail ? asset('storage/' . $course->thumbnail) : $imgUrl;
+                                    $noImageBanner = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f8fafc;stop-opacity:1"/><stop offset="100%" style="stop-color:%23e2e8f0;stop-opacity:1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/><g transform="translate(400, 220)" text-anchor="middle"><path d="M-24,-40 L24,-40 C32,-40 38,-34 38,-26 L38,26 C38,34 32,40 24,40 L-24,40 C-32,40 -38,34 -38,26 L-38,-26 C-38,-34 -32,-40 -24,-40 Z" fill="none" stroke="%2364748b" stroke-width="4" stroke-linejoin="round"/><circle cx="0" cy="0" r="14" fill="none" stroke="%2364748b" stroke-width="4"/><circle cx="20" cy="-22" r="4" fill="%2364748b"/><text x="0" y="85" fill="%23071530" font-family="Outfit, sans-serif" font-size="24" font-weight="800" letter-spacing="1">NO IMAGE AVAILABLE</text><text x="0" y="115" fill="%2364748b" font-family="Outfit, sans-serif" font-size="16" font-weight="500">FrancoWay Learning Portal</text></g></svg>';
+                                    $courseImage = $course->thumbnail ? asset('storage/' . $course->thumbnail) : $noImageBanner;
                                 @endphp
 
                                 <!-- Card Body & Image -->
@@ -125,7 +114,7 @@
                                             src="{{ $courseImage }}" 
                                             alt="{{ $course->title }}"
                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                            onerror="this.src='{{ $imgUrl }}'"
+                                            onerror="this.src='{{ $noImageBanner }}'"
                                         >
                                         <!-- Price Badge floating on image -->
                                         <span class="absolute bottom-3 right-3 bg-[#0B1E43] text-[#F8B803] font-bold text-[10px] px-2.5 py-1 rounded-full border border-[#F8B803]/30 shadow-md">

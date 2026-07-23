@@ -407,21 +407,14 @@
                                 }
                             }
 
-                            $titleLower = strtolower($course->title);
-                            if (strpos($titleLower, 'a1') !== false) {
-                                $imgUrl = 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=400';
-                            } elseif (strpos($titleLower, 'a2') !== false) {
-                                $imgUrl = 'https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&q=80&w=400';
-                            } else {
-                                $imgUrl = 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&q=80&w=400';
-                            }
-                            $courseImage = $course->thumbnail ? asset('storage/'.$course->thumbnail) : $imgUrl;
+                            $noImageBanner = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f8fafc;stop-opacity:1"/><stop offset="100%" style="stop-color:%23e2e8f0;stop-opacity:1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/><g transform="translate(400, 220)" text-anchor="middle"><path d="M-24,-40 L24,-40 C32,-40 38,-34 38,-26 L38,26 C38,34 32,40 24,40 L-24,40 C-32,40 -38,34 -38,26 L-38,-26 C-38,-34 -32,-40 -24,-40 Z" fill="none" stroke="%2364748b" stroke-width="4" stroke-linejoin="round"/><circle cx="0" cy="0" r="14" fill="none" stroke="%2364748b" stroke-width="4"/><circle cx="20" cy="-22" r="4" fill="%2364748b"/><text x="0" y="85" fill="%23071530" font-family="Outfit, sans-serif" font-size="24" font-weight="800" letter-spacing="1">NO IMAGE AVAILABLE</text><text x="0" y="115" fill="%2364748b" font-family="Outfit, sans-serif" font-size="16" font-weight="500">FrancoWay Learning Portal</text></g></svg>';
+                            $courseImage = $course->thumbnail ? asset('storage/'.$course->thumbnail) : $noImageBanner;
                         @endphp
 
                         <div class="col-md-4 col-sm-6 col-12">
                             <div class="mirror-course-card">
                                 <div class="mirror-card-img-box">
-                                    <img src="{{ $courseImage }}" class="mirror-card-img" alt="{{ $course->title }}">
+                                    <img src="{{ $courseImage }}" class="mirror-card-img" alt="{{ $course->title }}" onerror="this.src='{{ $noImageBanner }}'">
                                     <span class="mirror-status-badge {{ $badgeClass }}">{{ $statusText }}</span>
                                 </div>
 
