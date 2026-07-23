@@ -306,23 +306,23 @@
         /* Premium Table / List Overrides */
         .table, .default-table-area table {
             border-collapse: separate !important;
-            border-spacing: 0 8px !important;
+            border-spacing: 0 10px !important;
             width: 100% !important;
         }
 
         .table tr {
-            background-color: #ffffff !important;
-            box-shadow: 0 4px 12px rgba(7, 21, 48, 0.01) !important;
-            transition: all 0.2s ease !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
         .table th {
-            font-size: 12.5px !important;
+            font-size: 12px !important;
             font-weight: 800 !important;
             color: #071530 !important;
             text-transform: uppercase !important;
             letter-spacing: 0.5px !important;
-            background-color: #f7fafc !important;
+            background: transparent !important;
             border: none !important;
             padding: 14px 18px !important;
         }
@@ -331,19 +331,34 @@
             font-size: 14.5px !important;
             font-weight: 500 !important;
             color: #4a5568 !important;
-            border: none !important;
-            padding: 16px 18px !important;
+            background-color: #ffffff !important;
+            border-top: 1px solid #eff3f9 !important;
+            border-bottom: 1px solid #eff3f9 !important;
+            padding: 18px 18px !important;
             vertical-align: middle !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
-        .table tbody tr {
-            border-radius: 10px !important;
+        .table td:first-child {
+            border-left: 1px solid #eff3f9 !important;
+            border-top-left-radius: 14px !important;
+            border-bottom-left-radius: 14px !important;
+        }
+
+        .table td:last-child {
+            border-right: 1px solid #eff3f9 !important;
+            border-top-right-radius: 14px !important;
+            border-bottom-right-radius: 14px !important;
+        }
+
+        .table tbody tr:hover td {
+            background-color: #fafbfd !important;
+            border-color: rgba(7, 21, 48, 0.08) !important;
         }
 
         .table tbody tr:hover {
             transform: translateY(-2px) !important;
-            box-shadow: 0 8px 24px rgba(7, 21, 48, 0.04) !important;
-            background-color: #fcfcfc !important;
+            box-shadow: 0 10px 25px rgba(7, 21, 48, 0.03) !important;
         }
 
         /* Premium Form Fields & Inputs */
