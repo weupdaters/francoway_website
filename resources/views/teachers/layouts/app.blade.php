@@ -395,6 +395,29 @@
             outline: none !important;
         }
 
+        /* Disable Floating Labels globally and render inputs normally */
+        .form-floating > label {
+            display: none !important;
+        }
+        .form-floating > .form-control, 
+        .form-floating > .form-select,
+        .form-floating > select {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            height: 48px !important;
+        }
+        .form-floating > .form-control:not(:placeholder-shown),
+        .form-floating > .form-control:focus {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        .form-floating > .form-control::placeholder {
+            color: #a0aec0 !important;
+        }
+        .form-floating > .form-control:focus::placeholder {
+            color: #a0aec0 !important;
+        }
+
         /* Labels */
         label, .form-label {
             font-size: 13px !important;
