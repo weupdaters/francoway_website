@@ -131,16 +131,35 @@ class LessonController extends Controller
     {
         abort_if($lesson->course_id !== $course->id, 404);
 
-        auth()->user()->lessons()->syncWithoutDetaching([
-            $lesson->id => [
-                'is_completed' => true,
-                'completed_at' => now(),
-            ]
-        ]);
+        $user = auth()->user();
+        $alreadyCompleted = $user->lessons()->where('lesson_id', $lesson->id)->exists();
+
+        if ($alreadyCompleted) {
+            $user->lessons()->detach($lesson->id);
+            $isCompleted = false;
+        } else {
+            $user->lessons()->syncWithoutDetaching([
+                $lesson->id => [
+                    'is_completed' => true,
+                    'completed_at' => now(),
+                ]
+            ]);
+            $isCompleted = true;
+        }
+
+        $courseLessonIds = $course->lessons()->pluck('id');
+        $totalLessons = $courseLessonIds->count();
+        $completedCount = $user->lessons()->whereIn('lesson_id', $courseLessonIds)->count();
+        $progressPercentage = $totalLessons > 0 ? round(($completedCount / $totalLessons) * 100) : 0;
 
         return response()->json([
-            'success'   => true,
-            'lesson_id'=> $lesson->id,
+            'success'            => true,
+            'is_completed'       => $isCompleted,
+            'lesson_id'          => $lesson->id,
+            'progress_percentage'=> $progressPercentage,
+            'completed_count'    => $completedCount,
+            'total_lessons'      => $totalLessons,
+            'course_status'      => $progressPercentage >= 100 ? 'Completed' : 'In Progress',
         ]);
     }
 }

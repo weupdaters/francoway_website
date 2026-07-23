@@ -71,8 +71,8 @@
                             <span class="meta-pill">
                                 <i class="bi bi-clock text-secondary"></i> 18h 30m
                             </span>
-                            <span class="meta-pill meta-pill-success">
-                                <i class="bi bi-check-circle-fill me-1"></i> In Progress
+                            <span class="meta-pill {{ $completionPercentage >= 100 ? 'bg-success text-white' : 'meta-pill-success' }}" id="courseStatusBadge">
+                                <i class="bi bi-check-circle-fill me-1"></i> <span id="courseStatusText">{{ $completionPercentage >= 100 ? 'Completed' : 'In Progress' }}</span>
                             </span>
 
                             @if($course->has_custom_prompt && $course->custom_prompt)
@@ -108,10 +108,10 @@
                         </span>
                     </div>
                     <div class="fw-bold mb-2 text-dark-slate" style="font-size: 18px;">
-                        {{ $completionPercentage }}% <span class="fw-medium text-muted" style="font-size: 14px;">Completed</span>
+                        <span id="progressPercentageText">{{ $completionPercentage }}</span>% <span class="fw-medium text-muted" style="font-size: 14px;">Completed</span>
                     </div>
                     <div class="progress mb-2" style="height: 8px; background-color: #E2E8F0; border-radius: 10px;">
-                        <div class="progress-bar progress-bar-gradient" role="progressbar" 
+                        <div id="progressBarFill" class="progress-bar progress-bar-gradient" role="progressbar" 
                              style="width: {{ $completionPercentage }}%;" 
                              aria-valuenow="{{ $completionPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -176,7 +176,7 @@
                                         <a href="{{ route('users.lessons.show', [$course->id, $lesson->id]) }}"
                                            class="lesson-item-link {{ $isActive ? 'active-lesson' : '' }}">
 
-                                            <div class="d-flex align-items-center justify-content-center" style="min-width: 18px;">
+                                            <div id="lesson-check-icon-{{ $lesson->id }}" class="d-flex align-items-center justify-content-center" style="min-width: 18px;">
                                                 @if ($isCompleted)
                                                     <i class="bi bi-check-circle-fill text-success" style="{{ $isActive ? 'color: #ffffff !important;' : '' }}"></i>
                                                 @else
@@ -311,8 +311,15 @@
                     </h5>
 
                     @if ($currentLesson)
-                        <button id="completeBtn" class="btn btn-success btn-sm px-4 rounded-pill shadow-sm d-flex align-items-center gap-1">
-                            <i class="bi bi-check-lg"></i> Mark as Completed
+                        @php
+                            $isCurrentCompleted = auth()->user()->lessons->contains($currentLesson->id);
+                        @endphp
+                        <button id="completeBtn" class="btn {{ $isCurrentCompleted ? 'btn-secondary' : 'btn-success' }} btn-sm px-4 rounded-pill shadow-sm d-flex align-items-center gap-1">
+                            @if ($isCurrentCompleted)
+                                <i class="bi bi-check-all"></i> Completed
+                            @else
+                                <i class="bi bi-check-lg"></i> Mark as Completed
+                            @endif
                         </button>
                     @endif
                 </div>
@@ -641,18 +648,71 @@
 @if ($currentLesson)
 <script>
     function markLessonCompleted() {
+        const completeBtn = document.getElementById('completeBtn');
+        if (completeBtn) {
+            completeBtn.disabled = true;
+        }
+
         fetch("{{ route('users.lesson.complete', [$course->id, $currentLesson->id]) }}", {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
             }
-        }).then(() => {
-            const completeBtn = document.getElementById('completeBtn');
+        })
+        .then(res => res.json())
+        .then(data => {
             if (completeBtn) {
-                completeBtn.classList.remove('btn-success');
-                completeBtn.classList.add('btn-secondary');
-                completeBtn.innerHTML = '<i class="bi bi-check-all"></i> Completed';
+                completeBtn.disabled = false;
+                if (data.is_completed) {
+                    completeBtn.classList.remove('btn-success');
+                    completeBtn.classList.add('btn-secondary');
+                    completeBtn.innerHTML = '<i class="bi bi-check-all"></i> Completed';
+                } else {
+                    completeBtn.classList.remove('btn-secondary');
+                    completeBtn.classList.add('btn-success');
+                    completeBtn.innerHTML = '<i class="bi bi-check-lg"></i> Mark as Completed';
+                }
             }
+
+            // Real-time Progress Bar & Status updates
+            if (data.progress_percentage !== undefined) {
+                const percentText = document.getElementById('progressPercentageText');
+                const progressFill = document.getElementById('progressBarFill');
+                const statusBadge = document.getElementById('courseStatusBadge');
+                const statusText = document.getElementById('courseStatusText');
+
+                if (percentText) percentText.textContent = data.progress_percentage;
+                if (progressFill) {
+                    progressFill.style.width = data.progress_percentage + '%';
+                    progressFill.setAttribute('aria-valuenow', data.progress_percentage);
+                }
+                if (statusBadge && statusText) {
+                    if (data.progress_percentage >= 100) {
+                        statusText.textContent = 'Completed';
+                        statusBadge.className = 'meta-pill bg-success text-white';
+                    } else {
+                        statusText.textContent = 'In Progress';
+                        statusBadge.className = 'meta-pill meta-pill-success';
+                    }
+                }
+            }
+
+            // Real-time Sidebar Lesson Checkmark Icon update
+            if (data.lesson_id) {
+                const checkContainer = document.getElementById('lesson-check-icon-' + data.lesson_id);
+                if (checkContainer) {
+                    if (data.is_completed) {
+                        checkContainer.innerHTML = '<i class="bi bi-check-circle-fill text-success"></i>';
+                    } else {
+                        checkContainer.innerHTML = '<div class="rounded-circle border" style="width: 14px; height: 14px; border-color: #94A3B8 !important;"></div>';
+                    }
+                }
+            }
+        })
+        .catch(err => {
+            if (completeBtn) completeBtn.disabled = false;
+            console.error('Error completing lesson:', err);
         });
     }
 
