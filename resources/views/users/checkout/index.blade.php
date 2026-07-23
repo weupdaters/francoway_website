@@ -1,3 +1,26 @@
+@php
+    $taxEnabled = ($settings['checkout_tax_enabled'] ?? 0) == 1;
+    $taxPercent = floatval($settings['checkout_tax_percent'] ?? 0);
+    $taxLabel = $settings['checkout_tax_label'] ?? 'Taxes / SGST';
+    $taxAmount = $taxEnabled ? (($course->price * $taxPercent) / 100) : 0;
+    $totalAmount = $course->price + $taxAmount;
+
+    $payUpiEnabled = ($settings['checkout_pay_upi_enabled'] ?? 1) == 1;
+    $payCardEnabled = ($settings['checkout_pay_card_enabled'] ?? 1) == 1;
+    $payNetbankingEnabled = ($settings['checkout_pay_netbanking_enabled'] ?? 1) == 1;
+
+    // Check which payment method should be checked by default
+    $defaultMethod = 'upi';
+    if (!$payUpiEnabled) {
+        if ($payCardEnabled) {
+            $defaultMethod = 'card';
+        } elseif ($payNetbankingEnabled) {
+            $defaultMethod = 'netbanking';
+        } else {
+            $defaultMethod = 'none';
+        }
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,61 +244,82 @@
                                 <h5 class="fw-bold mb-0 text-dark" style="font-size: 16px;">Select Payment Method</h5>
                             </div>
 
-                            <!-- Payment Tabs -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-4">
-                                    <label class="payment-tab-label w-100 cursor-pointer mb-0">
-                                        <input type="radio" name="payment_method" value="upi" checked class="peer-check d-none" onchange="togglePaymentView('upi')">
-                                        <div class="payment-tab-card text-center py-3 rounded-3 border">
-                                            <div class="fs-3 mb-1">📱</div>
-                                            <div class="small fw-bold text-dark">UPI / QR</div>
-                                        </div>
-                                    </label>
+                            @if(!$payUpiEnabled && !$payCardEnabled && !$payNetbankingEnabled)
+                                <div class="alert alert-warning border-0 p-3 rounded-12">
+                                    No payment methods are currently available. Please contact administrator.
                                 </div>
-                                <div class="col-4">
-                                    <label class="payment-tab-label w-100 cursor-pointer mb-0">
-                                        <input type="radio" name="payment_method" value="card" class="peer-check d-none" onchange="togglePaymentView('card')">
-                                        <div class="payment-tab-card text-center py-3 rounded-3 border">
-                                            <div class="fs-3 mb-1">💳</div>
-                                            <div class="small fw-bold text-dark">Card</div>
-                                        </div>
-                                    </label>
+                            @else
+                                <!-- Payment Tabs -->
+                                <div class="row g-3 mb-4">
+                                    @if($payUpiEnabled)
+                                    <div class="col-4">
+                                        <label class="payment-tab-label w-100 cursor-pointer mb-0">
+                                            <input type="radio" name="payment_method" value="upi" {{ $defaultMethod === 'upi' ? 'checked' : '' }} class="peer-check d-none" onchange="togglePaymentView('upi')">
+                                            <div class="payment-tab-card text-center py-3 rounded-3 border">
+                                                <div class="fs-3 mb-1">📱</div>
+                                                <div class="small fw-bold text-dark">UPI / QR</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    @endif
+
+                                    @if($payCardEnabled)
+                                    <div class="col-4">
+                                        <label class="payment-tab-label w-100 cursor-pointer mb-0">
+                                            <input type="radio" name="payment_method" value="card" {{ $defaultMethod === 'card' ? 'checked' : '' }} class="peer-check d-none" onchange="togglePaymentView('card')">
+                                            <div class="payment-tab-card text-center py-3 rounded-3 border">
+                                                <div class="fs-3 mb-1">💳</div>
+                                                <div class="small fw-bold text-dark">Card</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    @endif
+
+                                    @if($payNetbankingEnabled)
+                                    <div class="col-4">
+                                        <label class="payment-tab-label w-100 cursor-pointer mb-0">
+                                            <input type="radio" name="payment_method" value="netbanking" {{ $defaultMethod === 'netbanking' ? 'checked' : '' }} class="peer-check d-none" onchange="togglePaymentView('netbanking')">
+                                            <div class="payment-tab-card text-center py-3 rounded-3 border">
+                                                <div class="fs-3 mb-1">🏦</div>
+                                                <div class="small fw-bold text-dark">Banking</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    @endif
                                 </div>
-                                <div class="col-4">
-                                    <label class="payment-tab-label w-100 cursor-pointer mb-0">
-                                        <input type="radio" name="payment_method" value="netbanking" class="peer-check d-none" onchange="togglePaymentView('netbanking')">
-                                        <div class="payment-tab-card text-center py-3 rounded-3 border">
-                                            <div class="fs-3 mb-1">🏦</div>
-                                            <div class="small fw-bold text-dark">Banking</div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
+                            @endif
 
                             <!-- Payment Details View Area -->
                             <div class="payment-details-area">
                                 
                                 <!-- UPI QR Details -->
-                                <div id="payment-view-upi" class="text-center py-2">
+                                @if($payUpiEnabled)
+                                <div id="payment-view-upi" class="{{ $defaultMethod === 'upi' ? '' : 'd-none' }} text-center py-2">
                                     <p class="text-muted small fw-semibold mb-3">Scan the QR code below using any UPI App (GPay, PhonePe, Paytm, etc.) to simulate your payment.</p>
+                                    
+                                    @if(($settings['checkout_upi_qr_enabled'] ?? 1) == 1)
                                     <div class="qr-container p-3 border rounded-3 bg-white d-inline-block shadow-sm mb-4">
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data={{ urlencode('upi://pay?pa=francoway@ybl&pn=FrancoWay&am=' . ($course->price ?? 1) . '&tn=Enrollment') }}" alt="UPI QR Code" class="img-fluid select-none" style="max-height: 160px;">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data={{ urlencode('upi://pay?pa=' . ($settings['checkout_upi_id'] ?? 'francoway@ybl') . '&pn=' . ($settings['site_name'] ?? 'FrancoWay') . '&am=' . $totalAmount . '&tn=Enrollment') }}" alt="UPI QR Code" class="img-fluid select-none" style="max-height: 160px;">
                                     </div>
+                                    @endif
+
                                     <div class="max-w-xs mx-auto text-start" style="max-width: 320px; margin: 0 auto;">
                                         <label class="text-muted small fw-bold text-uppercase d-block mb-2" style="font-size: 11px; letter-spacing: 0.5px;">OR Enter UPI ID</label>
-                                        <input type="text" name="upi_id" placeholder="username@upi" class="form-control rounded-3">
+                                        <input type="text" name="upi_id" placeholder="username@upi" class="form-control rounded-3" value="{{ old('upi_id', auth()->user()->email) }}">
                                     </div>
                                 </div>
+                                @endif
 
                                 <!-- Card Details -->
-                                <div id="payment-view-card" class="d-none">
+                                @if($payCardEnabled)
+                                <div id="payment-view-card" class="{{ $defaultMethod === 'card' ? '' : 'd-none' }}">
                                     <div class="mb-3">
                                         <label class="text-muted small fw-bold text-uppercase mb-2 d-block" style="font-size: 11px; letter-spacing: 0.5px;">Name on Card</label>
-                                        <input type="text" name="card_name" placeholder="John Doe" class="form-control rounded-3">
+                                        <input type="text" name="card_name" placeholder="John Doe" class="form-control rounded-3" value="{{ old('card_name', auth()->user()->name) }}">
                                     </div>
                                     <div class="mb-3">
                                         <label class="text-muted small fw-bold text-uppercase mb-2 d-block" style="font-size: 11px; letter-spacing: 0.5px;">Card Number</label>
-                                        <input type="text" name="card_number" placeholder="4111 2222 3333 4444" class="form-control rounded-3">
+                                        <input type="text" name="card_number" placeholder="4111 2222 3333 4444" class="form-control rounded-3" value="{{ old('card_number') }}">
                                     </div>
                                     <div class="row g-3">
                                         <div class="col-6">
@@ -288,9 +332,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
 
                                 <!-- Net Banking Details -->
-                                <div id="payment-view-netbanking" class="d-none">
+                                @if($payNetbankingEnabled)
+                                <div id="payment-view-netbanking" class="{{ $defaultMethod === 'netbanking' ? '' : 'd-none' }}">
                                     <div class="mb-3">
                                         <label class="text-muted small fw-bold text-uppercase mb-2 d-block" style="font-size: 11px; letter-spacing: 0.5px;">Choose Bank</label>
                                         <select class="form-select rounded-3">
@@ -302,6 +348,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                @endif
 
                             </div>
                         </div>
@@ -314,19 +361,12 @@
                             <h5 class="fw-bold text-dark border-bottom pb-3 mb-4" style="font-size: 16px;">Order Summary</h5>
                             
                             @php
-                                $titleLower = strtolower($course->title);
-                                if (strpos($titleLower, 'a1') !== false) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=400';
-                                } elseif (strpos($titleLower, 'a2') !== false) {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&q=80&w=400';
-                                } else {
-                                    $imgUrl = 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&q=80&w=400';
-                                }
-                                $courseImage = $course->thumbnail ? asset('storage/' . $course->thumbnail) : $imgUrl;
+                                $noImageBanner = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f8fafc;stop-opacity:1"/><stop offset="100%" style="stop-color:%23e2e8f0;stop-opacity:1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/><g transform="translate(400, 220)" text-anchor="middle"><path d="M-24,-40 L24,-40 C32,-40 38,-34 38,-26 L38,26 C38,34 32,40 24,40 L-24,40 C-32,40 -38,34 -38,26 L-38,-26 C-38,-34 -32,-40 -24,-40 Z" fill="none" stroke="%2364748b" stroke-width="4" stroke-linejoin="round"/><circle cx="0" cy="0" r="14" fill="none" stroke="%2364748b" stroke-width="4"/><circle cx="20" cy="-22" r="4" fill="%2364748b"/><text x="0" y="85" fill="%23071530" font-family="Outfit, sans-serif" font-size="24" font-weight="800" letter-spacing="1">NO IMAGE AVAILABLE</text><text x="0" y="115" fill="%2364748b" font-family="Outfit, sans-serif" font-size="16" font-weight="500">FrancoWay Learning Portal</text></g></svg>';
+                                $courseImage = $course->thumbnail ? asset('storage/' . $course->thumbnail) : $noImageBanner;
                             @endphp
 
                             <div class="d-flex gap-3 align-items-center mb-4">
-                                <img src="{{ $courseImage }}" class="rounded-3 border" style="width: 100px; height: 70px; object-fit: cover;">
+                                <img src="{{ $courseImage }}" class="rounded-3 border" style="width: 100px; height: 70px; object-fit: cover;" onerror="this.src='{{ $noImageBanner }}'">
                                 <div>
                                     <h6 class="fw-bold text-dark mb-1" style="font-size: 15px; line-height: 1.3;">{{ $course->title }}</h6>
                                     <span class="badge bg-danger-subtle text-danger text-uppercase px-2 py-1 rounded" style="font-size: 10px; font-weight: 700;">12-Month Access</span>
@@ -339,20 +379,26 @@
                                     <span>Subtotal</span>
                                     <span>₹{{ number_format($course->price, 2) }}</span>
                                 </div>
+                                
+                                @if($taxEnabled)
                                 <div class="d-flex justify-content-between mb-3 text-muted small fw-semibold">
-                                    <span>Taxes / SGST</span>
-                                    <span>₹0.00</span>
+                                    <span>{{ $taxLabel }} ({{ $taxPercent }}%)</span>
+                                    <span>₹{{ number_format($taxAmount, 2) }}</span>
                                 </div>
+                                @endif
+
                                 <div class="d-flex justify-content-between align-items-baseline border-top pt-3">
                                     <span class="fw-bold text-dark" style="font-size: 15px;">Total Amount</span>
-                                    <span class="fs-3 fw-bold text-danger">₹{{ number_format($course->price, 2) }}</span>
+                                    <span class="fs-3 fw-bold text-danger">₹{{ number_format($totalAmount, 2) }}</span>
                                 </div>
                             </div>
 
                             <!-- Button -->
+                            @if($payUpiEnabled || $payCardEnabled || $payNetbankingEnabled)
                             <button type="submit" class="btn btn-checkout py-3 w-100 mb-3 text-uppercase">
                                 <i class="fas fa-lock"></i> Complete Enrollment
                             </button>
+                            @endif
 
                             <div class="d-flex align-items-center justify-content-center gap-2 text-muted small fw-bold text-uppercase select-none" style="font-size: 10.5px; letter-spacing: 0.5px;">
                                 <i class="fas fa-shield-alt text-success"></i> SSL Secure Sandbox Payment
@@ -377,11 +423,16 @@
 
     <script>
         function togglePaymentView(method) {
-            document.getElementById('payment-view-upi').classList.add('d-none');
-            document.getElementById('payment-view-card').classList.add('d-none');
-            document.getElementById('payment-view-netbanking').classList.add('d-none');
+            const upiView = document.getElementById('payment-view-upi');
+            const cardView = document.getElementById('payment-view-card');
+            const bankingView = document.getElementById('payment-view-netbanking');
 
-            document.getElementById('payment-view-' + method).classList.remove('d-none');
+            if(upiView) upiView.classList.add('d-none');
+            if(cardView) cardView.classList.add('d-none');
+            if(bankingView) bankingView.classList.add('d-none');
+
+            const activeView = document.getElementById('payment-view-' + method);
+            if(activeView) activeView.classList.remove('d-none');
         }
     </script>
 </body>

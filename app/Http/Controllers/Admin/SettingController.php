@@ -42,6 +42,14 @@ class SettingController extends Controller
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
             'google_analytics' => 'nullable|string',
+            'checkout_tax_label' => 'nullable|string|max:100',
+            'checkout_tax_percent' => 'nullable|numeric|min:0|max:100',
+            'checkout_tax_enabled' => 'nullable|boolean',
+            'checkout_pay_upi_enabled' => 'nullable|boolean',
+            'checkout_pay_card_enabled' => 'nullable|boolean',
+            'checkout_pay_netbanking_enabled' => 'nullable|boolean',
+            'checkout_upi_id' => 'nullable|string|max:150',
+            'checkout_upi_qr_enabled' => 'nullable|boolean',
         ];
 
         $data = $request->validate($rules);
@@ -58,6 +66,11 @@ class SettingController extends Controller
 
         // checkbox fix
         $data['maintenance_mode'] = $request->has('maintenance_mode') ? 1 : 0;
+        $data['checkout_tax_enabled'] = $request->has('checkout_tax_enabled') ? 1 : 0;
+        $data['checkout_pay_upi_enabled'] = $request->has('checkout_pay_upi_enabled') ? 1 : 0;
+        $data['checkout_pay_card_enabled'] = $request->has('checkout_pay_card_enabled') ? 1 : 0;
+        $data['checkout_pay_netbanking_enabled'] = $request->has('checkout_pay_netbanking_enabled') ? 1 : 0;
+        $data['checkout_upi_qr_enabled'] = $request->has('checkout_upi_qr_enabled') ? 1 : 0;
 
         /* ---------- SAVE AS KEY / VALUE ---------- */
 

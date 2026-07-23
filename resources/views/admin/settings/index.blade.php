@@ -301,6 +301,98 @@
                     </div>
                 </div>
 
+                {{-- CHECKOUT SETTINGS --}}
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h5 class="settings-card-title">
+                            <i class="ri-secure-payment-line"></i> Checkout & Payment Gateways
+                        </h5>
+                    </div>
+                    <div class="settings-card-body d-flex flex-column gap-3">
+                        
+                        <div class="row g-3">
+                            <!-- Tax row configuration -->
+                            <div class="col-md-6 d-flex flex-column">
+                                <label class="premium-form-label">Tax / GST Label</label>
+                                <input type="text" name="checkout_tax_label" class="form-control premium-input"
+                                    value="{{ old('checkout_tax_label', $settings['checkout_tax_label'] ?? 'Taxes / SGST') }}" placeholder="e.g. Taxes / SGST">
+                            </div>
+
+                            <div class="col-md-6 d-flex flex-column">
+                                <label class="premium-form-label">Tax Rate (%)</label>
+                                <input type="number" name="checkout_tax_percent" class="form-control premium-input"
+                                    value="{{ old('checkout_tax_percent', $settings['checkout_tax_percent'] ?? '0') }}" min="0" max="100" step="0.01">
+                            </div>
+                        </div>
+
+                        <!-- Checkbox for Tax Enable -->
+                        <div class="form-check form-switch mt-2 mb-3">
+                            <input type="checkbox" class="form-check-input" id="checkout_tax_enabled"
+                                name="checkout_tax_enabled" value="1" style="width: 45px; height: 22px; cursor: pointer;"
+                                {{ ($settings['checkout_tax_enabled'] ?? 0) == 1 ? 'checked' : '' }}>
+                            <label class="form-check-label ms-2 fw-semibold text-dark" for="checkout_tax_enabled" style="cursor: pointer; margin-top: 2px;">
+                                Enable Tax / SGST Calculation Row
+                            </label>
+                        </div>
+
+                        <hr class="my-2" style="border-color: var(--border-color);">
+
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 13.5px;">Active Payment Methods</h6>
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" id="checkout_pay_upi_enabled"
+                                        name="checkout_pay_upi_enabled" value="1" style="width: 40px; height: 20px; cursor: pointer;"
+                                        {{ ($settings['checkout_pay_upi_enabled'] ?? 1) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label ms-2 fw-semibold text-dark" for="checkout_pay_upi_enabled" style="cursor: pointer; font-size: 13px;">
+                                        UPI / QR
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" id="checkout_pay_card_enabled"
+                                        name="checkout_pay_card_enabled" value="1" style="width: 40px; height: 20px; cursor: pointer;"
+                                        {{ ($settings['checkout_pay_card_enabled'] ?? 1) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label ms-2 fw-semibold text-dark" for="checkout_pay_card_enabled" style="cursor: pointer; font-size: 13px;">
+                                        Credit/Debit Card
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" id="checkout_pay_netbanking_enabled"
+                                        name="checkout_pay_netbanking_enabled" value="1" style="width: 40px; height: 20px; cursor: pointer;"
+                                        {{ ($settings['checkout_pay_netbanking_enabled'] ?? 1) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label ms-2 fw-semibold text-dark" for="checkout_pay_netbanking_enabled" style="cursor: pointer; font-size: 13px;">
+                                        Net Banking
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6 d-flex flex-column">
+                                <label class="premium-form-label">Merchant UPI Address</label>
+                                <input type="text" name="checkout_upi_id" class="form-control premium-input"
+                                    value="{{ old('checkout_upi_id', $settings['checkout_upi_id'] ?? 'francoway@ybl') }}" placeholder="e.g. merchant@ybl">
+                            </div>
+                            <div class="col-md-6 d-flex flex-column justify-content-end">
+                                <div class="form-check form-switch mb-2">
+                                    <input type="checkbox" class="form-check-input" id="checkout_upi_qr_enabled"
+                                        name="checkout_upi_qr_enabled" value="1" style="width: 45px; height: 22px; cursor: pointer;"
+                                        {{ ($settings['checkout_upi_qr_enabled'] ?? 1) == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label ms-2 fw-semibold text-dark" for="checkout_upi_qr_enabled" style="cursor: pointer; margin-top: 2px; font-size: 13px;">
+                                        Show QR Code for Scan & Pay
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 {{-- SEO SETTINGS --}}
                 <div class="settings-card">
                     <div class="settings-card-header">
