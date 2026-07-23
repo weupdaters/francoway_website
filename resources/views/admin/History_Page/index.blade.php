@@ -25,14 +25,16 @@
         </div>
 
         {{-- FILTERS --}}
-        <form method="GET" class="row g-3 mb-3 bg-white p-3 rounded-5 shadow-sm">
+        <form method="GET" class="row g-3 mb-4 bg-white p-4 rounded-16 border border-light shadow-sm align-items-end">
             <div class="col-md-3">
-                <input type="text" name="search" value="{{ request('search') }}" class="form-control"
+                <label class="premium-form-label mb-2">Search</label>
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control premium-input"
                     placeholder="Search user or course...">
             </div>
 
             <div class="col-md-2">
-                <select name="payment_status" class="form-select bg-white">
+                <label class="premium-form-label mb-2">Payment Status</label>
+                <select name="payment_status" class="form-select premium-input">
                     <option value="">All Payment Status</option>
                     <option value="paid" {{ request('payment_status') == 'paid' ? 'selected' : '' }}>Paid</option>
                     <option value="pending" {{ request('payment_status') == 'pending' ? 'selected' : '' }}>Pending</option>
@@ -42,38 +44,34 @@
             </div>
 
             <div class="col-md-2">
-                <select name="payment_method" class="form-select bg-white">
+                <label class="premium-form-label mb-2">Payment Method</label>
+                <select name="payment_method" class="form-select premium-input">
                     <option value="">All Methods</option>
                     <option value="gpay" {{ request('payment_method') == 'gpay' ? 'selected' : '' }}>GPay</option>
-                    <option value="razorpay" {{ request('payment_method') == 'razorpay' ? 'selected' : '' }}>Razorpay
-                    </option>
+                    <option value="razorpay" {{ request('payment_method') == 'razorpay' ? 'selected' : '' }}>Razorpay</option>
                     <option value="phonepe" {{ request('payment_method') == 'phonepe' ? 'selected' : '' }}>PhonePe</option>
                     <option value="cash" {{ request('payment_method') == 'cash' ? 'selected' : '' }}>Cash</option>
-                    <option value="bank_transfer" {{ request('payment_method') == 'bank_transfer' ? 'selected' : '' }}>Bank
-                        Transfer</option>
+                    <option value="bank_transfer" {{ request('payment_method') == 'bank_transfer' ? 'selected' : '' }}>Bank Transfer</option>
                     <option value="manual" {{ request('payment_method') == 'manual' ? 'selected' : '' }}>Manual</option>
                 </select>
             </div>
 
             <div class="col-md-2">
-                <select name="subscription_status" class="form-select bg-white">
+                <label class="premium-form-label mb-2">Status</label>
+                <select name="subscription_status" class="form-select premium-input">
                     <option value="">All Status</option>
-                    <option value="active" {{ request('subscription_status') == 'active' ? 'selected' : '' }}>Active
-                    </option>
-                    <option value="expired" {{ request('subscription_status') == 'expired' ? 'selected' : '' }}>Expired
-                    </option>
-                    <option value="cancelled" {{ request('subscription_status') == 'cancelled' ? 'selected' : '' }}>
-                        Inactive</option>
+                    <option value="active" {{ request('subscription_status') == 'active' ? 'selected' : '' }}>Active</option>
+                    <option value="expired" {{ request('subscription_status') == 'expired' ? 'selected' : '' }}>Expired</option>
+                    <option value="cancelled" {{ request('subscription_status') == 'cancelled' ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
 
-            <div class="col-md-1">
-                <button class="btn btn-primary w-100">Filter</button>
-            </div>
-
-            <div class="col-md-2">
-                <a href="{{ route('admin.assignments.index') }}" class="btn btn-secondary w-100">
-                    Reset
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-50 justify-content-center" style="height: 48px !important;">
+                    <i class="ri-filter-2-line"></i> Filter
+                </button>
+                <a href="{{ route('admin.assignments.index') }}" class="btn btn-secondary w-50 justify-content-center" style="height: 48px !important; display: inline-flex !important; align-items: center; justify-content: center;">
+                    <i class="ri-refresh-line"></i> Reset
                 </a>
             </div>
         </form>
@@ -209,41 +207,31 @@
                                 </td>            
 
                                     {{-- STATUS TOGGLE --}}
-                                <td>
-                                    <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
-
+                                    <td>
+                                    <div class="d-flex align-items-center justify-content-center gap-2">
                                         @if (strtolower($a->subscription_status ?? '') === 'active')
-                                            <span class="badge bg-success-subtle text-success">
-                                                <i class="fas fa-check-circle me-1"></i> Active
+                                            <span class="badge bg-success-subtle text-success px-2 py-1 fs-12 d-inline-flex align-items-center">
+                                                <i class="ri-checkbox-circle-fill me-1"></i> Active
                                             </span>
-
-                                            <form action="{{ route('admin.course-assign.inactive', $a->id) }}"
-                                                method="POST">
+                                            <form action="{{ route('admin.course-assign.inactive', $a->id) }}" method="POST" class="m-0">
                                                 @csrf
                                                 @method('PATCH')
-
-                                                <button type="submit" class="border-0 bg-transparent p-0 text-danger"
-                                                    title="Deactivate">
-                                                    <i class="fas fa-ban fs-5"></i>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger p-0 rounded-circle border-0 d-inline-flex align-items-center justify-content-center" style="width: 26px; height: 26px; background: transparent;" title="Deactivate">
+                                                    <i class="ri-close-circle-fill fs-5"></i>
                                                 </button>
                                             </form>
                                         @else
-                                            <span class="badge bg-secondary-subtle text-secondary">
-                                                <i class="fas fa-times-circle me-1"></i> Inactive
+                                            <span class="badge bg-secondary-subtle text-secondary px-2 py-1 fs-12 d-inline-flex align-items-center">
+                                                <i class="ri-close-circle-line me-1"></i> Inactive
                                             </span>
-
-                                            <form action="{{ route('admin.course-assign.active', $a->id) }}"
-                                                method="POST">
+                                            <form action="{{ route('admin.course-assign.active', $a->id) }}" method="POST" class="m-0">
                                                 @csrf
                                                 @method('PATCH')
-
-                                                <button type="submit" class="border-0 bg-transparent p-0 text-success"
-                                                    title="Activate">
-                                                    <i class="fas fa-check fs-5"></i>
+                                                <button type="submit" class="btn btn-sm btn-outline-success p-0 rounded-circle border-0 d-inline-flex align-items-center justify-content-center" style="width: 26px; height: 26px; background: transparent;" title="Activate">
+                                                    <i class="ri-checkbox-circle-line fs-5"></i>
                                                 </button>
                                             </form>
                                         @endif
-
                                     </div>
                                 </td>
 
