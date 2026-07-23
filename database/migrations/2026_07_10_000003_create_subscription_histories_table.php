@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_histories', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('subscription_id');
-            $table->timestamp('old_start_date')->nullable();
-            $table->timestamp('old_expiry_date')->nullable();
-            $table->timestamp('new_start_date')->nullable();
-            $table->timestamp('new_expiry_date')->nullable();
-            $table->string('action')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('subscription_histories')) {
+            Schema::create('subscription_histories', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('subscription_id');
+                $table->timestamp('old_start_date')->nullable();
+                $table->timestamp('old_expiry_date')->nullable();
+                $table->timestamp('new_start_date')->nullable();
+                $table->timestamp('new_expiry_date')->nullable();
+                $table->string('action')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

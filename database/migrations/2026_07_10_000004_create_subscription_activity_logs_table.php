@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_activity_logs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('subscription_id')->nullable();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->unsignedBigInteger('course_id')->nullable();
-            $table->string('action');
-            $table->text('message')->nullable();
-            $table->json('meta')->nullable();
-            $table->timestamp('logged_at')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('subscription_activity_logs')) {
+            Schema::create('subscription_activity_logs', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('subscription_id')->nullable();
+                $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+                $table->unsignedBigInteger('course_id')->nullable();
+                $table->string('action');
+                $table->text('message')->nullable();
+                $table->json('meta')->nullable();
+                $table->timestamp('logged_at')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

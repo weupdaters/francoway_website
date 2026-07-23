@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->unsignedBigInteger('subscription_id')->nullable();
-            $table->unsignedBigInteger('assignment_id')->nullable();
-            $table->decimal('amount', 10, 2);
-            $table->string('payment_method')->nullable();
-            $table->string('paid_by')->nullable();
-            $table->timestamp('paid_at')->nullable();
-            $table->string('status')->default('pending');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('payments')) {
+            Schema::create('payments', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+                $table->unsignedBigInteger('subscription_id')->nullable();
+                $table->unsignedBigInteger('assignment_id')->nullable();
+                $table->decimal('amount', 10, 2);
+                $table->string('payment_method')->nullable();
+                $table->string('paid_by')->nullable();
+                $table->timestamp('paid_at')->nullable();
+                $table->string('status')->default('pending');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
