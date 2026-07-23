@@ -616,18 +616,41 @@
 
                 let html = '';
                 res.lessons.forEach((lesson, index) => {
+                    let lType = lesson.lesson_type || lesson.type || 'video';
                     let typeBadgeColor = 'bg-primary-subtle text-primary';
                     let typeLabel = 'Video';
-                    let typeIcon = '<i class="bi bi-play-circle-fill lesson-play-icon"></i>';
-                    
-                    if (lesson.type === 'audio') {
+                    let thumbContent = '';
+
+                    let imagePath = lesson.image_file ? ("{{ asset('storage') }}/" + lesson.image_file) : null;
+
+                    if (lType === 'image') {
+                        typeBadgeColor = 'bg-success-subtle text-success';
+                        typeLabel = 'Image';
+                        if (imagePath) {
+                            thumbContent = `<img src="${imagePath}" alt="${lesson.title}">`;
+                        } else {
+                            thumbContent = `<i class="bi bi-image-fill lesson-play-icon text-success fs-5"></i>`;
+                        }
+                    } else if (lType === 'audio') {
                         typeBadgeColor = 'bg-warning-subtle text-warning';
                         typeLabel = 'Audio';
-                        typeIcon = '<i class="bi bi-mic-fill lesson-play-icon"></i>';
-                    } else if (lesson.type === 'text') {
+                        thumbContent = `<i class="bi bi-mic-fill lesson-play-icon text-warning fs-5"></i>`;
+                    } else if (lType === 'pdf') {
+                        typeBadgeColor = 'bg-danger-subtle text-danger';
+                        typeLabel = 'PDF';
+                        thumbContent = `<i class="bi bi-file-earmark-pdf-fill lesson-play-icon text-danger fs-5"></i>`;
+                    } else if (lType === 'summary' || lType === 'text') {
                         typeBadgeColor = 'bg-info-subtle text-info';
-                        typeLabel = 'Text';
-                        typeIcon = '<i class="bi bi-file-text-fill lesson-play-icon"></i>';
+                        typeLabel = 'Summary';
+                        thumbContent = `<i class="bi bi-file-text-fill lesson-play-icon text-info fs-5"></i>`;
+                    } else { // video or default
+                        typeBadgeColor = 'bg-primary-subtle text-primary';
+                        typeLabel = 'Video';
+                        if (imagePath) {
+                            thumbContent = `<img src="${imagePath}" alt="${lesson.title}"><i class="bi bi-play-circle-fill lesson-play-icon text-white drop-shadow"></i>`;
+                        } else {
+                            thumbContent = `<i class="bi bi-play-circle-fill lesson-play-icon text-primary fs-5"></i>`;
+                        }
                     }
 
                     let durationText = lesson.duration ? lesson.duration : '—';
@@ -638,7 +661,7 @@
                             <td>
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="lesson-thumb-box flex-shrink-0">
-                                        ${typeIcon}
+                                        ${thumbContent}
                                     </div>
                                     <div>
                                         <div class="fw-bold text-dark" style="font-size: 14px;">${lesson.title}</div>
