@@ -14,6 +14,17 @@ class LessonController extends Controller
     
     public function index(Course $course)
     {
+        // Block access if course is paid and payment is pending
+        if ($course->price > 0) {
+            $subscription = CourseUserSubscription::where('user_id', auth()->id())
+                ->where('course_id', $course->id)
+                ->latest()
+                ->first();
+            if (!$subscription || $subscription->payment_status === 'pending') {
+                return redirect()->route('users.checkout', $course->id)->with('error', 'Please complete the payment to access this course.');
+            }
+        }
+
         // 🔹 Sections with lessons
         $sections = Section::where('course_id', $course->id)
             ->with(['lessons' => function ($q) {

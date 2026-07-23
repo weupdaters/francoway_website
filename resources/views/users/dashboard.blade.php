@@ -385,13 +385,17 @@
 
                             $isFree = $course->price == 0;
                             $isExpired = (!$isFree && $daysLeft !== null && $daysLeft < 0);
+                            $isPending = (!$isFree && (!$subscription || $subscription->payment_status === 'pending' || $subscription->status === 'unpaid'));
                             
                             $completed = ($course->completionPercentage >= 100);
                             
                             // Mirror Status badge mapping
                             $badgeClass = 'mirror-badge-in-progress';
                             $statusText = 'In Progress';
-                            if($completed){
+                            if($isPending) {
+                                $badgeClass = 'bg-warning text-dark';
+                                $statusText = '🔒 Pending Payment';
+                            } elseif($completed){
                                 $badgeClass = 'mirror-badge-completed';
                                 $statusText = 'Completed';
                             } elseif($isExpired) {
@@ -441,6 +445,10 @@
                                         <!-- Action Buttons mirroring -->
                                         @if($isExpired)
                                             <button class="mirror-btn-navy w-100" disabled>🔒 Expired</button>
+                                        @elseif($isPending)
+                                            <a href="{{ route('users.checkout', $course->id) }}" class="mirror-btn-red w-100 text-center text-truncate d-block">
+                                                <i class="bi bi-credit-card-2-front-fill"></i> Complete Payment
+                                            </a>
                                         @else
                                             <div class="d-flex gap-2">
                                                 @if($completed)

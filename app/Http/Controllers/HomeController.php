@@ -109,6 +109,15 @@ class HomeController extends Controller
         if ($request->has('course_id')) {
             $course = Course::find($request->course_id);
             if ($course) {
+                if ($course->price > 0) {
+                    $subscription = \App\Models\CourseUserSubscription::where('user_id', auth()->id())
+                        ->where('course_id', $course->id)
+                        ->latest()
+                        ->first();
+                    if (!$subscription || $subscription->payment_status === 'pending') {
+                        return redirect()->route('users.checkout', $course->id)->with('error', 'Please complete the payment to access this course.');
+                    }
+                }
                 session([
                     'active_course_id' => $course->id,
                     'active_custom_prompt' => $course->has_custom_prompt ? $course->custom_prompt : null
