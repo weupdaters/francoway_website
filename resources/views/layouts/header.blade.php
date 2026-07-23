@@ -40,8 +40,8 @@
 <header class="bg-white/95 backdrop-blur-md sticky top-0 border-b border-gray-100 z-40 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 py-1 flex justify-between items-center">
         <!-- Logo -->
-        <a href="/" class="flex items-center">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="Francoway Logo" class="h-28 md:h-32 lg:h-36 w-auto object-contain -my-6 md:-my-8 lg:-my-10 transform scale-110 origin-left">
+        <a href="{{ auth()->check() ? route('dashboard') : route('index') }}" class="flex items-center">
+            <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/' . $settings['logo']) : asset('assets/images/logo.png') }}" alt="Francoway Logo" class="h-16 md:h-20 lg:h-24 w-auto object-contain transition-all duration-300">
         </a>
 
         <!-- Desktop Navigation Links -->

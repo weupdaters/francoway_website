@@ -449,21 +449,7 @@
 
             </ul>
 
-            {{-- UPGRADE TO PREMIUM CARD (FROM MOCKUP) --}}
-            <div class="mt-4 p-3 rounded-16 text-white position-relative overflow-hidden" 
-                 style="background: linear-gradient(135deg, #071530 0%, #101F42 100%); border: 1px solid #1E293B;">
-                <div class="d-flex align-items-center gap-2 mb-1">
-                    <i class="bi bi-award-fill text-warning fs-5"></i>
-                    <h6 class="fw-bold mb-0 text-white" style="font-size: 13px;">Upgrade to Premium</h6>
-                </div>
-                <p class="mb-3 text-white-50" style="font-size: 11px; line-height: 1.4;">
-                    Unlock exclusive courses & interactive features
-                </p>
-                <a href="{{ route('users.courses.index') }}" class="btn btn-sm w-100 rounded-pill text-white fw-bold d-flex align-items-center justify-content-center gap-1" 
-                   style="background: linear-gradient(90deg, #E53935 0%, #8B5CF6 100%); font-size: 11px; border: 0;">
-                    <span>Upgrade Now</span> <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
+
         </div>
 
         <!-- Main Content Panel -->

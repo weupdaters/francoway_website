@@ -135,11 +135,10 @@
                     Course Content
                 </h5>
 
-                {{-- TABS LIST --}}
-                <div class="nav flex-column nav-pills custom-course-tabs mb-3" id="course-tab-list" role="tablist">
-                    
+                {{-- TABS & CONTENT --}}
+                <div class="nav flex-column custom-course-tabs mb-2" id="course-tab-list" role="tablist">
                     {{-- 1. LESSONS TAB --}}
-                    <button class="nav-link active d-flex align-items-center justify-content-between text-start mb-2 px-3 py-3 rounded-12" 
+                    <button class="nav-link active d-flex align-items-center justify-content-between text-start mb-2 px-3 py-3 rounded-12 w-100" 
                             id="tab-lessons-btn" data-bs-toggle="pill" data-bs-target="#tab-lessons" type="button" role="tab">
                         <span class="d-flex align-items-center gap-2">
                             <span>Lessons</span>
@@ -147,55 +146,16 @@
                                 {{ $totalLessons }}
                             </span>
                         </span>
-                        <i class="bi bi-chevron-right text-muted small"></i>
+                        <i class="bi bi-chevron-down text-muted small"></i>
                     </button>
-
-                    {{-- 2. QUIZZES TAB --}}
-                    <button class="nav-link d-flex align-items-center justify-content-between text-start mb-2 px-3 py-3 rounded-12" 
-                            id="tab-quizzes-btn" data-bs-toggle="pill" data-bs-target="#tab-quizzes" type="button" role="tab">
-                        <span class="d-flex align-items-center gap-2">
-                            <span>Quizzes</span>
-                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
-                                0
-                            </span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small"></i>
-                    </button>
-
-                    {{-- 3. RESOURCES TAB --}}
-                    <button class="nav-link d-flex align-items-center justify-content-between text-start mb-2 px-3 py-3 rounded-12" 
-                            id="tab-resources-btn" data-bs-toggle="pill" data-bs-target="#tab-resources" type="button" role="tab">
-                        <span class="d-flex align-items-center gap-2">
-                            <span>Resources</span>
-                            @php
-                                $pdfCount = $course->lessons->whereNotNull('pdf_file')->count();
-                            @endphp
-                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
-                                {{ $pdfCount }}
-                            </span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small"></i>
-                    </button>
-
-                    {{-- 4. CERTIFICATE TAB --}}
-                    <button class="nav-link d-flex align-items-center justify-content-between text-start px-3 py-3 rounded-12" 
-                            id="tab-certificate-btn" data-bs-toggle="pill" data-bs-target="#tab-certificate" type="button" role="tab">
-                        <span class="d-flex align-items-center gap-2">
-                            <span>Certificate</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small"></i>
-                    </button>
-
                 </div>
-
-                <hr class="my-2 text-muted opacity-25">
 
                 {{-- TAB PANES CONTENT --}}
                 <div class="tab-content" id="course-tab-content">
                     
                     {{-- TAB 1: LESSONS LIST --}}
-                    <div class="tab-pane fade show active" id="tab-lessons" role="tabpanel">
-                        <div class="lessons-scroll-wrapper" style="max-height: 480px; overflow-y: auto; padding-right: 4px;">
+                    <div class="tab-pane fade show active mb-3" id="tab-lessons" role="tabpanel">
+                        <div class="lessons-scroll-wrapper ps-1 pe-1" style="max-height: 420px; overflow-y: auto;">
                             @foreach ($sections as $section)
                                 <div class="mb-3">
                                     <div class="d-flex align-items-center justify-content-between mb-2 px-1">
@@ -243,7 +203,7 @@
                     </div>
 
                     {{-- TAB 2: QUIZZES --}}
-                    <div class="tab-pane fade" id="tab-quizzes" role="tabpanel">
+                    <div class="tab-pane fade mb-3" id="tab-quizzes" role="tabpanel">
                         <div class="text-center py-4 text-muted">
                             <i class="bi bi-question-square fs-3 text-secondary mb-2 d-block"></i>
                             <p class="small mb-0">No quizzes available for this course yet.</p>
@@ -251,7 +211,7 @@
                     </div>
 
                     {{-- TAB 3: RESOURCES --}}
-                    <div class="tab-pane fade" id="tab-resources" role="tabpanel">
+                    <div class="tab-pane fade mb-3" id="tab-resources" role="tabpanel">
                         <div class="p-2">
                             @php
                                 $resourcesCount = 0;
@@ -279,7 +239,7 @@
                     </div>
 
                     {{-- TAB 4: CERTIFICATE --}}
-                    <div class="tab-pane fade" id="tab-certificate" role="tabpanel">
+                    <div class="tab-pane fade mb-3" id="tab-certificate" role="tabpanel">
                         <div class="text-center py-4">
                             <i class="bi bi-award fs-1 text-warning mb-2 d-block"></i>
                             <h6 class="fw-bold text-dark-slate mb-1">Course Certificate</h6>
@@ -294,6 +254,47 @@
                         </div>
                     </div>
 
+                </div>
+
+                <hr class="my-2 text-muted opacity-25">
+
+                {{-- OTHER TABS LIST --}}
+                <div class="nav flex-column custom-course-tabs" id="course-other-tabs" role="tablist">
+                    {{-- 2. QUIZZES TAB --}}
+                    <button class="nav-link d-flex align-items-center justify-content-between text-start mb-2 px-3 py-3 rounded-12 w-100" 
+                            id="tab-quizzes-btn" data-bs-toggle="pill" data-bs-target="#tab-quizzes" type="button" role="tab">
+                        <span class="d-flex align-items-center gap-2">
+                            <span>Quizzes</span>
+                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
+                                0
+                            </span>
+                        </span>
+                        <i class="bi bi-chevron-right text-muted small"></i>
+                    </button>
+
+                    {{-- 3. RESOURCES TAB --}}
+                    <button class="nav-link d-flex align-items-center justify-content-between text-start mb-2 px-3 py-3 rounded-12 w-100" 
+                            id="tab-resources-btn" data-bs-toggle="pill" data-bs-target="#tab-resources" type="button" role="tab">
+                        <span class="d-flex align-items-center gap-2">
+                            <span>Resources</span>
+                            @php
+                                $pdfCount = $course->lessons->whereNotNull('pdf_file')->count();
+                            @endphp
+                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
+                                {{ $pdfCount }}
+                            </span>
+                        </span>
+                        <i class="bi bi-chevron-right text-muted small"></i>
+                    </button>
+
+                    {{-- 4. CERTIFICATE TAB --}}
+                    <button class="nav-link d-flex align-items-center justify-content-between text-start px-3 py-3 rounded-12 w-100" 
+                            id="tab-certificate-btn" data-bs-toggle="pill" data-bs-target="#tab-certificate" type="button" role="tab">
+                        <span class="d-flex align-items-center gap-2">
+                            <span>Certificate</span>
+                        </span>
+                        <i class="bi bi-chevron-right text-muted small"></i>
+                    </button>
                 </div>
 
             </div>
@@ -368,8 +369,13 @@
 
                         {{-- LESSON DESCRIPTION --}}
                         @if($currentLesson->description)
-                            <div class="mb-4 text-secondary leading-relaxed font-fw" style="font-size: 14.5px;">
-                                {!! nl2br(e($currentLesson->description)) !!}
+                            <div class="card border-0 bg-light-subtle rounded-16 p-4 mb-4 shadow-2xs" style="border: 1px solid #F1F5F9 !important;">
+                                <h6 class="fw-bold text-dark-slate mb-3 d-flex align-items-center gap-2" style="font-size: 15px;">
+                                    <i class="bi bi-file-text text-danger"></i> Lesson Description
+                                </h6>
+                                <div class="lesson-description-content text-secondary leading-relaxed font-fw" style="font-size: 14.5px; line-height: 1.7;">
+                                    {!! $currentLesson->description !!}
+                                </div>
                             </div>
                         @endif
 

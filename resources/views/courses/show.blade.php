@@ -56,7 +56,7 @@
                          alt="{{ $course->title }}" />
 
                     <h4 class="mb-4">Course Description</h4>
-                    <p>{!! nl2br(e($course->description)) !!}</p>
+                    <p>{!! $course->description !!}</p>
 
                 </div>
 

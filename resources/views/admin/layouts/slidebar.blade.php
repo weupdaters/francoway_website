@@ -82,12 +82,12 @@
     
     {{-- Header Logo area --}}
     <div class="logo position-relative d-flex align-items-center justify-content-between">
-        <a href="{{ route('index') }}" class="d-block text-decoration-none position-relative d-flex align-items-center">
+        <a href="{{ auth()->check() ? route('dashboard') : route('index') }}" class="d-block text-decoration-none position-relative d-flex align-items-center">
             {{-- LOGO --}}
-            <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/'.$settings['logo']) : asset('admin/images/logo.png') }}"
+            <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/'.$settings['logo']) : asset('assets/images/logo.png') }}"
                  alt="logo-icon"
                  class="logo-icon me-2 img-fluid"
-                 style="height: 50px; width: auto; max-width: 160px; object-fit: contain;">
+                 style="height: 60px; width: auto; max-width: 200px; object-fit: contain;">
         </a>
     </div>
 
