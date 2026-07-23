@@ -54,31 +54,47 @@
         box-shadow: 0 4px 12px rgba(227, 27, 35, 0.15);
     }
 
-    /* Premium Table styling */
+    /* Premium Table Card Row Styling */
     .mirror-table {
         margin-bottom: 0;
+        border-collapse: separate !important;
+        border-spacing: 0 10px !important;
     }
     .mirror-table thead th {
-        background-color: #F8FAFC !important;
+        background-color: transparent !important;
         color: #071530 !important;
         font-weight: 800;
         font-size: 12.5px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        padding: 16px 20px;
-        border-bottom: 1px solid #EAEAEA !important;
-    }
-    .mirror-table tbody td {
-        padding: 18px 20px;
-        color: #5A6A85;
-        font-size: 14px;
-        border-bottom: 1px solid #F1F5F9;
+        padding: 12px 20px;
+        border-bottom: none !important;
     }
     .mirror-table tbody tr {
-        transition: background-color 0.2s;
+        background-color: #ffffff !important;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .mirror-table tbody td {
+        padding: 20px !important;
+        color: #5A6A85;
+        font-size: 14.5px;
+        border-top: 1px solid #eff3f9 !important;
+        border-bottom: 1px solid #eff3f9 !important;
+        background-color: #ffffff !important;
+    }
+    .mirror-table tbody tr td:first-child {
+        border-left: 1px solid #eff3f9 !important;
+        border-top-left-radius: 16px !important;
+        border-bottom-left-radius: 16px !important;
+    }
+    .mirror-table tbody tr td:last-child {
+        border-right: 1px solid #eff3f9 !important;
+        border-top-right-radius: 16px !important;
+        border-bottom-right-radius: 16px !important;
     }
     .mirror-table tbody tr:hover {
-        background-color: #F8FAFC;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 12px 30px rgba(7, 21, 48, 0.05) !important;
     }
     .mirror-course-link {
         font-weight: 700;
@@ -101,16 +117,19 @@
 
     /* Open Course Button */
     .btn-open-course-mirror {
-        background-color: #0B1F4D;
+        background-color: #071530;
         color: #ffffff;
-        font-weight: 700;
+        font-weight: 800;
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        padding: 8px 16px;
-        border-radius: 8px;
+        padding: 10px 20px;
+        border-radius: 12px;
         transition: all 0.25s;
         border: none;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
     }
     .btn-open-course-mirror:hover {
         background-color: #E31B23;
@@ -124,12 +143,12 @@
         background-color: transparent;
         border: 1.5px solid #E31B23 !important;
         color: #E31B23 !important;
-        font-weight: 700;
+        font-weight: 800;
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        padding: 8px 16px;
-        border-radius: 8px;
+        padding: 10px 20px;
+        border-radius: 12px;
         transition: all 0.25s;
         display: inline-flex;
         align-items: center;
@@ -193,7 +212,7 @@
         </div>
 
         {{-- ================= TABLE AREA ================= --}}
-        <div class="table-responsive rounded-3 border">
+        <div class="table-responsive border-0">
             <table class="table mirror-table align-middle">
                 <thead>
                     <tr>
