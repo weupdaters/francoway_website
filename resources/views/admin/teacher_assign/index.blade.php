@@ -176,7 +176,7 @@
 
   {{-- ================= EDIT MODAL ================= --}}
   <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
       <form id="editForm" class="modal-content bg-white rounded-10 border border-white">
         @csrf
         @method('PUT')
@@ -193,7 +193,17 @@
 
         <div class="modal-body">
           <div class="mb-3">
-            <label for="edit_user" class="form-label small fw-semibold">User</label>
+            <label for="edit_teacher" class="form-label small fw-semibold">Teacher</label>
+            <select name="teacher_id" id="edit_teacher" class="form-select" required>
+              @foreach ($teachers as $t)
+                <option value="{{ $t->id }}">{{ $t->name }}</option>
+              @endforeach
+            </select>
+            <div class="form-text">Change the assigned teacher.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="edit_user" class="form-label small fw-semibold">User (Student)</label>
             <select name="user_id" id="edit_user" class="form-select" required>
               @foreach ($users as $u)
                 <option value="{{ $u->id }}">{{ $u->name }}</option>
@@ -202,10 +212,14 @@
             <div class="form-text">Change the assigned user for this record.</div>
           </div>
 
-          <div id="edit_meta" class="mt-2" style="display:none">
-            <!-- optional place to show current teacher/course for context -->
-            <p class="mb-0 small text-muted"><strong>Teacher:</strong> <span id="edit_teacher_name">—</span></p>
-            <p class="mb-0 small text-muted"><strong>Course:</strong> <span id="edit_course_title">—</span></p>
+          <div class="mb-3">
+            <label for="edit_course" class="form-label small fw-semibold">Course</label>
+            <select name="course_id" id="edit_course" class="form-select" required>
+              @foreach ($courses as $c)
+                <option value="{{ $c->id }}">{{ $c->title }}</option>
+              @endforeach
+            </select>
+            <div class="form-text">Change the assigned course.</div>
           </div>
         </div>
 
@@ -274,7 +288,9 @@
         $.get(`/admin/teacher-assign/${id}`, function(res) {
 
           $('#edit_id').val(res.id);
+          $('#edit_teacher').val(res.teacher_id);
           $('#edit_user').val(res.user_id);
+          $('#edit_course').val(res.course_id);
 
           $('#editModal').modal('show');
 
@@ -296,7 +312,9 @@
           data: {
             _token: "{{ csrf_token() }}",
             _method: 'PUT',
-            user_id: $('#edit_user').val()
+            teacher_id: $('#edit_teacher').val(),
+            user_id: $('#edit_user').val(),
+            course_id: $('#edit_course').val()
           },
           success: function() {
             alert('Updated');

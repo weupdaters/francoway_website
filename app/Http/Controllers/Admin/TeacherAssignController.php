@@ -38,11 +38,13 @@ class TeacherAssignController extends Controller
 
         $teachers = User::where('role', 'teacher')->get();
         $users = User::where('role', 'user')->get();
+        $courses = Course::orderBy('title')->get();
 
         return view('admin.teacher_assign.index', compact(
             'assignments',
             'teachers',
-            'users'
+            'users',
+            'courses'
         ));
     }
 
@@ -136,13 +138,13 @@ public function getCoursesByUser($userId)
         try {
             $assign = TeacherAssignUser::findOrFail($id);
 
-            $request->validate([
-                'user_id' => 'required|exists:users,id',
+            $validated = $request->validate([
+                'user_id'    => 'required|exists:users,id',
+                'course_id'  => 'required|exists:courses,id',
+                'teacher_id' => 'required|exists:users,id',
             ]);
 
-            $assign->update([
-                'user_id' => $request->user_id,
-            ]);
+            $assign->update($validated);
 
             return response()->json([
                 'status' => true,
