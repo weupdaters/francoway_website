@@ -375,7 +375,11 @@
             </div>
             <div class="user-profile-dropdown dropdown">
                 <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown">
-                    <img class="user-avatar" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/images/user1.jpg') }}" alt="avatar">
+                    @php
+                        $avatarPlaceholder = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23eff3f9"/><circle cx="50" cy="40" r="20" fill="%2364748b"/><path d="M15,82 C15,65 30,55 50,55 C70,55 85,65 85,82" fill="%2364748b"/></svg>';
+                        $userAvatar = auth()->user()->image ? asset('storage/' . auth()->user()->image) : $avatarPlaceholder;
+                    @endphp
+                    <img class="user-avatar" src="{{ $userAvatar }}" alt="avatar" onerror="this.src='{{ $avatarPlaceholder }}'">
                     <span class="user-name-text d-none d-md-inline-block">{{ auth()->user()->name }}</span>
                     <i class="bi bi-chevron-down text-muted small"></i>
                 </div>

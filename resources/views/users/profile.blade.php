@@ -220,10 +220,11 @@
                     <!-- Avatar Upload -->
                     <div class="avatar-upload-box">
                         <div class="avatar-preview-wrapper">
-                            @php
-                                $userAvatar = $user->image ? asset('storage/' . $user->image) : asset('admin/images/user1.jpg');
-                            @endphp
-                            <img src="{{ $userAvatar }}" class="avatar-preview-img" id="profile-avatar-preview" alt="Avatar">
+                             @php
+                                 $avatarPlaceholder = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23eff3f9"/><circle cx="50" cy="40" r="20" fill="%2364748b"/><path d="M15,82 C15,65 30,55 50,55 C70,55 85,65 85,82" fill="%2364748b"/></svg>';
+                                 $userAvatar = $user->image ? asset('storage/' . $user->image) : $avatarPlaceholder;
+                             @endphp
+                             <img src="{{ $userAvatar }}" class="avatar-preview-img" id="profile-avatar-preview" alt="Avatar" onerror="this.src='{{ $avatarPlaceholder }}'">
                             <label for="image-upload-input" class="avatar-upload-trigger">
                                 <i class="bi bi-camera-fill me-1"></i> Edit
                             </label>
