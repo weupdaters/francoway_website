@@ -84,6 +84,9 @@ Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])
 
 // Submit OTP verification & update password
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+// Resend OTP email
+Route::post('/resend-otp', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.otp.resend');
 });
 
 

@@ -136,7 +136,13 @@
                     <div class="space-y-1.5">
                         <div class="flex justify-between items-center">
                             <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">6-Digit OTP Code</label>
-                            <a href="{{ route('auth.password.request') }}" class="text-xs font-bold text-brandRed hover:underline">Resend OTP?</a>
+                            <form action="{{ route('password.otp.resend') }}" method="POST" class="inline">
+                                @csrf
+                                <input type="hidden" name="email" value="{{ old('email', $email) }}">
+                                <button type="submit" class="text-xs font-bold text-brandRed hover:underline bg-transparent border-0 p-0 cursor-pointer">
+                                    Resend OTP Mail?
+                                </button>
+                            </form>
                         </div>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
@@ -207,6 +213,18 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </button>
+                    </div>
+
+                    <!-- Resend OTP Mail Box -->
+                    <div class="p-3.5 bg-gray-50 border border-gray-150 rounded-2xl flex items-center justify-between text-xs">
+                        <span class="text-gray-500 font-medium">Didn't receive the OTP mail?</span>
+                        <form action="{{ route('password.otp.resend') }}" method="POST" class="inline">
+                            @csrf
+                            <input type="hidden" name="email" value="{{ old('email', $email) }}">
+                            <button type="submit" class="font-bold text-brandRed hover:underline bg-transparent border-0 p-0 cursor-pointer">
+                                Resend Mail
+                            </button>
+                        </form>
                     </div>
                 </form>
             </div>
