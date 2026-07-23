@@ -210,6 +210,9 @@
             padding: 30px 20px;
             flex-shrink: 0;
             border-right: 1px solid #EAEAEA;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .sidebar-menu-list {
             list-style: none;
@@ -217,32 +220,41 @@
             margin-bottom: 0;
         }
         .sidebar-menu-item {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         .sidebar-menu-link {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 14px 20px;
+            gap: 12px;
+            padding: 12px 18px;
             color: #5A6A85;
             font-size: 14.5px;
             font-weight: 600;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 14px;
             transition: all 0.25s ease;
         }
         .sidebar-menu-link:hover {
-            background-color: rgba(227, 27, 35, 0.02);
-            color: #E31B23;
+            background-color: rgba(229, 57, 53, 0.05);
+            color: #E53935;
         }
         .sidebar-menu-item.active .sidebar-menu-link {
-            background-color: rgba(227, 27, 35, 0.08);
-            color: #E31B23;
-            border-left: 4px solid #E31B23;
-            border-radius: 0 12px 12px 0;
+            background: linear-gradient(90deg, #E53935 0%, #FF6B6B 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+            border-left: none;
+            border-radius: 14px;
+        }
+        .sidebar-menu-item.active .sidebar-menu-link i {
+            color: #ffffff !important;
         }
         .sidebar-menu-link i {
             font-size: 18px;
+            color: #5A6A85;
+            transition: color 0.25s ease;
+        }
+        .sidebar-menu-link:hover i {
+            color: #E53935;
         }
         .badge-count-red {
             background-color: #E53935;
@@ -436,6 +448,22 @@
                 </li>
 
             </ul>
+
+            {{-- UPGRADE TO PREMIUM CARD (FROM MOCKUP) --}}
+            <div class="mt-4 p-3 rounded-16 text-white position-relative overflow-hidden" 
+                 style="background: linear-gradient(135deg, #071530 0%, #101F42 100%); border: 1px solid #1E293B;">
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="bi bi-award-fill text-warning fs-5"></i>
+                    <h6 class="fw-bold mb-0 text-white" style="font-size: 13px;">Upgrade to Premium</h6>
+                </div>
+                <p class="mb-3 text-white-50" style="font-size: 11px; line-height: 1.4;">
+                    Unlock exclusive courses & interactive features
+                </p>
+                <a href="{{ route('users.courses.index') }}" class="btn btn-sm w-100 rounded-pill text-white fw-bold d-flex align-items-center justify-content-center gap-1" 
+                   style="background: linear-gradient(90deg, #E53935 0%, #8B5CF6 100%); font-size: 11px; border: 0;">
+                    <span>Upgrade Now</span> <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
         </div>
 
         <!-- Main Content Panel -->
