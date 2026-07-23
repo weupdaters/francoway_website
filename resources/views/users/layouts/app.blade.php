@@ -323,9 +323,53 @@
             </button>
         </div>
         <div class="nav-profile-area">
-            <div class="notification-bell-box">
-                <i class="bi bi-bell-fill"></i>
-                <span class="notification-badge">3</span>
+            <div class="dropdown">
+                <div class="notification-bell-box" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+                    <i class="bi bi-bell-fill"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2 p-3" style="width: 320px; border-radius: 16px;">
+                    <li class="dropdown-header d-flex justify-content-between align-items-center px-0 pb-2 mb-2 border-bottom">
+                        <span class="fw-bold text-dark" style="font-size: 15px;">Notifications</span>
+                        <span class="badge bg-danger-subtle text-danger rounded-pill">3 New</span>
+                    </li>
+                    <li class="mb-2">
+                        <a class="dropdown-item p-2 rounded d-flex gap-3 align-items-start" href="{{ route('users.courses.index') }}" style="white-space: normal; background: transparent;">
+                            <div class="bg-primary-subtle text-primary rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; min-width: 36px;">
+                                <i class="bi bi-book-half"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="fw-bold text-dark" style="font-size: 13px;">Welcome to FrancoWay!</div>
+                                <div class="text-muted" style="font-size: 11px; line-height: 1.3;">Explore your learning dashboard and start completing lessons.</div>
+                                <div class="text-muted mt-1" style="font-size: 10px;">Just now</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="dropdown-item p-2 rounded d-flex gap-3 align-items-start" href="{{ route('ai.practice') }}" style="white-space: normal; background: transparent;">
+                            <div class="bg-danger-subtle text-danger rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; min-width: 36px;">
+                                <i class="bi bi-robot"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="fw-bold text-dark" style="font-size: 13px;">AI Practice Available</div>
+                                <div class="text-muted" style="font-size: 11px; line-height: 1.3;">Test your speaking and writing skills with our interactive AI.</div>
+                                <div class="text-muted mt-1" style="font-size: 10px;">2 hours ago</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item p-2 rounded d-flex gap-3 align-items-start" href="{{ route('users.courses.index') }}" style="white-space: normal; background: transparent;">
+                            <div class="bg-success-subtle text-success rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; min-width: 36px;">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="fw-bold text-dark" style="font-size: 13px;">Course Achievements</div>
+                                <div class="text-muted" style="font-size: 11px; line-height: 1.3;">Complete quizzes to earn certificates of completion.</div>
+                                <div class="text-muted mt-1" style="font-size: 10px;">1 day ago</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="user-profile-dropdown dropdown">
                 <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown">
