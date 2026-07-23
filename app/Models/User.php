@@ -144,4 +144,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\AiPracticeAttempt::class)->latest();
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(CourseUserSubscription::class, 'user_id');
+    }
 }
