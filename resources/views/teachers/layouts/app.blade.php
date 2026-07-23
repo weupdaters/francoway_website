@@ -251,6 +251,180 @@
         body.dark-mode #themeToggle {
             color: #ffffff !important; /* dark mode */
         }
+
+        /* ========================================================
+           GLOBAL PREMIUM DESIGN SYSTEM OVERRIDES (ADMIN & TEACHER)
+           ======================================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        body, .main-content-container, .card, .table, input, select, textarea, button, label {
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        /* Premium Card Overrides */
+        .card, .main-content-card {
+            background: #ffffff !important;
+            border-radius: 20px !important;
+            border: 1px solid #EAEAEA !important;
+            box-shadow: 0 10px 40px rgba(7, 21, 48, 0.02) !important;
+            padding: 24px !important;
+            margin-bottom: 25px !important;
+            overflow: hidden !important;
+        }
+        
+        .card-header {
+            background-color: #fafafa !important;
+            border-bottom: 1px solid #EAEAEA !important;
+            padding: 16px 24px !important;
+            font-weight: 800 !important;
+            color: #071530 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        /* Premium Table / List Overrides */
+        .table, .default-table-area table {
+            border-collapse: separate !important;
+            border-spacing: 0 8px !important;
+            width: 100% !important;
+        }
+
+        .table tr {
+            background-color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(7, 21, 48, 0.01) !important;
+        }
+
+        .table th {
+            font-size: 12.5px !important;
+            font-weight: 800 !important;
+            color: #071530 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            background-color: #f7fafc !important;
+            border: none !important;
+            padding: 14px 18px !important;
+        }
+
+        .table td {
+            font-size: 14.5px !important;
+            font-weight: 500 !important;
+            color: #4a5568 !important;
+            border: none !important;
+            padding: 16px 18px !important;
+            vertical-align: middle !important;
+        }
+
+        .table tbody tr {
+            transition: all 0.2s ease !important;
+            border-radius: 10px !important;
+        }
+
+        .table tbody tr:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 24px rgba(7, 21, 48, 0.04) !important;
+            background-color: #fcfcfc !important;
+        }
+
+        /* Premium Form Fields & Inputs */
+        .form-group, .mb-3, .mb-4 {
+            margin-bottom: 20px !important;
+        }
+
+        .form-control, .form-select, select, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], textarea {
+            height: 48px !important;
+            border-radius: 12px !important;
+            border: 1.5px solid #EAEAEA !important;
+            padding: 0 18px !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            color: #071530 !important;
+            background-color: #fafafa !important;
+            transition: all 0.2s ease !important;
+            width: 100% !important;
+        }
+
+        textarea, textarea.form-control {
+            height: auto !important;
+            padding: 14px 18px !important;
+        }
+
+        .form-control:focus, .form-select:focus, select:focus, input:focus, textarea:focus {
+            background-color: #ffffff !important;
+            border-color: #071530 !important;
+            box-shadow: 0 0 0 4px rgba(7, 21, 48, 0.04) !important;
+            outline: none !important;
+        }
+
+        /* Labels */
+        label, .form-label {
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            color: #071530 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            margin-bottom: 8px !important;
+            display: inline-block !important;
+        }
+
+        /* Premium Buttons */
+        .btn, .btn-primary, .btn-success, .btn-submit, .btn[type="submit"] {
+            height: 46px !important;
+            border-radius: 12px !important;
+            background-color: #071530 !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            padding: 0 28px !important;
+            border: none !important;
+            box-shadow: 0 4px 14px rgba(7, 21, 48, 0.12) !important;
+            transition: all 0.2s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+        }
+
+        .btn:hover, .btn-primary:hover, .btn-success:hover, .btn-submit:hover, .btn[type="submit"]:hover {
+            background-color: #E53935 !important;
+            color: #ffffff !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.22) !important;
+        }
+
+        /* Danger/Delete/Cancel Buttons */
+        .btn-danger, .btn-warning {
+            background-color: #E53935 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(229, 57, 53, 0.12) !important;
+        }
+
+        .btn-danger:hover, .btn-warning:hover {
+            background-color: #071530 !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 20px rgba(7, 21, 48, 0.22) !important;
+        }
+
+        /* Dark theme tweaks to play nice with global overrides */
+        [data-bs-theme="dark"] .card, 
+        [data-bs-theme="dark"] .main-content-card,
+        [data-bs-theme="dark"] tr {
+            background-color: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+        [data-bs-theme="dark"] .form-control,
+        [data-bs-theme="dark"] .form-select,
+        [data-bs-theme="dark"] input,
+        [data-bs-theme="dark"] textarea {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+            border-color: #222222 !important;
+        }
+        [data-bs-theme="dark"] label,
+        [data-bs-theme="dark"] .form-label,
+        [data-bs-theme="dark"] .settings-card-title,
+        [data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, [data-bs-theme="dark"] h3, [data-bs-theme="dark"] h4, [data-bs-theme="dark"] h5, [data-bs-theme="dark"] h6 {
+            color: #ffffff !important;
+        }
     </style>
 </head>
 
