@@ -445,10 +445,12 @@
 
                                                     {{-- Actions Bar (Reply, Edit, Delete) --}}
                                                     <div class="d-flex align-items-center gap-3 mb-2">
-                                                        <button class="btn btn-sm text-danger p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
-                                                                onclick="toggleReplyForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
-                                                            <i class="bi bi-reply-fill"></i> Reply
-                                                        </button>
+                                                        @if(auth()->check() && $comment->user_id !== auth()->id())
+                                                            <button class="btn btn-sm text-danger p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
+                                                                    onclick="toggleReplyForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
+                                                                <i class="bi bi-reply-fill"></i> Reply
+                                                            </button>
+                                                        @endif
 
                                                         @if(auth()->check() && ($comment->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
                                                             <button class="btn btn-sm text-primary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"

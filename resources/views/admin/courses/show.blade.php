@@ -58,7 +58,8 @@
                         <div>
                             <img src="{{ asset('storage/'.$course->thumbnail) }}"
                                  class="rounded-3"
-                                 style="max-width: 250px;">
+                                 style="max-width: 250px;"
+                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 500\'><defs><linearGradient id=\'bg\' x1=\'0%\' y1=\'0%\' x2=\'100%\' y2=\'100%\'><stop offset=\'0%\' style=\'stop-color:%23071530;stop-opacity:1\'/><stop offset=\'100%\' style=\'stop-color:%23101F42;stop-opacity:1\'/></linearGradient></defs><rect width=\'100%\' height=\'100%\' fill=\'url(%23bg)\'/><g transform=\'translate(400, 220)\' text-anchor=\'middle\'><text x=\'0\' y=\'20\' fill=\'%23ffffff\' font-family=\'Outfit, sans-serif\' font-size=\'24\' font-weight=\'800\'>NO IMAGE</text></g></svg>';">
                         </div>
                     </div>
                 @endif
@@ -70,7 +71,8 @@
                         <div>
                             <img src="{{ asset('storage/'.$course->cover_image) }}"
                                  class="rounded-3"
-                                 style="max-width: 100%;">
+                                 style="max-width: 100%;"
+                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 500\'><defs><linearGradient id=\'bg\' x1=\'0%\' y1=\'0%\' x2=\'100%\' y2=\'100%\'><stop offset=\'0%\' style=\'stop-color:%23071530;stop-opacity:1\'/><stop offset=\'100%\' style=\'stop-color:%23101F42;stop-opacity:1\'/></linearGradient></defs><rect width=\'100%\' height=\'100%\' fill=\'url(%23bg)\'/><g transform=\'translate(400, 220)\' text-anchor=\'middle\'><text x=\'0\' y=\'20\' fill=\'%23ffffff\' font-family=\'Outfit, sans-serif\' font-size=\'24\' font-weight=\'800\'>NO IMAGE</text></g></svg>';">
                         </div>
                     </div>
                 @endif

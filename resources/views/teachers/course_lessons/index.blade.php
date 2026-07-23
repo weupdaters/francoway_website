@@ -383,7 +383,7 @@
             {{-- Course Detail Sidebar (Populated via JS) --}}
             <div class="card premium-card p-4 d-none" id="courseDetailSidebar">
                 <div class="course-thumbnail-wrapper mb-3">
-                    <img id="sideCourseThumbnail" src="" class="course-thumbnail-img" alt="Thumbnail">
+                    <img id="sideCourseThumbnail" src="" class="course-thumbnail-img" alt="Thumbnail" onerror="this.src=noImageBanner;">
                     <span class="published-badge">Published</span>
                 </div>
 
