@@ -72,7 +72,7 @@
               <small class="text-muted">Manage lessons professionally</small>
             </div>
 
-            <button class="btn btn-sm btn-primary px-3 d-none" id="addLessonBtn">
+            <button class="btn btn-sm btn-primary px-3" id="addLessonBtn" style="display: none !important;">
               + Add Lesson
             </button>
           </div>
@@ -109,9 +109,10 @@
       selectedCourse = $(this).data('id');
 
       $('#addLessonBtn')
-        .removeClass('d-none')
+        .attr('style', 'display: inline-flex !important;')
         .off('click')
         .on('click', function() {
+          if (!selectedCourse) return;
           window.location.href =
             "{{ route('teacher.lessons.create', ':id') }}".replace(':id', selectedCourse);
         });
