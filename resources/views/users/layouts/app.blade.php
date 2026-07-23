@@ -315,7 +315,7 @@
     <div class="main-navbar">
         <div class="nav-logo-area">
             <a href="{{ route('index') }}" class="d-flex align-items-center text-decoration-none">
-                <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('Admin/images/logo .jpeg') }}" alt="logo" class="nav-logo-img rounded-circle me-2">
+                <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('admin/images/logo.png') }}" alt="logo" class="nav-logo-img rounded-circle me-2">
 
             </a>
             <button class="btn p-0 border-0 ms-4 d-xl-none" id="hamburger-sidebar-toggle">

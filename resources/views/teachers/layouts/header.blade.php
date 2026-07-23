@@ -17,7 +17,7 @@
                                     </li>
                                     <li>
                                         <a href="{{ route('index') }}" class="d-flex text-decoration-none align-items-center" style="gap: 8px;">
-                                            <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/' . $settings['logo']) : asset('Admin/images/logo .jpeg') }}" alt="logo-icon" class="logo-icon" style="height: 55px; width: auto; max-width: 160px; object-fit: contain;">
+                                            <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/' . $settings['logo']) : asset('admin/images/logo.png') }}" alt="logo-icon" class="logo-icon" style="height: 55px; width: auto; max-width: 160px; object-fit: contain;">
                                         </a> 
                                     </li>
                                 </ul>
