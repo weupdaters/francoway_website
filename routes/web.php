@@ -73,16 +73,16 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('auth.register');
     Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
-// forgot password page
+// Forgot password page
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('auth.password.request');
 
-// send email
+// Send OTP email
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-// reset form
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// OTP verification & reset password form
+Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
-// update password
+// Submit OTP verification & update password
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 });
 
