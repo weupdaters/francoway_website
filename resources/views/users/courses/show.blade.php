@@ -433,7 +433,7 @@
                                                     <p id="comment-text-{{ $comment->id }}" class="mb-2 text-secondary font-fw" style="font-size: 13.5px;">{{ $comment->comment }}</p>
 
                                                     {{-- Inline Edit Form for Main Comment --}}
-                                                    <form id="edit-form-{{ $comment->id }}" method="POST" action="{{ route('comment.update', $comment->id) }}" class="d-none mt-2 mb-3">
+                                                    <form id="edit-form-{{ $comment->id }}" method="POST" action="{{ route('users.comment.update', $comment->id) }}" class="d-none mt-2 mb-3">
                                                         @csrf
                                                         @method('PUT')
                                                         <textarea name="comment" class="form-control mb-2 rounded-10 font-fw" rows="2" required style="border-color: #CBD5E1;">{{ $comment->comment }}</textarea>
@@ -456,7 +456,7 @@
                                                                 <i class="bi bi-pencil-square"></i> Edit
                                                             </button>
 
-                                                            <form method="POST" action="{{ route('comment.destroy', $comment->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                                            <form method="POST" action="{{ route('users.comment.destroy', $comment->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this comment?');">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-sm text-secondary p-0 border-0 bg-transparent hover-red d-inline-flex align-items-center gap-1 font-fw"
@@ -490,7 +490,7 @@
                                                                     <p id="comment-text-{{ $reply->id }}" class="mb-2 text-secondary font-fw" style="font-size: 13px;">{{ $reply->comment }}</p>
 
                                                                     {{-- Inline Edit Form for Reply --}}
-                                                                    <form id="edit-form-{{ $reply->id }}" method="POST" action="{{ route('comment.update', $reply->id) }}" class="d-none mt-2 mb-2">
+                                                                    <form id="edit-form-{{ $reply->id }}" method="POST" action="{{ route('users.comment.update', $reply->id) }}" class="d-none mt-2 mb-2">
                                                                         @csrf
                                                                         @method('PUT')
                                                                         <textarea name="comment" class="form-control mb-2 rounded-10 font-fw" rows="2" required style="border-color: #CBD5E1;">{{ $reply->comment }}</textarea>
@@ -508,7 +508,7 @@
                                                                                 <i class="bi bi-pencil-square"></i> Edit
                                                                             </button>
 
-                                                                            <form method="POST" action="{{ route('comment.destroy', $reply->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this reply?');">
+                                                                            <form method="POST" action="{{ route('users.comment.destroy', $reply->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this reply?');">
                                                                                 @csrf
                                                                                 @method('DELETE')
                                                                                 <button type="submit" class="btn btn-sm text-secondary p-0 border-0 bg-transparent hover-red font-fw d-inline-flex align-items-center gap-1"
@@ -524,7 +524,7 @@
                                                     @endif
 
                                                     {{-- INLINE REPLY FORM --}}
-                                                    <form id="reply-form-{{ $comment->id }}" method="POST" action="{{ route('comment.store') }}" class="reply-form d-none mt-3 p-3 bg-white border rounded-12">
+                                                    <form id="reply-form-{{ $comment->id }}" method="POST" action="{{ route('users.comment.store') }}" class="reply-form d-none mt-3 p-3 bg-white border rounded-12">
                                                         @csrf
                                                         <input type="hidden" name="lesson_id" value="{{ $currentLesson->id }}">
                                                         <input type="hidden" name="parent_id" value="{{ $comment->id }}">
