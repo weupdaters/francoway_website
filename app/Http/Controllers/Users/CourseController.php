@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\Plan;
+use App\Models\SubscriptionPlan;
 use App\Models\Section;
 use App\Models\Lesson;
 use App\Models\Comment;
@@ -53,7 +53,7 @@ class CourseController extends Controller
             ->first();
 
         // Plans (for buy page)
-        $plans = Plan::where('course_id', $courseId)->get();
+        $plans = SubscriptionPlan::where('course_id', $courseId)->get();
 
         // Sections with lessons
         $sections = Section::with(['lessons' => function ($q) {
