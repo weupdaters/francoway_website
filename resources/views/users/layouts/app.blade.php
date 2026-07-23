@@ -130,8 +130,11 @@
             gap: 15px;
         }
         .nav-logo-img {
-            height: 48px;
-            width: auto;
+            height: 54px !important;
+            width: auto !important;
+            max-height: 54px !important;
+            max-width: 180px !important;
+            object-fit: contain !important;
         }
         .nav-brand-text {
             font-family: 'Outfit', sans-serif;
@@ -315,8 +318,7 @@
     <div class="main-navbar">
         <div class="nav-logo-area">
             <a href="{{ route('index') }}" class="d-flex align-items-center text-decoration-none">
-                <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('admin/images/logo.png') }}" alt="logo" class="nav-logo-img rounded-circle me-2">
-
+                <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('admin/images/logo.png') }}" alt="logo" class="nav-logo-img me-2">
             </a>
             <button class="btn p-0 border-0 ms-4 d-xl-none" id="hamburger-sidebar-toggle">
                 <i class="bi bi-list fs-3 text-dark"></i>
