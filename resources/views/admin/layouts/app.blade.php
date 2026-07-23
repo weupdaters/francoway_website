@@ -317,7 +317,7 @@
           margin-bottom: 20px !important;
       }
 
-      .form-control, .form-select, select, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], textarea {
+      input.form-control, select.form-control, .form-select, select, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], textarea {
           height: 48px !important;
           border-radius: 12px !important;
           border: 1.5px solid #EAEAEA !important;
@@ -335,11 +335,11 @@
           padding: 14px 18px !important;
       }
 
-      .form-control:hover, .form-select:hover, select:hover, input:hover, textarea:hover {
+      input.form-control:hover, select.form-control:hover, .form-select:hover, select:hover, input:hover, textarea:hover {
           border-color: rgba(7, 21, 48, 0.25) !important;
       }
 
-      .form-control:focus, .form-select:focus, select:focus, input:focus, textarea:focus {
+      input.form-control:focus, select.form-control:focus, .form-select:focus, select:focus, input:focus, textarea:focus {
           background-color: #ffffff !important;
           border-color: #071530 !important;
           box-shadow: 0 0 0 4px rgba(7, 21, 48, 0.04) !important;
