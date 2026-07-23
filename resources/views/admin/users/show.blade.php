@@ -90,7 +90,7 @@
 
                         <tr>
                             <th>Created At</th>
-                            <td>{{ $user->created_at->format('d M Y, h:i A') }}</td>
+                            <td>{{ $user->created_at ? $user->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                         </tr>
                     </tbody>
                 </table>

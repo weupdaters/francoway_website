@@ -1867,7 +1867,7 @@
                                         {{ $attempt->score }}
                                     </span>
                                 </div>
-                                <div class="text-secondary small mt-1 text-truncate" style="font-size: 11px;">{{ $attempt->created_at->format('d M Y, h:i A') }}</div>
+                                <div class="text-secondary small mt-1 text-truncate" style="font-size: 11px;">{{ $attempt->created_at ? $attempt->created_at->format('d M Y, h:i A') : 'N/A' }}</div>
                             </div>
                         @empty
                             <div class="text-secondary small text-center py-2" id="noHistoryText">No practice attempts yet.</div>

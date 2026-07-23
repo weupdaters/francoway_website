@@ -67,7 +67,7 @@
                                     <td class="text-success">₹{{ $p->amount }}</td>
                                     <td>{{ ucfirst($p->payment_method ?? 'N/A') }}</td>
                                     <td>{{ ucfirst($p->paid_by ?? 'N/A') }}</td>
-                                    <td>{{ $p->paid_at ? \Carbon\Carbon::parse($p->paid_at)->format('d M Y') : $p->created_at->format('d M Y') }}</td>
+                                    <td>{{ $p->paid_at ? \Carbon\Carbon::parse($p->paid_at)->format('d M Y') : ($p->created_at ? $p->created_at->format('d M Y') : 'N/A') }}</td>
                                 </tr>
                             @empty
                                 <tr>
