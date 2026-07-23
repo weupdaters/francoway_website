@@ -39,9 +39,8 @@ class CommentController extends Controller
 
         $comment = Comment::findOrFail($id);
 
-        $user = auth()->user();
-        if ($comment->user_id !== $user->id && !in_array($user->role ?? '', ['teacher', 'admin'])) {
-            return back()->with('error', 'Unauthorized action.');
+        if ($comment->user_id !== auth()->id()) {
+            return back()->with('error', 'You can only edit your own comment.');
         }
 
         $comment->update([

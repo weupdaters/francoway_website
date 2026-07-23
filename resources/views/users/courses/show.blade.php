@@ -452,12 +452,14 @@
                                                             </button>
                                                         @endif
 
-                                                        @if(auth()->check() && ($comment->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
+                                                        @if(auth()->check() && $comment->user_id == auth()->id())
                                                             <button class="btn btn-sm text-primary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
                                                                     onclick="toggleEditForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
                                                                 <i class="bi bi-pencil-square"></i> Edit
                                                             </button>
+                                                        @endif
 
+                                                        @if(auth()->check() && ($comment->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
                                                             <form method="POST" action="{{ route('users.comment.destroy', $comment->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this comment?');">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -503,13 +505,15 @@
                                                                     </form>
 
                                                                     {{-- Reply Edit / Delete Action Buttons --}}
-                                                                    @if(auth()->check() && ($reply->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
-                                                                        <div class="d-flex gap-3 align-items-center mt-1">
+                                                                    <div class="d-flex gap-3 align-items-center mt-1">
+                                                                        @if(auth()->check() && $reply->user_id == auth()->id())
                                                                             <button class="btn btn-sm text-primary p-0 border-0 bg-transparent font-fw d-inline-flex align-items-center gap-1"
                                                                                     onclick="toggleEditForm({{ $reply->id }})" style="font-size: 11.5px; font-weight: 600;">
                                                                                 <i class="bi bi-pencil-square"></i> Edit
                                                                             </button>
+                                                                        @endif
 
+                                                                        @if(auth()->check() && ($reply->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
                                                                             <form method="POST" action="{{ route('users.comment.destroy', $reply->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this reply?');">
                                                                                 @csrf
                                                                                 @method('DELETE')
@@ -518,8 +522,8 @@
                                                                                     <i class="bi bi-trash-fill"></i> Delete
                                                                                 </button>
                                                                             </form>
-                                                                        </div>
-                                                                    @endif
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
                                                             @endforeach
                                                         </div>
