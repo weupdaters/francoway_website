@@ -1,445 +1,1281 @@
 @extends('layouts.master')
+
+@section('title', 'Francoway - Success in French. Success in Canada.')
+
+@push('css')
+<style>
+    /* Reset body and inputs to modern sans-serif font */
+    body, input, select, textarea, button, p, span, li, a {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Custom styles for section titles and subtitles to match image design */
+    .section-title {
+        font-family: 'Outfit', 'Inter', sans-serif !important;
+        font-weight: 800 !important;
+        color: #0B1E43 !important;
+        text-transform: uppercase !important;
+    }
+    
+    .section-title span, .section-title .text-highlight {
+        font-family: 'Cactus Classical Serif', serif !important;
+        font-weight: bold !important;
+        color: #E31B23 !important;
+        text-transform: uppercase !important;
+    }
+
+    .section-subtitle {
+        font-family: 'Cactus Classical Serif', serif !important;
+        color: #4B5563 !important;
+    }
+
+    /* Preserve decorative cursive script font where applied */
+    .font-script, .font-script * {
+        font-family: 'Caveat', cursive !important;
+    }
+
+    @keyframes float-bubble {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(4deg); }
+    }
+    .animate-float-bubble {
+        animation: float-bubble 3.8s infinite ease-in-out;
+    }
+    
+    /* Auto Floating Geometric Shapes */
+    @keyframes float-shape-1 {
+        0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        50% { transform: translateY(-18px) rotate(180deg) scale(1.1); }
+    }
+    @keyframes float-shape-2 {
+        0%, 100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+        50% { transform: translate(15px, -15px) rotate(-90deg) scale(0.95); }
+    }
+    @keyframes float-shape-3 {
+        0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+        50% { transform: translate(-12px, 12px) rotate(45deg); }
+    }
+    .animate-float-1 { animation: float-shape-1 8s infinite ease-in-out; }
+    .animate-float-2 { animation: float-shape-2 10s infinite ease-in-out; }
+    .animate-float-3 { animation: float-shape-3 7s infinite ease-in-out; }
+
+    @keyframes play-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(227, 27, 35, 0.45); }
+        70% { box-shadow: 0 0 0 14px rgba(227, 27, 35, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(227, 27, 35, 0); }
+    }
+    .animate-play-pulse {
+        animation: play-pulse 2s infinite ease-in-out;
+    }
+    
+    /* Video testimonial thumbnails transition */
+    .student-thumb {
+        border-color: transparent;
+        transition: all 0.3s ease;
+    }
+    .student-thumb.active {
+        border-color: #E31B23 !important;
+        transform: scale(1.1) !important;
+    }
+</style>
+@endpush
+
 @section('content')
+    <!-- Background Floating Glow Orbs (Continuous looping animations in background) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-[#0B1E43]/5 blur-3xl animate-blur-orbit"></div>
+        <div class="absolute top-1/2 -right-20 w-96 h-96 rounded-full bg-[#0B1E43]/5 blur-3xl animate-blur-orbit-reverse"></div>
+    </div>
 
-{{-- home page --}}
- <main>
-        <!--prettier-ignore-->
-        <!--learning home section 1-->
-        <section class="elearning-home-section-1 position-relative pt-300 pb-200 bg-primary rounded-bottom-4 overflow-hidden">
-            <div class="banner-line">
-                <div class="vertical-effect border-opacity-10 border-end border-white"></div>
-                <div class="vertical-effect border-opacity-10 border-end border-white"></div>
-                <div class="vertical-effect border-opacity-10 border-end border-white"></div>
-                <div class="vertical-effect border-opacity-10 border-end border-white"></div>
-                <div class="vertical-effect border-opacity-10 border-end border-white d-none d-lg-block"></div>
-                <div class="vertical-effect border-opacity-10 border-end border-white d-none d-lg-block"></div>
-            </div>
-            <div class="position-absolute bottom-0 end-0 mb-80 me-10 z-0">
-                <img class="w-100" src="{{ asset('frontend/imgs/pages/learning/page-home/home-section-1/pattern.png') }}" alt="Weupdaters" />
-            </div>
-            <div class="container position-relative pt-lg-10 text-lg-start text-center">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-12 px-md-0 ">
-                        <span class="content-top btn-text fw-bold text-white">
-                            <i class="ri-git-repository-line text-green-3"></i>
-                            &nbsp; #01 learning platform
-                        </span>
-                        <h1 class="text-white fs-80 lh-sm mb-5 text-anime-style-3">
-                            Learning wherever <br />&
-                            <span class="text-green-3 position-relative">
-                                whenever
-                                <span class="position-absolute top-0 start-0 pt-5 z-0 d-none d-md-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="370" height="22" viewBox="0 0 370 22" fill="none">
-                                        <path d="M1.5 20.0001C97 12.8334 304.1 -0.599919 368.5 3.00008" stroke="#D5D52B" stroke-width="3" stroke-linecap="round" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </h1>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="banner-girl position-absolute bottom-0 start-50 z-2 d-none d-lg-block">
-                <div class="position-relative z-1 overflow-hidden">
-                    <div class="parallax-item">
-                        <img src="{{ asset('frontend/imgs/pages/learning/page-home/home-section-1/banner-girl.png') }}" alt="Weupdaters" />
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="bg-green-3 py-4 rounded-bottom-4 overflow-hidden">
-            <h1 class="fs-80 mb-0 fw-bold text-primary text-uppercase text-nowrap scroll-move-left">Online courses from the world's leading experts.</h1>
+    <!-- 3. HERO SECTION (FULL WIDTH BRANDED HERO) -->
+    <section id="hero-section" class="relative bg-white overflow-hidden border-b border-gray-100 z-10 w-full flex items-center min-h-[500px] lg:min-h-[560px]">
+        
+        <!-- Background Image (Right side Eiffel Tower) -->
+        <div class="absolute right-0 top-0 bottom-0 w-full lg:w-[58%] h-full z-0 select-none pointer-events-none">
+            <!-- Gradient overlay for desktop to fade smoothly into the text area -->
+            <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 hidden lg:block"></div>
+            <img src="{{ asset('assets/images/hero_banner.png') }}" class="w-full h-full object-cover object-center lg:object-right opacity-35 lg:opacity-100" alt="Paris Banner">
         </div>
-
-        <!--learning home section 2-->
-        <section class="elearning-home-section-2 position-relative overflow-hidden pt-120 pb-120 rounded-bottom-4 bg-white z-35">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <span class="btn-text fw-bold text-primary">
-                            <i class="ri-book-marked-fill opacity-25"></i>
-                            &nbsp; industry experts market
-                        </span>
-                        <h2 class="pb-8 border-bottom text-anime-style-3">
-                            Online courses from the world's leading
-                            <span class="position-relative">
-                                experts.
-                                <span class="position-absolute top-0 start-0 pt-5 z-0 d-none d-md-block">
-                                    <svg class="stroke-green-3" xmlns="http://www.w3.org/2000/svg" width="186" height="22" viewBox="0 0 186 22" fill="none">
-                                        <path d="M2 20C49.3597 12.6711 152.063 -1.06621 184 2.61526" stroke="#D5D52B" stroke-width="3" stroke-linecap="round" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </h2>
-                        
+        
+        <!-- Max-w Container to align text content with page margins -->
+        <div class="max-w-7xl mx-auto px-4 md:px-6 w-full relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Left Column: Content -->
+                <div class="lg:col-span-7 flex flex-col justify-center space-y-4 text-left py-12 md:py-16">
+                    <!-- Cursive Script Tagline -->
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-0.5 bg-[#E31B23]"></span>
+                        <span class="font-script text-2xl md:text-3xl text-gray-700 leading-none">Learn. Speak. Success.</span>
                     </div>
-                    <div class="col-lg-8 ps-lg-10">
-                        <div class="d-flex gap-4 py-5 border-top border-bottom" data-aos="fade-left" data-aos-delay="0">
-                            <a href="#" class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                    <g clip-path="url(#clip0_550_1222)">
-                                        <path d="M14.9385 20.9351C16.0909 21.4069 16.9858 22.3572 17.4062 23.5352H23.5353V13.2812H16.3858C15.6881 15.5834 15.1895 18.1709 14.9385 20.9351Z" fill="#01473C" />
-                                        <path d="M13.2744 23.5366C12.4695 23.5404 11.8164 24.1943 11.8164 24.9999C11.8164 25.8056 12.4695 26.4594 13.2744 26.4633C13.2763 26.4633 13.2778 26.4621 13.2797 26.4617C13.2832 26.4617 13.2858 26.4633 13.2889 26.4633C14.0934 26.4591 14.7461 25.8056 14.7461 24.9999C14.7461 24.1977 14.098 23.5481 13.2984 23.5385C13.2919 23.5381 13.2862 23.5381 13.2797 23.5381C13.2778 23.5378 13.2763 23.5366 13.2744 23.5366Z" fill="#01473C" />
-                                        <path d="M17.4453 10.3517H23.5351V3.1167C21.1776 3.88689 19.0292 6.63309 17.4453 10.3517Z" fill="#01473C" />
-                                        <path d="M26.4648 13.2812V23.5352H35.1837C35.017 18.3277 34.4032 17.0502 34.4193 16.1266C32.8831 15.8298 31.6452 14.7278 31.1291 13.2812H26.4648Z" fill="#01473C" />
-                                        <path d="M12.0106 29.1851C10.6792 28.7792 9.62181 27.7695 9.15642 26.4648H0C0.216293 30.1525 1.28746 33.6315 2.94151 36.7188H13.316C12.6839 34.4212 12.2452 31.8844 12.0106 29.1851Z" fill="#01473C" />
-                                        <path d="M34.4193 33.8734C34.4013 32.8114 35.017 31.6765 35.1837 26.4648H26.4648V36.7188H31.1291C31.6452 35.2722 32.8831 34.1702 34.4193 33.8734Z" fill="#01473C" />
-                                        <path d="M37.2344 34.2827C38.2289 34.79 38.9994 35.6564 39.3786 36.7188H47.0584C48.712 33.6315 49.7836 30.1525 49.9999 26.4648H38.1129C38.0473 28.6427 37.7101 32.7599 37.2344 34.2827Z" fill="#01473C" />
-                                        <path d="M0 23.5352H9.15642C9.62181 22.2305 10.6792 21.2208 12.0106 20.8149C12.2452 18.1156 12.6835 15.5788 13.3156 13.2812H2.94151C1.28746 16.3685 0.216293 19.8475 0 23.5352Z" fill="#01473C" />
-                                        <path d="M26.4648 3.1311V10.3516H31.1291C31.3087 9.84764 31.5769 9.3914 31.9164 8.99086C30.3799 5.96352 28.4626 3.79982 26.4648 3.1311Z" fill="#01473C" />
-                                        <path d="M4.90625 10.3516H14.2801C16.3961 4.76418 19.7008 0.850296 23.5353 0.0850678V0C15.8872 0.448227 9.16841 4.52156 4.90625 10.3516Z" fill="#01473C" />
-                                        <path d="M14.2801 39.6484H4.90625C9.16841 45.4784 15.8872 49.5518 23.5353 50V49.9149C19.7008 49.1497 16.3961 45.2358 14.2801 39.6484Z" fill="#01473C" />
-                                        <path d="M39.3787 10.3516H45.1916C40.9294 4.52156 34.1129 0.448227 26.4648 0V0.081253C29.5437 0.694656 32.3357 3.41301 34.446 7.50351C34.7088 7.4543 34.9773 7.42188 35.2539 7.42188C37.1613 7.42188 38.7718 8.65021 39.3787 10.3516Z" fill="#01473C" />
-                                        <path d="M35.2539 42.5781C34.9773 42.5781 34.7088 42.5457 34.446 42.4965C32.3357 46.587 29.5437 49.305 26.4648 49.9187V50C34.1129 49.5518 40.9294 45.4784 45.1916 39.6484H39.3787C38.7718 41.3498 37.1613 42.5781 35.2539 42.5781Z" fill="#01473C" />
-                                        <path d="M23.5351 46.8834V39.6484H17.4453C19.0292 43.367 21.1776 46.1132 23.5351 46.8834Z" fill="#01473C" />
-                                        <path d="M31.9164 41.0091C31.5769 40.6086 31.3087 40.1524 31.1291 39.6484H26.4648V46.8689C28.4626 46.2002 30.3799 44.0365 31.9164 41.0091Z" fill="#01473C" />
-                                        <path d="M39.3791 13.2812C38.9996 14.3452 38.2275 15.2122 37.2314 15.7192C37.727 17.2924 38.0463 21.3005 38.1134 23.5352H50.0004C49.7841 19.8475 48.7129 16.3685 47.0589 13.2812H39.3791Z" fill="#01473C" />
-                                        <path d="M14.9385 29.0649C15.1895 31.8291 15.6881 34.4166 16.3858 36.7188H23.5353V26.4648H17.4062C16.9862 27.6428 16.0909 28.5931 14.9385 29.0649Z" fill="#01473C" />
-                                        <path d="M36.7188 11.8164C36.7188 12.6255 36.063 13.2812 35.2539 13.2812C34.4448 13.2812 33.7891 12.6255 33.7891 11.8164C33.7891 11.0073 34.4448 10.3516 35.2539 10.3516C36.063 10.3516 36.7188 11.0073 36.7188 11.8164Z" fill="#01473C" />
-                                        <path d="M36.7188 38.1836C36.7188 38.9927 36.063 39.6484 35.2539 39.6484C34.4448 39.6484 33.7891 38.9927 33.7891 38.1836C33.7891 37.3745 34.4448 36.7188 35.2539 36.7188C36.063 36.7188 36.7188 37.3745 36.7188 38.1836Z" fill="#01473C" />
-                                    </g>
+                    
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl md:text-5xl lg:text-[58px] font-heading font-black text-[#0B1E43] uppercase leading-[1.08] tracking-tight">
+                        FRENCH <span class="text-[#E31B23]">COURSES</span>
+                    </h1>
+                    
+                    <!-- Subheading -->
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 tracking-tight leading-snug">
+                        For Every Goal & Every Level
+                    </h2>
+                    
+                    <!-- Checklist -->
+                    <ul class="space-y-3 pt-2">
+                        <li class="flex items-start gap-3">
+                            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0B1E43] text-white shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                 </svg>
-                            </a>
-                            <div class="content">
-                                <h6>Flexible schedule</h6>
-                                <p class="mb-0">
-                                    We offer a wide range of digital marketing services that cater to <br />
-                                    business of all sizes.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-4 py-5 border-bottom" data-aos="fade-left" data-aos-delay="200">
-                            <a href="#" class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                    <g clip-path="url(#clip0_550_1220)">
-                                        <path d="M46.4636 40.248L47.4993 39.2123C47.8811 38.8304 48.0226 38.2697 47.8655 37.752C47.7095 37.2355 47.2803 36.8464 46.7512 36.7408L36.3928 34.6694C35.9122 34.5775 35.4159 34.722 35.0695 35.0699C34.7235 35.4159 34.5732 35.9122 34.669 36.3929L36.7403 46.7513C36.8464 47.2807 37.2355 47.7099 37.7516 47.8655C38.2712 48.0273 38.8319 47.88 39.2122 47.4993L40.2479 46.4636L43.3565 49.5707C43.9287 50.1429 44.8557 50.1429 45.4279 49.5707L49.5706 45.4279C50.1429 44.8557 50.1429 43.9288 49.5706 43.3566L46.4636 40.248Z" fill="#01473C" />
-                                        <path d="M20.6055 23.6328H23.5351V26.5625H20.6055V23.6328Z" fill="#01473C" />
-                                        <path d="M7.3242 23.6328H17.6757V22.1679C17.6757 21.3584 18.3311 20.7031 19.1406 20.7031H24.9999C25.8098 20.7031 26.5624 21.3584 26.5624 22.1679V23.6328H36.8163C40.8549 23.6328 44.1405 20.3468 44.1405 16.3086V10.2539C44.1405 9.4444 43.4855 8.78904 42.6757 8.78904H32.4218V4.39452C32.4218 1.97143 30.4507 0 28.0273 0H16.2109C13.7878 0 11.8164 1.97143 11.8164 4.39452V8.78904H1.46484C0.655363 8.78904 0 9.4444 0 10.2539V16.3086C0 20.3468 3.28597 23.6328 7.3242 23.6328ZM14.7461 4.39452C14.7461 3.58619 15.4029 2.92968 16.2109 2.92968H28.0273C28.8356 2.92968 29.4921 3.58619 29.4921 4.39452V8.78904H14.7461V4.39452Z" fill="#01473C" />
-                                        <path d="M1.46484 44.1406H33.2309L31.7969 36.9682C31.5078 35.5217 31.9572 34.0385 32.9986 32.9983C34.7632 31.2244 36.6477 31.8268 36.9411 31.7909L44.1405 33.2309V23.4619C42.2774 25.3693 39.6869 26.5625 36.8163 26.5625H26.5624V28.0273C26.5624 28.8368 25.8098 29.4922 24.9999 29.4922H19.1406C18.3311 29.4922 17.6757 28.8368 17.6757 28.0273V26.5625H7.3242C4.45403 26.5625 1.86347 25.3693 0 23.4619V42.6757C0 43.4852 0.655363 44.1406 1.46484 44.1406Z" fill="#01473C" />
-                                    </g>
+                            </span>
+                            <span class="text-sm md:text-base font-bold text-gray-700">Beginner to Advanced Levels (A1 to C2)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0B1E43] text-white shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                 </svg>
-                            </a>
-                            <div class="content">
-                                <h6>Expert instructor</h6>
-                                <p class="mb-0">
-                                    We offer a wide range of digital marketing services that cater to <br />
-                                    business of all sizes.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-4 py-5 border-bottom" data-aos="fade-left" data-aos-delay="400">
-                            <a href="#" class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="54" height="50" viewBox="0 0 54 50" fill="none">
-                                    <path d="M9.08747 7.7472V19.3086C9.63538 19.0405 10.2414 18.8989 10.8695 18.8989C11.9507 18.8989 12.9681 19.319 13.7339 20.0819L14.7451 21.089H18.2929C19.1576 21.089 19.8587 21.79 19.8587 22.6547C19.8587 23.5194 19.1576 24.2205 18.2929 24.2205H17.8893L23.0776 29.3876C23.9065 30.2181 24.6079 31.1408 25.1732 32.1321V2.33614C24.0178 1.00931 22.3175 0.169434 20.4199 0.169434H7.44739C6.44467 0.169434 5.63184 0.982273 5.63184 1.98488V2.2449C7.67505 3.23446 9.08747 5.32893 9.08747 7.7472ZM12.1865 8.56286H18.293C19.1577 8.56286 19.8588 9.2639 19.8588 10.1286C19.8588 10.9933 19.1577 11.6944 18.293 11.6944H12.1865C11.3218 11.6944 10.6208 10.9933 10.6208 10.1286C10.6208 9.2639 11.3218 8.56286 12.1865 8.56286ZM12.1865 14.826H18.293C19.1577 14.826 19.8588 15.5271 19.8588 16.3918C19.8588 17.2565 19.1577 17.9575 18.293 17.9575H12.1865C11.3218 17.9575 10.6208 17.2565 10.6208 16.3918C10.6208 15.5271 11.3218 14.826 12.1865 14.826Z" fill="#01473C" />
-                                    <path d="M30.3595 29.3943L35.5544 24.2206H35.1509C34.2862 24.2206 33.5851 23.5195 33.5851 22.6548C33.5851 21.7901 34.2862 21.0891 35.1509 21.0891H38.6987L39.71 20.0819C40.4759 19.319 41.4932 18.899 42.5743 18.899C43.2023 18.899 43.8085 19.0406 44.3563 19.3087V7.7472C44.3563 5.32893 45.7687 3.23446 47.8118 2.2449V2.06056C47.8118 1.01609 46.9652 0.169434 45.9207 0.169434H33.6721C31.4906 0.169434 29.5447 1.17528 28.2705 2.74751V32.1308C28.8345 31.1417 29.5338 30.2216 30.3595 29.3943ZM35.1508 8.56286H41.2572C42.122 8.56286 42.823 9.2639 42.823 10.1286C42.823 10.9933 42.122 11.6944 41.2572 11.6944H35.1508C34.2861 11.6944 33.585 10.9933 33.585 10.1286C33.585 9.2639 34.2861 8.56286 35.1508 8.56286ZM35.1508 14.826H41.2572C42.122 14.826 42.823 15.5271 42.823 16.3918C42.823 17.2565 42.122 17.9575 41.2572 17.9575H35.1508C34.2861 17.9575 33.585 17.2565 33.585 16.3918C33.585 15.5271 34.2861 14.826 35.1508 14.826Z" fill="#01473C" />
-                                    <path d="M2.97808 4.76904C4.62286 4.76904 5.95616 6.10234 5.95616 7.74712V24.7331C5.95616 26.4487 6.60783 28.1642 7.91138 29.4703L12.2293 33.7966C12.865 34.4337 13.8957 34.4337 14.5314 33.7966C15.1671 33.1596 15.1672 32.1269 14.5314 31.49L10.2136 27.1637C8.87578 25.8233 8.87609 23.6422 10.2141 22.3021C10.5754 21.9403 11.1621 21.9398 11.5244 22.3006L20.8683 31.6064C22.6956 33.4374 23.7222 35.9207 23.7222 38.5101V49.935H18.7315H13.7814V44.0688L2.10637 32.2011C0.756576 30.8291 0 28.98 0 27.0536V7.74712C0 6.10234 1.3334 4.76904 2.97808 4.76904Z" fill="#01473C" />
-                                    <path d="M50.4667 4.76904C48.8219 4.76904 47.4886 6.10234 47.4886 7.74712V24.7331C47.4886 26.4487 46.837 28.1642 45.5334 29.4703L41.2155 33.7966C40.5798 34.4337 39.5491 34.4337 38.9134 33.7966C38.2777 33.1596 38.2776 32.1269 38.9134 31.49L43.2313 27.1637C44.5691 25.8233 44.5688 23.6422 43.2308 22.3021C42.8695 21.9403 42.2828 21.9398 41.9205 22.3006L32.5766 31.6064C30.7493 33.4374 29.7227 35.9207 29.7227 38.5101V49.935H34.7134H39.6635V44.0688L51.3384 32.2011C52.6881 30.8291 53.4448 28.98 53.4448 27.0536V7.74712C53.4448 6.10234 52.1115 4.76904 50.4667 4.76904Z" fill="#01473C" />
+                            </span>
+                            <span class="text-sm md:text-base font-bold text-gray-700">Expert Trainers | Interactive Classes</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0B1E43] text-white shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                 </svg>
-                            </a>
-                            <div class="content">
-                                <h6>Pocket friendly</h6>
-                                <p class="mb-0">
-                                    We offer a wide range of digital marketing services that cater to <br />
-                                    business of all sizes.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-4 py-5 border-bottom" data-aos="fade-left" data-aos-delay="600">
-                            <a href="#" class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="50" viewBox="0 0 48 50" fill="none">
-                                    <path d="M24.2159 13.8337C22.9478 12.319 22.5651 10.5384 22.4819 9.21948C19.7929 9.89836 17.7969 12.3378 17.7969 15.2347V20.9621C17.7969 24.3824 20.5796 27.1651 24 27.1651C27.4204 27.1651 30.2031 24.3823 30.2031 20.9621V16.6341C27.5771 16.3866 25.5672 15.4476 24.2159 13.8337Z" fill="#01473C" />
-                                    <path d="M18.0606 27.8962C16.106 26.2196 14.8654 23.7331 14.8654 20.9621V15.2347C14.8654 10.1978 18.9633 6.09991 24.0002 6.09991C24.434 6.09991 24.8456 6.29213 25.1241 6.62468C25.4026 6.95732 25.5195 7.39629 25.4433 7.82343C25.4405 7.84005 25.052 10.2842 26.4783 11.9686C27.4899 13.1632 29.2364 13.7688 31.6691 13.7688C32.4787 13.7688 33.135 14.4251 33.135 15.2347V20.9621C33.135 23.7331 31.8944 26.2196 29.9399 27.8962H38.3656V14.3653C38.3655 6.43158 31.934 0 24.0002 0C16.0663 0 9.63477 6.43158 9.63477 14.3653V27.8962H18.0606Z" fill="#01473C" />
-                                    <path d="M36.0664 30.8279H11.9336V50H36.0664V30.8279ZM23.9995 41.8228C23.3852 41.8228 22.8288 41.4268 22.6202 40.8507C22.4119 40.2758 22.5974 39.6111 23.0702 39.2243C23.546 38.8348 24.2246 38.7884 24.7526 39.1002C25.2781 39.4105 25.5569 40.0463 25.437 40.6432C25.301 41.3202 24.6905 41.8228 23.9995 41.8228Z" fill="#01473C" />
-                                    <path d="M9.0017 30.845C7.27817 30.9937 5.78078 32.134 5.19034 33.787L0.831447 44.0356C-0.206557 46.9417 1.9447 50 5.02685 50H9.0018L9.0017 30.845Z" fill="#01473C" />
-                                    <path d="M47.1684 44.0357L42.8094 33.787C42.219 32.134 40.7216 30.9937 38.998 30.845V50.0001H42.973C46.0551 50.0001 48.2064 46.9418 47.1684 44.0357Z" fill="#01473C" />
+                            </span>
+                            <span class="text-sm md:text-base font-bold text-gray-700">DELF / DALF Exam Preparation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0B1E43] text-white shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                 </svg>
-                            </a>
-                            <div class="content">
-                                <h6>24/7 online support</h6>
-                                <p class="mb-0">
-                                    We offer a wide range of digital marketing services that cater to <br />
-                                    business of all sizes.
-                                </p>
-                            </div>
-                        </div>
+                            </span>
+                            <span class="text-sm md:text-base font-bold text-gray-750">100% Practical & Communication Based</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- Action Buttons -->
+                    <div class="pt-4 flex flex-wrap gap-4 items-center">
+                        <a href="#courses" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0B1E43] hover:bg-[#E31B23] text-white font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all duration-300 shadow-md shadow-blue-950/15">
+                            Explore Courses <span class="text-sm">➔</span>
+                        </a>
+                        <a href="#enquire" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-white border border-gray-300 text-gray-800 hover:border-[#0B1E43] font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all duration-300 shadow-sm">
+                            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0B1E43]/5 text-[#E31B23] shrink-0">
+                                <svg class="w-3 h-3 fill-current ml-0.5" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </span>
+                            Watch Intro
+                        </a>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!--learning-home-section-3-->
- <section class="elearning-home-section-3 bg-secondary-2 mt--20 position-relative overflow-hidden py-120 rounded-bottom-4 z-30">
-    <div class="container position-relative z-1">
-
-        <div class="row">
-            <div class="text-center">
-                <span class="btn-text fw-bold text-primary">
-                    <i class="ri-book-marked-fill opacity-25"></i>
-                    &nbsp; popular courses
-                </span>
-                <h2 class="text-anime-style-2">
-                    Industry experts
-                    <span class="position-relative">
-                        courses
-                    </span>
-                </h2>
+                
+                <!-- Right Column spacer for desktop layout so content doesn't overlay Paris image -->
+                <div class="hidden lg:block lg:col-span-5 h-full"></div>
+                
             </div>
         </div>
+        
+    </section>
 
-        <div class="row mt-6 g-lg-5 g-md-4 g-3">
+    <!-- 4. KEY HIGHLIGHTS BAR (EXACT MATCH TO ATTACHED IMAGE - FLOATING GENTLY) -->
+    <section class="px-4 relative z-30 animate-float-slow bg-[#F5F8FC]">
+        <div class="max-w-7xl mx-auto mt-6 md:mt-10 bg-white border border-gray-200 shadow-[0_15px_40px_rgba(8,29,71,0.05)] rounded-2xl p-6 lg:py-7 lg:px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-0 md:divide-x divide-gray-100">
+                
+                <!-- Highlight 1 (Slides in from Left) -->
+                <div class="flex flex-col items-center text-center px-4 group reveal-left reveal-delay-100">
+                    <div class="text-[#0b2447] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 ease-out">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Expert Mentorship</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider text-[#E31B23]">Native & DELF Certified</p>
+                </div>
 
-            @foreach($courses as $course)
-            <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                <!-- Highlight 2 (Slides in from Bottom) -->
+                <div class="flex flex-col items-center text-center px-4 group reveal-bottom reveal-delay-200">
+                    <div class="text-[#0b2447] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 ease-out">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Conversational Focus</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider text-[#0B1E43]">Speak from Day One</p>
+                </div>
 
-                <div class="card-news position-relative hover-up">
+                <!-- Highlight 3 (Slides in from Bottom) -->
+                <div class="flex flex-col items-center text-center px-4 group reveal-bottom reveal-delay-300">
+                    <div class="text-[#0b2447] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 ease-out">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-sm leading-tight">98% Success Rate</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider text-[#E31B23]">Proven DELF/DALF Results</p>
+                </div>
 
-                    <a href="{{ route('courses.show', $course->id) }}"
-                       class="card-news-img position-relative d-block">
+                <!-- Highlight 4 (Slides in from Bottom) -->
+                <div class="flex flex-col items-center text-center px-4 group reveal-bottom reveal-delay-400">
+                    <div class="text-[#0b2447] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 ease-out">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Canada PR Boost</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider text-[#0B1E43]">+50 Express Entry Points</p>
+                </div>
 
-                        <img class="w-100 rounded-top-3"
-                             src="{{ $course->cover_image
-                                    ? asset('storage/'.$course->cover_image)
-                                    : ($course->thumbnail
-                                        ? asset('storage/'.$course->thumbnail)
-                                        : asset('frontend/imgs/pages/learning/page-home/home-section-3/img-1.png')) }}"
-                             alt="{{ $course->title }}" />
+                <!-- Highlight 5 (Slides in from Right) -->
+                <div class="flex flex-col items-center text-center px-4 group reveal-right reveal-delay-500">
+                    <div class="text-[#0b2447] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 ease-out">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                            <rect x="4" y="3" width="16" height="18" rx="2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h5" />
+                            <circle cx="15" cy="15" r="2.5" />
+                            <path d="M13.5 17l-1 2 2-1 2 1-1-2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Global Validation</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider text-[#E31B23]">Govt. & Corporate Aligned</p>
+                </div>
 
-                       
-                    </a>
+            </div>
+        </div>
+    </section>
 
-                    <div class="card-news-body p-5 pb-4 bg-white rounded-bottom-3">
+    <!-- 5. OUR FRENCH COURSES SECTION (MIRROR COPY HIGH-FIDELITY DESIGN) -->
+    <section id="courses" class="py-16 md:py-20 bg-white overflow-hidden relative z-10">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="flex items-center justify-center gap-4 mb-2.5">
+                    <span class="w-[60px] h-0.5 bg-gradient-to-r from-transparent to-[#E31B23] shrink-0"></span>
+                    <h2 class="section-title text-2xl md:text-3xl shrink-0 tracking-wider">
+                        OUR <span class="text-[#E31B23]">FRENCH COURSES</span>
+                    </h2>
+                    <span class="w-[60px] h-0.5 bg-gradient-to-l from-transparent to-[#E31B23] shrink-0"></span>
+                </div>
+                <p class="section-subtitle text-xs md:text-sm font-medium tracking-wide leading-relaxed">Choose from our CEFR-aligned modules from Beginner to Advanced levels</p>
+            </div>            <!-- Cards Grid (3 columns desktop) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                @forelse($courses as $course)
+                    @php
+                        $bgImage = 'assets/images/course_bg_a1.png';
+                        $textColor = '#E31B23';
+                        $btnBg = 'bg-[#E31B23]';
+                        $btnHover = 'hover:bg-red-700';
+                        
+                        $titleLower = strtolower($course->title);
+                        if (strpos($titleLower, 'a1') !== false) {
+                            $bgImage = 'assets/images/course_bg_a1.png';
+                            $textColor = '#E31B23';
+                            $btnBg = 'bg-[#E31B23]';
+                            $btnHover = 'hover:bg-red-700';
+                        } elseif (strpos($titleLower, 'a2') !== false) {
+                            $bgImage = 'assets/images/course_bg_a2.png';
+                            $textColor = '#0B1E43';
+                            $btnBg = 'bg-[#0B1E43]';
+                            $btnHover = 'hover:bg-blue-900';
+                        } elseif (strpos($titleLower, 'b1') !== false) {
+                            $bgImage = 'assets/images/course_bg_b1.png';
+                            $textColor = '#E31B23';
+                            $btnBg = 'bg-[#E31B23]';
+                            $btnHover = 'hover:bg-red-700';
+                        } elseif (strpos($titleLower, 'b2') !== false) {
+                            $bgImage = 'assets/images/course_bg_b2.png';
+                            $textColor = '#0B1E43';
+                            $btnBg = 'bg-[#0B1E43]';
+                            $btnHover = 'hover:bg-blue-900';
+                        } elseif (strpos($titleLower, 'c1') !== false) {
+                            $bgImage = 'assets/images/course_bg_c1.png';
+                            $textColor = '#E31B23';
+                            $btnBg = 'bg-[#E31B23]';
+                            $btnHover = 'hover:bg-red-700';
+                        } elseif (strpos($titleLower, 'delf') !== false || strpos($titleLower, 'dalf') !== false || strpos($titleLower, 'prep') !== false) {
+                            $bgImage = 'assets/images/course_bg_delf.png';
+                            $textColor = '#0B1E43';
+                            $btnBg = 'bg-[#0B1E43]';
+                            $btnHover = 'hover:bg-blue-900';
+                        } else {
+                            // Fallback based on loop index
+                            $index = $loop->index % 6;
+                            $images = [
+                                'assets/images/course_bg_a1.png',
+                                'assets/images/course_bg_a2.png',
+                                'assets/images/course_bg_b1.png',
+                                'assets/images/course_bg_b2.png',
+                                'assets/images/course_bg_c1.png',
+                                'assets/images/course_bg_delf.png'
+                            ];
+                            $bgImage = $images[$index];
+                            $textColor = ($index % 2 === 0) ? '#E31B23' : '#0B1E43';
+                            $btnBg = ($index % 2 === 0) ? 'bg-[#E31B23]' : 'bg-[#0B1E43]';
+                            $btnHover = ($index % 2 === 0) ? 'hover:bg-red-700' : 'hover:bg-blue-900';
+                        }
+                    @endphp
 
-                        <div class="d-flex gap-2">
-                            <i class="bi bi-star-fill text-yellow fs-7"></i>
-                            <i class="bi bi-star-fill text-yellow fs-7"></i>
-                            <i class="bi bi-star-fill text-yellow fs-7"></i>
-                            <i class="bi bi-star-fill text-yellow fs-7"></i>
-                            <i class="bi bi-star-fill text-yellow fs-7"></i>
+                    <!-- Dynamic Course Card -->
+                    <div class="bg-white rounded-3xl border border-gray-100 hover:shadow-[0_12px_35px_rgba(8,29,71,0.06)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden flex flex-col justify-between p-6 md:p-8 min-h-[220px] group">
+                        <div class="absolute inset-0 z-0 select-none pointer-events-none">
+                            <img src="{{ asset($bgImage) }}" class="w-full h-full object-cover object-right group-hover:scale-105 transition-transform duration-700 ease-out">
                         </div>
-
-                        <div class="card-news-title mt-3">
-                            <h6 class="fs-6">
-                                {{ $course->title }}
-                            </h6>
-                        </div>
-
-                        <div class="d-flex card-news-information mt-4 gap-4 border-bottom pb-3">
-                            <div class="d-flex align-items-center gap-1">
-                                <i class="ri-book-marked-fill text-primary"></i>
-                                <p class="fs-7 mb-0">{{ ucfirst($course->level) }}</p>
+                        <div class="relative z-10 max-w-[65%] flex flex-col justify-between h-full space-y-4">
+                            <div>
+                                <span class="text-sm md:text-base font-black tracking-wider uppercase block mb-1" style="color: {{ $textColor }};">
+                                    {{ $course->title }}
+                                </span>
+                                <p class="text-[13px] md:text-sm text-gray-550 font-medium leading-relaxed line-clamp-3">
+                                    {{ $course->description }}
+                                </p>
                             </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-4">
-                           
-                            <div class="d-flex align-items-center gap-1 ms-auto">
-                                <a href="{{ route('courses.show', $course->id) }}"
-                                   class="btn btn-white bg-green-3 text-primary hover-up">
-                                    enroll now
+                            <div>
+                                <a href="{{ route('courses.show', $course->id) }}" class="inline-flex items-center justify-center gap-1 px-4 py-2 {{ $btnBg }} text-white text-[11px] font-bold uppercase rounded-lg {{ $btnHover }} transition-colors duration-300">
+                                    Learn More
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
                                 </a>
                             </div>
                         </div>
-
                     </div>
-                </div>
+                @empty
+                    <!-- Empty State Fallback -->
+                    <div class="col-span-3 text-center py-12 text-gray-400">
+                        No courses available at the moment.
+                    </div>
+                @endforelse      </div>
 
             </div>
-            @endforeach
 
-        </div>
-
-        <div class="row">
-            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                <a href="{{ route('courses.index') }}"
-                   class="btn btn-white bg-green-3 mt-8 text-primary hover-up">
-                    <span class="text-primary">more courses</span>
-                    <img src="{{ asset('frontend/imgs/pages/learning/icon/arrow-right.svg') }}" alt="Weupdaters" />
+            <!-- View All Courses Button -->
+            <div class="flex justify-center mt-12">
+                <a href="{{ route('courses.index') }}" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#0B1E43] hover:bg-blue-900 text-white font-extrabold text-sm uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md shadow-[#0B1E43]/10">
+                    View All Courses
                 </a>
             </div>
+
+        </div>
+    </section>
+    <!-- 6. WHY LEARN FRENCH SECTION -->
+    <section id="why-french" class="py-20 md:py-28 bg-[#F5F8FC] overflow-hidden relative reveal-item z-10 border-y border-gray-100/50">
+        <!-- Background Skyline Landscape Banner (Constrained on desktop to prevent overlap) -->
+        <div class="absolute right-0 bottom-0 w-full lg:w-[45%] xl:w-[40%] h-[200px] sm:h-[260px] lg:h-full z-0 select-none pointer-events-none">
+            <!-- Left-side fade mask to seamlessly blend the image edge with the background -->
+            <div class="absolute inset-y-0 left-0 w-64 bg-gradient-to-r from-[#F5F8FC] via-[#F5F8FC]/60 to-transparent z-10 hidden lg:block"></div>
+            <!-- Top-side fade mask to seamlessly blend the top edge of the image with the background -->
+            <div class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#F5F8FC] to-transparent z-10 hidden lg:block"></div>
+            <img src="{{ asset('assets/images/why_learn_french_new_bg.png') }}" alt="Paris Skyline Banner" class="w-full h-full object-cover mix-blend-multiply" style="object-position: right bottom;">
         </div>
 
-    </div>
-</section>
-
-
-
-        <!--learning home section 4-->
-        <section class="elearning-home-section-4 position-relative overflow-hidden pt-120">
-            <div class="container position-relative z-1 pb-150 border-bottom">
-                <div class="row flex-wrap align-items-center">
-                    <div class="col-lg-4 swipper-root">
-                        <span class="btn-text fw-bold text-primary">
-                            <i class="ri-book-marked-fill opacity-25"></i>
-                            &nbsp; popular courses
-                        </span>
-                        <h2 class="text-anime-style-2">
-                            FrancoWay one of the<br />
-                            best
-                            <span class="position-relative">
-                                eLearning
-                                <span class="position-absolute top-0 start-0 pt-5 z-0 d-none d-md-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="221" height="22" viewBox="0 0 221 22" fill="none">
-                                        <path d="M2 20C58.4673 12.6711 180.922 -1.06621 219 2.61526" stroke="#D5D52B" stroke-width="3" stroke-linecap="round" />
-                                    </svg>
-                                </span>
-                            </span>
-                        </h2>
-                    </div>
-                    <div class="col-lg-7 ms-lg-auto mt-3 mt-lg-0">
-                        <div class="position-relative row justify-content-lg-end justify-content-center mt-5">
-                            <div class="col-lg-3 col-md-4 col-6">
-                                <div class="text-lg-start text-center">
-                                    <h2 class="count mb-0"><span class="odometer text-nowrap" data-count="1200"></span>+</h2>
-                                    <p>We offer a wide range of digital marketing</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-6">
-                                <div class="text-lg-start text-center">
-                                    <h2 class="count mb-0"><span class="odometer text-nowrap" data-count="59"></span></h2>
-                                    <p>We offer a wide range of digital marketing</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-6">
-                                <div class="text-lg-start text-center">
-                                    <h2 class="count mb-0"><span class="odometer text-nowrap" data-count="32"></span></h2>
-                                    <p>We offer a wide range of digital marketing</p>
-                                </div>
-                            </div>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Left Content: 5 Columns -->
+                <div class="lg:col-span-8 space-y-10">
+                    <!-- Section Header -->
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <div class="flex items-center justify-center gap-4 mb-2.5">
+                            <span class="w-[60px] h-0.5 bg-gradient-to-r from-transparent to-[#E31B23] shrink-0"></span>
+                            <h2 class="section-title text-2xl md:text-3xl shrink-0 tracking-wider">
+                                WHY LEARN <span class="text-[#E31B23]">FRENCH?</span>
+                            </h2>
+                            <span class="w-[60px] h-0.5 bg-gradient-to-l from-transparent to-[#E31B23] shrink-0"></span>
                         </div>
+                        <p class="section-subtitle text-xs md:text-sm font-medium tracking-wide leading-relaxed text-center">Unlock global career opportunities, ease your immigration path to Canada, and learn a beautiful romance language.</p>
+                    </div>
+                    
+                    <!-- 5 Columns Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-6 md:gap-8 lg:gap-10 text-center">
+                        
+                        <!-- Item 1 -->
+                        <div class="flex flex-col items-center group">
+                            <div class="mb-5 p-5 bg-white/95 rounded-[24px] shadow-sm border border-gray-100/60 group-hover:scale-110 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
+                                <img src="{{ asset('assets/images/icon_globe.png') }}" class="w-[52px] h-[52px] md:w-[58px] md:h-[58px] object-contain" alt="Globe Icon">
+                            </div>
+                            <h4 class="text-sm md:text-base font-bold text-[#0B1E43] leading-snug">Spoken in<br>29+ Countries</h4>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex flex-col items-center group">
+                            <div class="mb-5 p-5 bg-white/95 rounded-[24px] shadow-sm border border-gray-100/60 group-hover:scale-110 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
+                                <img src="{{ asset('assets/images/icon_briefcase.png') }}" class="w-[52px] h-[52px] md:w-[58px] md:h-[58px] object-contain" alt="Career Icon">
+                            </div>
+                            <h4 class="text-sm md:text-base font-bold text-[#0B1E43] leading-snug">Enhance Career<br>Opportunities</h4>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="flex flex-col items-center group">
+                            <div class="mb-5 p-5 bg-white/95 rounded-[24px] shadow-sm border border-gray-100/60 group-hover:scale-110 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
+                                <img src="{{ asset('assets/images/icon_university.png') }}" class="w-[52px] h-[52px] md:w-[58px] md:h-[58px] object-contain" alt="University Icon">
+                            </div>
+                            <h4 class="text-sm md:text-base font-bold text-[#0B1E43] leading-snug">Study in Top<br>French Universities</h4>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="flex flex-col items-center group">
+                            <div class="mb-5 p-5 bg-white/95 rounded-[24px] shadow-sm border border-gray-100/60 group-hover:scale-110 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
+                                <img src="{{ asset('assets/images/icon_maple.png') }}" class="w-[52px] h-[52px] md:w-[58px] md:h-[58px] object-contain" alt="Canada Icon">
+                            </div>
+                            <h4 class="text-sm md:text-base font-bold text-[#0B1E43] leading-snug">Gateway to<br>Canada & Europe</h4>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="flex flex-col items-center group">
+                            <div class="mb-5 p-5 bg-white/95 rounded-[24px] shadow-sm border border-gray-100/60 group-hover:scale-110 group-hover:bg-white group-hover:shadow-md transition-all duration-300 flex items-center justify-center w-[92px] h-[92px] md:w-[98px] md:h-[98px] mx-auto">
+                                <svg class="w-[52px] h-[52px] md:w-[58px] md:h-[58px] text-[#0B1E43]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-sm md:text-base font-bold text-[#0B1E43] leading-snug">Rich Culture,<br>Language & Lifestyle</h4>
+                        </div>
+
                     </div>
                 </div>
-               
+                
+                <!-- Right Side Empty Spacer / Spacing Buffer (Allows clean backdrop & prevents overlapping) -->
+                <div class="lg:col-span-4 h-28 sm:h-36 lg:h-64"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FORM SECTION (LEAD CAPTURE) -->
+    <section id="enquire" class="py-10 md:py-12 px-4 bg-white reveal-item z-10">
+        <div class="max-w-7xl mx-auto bg-white border border-gray-100 rounded-3xl shadow-[0_15px_50px_rgba(8,29,71,0.06)] overflow-hidden relative z-10">
+            
+            <!-- Background Banner Image (No crop / No cut) -->
+            <div class="absolute inset-0 z-0 select-none pointer-events-none">
+                <img src="{{ asset('assets/images/enquiry_banner_canada.png') }}" alt="Canada Banner" class="w-full h-full object-cover lg:object-fill">
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 relative z-20">
+                <!-- Left Side Form -->
+                <div class="lg:col-span-7 py-5 px-6 md:py-6 md:px-10">
+                    <div>
+                        <h2 class="section-title text-xl md:text-2xl mb-1 text-left tracking-wider">
+                            BEGIN YOUR <span class="text-[#E31B23]">FRENCH JOURNEY TODAY!</span>
+                        </h2>
+                        <p class="section-subtitle text-xs md:text-sm mb-4 text-left leading-relaxed">Fill out the form below to receive a call back and schedule a free trial lesson.</p>
+                    </div>
+
+                    <form id="lead-form" class="space-y-3.5" action="#" method="POST">
+                        @csrf
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">First Name*</label>
+                                <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#E31B23] focus:outline-none bg-white transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Last Name*</label>
+                                <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#E31B23] focus:outline-none bg-white transition-colors">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Your Email*</label>
+                                <input type="email" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#E31B23] focus:outline-none bg-white transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Your Phone*</label>
+                                <input type="tel" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#E31B23] focus:outline-none bg-white transition-colors">
+                            </div>
+                        </div>
+
+                        <!-- Checkboxes -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">What are you interested in?</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="interest[]" value="A1" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    A1 Beginner
+                                </label>
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="interest[]" value="A2" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    A2 Elementary
+                                </label>
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="interest[]" value="B1" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    B1 Intermediate
+                                </label>
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="interest[]" value="B2" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    B2 Upper Intermediate
+                                </label>
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="interest[]" value="C1" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    C1 Advanced
+                                </label>
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="interest[]" value="delf" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    DELF / DALF
+                                </label>
+                                <label class="flex items-center text-sm font-medium text-gray-700 cursor-pointer col-span-2 sm:col-span-1">
+                                    <input type="checkbox" name="interest[]" value="other" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2">
+                                    Other
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full bg-[#E31B23] hover:bg-red-700 text-white py-3 rounded-lg font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md shadow-red-600/10">
+                            Submit & Get Free Counselling
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </button>
+
+                        <!-- Privacy Shield Statement -->
+                        <div class="flex items-start gap-2 text-[10px] text-gray-400 mt-3 justify-start">
+                            <svg class="w-4 h-4 text-[#0B1E43] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            <span class="leading-normal">By submitting this form, you agree to our <a href="{{ route('privacy.policy') }}" class="underline hover:text-red-500">Privacy Policy</a> and <a href="{{ route('terms.conditions') }}" class="underline hover:text-red-500">Terms & Conditions</a>.</span>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Right Side Empty Spacer (Lets background image show through) -->
+                <div class="hidden lg:block lg:col-span-5 h-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7.5 WHY CHOOSE US SECTION (MIRROR COPY PREMIUM DESIGN) -->
+    <section class="py-8 md:py-10 lg:pt-12 lg:pb-16 bg-[#F5F8FC] overflow-hidden px-4 relative z-10 border-b border-gray-100/50">
+        
+        <!-- Organic 4-pointed hand-drawn star shapes in background (Top Left - matching brand colors) -->
+        <div class="absolute -top-4 -left-4 md:-top-6 md:-left-6 opacity-[0.06] pointer-events-none select-none text-[#E31B23]">
+            <svg class="w-28 h-28 md:w-36 md:h-36 rotate-[12deg]" fill="currentColor" viewBox="0 0 100 100">
+                <path d="M50 0 C53 35 65 47 100 50 C65 53 53 65 50 100 C47 65 35 53 0 50 C35 47 47 35 50 0 Z" />
+            </svg>
+        </div>
+        <div class="absolute top-10 left-16 md:left-24 opacity-[0.05] pointer-events-none select-none text-[#E31B23]">
+            <svg class="w-16 h-16 md:w-20 md:h-20 -rotate-[15deg]" fill="currentColor" viewBox="0 0 100 100">
+                <path d="M50 0 C53 35 65 47 100 50 C65 53 53 65 50 100 C47 65 35 53 0 50 C35 47 47 35 50 0 Z" />
+            </svg>
+        </div>
+
+        <!-- Organic brush stroke/leaf shape in bottom right corner (brand color) -->
+        <div class="absolute bottom-0 right-0 opacity-[0.10] pointer-events-none select-none text-[#0B1E43]">
+            <svg class="w-20 h-20 md:w-24 md:h-24" fill="currentColor" viewBox="0 0 100 100">
+                <path d="M100 100 C75 100 50 90 35 75 C20 60 15 45 15 15 C20 40 40 60 70 75 C85 82 95 90 100 100 Z" />
+            </svg>
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10 px-4 md:px-6">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="flex items-center justify-center gap-4 mb-2.5">
+                    <span class="w-[60px] h-0.5 bg-gradient-to-r from-transparent to-[#E31B23] shrink-0"></span>
+                    <h2 class="section-title text-2xl md:text-3xl shrink-0 tracking-wider">
+                        WHY CHOOSE <span class="text-[#E31B23]">US</span>
+                    </h2>
+                    <span class="w-[60px] h-0.5 bg-gradient-to-l from-transparent to-[#E31B23] shrink-0"></span>
+                </div>
+                <p class="section-subtitle text-xs md:text-sm font-medium tracking-wide leading-relaxed">
+                    Expert educators and customized curriculum to guarantee your success in French.
+                </p>
+            </div>
+            
+            <!-- Cards Grid with Alternating Staggered Offset Layout (Tight gap to match screenshot) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto lg:pb-10">
+                
+                <!-- Card 1: World Class Teachers -->
+                <div class="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] sm:aspect-auto h-[290px] sm:h-[320px] md:h-[360px] lg:h-[400px] shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 lg:translate-y-0">
+                    <img src="{{ asset('assets/images/choose_teachers.png') }}" alt="World Class Teachers" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 md:p-8">
+                        <h3 class="text-white text-lg md:text-xl font-heading font-bold tracking-wide leading-snug text-center">
+                            World Class<br>Teachers
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 2: Experienced and Caring Teachers (Shifted Down to match screenshot) -->
+                <div class="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] sm:aspect-auto h-[290px] sm:h-[320px] md:h-[360px] lg:h-[400px] shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 lg:translate-y-12">
+                    <img src="{{ asset('assets/images/choose_experienced.png') }}" alt="Experienced and Caring Teachers" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 md:p-8">
+                        <h3 class="text-white text-lg md:text-xl font-heading font-bold tracking-wide leading-snug text-center">
+                            Experienced and<br>Caring Teachers
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 3: Global Community -->
+                <div class="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] sm:aspect-auto h-[290px] sm:h-[320px] md:h-[360px] lg:h-[400px] shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 lg:translate-y-0">
+                    <img src="{{ asset('assets/images/choose_community.png') }}" alt="Global Community" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 md:p-8">
+                        <h3 class="text-white text-lg md:text-xl font-heading font-bold tracking-wide leading-snug text-center">
+                            Global Community
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 4: Top Notch Courses (Shifted Down to match screenshot) -->
+                <div class="group relative rounded-[2.5rem] overflow-hidden aspect-[4/5] sm:aspect-auto h-[290px] sm:h-[320px] md:h-[360px] lg:h-[400px] shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 lg:translate-y-12">
+                    <img src="{{ asset('assets/images/choose_courses.png') }}" alt="Top Notch Courses" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 md:p-8">
+                        <h3 class="text-white text-lg md:text-xl font-heading font-bold tracking-wide leading-snug text-center">
+                            Top Notch Courses
+                        </h3>
+                    </div>
+                </div>
                 
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!--testimonial section-->
-           <section class="elearning-about-section-4 position-relative overflow-hidden">
-            <div class="container position-relative z-1 border-bottom border-primary py-120">
-                <div class="text-center">
-                    <span class="btn-text fw-bold text-primary">
-                        <i class="ri-book-marked-fill opacity-25"></i>
-                        &nbsp; testimonials
-                    </span>
-                    <h2 class="text-anime-style-2">Happy users feedback</h2>
+    <!-- 8. WHAT OUR STUDENTS SAY (TESTIMONIALS) -->
+    <section class="py-16 md:py-24 bg-white overflow-hidden px-4 reveal-item z-10">
+        <!-- Title -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-[#E31B23] block mb-2">
+                <span class="inline-block w-8 h-px bg-[#E31B23] mr-2 align-middle"></span>
+                TESTIMONIALS
+                <span class="inline-block w-8 h-px bg-[#E31B23] ml-2 align-middle"></span>
+            </span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-[#0B1E43] font-sans tracking-tight mb-4">
+                What Our <span class="text-[#E31B23]">Students</span> Say
+            </h2>
+            <p class="text-gray-500 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+                Real stories. Real results. From students who achieved their French goals with Francoway.
+            </p>
+        </div>
+
+        <!-- Main Testimonial Card -->
+        <div class="max-w-6xl mx-auto bg-[#0B1E43] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 relative p-6 md:p-10 text-white mb-16">
+            <!-- Decorative blur shapes inside the dark card -->
+            <div class="absolute -top-24 -left-24 w-72 h-72 bg-[#E31B23]/25 rounded-full blur-[80px] pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-blue-500/15 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
+                
+                <!-- Left Column: Video Review Card (lg:col-span-5) -->
+                <div class="lg:col-span-5 flex justify-center items-center">
+                    <div class="relative w-full max-w-[340px] aspect-[3/4] bg-[#071530] border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl group cursor-pointer" onclick="playActiveStudentVideo()">
+                        <!-- Student Image Background -->
+                        <img id="active-student-video-poster" src="{{ asset('assets/images/student1.png') }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" alt="Student Review Video">
+                        
+                        <!-- Video Element (Hidden initially, plays inline on click) -->
+                        <video id="active-student-video" class="absolute inset-0 w-full h-full object-cover hidden" loop playsinline controls></video>
+                        
+                        <!-- Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        
+                        <!-- Play Button Overlay -->
+                        <div id="active-student-video-play-btn" class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center border border-white/40 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10 animate-play-pulse">
+                                <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Top Info Badge -->
+                        <span class="absolute top-4 left-4 bg-[#E31B23] text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md border border-white/10 flex items-center gap-1.5">
+                            <span class="text-xs">★</span> <span id="active-student-video-badge">Cleared DELF B2</span>
+                        </span>
+                        
+                        <!-- Bottom Student Info Tag -->
+                        <div class="absolute bottom-6 left-6 text-left">
+                            <h4 id="active-student-video-name" class="text-white text-base font-extrabold uppercase tracking-wider mb-0.5">Simran Kaur</h4>
+                            <p id="active-student-video-role" class="text-white/60 text-[10px] font-bold uppercase tracking-widest">Francoway Student</p>
+                        </div>
+
+                        <!-- Verified Checkmark Badge at bottom-right -->
+                        <div class="absolute bottom-6 right-6 w-6 h-6 rounded-full bg-[#3897F0] text-white flex items-center justify-center shadow-md">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="row mt-80 wow img-custom-anim-top">
-                    <!-- Swiper -->
-                    <div class="swiper slider-3">
-                        <div class="swiper-wrapper z-1">
-                            <div class="swiper-slide">
-                                <div class="card-testimonial rounded-4 p-5 mb-lg-0 mb-5">
-                                    <div class="founder d-flex justify-content-between border-bottom pb-5">
-                                        <div class="d-flex align-items-center">
-                                            <a href="#">
-                                                <img class="rounded-circle icon-shape icon-50" src="{{ asset('frontend/imgs/pages/seo-agency/page-home/section-7/avatar-1.png') }}" alt="Weupdaters" />
-                                            </a>
-                                            <div class="text-start ms-3">
-                                                <a href="#">
-                                                    <span class="btn-text">Kristin Watson</span>
-                                                </a>
-                                                <p class="mb-0 fs-7">Head Of Idea, Treve LLC</p>
-                                            </div>
-                                        </div>
-                                        <div class="quote icon-shape icon-50 bg-white rounded-circle">
-                                            <svg class="fill-primary" xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                                                <g clip-path="url(#clip0_349_1387)">
-                                                    <path d="M0.0605469 -0.0449219V15.9551L8.31055 7.95508V-0.0449219H0.0605469Z" fill="#0D6EFD" />
-                                                    <path d="M13.8105 -0.0449219V15.9551L22.0605 7.95508V-0.0449219H13.8105Z" fill="#0D6EFD" />
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <h6 class="mb-0 mt-5">" Unmatched excellence superior to all others. Highly recommended for both beginners and advanced users. "</h6>
-                                </div>
+
+                <!-- Right Column: Details & Score Card (lg:col-span-7) -->
+                <div class="lg:col-span-7 flex flex-col justify-between space-y-6 text-left">
+                    
+                    <!-- Score and Rating Area -->
+                    <div class="flex items-center gap-5">
+                        <!-- Boxed Score -->
+                        <div class="border border-white/15 rounded-2xl bg-white/5 py-2.5 px-5 text-center flex flex-col justify-center min-w-[105px] shadow-lg shrink-0">
+                            <span id="active-student-score-num" class="text-3xl md:text-4xl font-extrabold font-sans leading-none text-white tracking-tight">92</span>
+                            <span id="active-student-score-den" class="text-[8px] text-[#A0AEC0] uppercase tracking-widest font-black mt-1">OUT OF 100</span>
+                        </div>
+
+                        <!-- Rating Badge Text -->
+                        <div class="space-y-1">
+                            <div class="flex gap-0.5 text-[#F8B803]" id="active-student-stars">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                             </div>
-                            <div class="swiper-slide">
-                                <div class="card-testimonial rounded-4 p-5 mb-lg-0 mb-5">
-                                    <div class="founder d-flex justify-content-between border-bottom pb-5">
-                                        <div class="d-flex align-items-center">
-                                            <a href="#">
-                                                <img class="rounded-circle icon-shape icon-50" src="{{ asset('frontend/imgs/pages/seo-agency/page-home/section-7/avatar-1.png') }}" alt="Weupdaters" />
-                                            </a>
-                                            <div class="text-start ms-3">
-                                                <a href="#">
-                                                    <span class="btn-text">Kristin Watson</span>
-                                                </a>
-                                                <p class="mb-0 fs-7">Head Of Idea, Treve LLC</p>
-                                            </div>
-                                        </div>
-                                        <div class="quote icon-shape icon-50 bg-white rounded-circle">
-                                            <svg class="fill-primary" xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                                                <g clip-path="url(#clip0_349_1387)">
-                                                    <path d="M0.0605469 -0.0449219V15.9551L8.31055 7.95508V-0.0449219H0.0605469Z" fill="#0D6EFD" />
-                                                    <path d="M13.8105 -0.0449219V15.9551L22.0605 7.95508V-0.0449219H13.8105Z" fill="#0D6EFD" />
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <h6 class="mb-0 mt-5">" Unmatched excellence superior to all others. Highly recommended for both beginners and advanced users. "</h6>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="card-testimonial rounded-4 p-5 mb-lg-0 mb-5">
-                                    <div class="founder d-flex justify-content-between border-bottom pb-5">
-                                        <div class="d-flex align-items-center">
-                                            <a href="#">
-                                                <img class="rounded-circle icon-shape icon-50" src="{{ asset('frontend/imgs/pages/seo-agency/page-home/section-7/avatar-1.png') }}" alt="Weupdaters" />
-                                            </a>
-                                            <div class="text-start ms-3">
-                                                <a href="#">
-                                                    <span class="btn-text">Kristin Watson</span>
-                                                </a>
-                                                <p class="mb-0 fs-7">Head Of Idea, Treve LLC</p>
-                                            </div>
-                                        </div>
-                                        <div class="quote icon-shape icon-50 bg-white rounded-circle">
-                                            <svg class="fill-primary" xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                                                <g clip-path="url(#clip0_349_1387)">
-                                                    <path d="M0.0605469 -0.0449219V15.9551L8.31055 7.95508V-0.0449219H0.0605469Z" fill="#0D6EFD" />
-                                                    <path d="M13.8105 -0.0449219V15.9551L22.0605 7.95508V-0.0449219H13.8105Z" fill="#0D6EFD" />
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <h6 class="mb-0 mt-5">" Unmatched excellence superior to all others. Highly recommended for both beginners and advanced users. "</h6>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="card-testimonial rounded-4 p-5 mb-lg-0 mb-5">
-                                    <div class="founder d-flex justify-content-between border-bottom pb-5">
-                                        <div class="d-flex align-items-center">
-                                            <a href="#">
-                                                <img class="rounded-circle icon-shape icon-50" src="{{ asset('frontend/imgs/pages/seo-agency/page-home/section-7/avatar-1.png') }}" alt="Weupdaters" />
-                                            </a>
-                                            <div class="text-start ms-3">
-                                                <a href="#">
-                                                    <span class="btn-text">Kristin Watson</span>
-                                                </a>
-                                                <p class="mb-0 fs-7">Head Of Idea, Treve LLC</p>
-                                            </div>
-                                        </div>
-                                        <div class="quote icon-shape icon-50 bg-white rounded-circle">
-                                            <svg class="fill-primary" xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                                                <g clip-path="url(#clip0_349_1387)">
-                                                    <path d="M0.0605469 -0.0449219V15.9551L8.31055 7.95508V-0.0449219H0.0605469Z" fill="#0D6EFD" />
-                                                    <path d="M13.8105 -0.0449219V15.9551L22.0605 7.95508V-0.0449219H13.8105Z" fill="#0D6EFD" />
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <h6 class="mb-0 mt-5">" Unmatched excellence superior to all others. Highly recommended for both beginners and advanced users. "</h6>
-                                </div>
+                            <h4 id="active-student-badge-text" class="text-base font-extrabold text-white uppercase tracking-wider leading-none">CLEARED DELF B2</h4>
+                            <div class="flex items-center gap-1 mt-0.5 text-[10px] text-white/50 font-semibold">
+                                <span>Verified by Francoway Academy</span>
+                                <svg class="w-3.5 h-3.5 fill-[#3897F0] shrink-0" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6 1.4 1.4-9 9z"/>
+                                </svg>
                             </div>
                         </div>
                     </div>
-                    <!-- Swiper JS -->
+
+                    <!-- Review Text (Card Layout) -->
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-5 md:p-6 relative">
+                        <!-- Quotation Icons -->
+                        <span class="absolute top-2 left-3 text-5xl text-[#E31B23] font-serif select-none pointer-events-none">“</span>
+                        
+                        <p id="active-student-text" class="text-xs md:text-sm text-gray-200 leading-relaxed font-medium px-4 py-2">
+                            "Francoway's live classes and AI practice tool helped me clear my DELF B2 exam on my first attempt. The structure and personal attention were exceptional!"
+                        </p>
+                        
+                        <span class="absolute bottom-2 right-3 text-5xl text-[#E31B23] font-serif select-none pointer-events-none">”</span>
+                    </div>
+
+                    <!-- Features Row -->
+                    <div class="border-t border-white/10 pt-5">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center md:divide-x divide-white/10">
+                            <!-- Feature 1 -->
+                            <div class="flex flex-col items-center md:px-1">
+                                <div class="text-[#E31B23] mb-1">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-gray-250">Expert Trainers</span>
+                            </div>
+                            <!-- Feature 2 -->
+                            <div class="flex flex-col items-center md:px-1">
+                                <div class="text-[#E31B23] mb-1">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-gray-250">Live Classes</span>
+                            </div>
+                            <!-- Feature 3 -->
+                            <div class="flex flex-col items-center md:px-1">
+                                <div class="text-[#E31B23] mb-1">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 .364l-.707 .707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-gray-250">AI Practice</span>
+                            </div>
+                            <!-- Feature 4 -->
+                            <div class="flex flex-col items-center md:px-1">
+                                <div class="text-[#E31B23] mb-1">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-gray-250">Personalized Feedback</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Thumbnails / Selectors & Arrow Controls -->
+                    <div class="flex items-center gap-3 pt-5 border-t border-white/10">
+                        <div class="flex gap-2.5 overflow-x-auto py-1" id="student-selectors">
+                            <!-- Student 1 Thumbnail -->
+                            <div onclick="selectStudentReview(0)" class="student-thumb active w-11 h-11 rounded-full overflow-hidden border-2 border-[#E31B23] cursor-pointer transition-all duration-300 transform scale-105 shrink-0">
+                                <img src="{{ asset('assets/images/student1.png') }}" class="w-full h-full object-cover" alt="Simran Kaur">
+                            </div>
+                            <!-- Student 2 Thumbnail -->
+                            <div onclick="selectStudentReview(1)" class="student-thumb w-11 h-11 rounded-full overflow-hidden border-2 border-transparent hover:border-white/50 cursor-pointer transition-all duration-300 shrink-0">
+                                <img src="{{ asset('assets/images/student2.png') }}" class="w-full h-full object-cover" alt="Rohit Verma">
+                            </div>
+                            <!-- Student 3 Thumbnail -->
+                            <div onclick="selectStudentReview(2)" class="student-thumb w-11 h-11 rounded-full overflow-hidden border-2 border-transparent hover:border-white/50 cursor-pointer transition-all duration-300 shrink-0">
+                                <img src="{{ asset('assets/images/student3.png') }}" class="w-full h-full object-cover" alt="Amandeep Singh">
+                            </div>
+                            <!-- Student 4 Thumbnail -->
+                            <div onclick="selectStudentReview(3)" class="student-thumb w-11 h-11 rounded-full overflow-hidden border-2 border-transparent hover:border-white/50 cursor-pointer transition-all duration-300 shrink-0">
+                                <img src="{{ asset('assets/images/student4.png') }}" class="w-full h-full object-cover" alt="Neha Sharma">
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2 ms-auto shrink-0">
+                            <!-- Prev Button -->
+                            <button type="button" onclick="prevStudentReview()" class="w-10 h-10 rounded-full border border-white/10 hover:border-[#E31B23] flex items-center justify-center transition-all bg-white/5 hover:bg-[#E31B23] text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <!-- Next Button -->
+                            <button type="button" onclick="nextStudentReview()" class="w-10 h-10 rounded-full border border-white/10 hover:border-[#E31B23] flex items-center justify-center transition-all bg-white/5 hover:bg-[#E31B23] text-white">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-        
-      
+        </div>
 
-      
-    </main>
+        <!-- BOTTOM: Student Video Reviews Grid -->
+        <div class="max-w-6xl mx-auto px-2">
+            <div class="flex items-center gap-3.5 mb-8">
+                <!-- Red Rounded Icon -->
+                <div class="w-10 h-10 rounded-xl bg-[#E31B23]/10 text-[#E31B23] flex items-center justify-center shadow-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="text-left">
+                    <h3 class="text-xl font-extrabold text-[#0B1E43] font-sans">Student Video Reviews</h3>
+                    <p class="text-xs text-gray-500 font-semibold mt-0.5">See how our students achieved their success</p>
+                </div>
+            </div>
+            
+            <!-- Video Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-5">
+                <!-- Card 1: Arjun Mehta -->
+                <div onclick="openVideoModal('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4')" class="relative rounded-[2rem] overflow-hidden shadow-md group cursor-pointer aspect-[3/4] border border-gray-100/60 bg-slate-900">
+                    <img src="{{ asset('assets/images/arjun_mehta.jpg') }}" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" alt="Arjun Mehta">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+                    
+                    <!-- Red Quote Bubble at top-right -->
+                    <div class="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#E31B23] text-white flex items-center justify-center shadow-md">
+                        <span class="text-sm font-bold font-serif leading-none mt-0.5">“</span>
+                    </div>
+                    
+                    <!-- Play Icon Overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/20 backdrop-blur-sm text-white rounded-full flex items-center justify-center border border-white/30 shadow-md transition-transform duration-300 group-hover:scale-110">
+                            <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Info tags -->
+                    <div class="absolute bottom-4 left-4 right-4 text-left">
+                        <!-- Stars -->
+                        <div class="flex gap-0.5 text-[#F8B803] mb-1">
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <h4 class="text-white text-xs font-black tracking-wide leading-tight">Arjun Mehta</h4>
+                        <p class="text-white/60 text-[9px] font-bold mt-0.5">Cleared DELF B1</p>
+                    </div>
+                </div>
 
+                <!-- Card 2: Kritika Sharma -->
+                <div onclick="openVideoModal('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4')" class="relative rounded-[2rem] overflow-hidden shadow-md group cursor-pointer aspect-[3/4] border border-gray-100/60 bg-slate-900">
+                    <img src="{{ asset('assets/images/kritika_sharma.jpg') }}" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" alt="Kritika Sharma">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+                    
+                    <div class="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#E31B23] text-white flex items-center justify-center shadow-md">
+                        <span class="text-sm font-bold font-serif leading-none mt-0.5">“</span>
+                    </div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/20 backdrop-blur-sm text-white rounded-full flex items-center justify-center border border-white/30 shadow-md transition-transform duration-300 group-hover:scale-110">
+                            <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-4 left-4 right-4 text-left">
+                        <div class="flex gap-0.5 text-[#F8B803] mb-1">
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <h4 class="text-white text-xs font-black tracking-wide leading-tight">Kritika Sharma</h4>
+                        <p class="text-white/60 text-[9px] font-bold mt-0.5">Cleared DELF A2</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Rohan Verma -->
+                <div onclick="openVideoModal('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4')" class="relative rounded-[2rem] overflow-hidden shadow-md group cursor-pointer aspect-[3/4] border border-gray-100/60 bg-slate-900">
+                    <img src="{{ asset('assets/images/rohan_verma.jpg') }}" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" alt="Rohan Verma">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+                    
+                    <div class="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#E31B23] text-white flex items-center justify-center shadow-md">
+                        <span class="text-sm font-bold font-serif leading-none mt-0.5">“</span>
+                    </div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/20 backdrop-blur-sm text-white rounded-full flex items-center justify-center border border-white/30 shadow-md transition-transform duration-300 group-hover:scale-110">
+                            <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-4 left-4 right-4 text-left">
+                        <div class="flex gap-0.5 text-[#F8B803] mb-1">
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <h4 class="text-white text-xs font-black tracking-wide leading-tight">Rohan Verma</h4>
+                        <p class="text-white/60 text-[9px] font-bold mt-0.5">Cleared DELF C1</p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Mehak Bedi -->
+                <div onclick="openVideoModal('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4')" class="relative rounded-[2rem] overflow-hidden shadow-md group cursor-pointer aspect-[3/4] border border-gray-100/60 bg-slate-900">
+                    <img src="{{ asset('assets/images/mehak_bedi.jpg') }}" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" alt="Mehak Bedi">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+                    
+                    <div class="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#E31B23] text-white flex items-center justify-center shadow-md">
+                        <span class="text-sm font-bold font-serif leading-none mt-0.5">“</span>
+                    </div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/20 backdrop-blur-sm text-white rounded-full flex items-center justify-center border border-white/30 shadow-md transition-transform duration-300 group-hover:scale-110">
+                            <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-4 left-4 right-4 text-left">
+                        <div class="flex gap-0.5 text-[#F8B803] mb-1">
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <h4 class="text-white text-xs font-black tracking-wide leading-tight">Mehak Bedi</h4>
+                        <p class="text-white/60 text-[9px] font-bold mt-0.5">Cleared DELF B2</p>
+                    </div>
+                </div>
+
+                <!-- Card 5: Gurpreet Singh -->
+                <div onclick="openVideoModal('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4')" class="relative rounded-[2rem] overflow-hidden shadow-md group cursor-pointer aspect-[3/4] border border-gray-100/60 bg-slate-900">
+                    <img src="{{ asset('assets/images/gurpreet_singh.jpg') }}" class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" alt="Gurpreet Singh">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent"></div>
+                    
+                    <div class="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#E31B23] text-white flex items-center justify-center shadow-md">
+                        <span class="text-sm font-bold font-serif leading-none mt-0.5">“</span>
+                    </div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/20 backdrop-blur-sm text-white rounded-full flex items-center justify-center border border-white/30 shadow-md transition-transform duration-300 group-hover:scale-110">
+                            <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-4 left-4 right-4 text-left">
+                        <div class="flex gap-0.5 text-[#F8B803] mb-1">
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <h4 class="text-white text-xs font-black tracking-wide leading-tight">Gurpreet Singh</h4>
+                        <p class="text-white/60 text-[9px] font-bold mt-0.5">Cleared DELF B1</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dots Pagination -->
+            <div class="flex justify-center gap-2 mt-8">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#E31B23]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#D1D5DB] hover:bg-[#E31B23]/50 cursor-pointer"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#D1D5DB] hover:bg-[#E31B23]/50 cursor-pointer"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#D1D5DB] hover:bg-[#E31B23]/50 cursor-pointer"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden opacity-0 transition-opacity duration-300 pointer-events-none" onclick="closeVideoModal()">
+        <div class="relative w-full max-w-4xl mx-4 aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10" onclick="event.stopPropagation()">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-50 text-white/70 hover:text-white transition-colors bg-black/40 rounded-full p-2.5 hover:bg-black/60">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <video id="modalVideo" class="w-full h-full object-cover" controls playsinline src=""></video>
+        </div>
+    </div>
+
+    <!-- Success Submit & Intro Video Script -->
+    <script>
+        function openVideoModal(videoUrl) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            if (modal && video) {
+                video.src = videoUrl;
+                modal.classList.remove('hidden', 'pointer-events-none');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                video.play();
+            }
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            if (modal && video) {
+                modal.classList.add('opacity-0');
+                video.pause();
+                setTimeout(() => {
+                    modal.classList.add('hidden', 'pointer-events-none');
+                    video.src = '';
+                }, 300);
+            }
+        }
+
+        const leadForm = document.getElementById('lead-form');
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Merci! Your request has been submitted successfully. A Francoway consultant will contact you shortly.');
+            leadForm.reset();
+        });
+
+        // Testimonial Reviews Split Layout Logic
+        const studentsData = [
+            {
+                name: "Simran Kaur",
+                role: "Francoway Student",
+                badge: "Cleared DELF B2",
+                scoreNum: 92,
+                scoreDen: "out of 100",
+                offset: 12.1, // (150.8 * (1 - 92/100))
+                text: '"Francoway\'s live classes and AI practice tool helped me clear my DELF B2 exam on my first attempt. The structure and personal attention were exceptional!"',
+                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                image: "{{ asset('assets/images/student1.png') }}"
+            },
+            {
+                name: "Rohit Verma",
+                role: "Canada PR Applicant",
+                badge: "Canada Express Entry",
+                scoreNum: 9,
+                scoreDen: "out of 10",
+                offset: 15.1, // (150.8 * (1 - 9/10))
+                text: '"I needed CLB 7+ for my Canada PR Express Entry. Thanks to the rigorous training at Francoway, I achieved a CLB 9 in my TEF Canada exam. Highly recommended!"',
+                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                image: "{{ asset('assets/images/student2.png') }}"
+            },
+            {
+                name: "Amandeep Singh",
+                role: "Francoway Student",
+                badge: "Cleared DELF A2",
+                scoreNum: 96,
+                scoreDen: "out of 100",
+                offset: 6.0, // (150.8 * (1 - 96/100))
+                text: '"Learning French from scratch seemed impossible, but the teachers at Francoway made it fun and simple. I cleared my DELF A2 exam with 96/100 in just 2 months!"',
+                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                image: "{{ asset('assets/images/student3.png') }}"
+            },
+            {
+                name: "Neha Sharma",
+                role: "Francoway Student",
+                badge: "Cleared DELF B1",
+                scoreNum: 88,
+                scoreDen: "out of 100",
+                offset: 18.1, // (150.8 * (1 - 88/100))
+                text: '"The curriculum is perfectly aligned with the CEFR standards. I moved from A1 to B1 level in French in just 6 months. The worksheets and mocks were key to my success."',
+                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                image: "{{ asset('assets/images/student4.png') }}"
+            }
+        ];
+
+        let activeStudentIndex = 0;
+        let testimonialAutoPlayInterval = null;
+
+        function selectStudentReview(index) {
+            activeStudentIndex = index;
+            const student = studentsData[index];
+
+            // Reset video element
+            const video = document.getElementById('active-student-video');
+            const poster = document.getElementById('active-student-video-poster');
+            const playBtn = document.getElementById('active-student-video-play-btn');
+            
+            if (video) {
+                video.pause();
+                video.classList.add('hidden');
+            }
+            if (poster) poster.classList.remove('hidden');
+            if (playBtn) playBtn.classList.remove('hidden');
+
+            // Update Video Card poster, badge, name
+            if (poster) poster.src = student.image;
+            if (video) video.src = student.videoUrl;
+            
+            const vBadge = document.getElementById('active-student-video-badge');
+            const vName = document.getElementById('active-student-video-name');
+            const vRole = document.getElementById('active-student-video-role');
+            
+            if (vBadge) vBadge.textContent = student.badge;
+            if (vName) vName.textContent = student.name;
+            if (vRole) vRole.textContent = student.role;
+
+            // Update Details
+            const scoreNum = document.getElementById('active-student-score-num');
+            const scoreDen = document.getElementById('active-student-score-den');
+            const scoreCircle = document.getElementById('active-student-score-circle');
+            const badgeText = document.getElementById('active-student-badge-text');
+            const activeText = document.getElementById('active-student-text');
+            
+            if (scoreNum) scoreNum.textContent = student.scoreNum;
+            if (scoreDen) scoreDen.textContent = student.scoreDen;
+            if (scoreCircle) scoreCircle.style.strokeDashoffset = student.offset;
+            if (badgeText) badgeText.textContent = student.badge;
+            if (activeText) activeText.textContent = student.text;
+
+            // Update Thumbnails
+            const thumbs = document.querySelectorAll('.student-thumb');
+            thumbs.forEach((thumb, idx) => {
+                if (idx === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function playActiveStudentVideo() {
+            const video = document.getElementById('active-student-video');
+            const poster = document.getElementById('active-student-video-poster');
+            const playBtn = document.getElementById('active-student-video-play-btn');
+
+            stopTestimonialAutoPlay();
+
+            if (video) {
+                if (video.classList.contains('hidden')) {
+                    video.classList.remove('hidden');
+                    if (poster) poster.classList.add('hidden');
+                    if (playBtn) playBtn.classList.add('hidden');
+                    video.play();
+                } else {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                }
+            }
+        }
+
+        function prevStudentReview() {
+            let newIndex = activeStudentIndex - 1;
+            if (newIndex < 0) newIndex = studentsData.length - 1;
+            selectStudentReview(newIndex);
+            stopTestimonialAutoPlay();
+        }
+
+        function nextStudentReview() {
+            let newIndex = activeStudentIndex + 1;
+            if (newIndex >= studentsData.length) newIndex = 0;
+            selectStudentReview(newIndex);
+            stopTestimonialAutoPlay();
+        }
+
+        function startTestimonialAutoPlay() {
+            stopTestimonialAutoPlay();
+            testimonialAutoPlayInterval = setInterval(() => {
+                // Only autoplay if video is not actively playing
+                const video = document.getElementById('active-student-video');
+                if (video && (video.classList.contains('hidden') || video.paused)) {
+                    let nextIndex = (activeStudentIndex + 1) % studentsData.length;
+                    selectStudentReview(nextIndex);
+                }
+            }, 6000);
+        }
+
+        function stopTestimonialAutoPlay() {
+            if (testimonialAutoPlayInterval) {
+                clearInterval(testimonialAutoPlayInterval);
+            }
+        }
+
+        // Initialize review
+        document.addEventListener("DOMContentLoaded", () => {
+            selectStudentReview(0);
+            startTestimonialAutoPlay();
+            
+            // Pause autoplay on mouse enter
+            const wrapper = document.getElementById('student-selectors');
+            if (wrapper) {
+                const container = wrapper.parentElement.parentElement;
+                container.addEventListener('mouseenter', stopTestimonialAutoPlay);
+                container.addEventListener('mouseleave', startTestimonialAutoPlay);
+            }
+        });
+
+
+
+        // Elisa Hero Image Parallax (Mouse Move & Scroll effect)
+        (function() {
+            const hero = document.getElementById('hero-section');
+            const elisa = document.getElementById('elisa-container');
+            const elisaMobile = document.getElementById('elisa-container-mobile');
+            
+            if (!hero) return;
+            
+            let mouseX = 0, mouseY = 0;
+            let targetX = 0, targetY = 0;
+            let scrollY = window.scrollY;
+            
+            // Mousemove parallax for desktop
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+                const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+                
+                targetX = x * 35; // shift up to 35px left/right
+                targetY = y * 15; // shift up to 15px up/down
+            });
+            
+            hero.addEventListener('mouseleave', () => {
+                targetX = 0;
+                targetY = 0;
+            });
+            
+            // Scroll tracking
+            window.addEventListener('scroll', () => {
+                scrollY = window.scrollY;
+            }, { passive: true });
+            
+            // Smoothened Render Loop (Lerp)
+            function render() {
+                // Lerp for smooth pointer physics
+                mouseX += (targetX - mouseX) * 0.08;
+                mouseY += (targetY - mouseY) * 0.08;
+                
+                // Shift left/right with scroll (max shift 70px)
+                const scrollOffset = Math.min(scrollY * 0.12, 70);
+                
+                // Desktop image shift: combine mousemove and scroll parallax
+                if (elisa) {
+                    elisa.style.transform = `translate3d(${mouseX - scrollOffset}px, ${mouseY}px, 0)`;
+                }
+                
+                // Mobile image shift: scroll parallax only
+                if (elisaMobile) {
+                    elisaMobile.style.transform = `translate3d(${-scrollOffset}px, 0, 0)`;
+                }
+                
+                requestAnimationFrame(render);
+            }
+            
+            requestAnimationFrame(render);
+        })();
+    </script>
 @endsection

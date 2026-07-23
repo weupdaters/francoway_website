@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Foundation\Configuration\Middleware; // ✅ ADD THIS
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,10 +13,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
-        // 🔹 Custom middleware alias (Laravel 11)
+        // 🔹 Custom middleware alias
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'check-subscription' => \App\Http\Middleware\CheckCourseSubscription::class,
         ]);
+
+    })
+    ->withSchedule(function (Schedule $schedule) {
+
+        $schedule->command('subscriptions:manage')->dailyAt('09:00');
 
     })
     ->withExceptions(function (Exceptions $exceptions): void {

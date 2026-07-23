@@ -16,9 +16,9 @@ public function courses()
 {
     return $this->belongsToMany(Course::class, 'teacher_user');
 }
-public function teacherUsers()
+public function teacherAssignUsers()
 {
-    return $this->hasMany(TeacherUser::class, 'teacher_id');
+    return $this->hasMany(TeacherAssignUser::class, 'teacher_id', 'user_id');
 }
 public function getCoursesAttribute()
 {

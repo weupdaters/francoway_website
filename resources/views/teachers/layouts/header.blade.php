@@ -16,9 +16,8 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <a href="index.html" class="d-flex text-decoration-none align-items-center" style="gap: 8px;">
-                                            <img src="{{ asset('Admin/images/logo .jpeg') }}" alt="logo-icon" class="logo-icon" style="width:40px; height:40px; border-radius:50%;">
-                                            <span class="logo-text text-secondary fw-semibold fs-25 position-relative top-1">FrancoWay</span>
+                                        <a href="{{ route('index') }}" class="d-flex text-decoration-none align-items-center" style="gap: 8px;">
+                                            <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/' . $settings['logo']) : asset('Admin/images/logo .jpeg') }}" alt="logo-icon" class="logo-icon" style="height: 55px; width: auto; max-width: 160px; object-fit: contain;">
                                         </a> 
                                     </li>
                                 </ul>
@@ -59,10 +58,14 @@
                                                 <ul class="admin-link mb-0 list-unstyled">
                                                    
                                                     <li>
-                                                        <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="{{ route('logout') }}">
-                                                            <i class="material-symbols-outlined">logout</i>
-                                                            <span class="ms-2">Logout</span>
-                                                        </a>
+                                                        <form method="POST" action="{{ route('auth.logout') }}" id="header-logout-form">
+                                                            @csrf
+                                                            <a class="dropdown-item admin-item-link d-flex align-items-center text-body" href="javascript:void(0);" onclick="document.getElementById('header-logout-form').submit();">
+                                                                <img src="https://img.icons8.com/color/48/shutdown.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 8px;" alt="logout">
+                                                                <span class="ms-2">Logout</span>
+
+                                                            </a>
+                                                        </form>
                                                     </li>
                                                 </ul>
                                             </div>

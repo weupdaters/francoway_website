@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Teacher;
+use App\Models\CourseUser;
 use App\Models\Lesson;
 use App\Models\Section;
-use App\Models\CourseUser;
+use App\Models\Teacher;
+use App\Models\User;
+use App\Models\CourseUserSubscription;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
@@ -27,6 +28,8 @@ class Course extends Model
         'thumbnail',
         'cover_image',
         'trial_video',
+        'has_custom_prompt',
+        'custom_prompt',
     ];
 
     /*
@@ -36,7 +39,8 @@ class Course extends Model
     */
     protected $casts = [
         'status' => 'boolean',
-        'price'  => 'float',
+        'price' => 'float',
+        'has_custom_prompt' => 'boolean',
     ];
 
     /*
@@ -67,7 +71,7 @@ class Course extends Model
     }
 
     // ✅ Course lessons (direct access if needed)
-     public function lessons()
+    public function lessons()
     {
         return $this->hasMany(Lesson::class);
     }
@@ -89,4 +93,23 @@ class Course extends Model
     {
         return $this->status === true;
     }
+
+    //plan
+    public function plans()
+    {
+        return $this->hasMany(SubscriptionPlan::class);
+    }
+    // ✅ Course subscriptions
+    public function courseUserSubscription()
+    {
+        return $this->hasMany(CourseUserSubscription::class);
+    }
+
+    //teacher
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+    //
+
 }

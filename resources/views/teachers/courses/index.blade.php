@@ -77,7 +77,7 @@
                                 <div class="d-flex justify-content-end gap-3">
 
                                     {{-- Manage Lessons --}}
-                                    <a href="{{ route('teacher.course_lessons.index', $course->id) }}"
+                                    <a href="{{ route('teacher.course-lessons', $course->id) }}"
                                        data-bs-toggle="tooltip"
                                        data-bs-title="Manage Lessons">
                                         <i class="material-symbols-outlined fs-18 text-primary">

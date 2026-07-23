@@ -1,0 +1,301 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    z-index: 5;
+    position: relative;
+}
+
+.nav-link{
+    font-family: 'Fraunces';
+    color: #1b3942 !important;
+    font-size: 18px;
+}
+
+.nav-link:hover{
+    text-decoration: underline;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+    min-height: 550px;
+    position: relative;
+    padding: 40px 20px;
+}
+
+/* Pink Circle Responsive */
+.pink{
+    height: clamp(400px, 60vw, 700px);
+    width: clamp(400px, 60vw, 700px);
+    border: 100px solid pink;
+    border-radius: 50%;
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    z-index: 1;
+}
+
+/* French badge */
+.french{
+    height: 70px;
+    max-width: 350px;
+    border-radius: 100px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Main Heading */
+.hero-1{
+    margin-top: 20px;
+    margin-left: 0;
+    position: relative;
+    z-index: 2;
+    font-family: "Fraunces", Serif;
+    font-size: clamp(32px, 6vw, 90px);
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    color: #1b3942;
+}
+
+/* Subheading */
+.hero-2{
+    margin-top: 20px;
+    margin-left: 0;
+    font-family: "Figtree", serif;
+    color: #4e676f;
+}
+
+/* Right background shape */
+.right-background{
+    background-image: url('/images/banner-background.png');
+    background-color: #6bba8d;
+    height: clamp(200px, 35vw, 350px);
+    width: clamp(200px, 35vw, 350px);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-bottom-right-radius: 100%;
+    z-index: 1;
+}
+
+/* Banner image */
+.banner-img{
+    position: relative;
+    z-index: 2;
+    max-height: 850px;
+    transition: 0.3s ease;
+}
+
+/* Boxes */
+.boxes{
+    background-image: url('images/boxes.png');
+    position: absolute;
+    top: 120px;
+    right: 30px;
+    width: clamp(120px, 15vw, 180px);
+    height: clamp(120px, 15vw, 180px);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* Hello */
+.hello-wrapper{
+    position: absolute;
+    top: 280px;
+    right: 450px;
+    height: 120px;
+    width: 140px;
+}
+
+/* =========================
+   SECTION 2
+========================= */
+
+.section-1{
+    font-family: "Fraunces", Serif;
+    padding: 40px 20px;
+}
+
+.section-1 p{
+   font-family: "Figtree",serif;
+   color: #646A69;
+   font-size: 16px;
+}
+
+.section-1 i{
+    font-size: 50px;
+    color: #faaff0;
+}
+
+.section-1 h2{
+    font-family: "Fraunces", Serif;
+    font-weight: 400;
+    line-height: 1.1;
+    font-size: clamp(28px, 6vw, 85px);
+}
+
+/* =========================
+   TESTIMONIALS
+========================= */
+
+.testimonial-card {
+    transition: 0.3s ease;
+    min-height: 260px;
+    font-family: "Figtree",serif;
+    border:1px solid #b48be0;
+    padding: 25px;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.purple-card { background: #e7ddf2; }
+.beige-card { background: #efe2c7; }
+.sky-card { background: #bde9d3; }
+
+.quote-icon {
+    font-size: clamp(50px, 8vw, 170px);
+    color: #b48be0;
+    font-weight: 600;
+}
+
+.testimonial-text {
+    font-size: clamp(15px, 2vw, 20px);
+    font-weight: 600;
+    color: #1b3942;
+}
+
+/* =========================
+   APP SECTION
+========================= */
+
+.app-section{
+    background:#183c3f;
+    border-radius:25px;
+    margin:40px 15px;
+    padding:50px 25px;
+}
+
+.learn-text{
+    font-size: clamp(32px, 5vw, 60px);
+    font-family:'Fraunces', serif;
+}
+
+.highlight-box{
+    display:inline-block;
+    background:#ffd400;
+    color:#183c3f;
+    font-size: clamp(32px, 7vw, 80px);
+    font-family:'Fraunces', serif;
+    padding:10px 20px;
+    border-radius:20px;
+}
+
+.subtitle{
+    font-size: clamp(18px, 3vw, 38px);
+    font-family:'Fraunces', serif;
+}
+
+.small-text{
+    font-size:14px;
+    opacity:0.8;
+}
+
+.signup-card{
+    background:#f4f4f4;
+    border-radius:20px;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Form */
+.form-style{
+    border:none;
+    border-bottom:1px solid #ccc;
+    border-radius:0;
+    box-shadow:none;
+}
+
+.form-style:focus{
+    box-shadow:none;
+    border-color:#183c3f;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+.flag-strip{
+    display:flex;
+    height:70px;
+    z-index: 3;
+}
+
+.flag-strip div{
+    flex:1;
+}
+
+.blue{ background:#0055A4; }
+.white{ background:#ffffff; }
+.red{ background:#EF4135; }
+
+.footer-dark {
+    background-color: #111;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-dark::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: clamp(15%, 18vw, 25%);
+    height: 100%;
+    background-color: #1f6fa9;
+}
+
+.footer-dark::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: clamp(15%, 18vw, 25%);
+    height: 100%;
+    background-color: #d62828;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.banner-wrapper {
+    display: inline-block;
+    overflow: hidden;
+}

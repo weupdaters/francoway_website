@@ -1,122 +1,239 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign In - Francoway</title>
 
-  <!-- Links Of CSS File -->
-  <link rel="stylesheet" href="{{ asset('admin/css/idebar-menu.css') }}   ">
-  <link rel="stylesheet" href="{{ asset('admin/css/simplebar.css') }}   ">
-  <link rel="stylesheet" href="{{ asset('admin/css/prism.css') }}   ">
-  <link rel="stylesheet" href="{{ asset('admin/css/quill.snow.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/css/remixicon.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/css/swiper-bundle.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/css/jsvectormap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@450;500;600;700;850;900&family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ asset('admin/images/favicon.png') }}  ">
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Cactus Classical Serif', 'serif'],
+                        script: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        brandBlue: '#0B1E43',
+                        brandRed: '#E31B23',
+                        brandGold: '#F8B803',
+                    }
+                }
+            }
+        }
+    </script>
 
-  <!-- Title -->
-  <title>Login - {{ config('app.name') }}</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Cactus Classical Serif', serif;
+        }
+        .font-script {
+            font-family: 'Caveat', cursive;
+        }
+        
+        @keyframes float-slow {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float-slow {
+            animation: float-slow 7s infinite ease-in-out;
+        }
+
+        @keyframes float-reverse {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float-reverse {
+            animation: float-reverse 8s infinite ease-in-out;
+        }
+
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 27, 37, 0.2); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(227, 27, 37, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 27, 37, 0); }
+        }
+        .btn-pulse-red:hover {
+            animation: subtle-pulse 1.6s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+    </style>
 </head>
+<body class="bg-[#F5F8FC] text-gray-800 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
 
-<body class="bg-body-bg">
+    <!-- Decorative Blurry Gradient Orbits -->
+    <div class="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#0B1E43]/5 blur-[100px] pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#E31B23]/5 blur-[100px] pointer-events-none"></div>
 
-  <!-- Start Preloader Area -->
-  <div class="preloader" id="preloader">
-    <div class="preloader">
-      <div class="waviy position-relative">
-        <span class="d-inline-block">F</span>
-        <span class="d-inline-block">I</span>
-        <span class="d-inline-block">L</span>
-        <span class="d-inline-block">A</span>
-      </div>
-    </div>
-  </div>
-  <!-- End Preloader Area -->
-
-  <div class="container-fluid">
-    <div class="main-content d-flex flex-column p-0">
-      <div class="m-lg-auto my-auto w-930 py-4">
-        <div class="card bg-white border rounded-10 border-white py-100 px-130">
-          <div class="p-md-5 p-4 p-lg-0">
-            <div class="text-center mb-4">
-              <h3 class="fs-26 fw-medium" style="margin-bottom: 6px;">Sign In</h3>
-              <p class="fs-16 text-secondary lh-1-8">Don’t have an account yet? <a href="{{ route('auth.register') }}"
-                  class="text-primary text-decoration-none">Sign Up</a></p>
+    <div class="w-full max-w-[960px] bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(11,30,67,0.06)] border border-gray-100 overflow-hidden grid grid-cols-1 lg:grid-cols-12 relative z-10">
+        
+        <!-- Left Side: Login Form (7 Columns) -->
+        <div class="lg:col-span-7 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6">
+            
+            <!-- Logo & Back Link -->
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-1 text-xs font-bold text-gray-400 hover:text-brandRed transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                    Back to Home
+                </a>
             </div>
 
-            <form class="login-register text-start mt-20" action="{{ route('login.submit') }}" method="POST">
-              @csrf
-              {{-- Email --}}
-              <div class="form-group">
-                <label class="form-label">Email address *</label>
-                <input class="form-control" type="email" name="email" value="{{ old('email') }}"
-                  placeholder="email@example.com" required>
-
-                @error('email')
-                  <small class="text-danger">{{ $message }}</small>
-                @enderror
-              </div>
-              {{-- Password --}}
-              <div class="form-group">
-                <label class="form-label">Password *</label>
-                <input class="form-control" type="password" name="password" placeholder="Enter password *" required>
-
-                @error('password')
-                  <small class="text-danger">{{ $message }}</small>
-                @enderror
-              </div>
-              <div class="mb-20">
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-1">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label fs-16" for="flexCheckDefault">
-                      Remember me
-                    </label>
-                  </div>
-                  <a href="forgot-password.html" class="fs-16 text-primary fw-normal text-decoration-none">Forgot
-                    Password?</a>
+            <!-- Main Heading & Form -->
+            <div class="space-y-6">
+                <div class="space-y-2 text-left">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-brandRed font-bold text-[10px] uppercase tracking-widest">
+                        ✦ Sign In
+                    </span>
+                    <h2 class="text-2xl sm:text-3.5xl font-heading font-black text-brandBlue tracking-tight leading-none">
+                        Welcome Back
+                    </h2>
+                    <p class="text-sm text-gray-550 font-medium leading-relaxed">
+                        Don't have an account yet? 
+                        <a href="{{ route('auth.register') }}" class="text-brandRed font-bold hover:underline">Sign Up</a>
+                    </p>
                 </div>
-              </div>
 
-              <div class="mb-4">
-                <button type="submit" class="btn btn-primary fw-normal text-white w-100"
-                  style="padding-top: 18px; padding-bottom: 18px;">Sign In</button>
-              </div>
+                <!-- Form -->
+                <form action="{{ route('login.submit') }}" method="POST" class="space-y-4">
+                    @csrf
+                    
+                    <!-- Email field -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Email Address</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                </svg>
+                            </span>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                value="{{ old('email') }}" 
+                                placeholder="name@example.com" 
+                                required 
+                                class="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-150 rounded-2xl text-sm focus:outline-none focus:border-brandRed focus:bg-white transition-all duration-300 shadow-sm"
+                            >
+                        </div>
+                        @error('email')
+                            <p class="text-xs text-brandRed font-semibold mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
+                    <!-- Password field -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Password</label>
+                            <a href="{{ route('auth.password.request') }}" class="text-xs font-bold text-brandRed hover:underline">Forgot Password?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                            </span>
+                            <input 
+                                type="password" 
+                                name="password" 
+                                placeholder="••••••••" 
+                                required 
+                                class="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-150 rounded-2xl text-sm focus:outline-none focus:border-brandRed focus:bg-white transition-all duration-300 shadow-sm"
+                            >
+                        </div>
+                        @error('password')
+                            <p class="text-xs text-brandRed font-semibold mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
+                    <!-- Remember Me checkbox -->
+                    <div class="flex items-center gap-2.5 pt-2">
+                        <input 
+                            type="checkbox" 
+                            name="remember" 
+                            id="remember" 
+                            class="w-4 h-4 rounded text-brandRed focus:ring-brandRed border-gray-300 cursor-pointer"
+                        >
+                        <label for="remember" class="text-xs text-gray-500 font-semibold select-none cursor-pointer">
+                            Remember me on this device
+                        </label>
+                    </div>
 
-            </form>
-          </div>
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button 
+                            type="submit" 
+                            class="inline-flex items-center justify-center gap-2 w-full py-3 bg-brandRed hover:bg-brandBlue text-white font-extrabold text-xs uppercase tracking-widest rounded-2xl transition-all duration-300 shadow-md btn-pulse-red"
+                        >
+                            Sign In
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer Meta -->
+            <p class="text-[10px] text-gray-400 font-medium text-center leading-normal">
+                By signing in, you agree to our <a href="{{ route('terms.conditions') }}" class="underline hover:text-brandRed">Terms & Conditions</a> and <a href="{{ route('privacy.policy') }}" class="underline hover:text-brandRed">Privacy Policy</a>.
+            </p>
+
         </div>
-      </div>
+
+        <!-- Right Side: Graphic Banner (5 Columns) -->
+        <div class="lg:col-span-5 bg-brandBlue relative overflow-hidden flex flex-col justify-between p-8 md:p-10 text-white">
+            <!-- Background Image Illustration -->
+            <img 
+                src="{{ asset('assets/images/form_illustration_new.jpg') }}" 
+                class="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+                alt="France Canada Slogan Banner"
+            >
+
+            <!-- Decorative Dot Grid in Top Right -->
+            <div class="absolute top-10 right-10 grid grid-cols-6 gap-1.5 opacity-25 select-none pointer-events-none z-10">
+                @for ($i = 0; $i < 24; $i++)
+                    <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                @endfor
+            </div>
+            <!-- Brand Header -->
+            <div class="relative z-10">
+                <span class="font-heading font-bold text-2xl tracking-tight text-white block">
+                    Franco<span class="text-brandRed font-black">way</span>
+                </span>
+            </div>
+
+            <!-- Dynamic Slogan -->
+            <div class="relative z-10 space-y-4">
+                <h3 class="font-heading font-black text-3xl sm:text-4xl leading-tight">
+                    Success in French.<br>Success in Canada.
+                </h3>
+                <p class="font-script text-2xl text-brandGold">
+                    Learn from the native experts.
+                </p>
+            </div>
+
+            <!-- Footer Badge -->
+            <div class="relative z-10 pt-8 border-t border-white/10 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-brandGold">✓</span>
+                <span class="text-xs text-white/80 font-semibold uppercase tracking-wider">CEFR & DELF Aligned Training</span>
+            </div>
+        </div>
+
     </div>
-  </div>
 
-
-
-  <!-- Link Of JS File -->
-  <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('admin/js/sidebar-menu.js') }}"></script>
-  <script src="{{ asset('admin/js/quill.min.js') }}"></script>
-  <script src="{{ asset('admin/js/data-table.js') }}"></script>
-  <script src="{{ asset('admin/js/prism.js') }}"></script>
-  <script src="{{ asset('admin/js/clipboard.min.js') }}"></script>
-  <script src="{{ asset('admin/js/simplebar.min.js') }}"></script>
-  <script src="{{ asset('admin/js/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('admin/js/echarts.min.js') }}"></script>
-  <script src="{{ asset('admin/js/swiper-bundle.min.js') }}"></script>
-  <script src="{{ asset('admin/js/fullcalendar.main.js') }}"></script>
-  <script src="{{ asset('admin/js/jsvectormap.min.js') }}"></script>
-  <script src="{{ asset('admin/js/world-merc.js') }}"></script>
-  <script src="{{ asset('admin/js/custom/apexcharts.js') }}"></script>
-  <script src="{{ asset('admin/js/custom/echarts.js') }}"></script>
-  <script src="{{ asset('admin/js/custom/maps.js') }}"></script>
-  <script src="{{ asset('admin/js/custom/custom.js') }}"></script>
 </body>
-
 </html>

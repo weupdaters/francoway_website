@@ -62,54 +62,366 @@
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
 
     {{-- ===== Favicon ===== --}}
- <link rel="icon" type="image/png"
+    <link rel="icon" type="image/png"
           href="{{ setting('favicon')
                 ? asset('storage/' . setting('favicon')) . '?v=' . time()
                 : asset('frontend/imgs/template/favicon.svg') }}">
 
-
+    <!-- Google Fonts & Bootstrap Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     {{-- Extra Page CSS --}}
     @stack('styles')
+    <script>
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-bs-theme", savedTheme);
+    </script>
+    <style>
+        /* Global Reset to replicate Mockup */
+        body {
+            font-family: 'Poppins', 'Outfit', sans-serif;
+            background-color: #F3F6F9 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            color: #071530;
+        }
+
+        /* 1. TOP BLACK INFO BAR */
+        .top-info-bar {
+            background-color: #071530;
+            color: #ffffff;
+            font-size: 12px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            font-weight: 500;
+        }
+        .top-info-bar a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .top-info-bar a:hover {
+            color: #E53935;
+        }
+        .top-info-bar .social-links a {
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        /* 2. MAIN NAVIGATION NAVBAR (WHITE) */
+        .main-navbar {
+            background-color: #ffffff;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid #EAEAEA;
+        }
+        .nav-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .nav-logo-img {
+            height: 48px;
+            width: auto;
+        }
+        .nav-brand-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 20px;
+            color: #071530;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+        .nav-brand-subtext {
+            font-size: 9px;
+            color: #E53935;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 2px;
+        }
+        .nav-profile-area {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .notification-bell-box {
+            position: relative;
+            font-size: 22px;
+            color: #5A6A85;
+            cursor: pointer;
+        }
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -3px;
+            background-color: #E53935;
+            color: #ffffff;
+            font-size: 8px;
+            font-weight: 800;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .user-profile-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .user-name-text {
+            font-weight: 600;
+            font-size: 14px;
+            color: #071530;
+        }
+
+        /* 3. LAYOUT MAIN BODY GRID */
+        .dashboard-layout-container {
+            display: flex;
+            min-height: calc(100vh - 115px);
+        }
+
+        /* Left Sidebar */
+        .left-sidebar-wrapper {
+            width: 260px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            flex-shrink: 0;
+            border-right: 1px solid #EAEAEA;
+        }
+        .sidebar-menu-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .sidebar-menu-item {
+            margin-bottom: 12px;
+        }
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 20px;
+            color: #5A6A85;
+            font-size: 14.5px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.25s ease;
+        }
+        .sidebar-menu-link:hover {
+            background-color: rgba(227, 27, 35, 0.02);
+            color: #E31B23;
+        }
+        .sidebar-menu-item.active .sidebar-menu-link {
+            background-color: rgba(227, 27, 35, 0.08);
+            color: #E31B23;
+            border-left: 4px solid #E31B23;
+            border-radius: 0 12px 12px 0;
+        }
+        .sidebar-menu-link i {
+            font-size: 18px;
+        }
+        .badge-count-red {
+            background-color: #E53935;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        /* Right Main Content Panel */
+        .main-content-panel {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        /* Mobile Responsive Overrides */
+        @media (max-width: 1200px) {
+            .left-sidebar-wrapper {
+                display: none;
+                position: absolute;
+                z-index: 1040;
+                top: 115px;
+                left: 0;
+                bottom: 0;
+                box-shadow: 10px 0 30px rgba(0,0,0,0.05);
+            }
+            .left-sidebar-wrapper.show-mobile-sidebar {
+                display: block !important;
+            }
+            .top-info-bar {
+                padding: 0 20px;
+            }
+            .main-navbar {
+                padding: 0 20px;
+            }
+            .main-content-panel {
+                padding: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .top-info-bar {
+                display: none !important;
+            }
+            .left-sidebar-wrapper {
+                top: 75px;
+            }
+        }
+    </style>
 </head>
 
+<body>
 
-<body class="bg-body-bg">
+    <!-- 1. TOP BLACK INFO BAR -->
+    <div class="top-info-bar">
+        <div>
+            <i class="bi bi-envelope-fill me-1"></i> <a href="mailto:support@francoway.com">support@francoway.com</a>
+            <span class="mx-3 text-white-50">|</span>
+            <i class="bi bi-telephone-fill me-1"></i> +91 98765 43210
+        </div>
+        <div class="social-links d-none d-md-block">
+            <span>Follow Us:</span>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-whatsapp"></i></a>
+        </div>
+    </div>
 
-  <!-- Page-specific CSS -->
-  @stack('styles')
+    <!-- 2. MAIN NAVIGATION NAVBAR (WHITE) -->
+    <div class="main-navbar">
+        <div class="nav-logo-area">
+            <a href="{{ route('index') }}" class="d-flex align-items-center text-decoration-none">
+                <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('Admin/images/logo .jpeg') }}" alt="logo" class="nav-logo-img rounded-circle me-2">
 
-  <!-- Custom CSS -->
-
- 
-    <!-- Start Preloader Area -->
-        <div class="preloader" id="preloader">
-            <div class="preloader">
-                <div class="waviy position-relative">
-                     <span class="d-inline-block">F</span>
-                    <span class="d-inline-block">r</span>
-                    <span class="d-inline-block">a</span>
-                    <span class="d-inline-block">n</span>
-                     <span class="d-inline-block">c</span>
-                      <span class="d-inline-block">o</span>
-                       <span class="d-inline-block">W</span> 
-                       <span class="d-inline-block">a</span>
-                        <span class="d-inline-block">y</span>
+            </a>
+            <button class="btn p-0 border-0 ms-4 d-xl-none" id="hamburger-sidebar-toggle">
+                <i class="bi bi-list fs-3 text-dark"></i>
+            </button>
+        </div>
+        <div class="nav-profile-area">
+            <div class="notification-bell-box">
+                <i class="bi bi-bell-fill"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="user-profile-dropdown dropdown">
+                <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+                    <img class="user-avatar" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/assets/images/user1.jpg') }}" alt="avatar">
+                    <span class="user-name-text d-none d-md-inline-block">{{ auth()->user()->name }}</span>
+                    <i class="bi bi-chevron-down text-muted small"></i>
                 </div>
+                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
+                    <li><a class="dropdown-item py-2 text-muted" href="#" onclick="alert('Profile section is loading. You can edit your settings here soon.'); event.preventDefault();"><img src="https://img.icons8.com/color/48/user-male-circle.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 8px;" alt="profile"> My Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form method="POST" action="{{ route('auth.logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item py-2 text-danger border-0 bg-transparent w-100 text-start">
+                                <img src="https://img.icons8.com/color/48/shutdown.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 8px;" alt="logout"> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Preloader Area -->
+    </div>
 
+    <!-- 3. LAYOUT CONTAINER -->
+    <div class="dashboard-layout-container">
+        
+        <!-- Left Sidebar -->
+        <div class="left-sidebar-wrapper">
+            <ul class="sidebar-menu-list">
+                <li class="sidebar-menu-item {{ request()->routeIs('users.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('users.dashboard') }}" class="sidebar-menu-link">
+                        <img src="https://img.icons8.com/color/48/dashboard.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="dashboard">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item {{ request()->routeIs('users.courses.*') || request()->routeIs('users.lessons.*') ? 'active' : '' }}">
+                    <a href="{{ route('users.courses.index') }}" class="sidebar-menu-link">
+                        <img src="https://img.icons8.com/color/48/book.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="courses">
+                        <span>My Courses</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" onclick="alert('Certificates section is loading.'); event.preventDefault();" class="sidebar-menu-link">
+                        <img src="https://img.icons8.com/color/48/certificate.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="certificates">
+                        <span>Certificates</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item {{ request()->routeIs('users.profile.*') ? 'active' : '' }}">
+                    <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
+                        <img src="https://img.icons8.com/color/48/user-male-circle.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="profile">
+                        <span>Profile</span>
+                    </a>
+                </li>
 
+                <li class="sidebar-menu-item border-top mt-4 pt-3">
+                    <form method="POST" action="{{ route('auth.logout') }}" id="sidebar-logout-form-layout">
+                        @csrf
+                        <a href="#" onclick="document.getElementById('sidebar-logout-form-layout').submit(); event.preventDefault();" class="sidebar-menu-link text-danger">
+                            <img src="https://img.icons8.com/color/48/shutdown.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="logout">
+                            <span>Logout</span>
+                        </a>
+                    </form>
+                </li>
 
+            </ul>
+        </div>
 
-  @include('users.layouts.notification')
+        <!-- Main Content Panel -->
+        <div class="main-content-panel">
+            @yield('content')
+        </div>
 
-  @include('users.layouts.header')
+    </div>
 
-    @yield('content')
-
-@include('users.layouts.footer')    
-
-
-  @stack('scripts')
-
+    <!-- Link Of JS Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('admin/js/custom/custom.js') }}"></script>
+    @stack('scripts')
+    <script>
+        $(document).ready(function() {
+            // Hamburger mobile toggle sidebar
+            $('#hamburger-sidebar-toggle').on('click', function(e) {
+                $('.left-sidebar-wrapper').toggleClass('show-mobile-sidebar');
+                e.stopPropagation();
+            });
+            
+            $(document).on('click', function(e) {
+                if ($(window).width() <= 1200) {
+                    if (!$(e.target).closest('.left-sidebar-wrapper').length && !$(e.target).closest('#hamburger-sidebar-toggle').length) {
+                        $('.left-sidebar-wrapper').removeClass('show-mobile-sidebar');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

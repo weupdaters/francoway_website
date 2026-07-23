@@ -16,8 +16,11 @@
                         <span class="text-body fs-14 hover">Dashboard</span>
                     </a>
                 </li>
-                <li class="breadcrumb-item"><span>LMS</span></li>
-                <li class="breadcrumb-item"><span>Courses</span></li>
+               
+                <li class="breadcrumb-item">
+                <a href="{{ route('admin.courses.index') }}" class="d-flex align-items-center text-decoration-none">
+                    <span class="text-body fs-14 hover">Courses</span>
+                </a>
                 <li class="breadcrumb-item active">
                     <span class="text-secondary">View Course</span>
                 </li>
@@ -71,6 +74,20 @@
                         </div>
                     </div>
                 @endif
+
+                {{-- Custom AI Prompt --}}
+                <div class="mb-20">
+                    <label class="label fs-16 mb-2">Custom Prompt</label>
+                    <div class="border rounded p-3 bg-light">
+                        <p class="mb-2"><strong>Use Custom Prompt:</strong> {{ $course->has_custom_prompt ? 'Yes' : 'No' }}</p>
+                        @if($course->has_custom_prompt && $course->custom_prompt)
+                            <p class="mb-1"><strong>Prompt Content:</strong></p>
+                            <div class="bg-white p-3 border rounded text-dark fs-14" style="white-space: pre-wrap; font-family: monospace;">{{ $course->custom_prompt }}</div>
+                        @else
+                            <p class="text-muted fs-14 mb-0">No custom prompt configured.</p>
+                        @endif
+                    </div>
+                </div>
 
             </div>
         </div>

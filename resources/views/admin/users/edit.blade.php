@@ -2,6 +2,31 @@
 
 @section('content')
 
+        {{-- Breadcrumb --}}
+        <div class="main-content-container overflow-hidden">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
+                        <h3 class="mb-0">Create User</h3>
+
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb align-items-center mb-0 lh-1">
+                               
+                                
+                                <li class="breadcrumb-item active" aria-current="page">
+                                   <a href="{{ route('admin.users.index') }}"
+                                       class="d-flex align-items-center text-decoration-none">
+                                        <span class="text-body fs-14 hover">Users</span>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <a href="{{ route('admin.users.edit', $user->id) }}"
+                                       class="d-flex align-items-center text-decoration-none">
+                                        <span class="text-secondary fs-14 hover">Edit User</span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
 <div class="card bg-white p-20 rounded-10 border border-white mb-4">
 
     <form action="{{ route('admin.users.update', $user->id) }}"

@@ -17,9 +17,26 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        // Trim inputs to handle copy-paste whitespace/newline issues
+        $request->merge([
+            'email' => strtolower(trim($request->input('email'))),
+            'password' => trim($request->input('password')),
+        ]);
+
         $credentials = $request->validate([
             'email' => ['required','email'],
             'password' => ['required'],
+        ]);
+
+        $dbUser = \App\Models\User::where('email', $request->input('email'))->first();
+        \Log::info('Login Attempt Info', [
+            'input_email' => $request->input('email'),
+            'input_password_length' => strlen($request->input('password')),
+            'input_password_hex' => bin2hex($request->input('password')),
+            'db_user_found' => !is_null($dbUser),
+            'db_role' => $dbUser ? $dbUser->role : null,
+            'db_status' => $dbUser ? $dbUser->status : null,
+            'password_matches' => $dbUser ? password_verify($request->input('password'), $dbUser->password) : false,
         ]);
 
         $key = Str::lower($request->input('email')).'|'.$request->ip();

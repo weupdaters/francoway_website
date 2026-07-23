@@ -3,108 +3,170 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Course;
+use App\Models\Plan;
+use App\Models\Section;
+use App\Models\Lesson;
+use App\Models\Comment;
 
 class CourseController extends Controller
 {
-    public function index()
+    /**
+     * MY ENROLLED COURSES LIST (LMS)
+     */
+    public function index(Request $request)
     {
-        $courses = Course::paginate(10);
+        $userId = auth()->id();
+        $type = $request->query('type');
+
+        $courseIds = \App\Models\CourseUserSubscription::where('user_id', $userId)
+            ->pluck('course_id')
+            ->unique();
+
+        $query = Course::whereIn('id', $courseIds);
+
+        if ($type === 'paid') {
+            $query->where('price', '>', 0);
+        } elseif ($type === 'free') {
+            $query->where('price', 0);
+        }
+
+        $courses = $query->latest()->paginate(10)->withQueryString();
+
         return view('users.courses.index', compact('courses'));
     }
-    public function create()
+
+    /**
+     * COURSE PAGE
+     */
+    public function show($courseId)
     {
-        return view('users.courses.create');
+        $user = auth()->user();
+
+        // Course
+        $course = Course::with('lessons')->findOrFail($courseId);
+
+        // Subscription check
+        $subscription = $user->subscriptions()
+            ->where('course_id', $courseId)
+            ->first();
+
+        // Plans (for buy page)
+        $plans = Plan::where('course_id', $courseId)->get();
+
+        // Sections with lessons
+        $sections = Section::with(['lessons' => function ($q) {
+            $q->orderBy('id');
+        }])->where('course_id', $courseId)->get();
+
+        // Default lesson (first lesson)
+        $currentLesson = Lesson::where('course_id', $courseId)->first();
+
+        // Progress calculation
+        $completedLessons = $user->lessons()
+            ->where('course_id', $courseId)
+            ->count();
+
+        $totalLessons = Lesson::where('course_id', $courseId)->count();
+
+        $course->completionPercentage = $totalLessons > 0
+            ? round(($completedLessons / $totalLessons) * 100)
+            : 0;
+
+        return view('users.courses.show', compact(
+            'course',
+            'subscription',
+            'plans',
+            'sections',
+            'currentLesson'
+        ));
     }
-    public function store(Request $request)
-{
-    $data = $request->validate([
-        'title'        => 'required',
-        'description'  => 'required',
-        'price'        => 'required',
-        'status'       => 'required',
-        'thumbnail'    => 'nullable|image',
-        'cover_image'  => 'nullable|image',
-        'trial_video'  => 'nullable|mimes:mp4,mov,avi|max:50000',
-    ]);
 
-    if ($request->hasFile('thumbnail')) {
-        $data['thumbnail'] = $request->file('thumbnail')->store('courses', 'public');
-    }
-
-    if ($request->hasFile('cover_image')) {
-        $data['cover_image'] = $request->file('cover_image')->store('courses', 'public');
-    }
-
-    if ($request->hasFile('trial_video')) {
-        $data['trial_video'] = $request->file('trial_video')->store('courses/videos', 'public');
-    }
-
-    Course::create($data);
-
-    return redirect()->route('users.courses.index')
-           ->with('success', 'Course created successfully');
-}
-
-    public function show(Course $course)
+    /**
+     * SINGLE LESSON VIEW
+     */
+    public function showLesson($courseId, $lessonId)
     {
-        return view('users.courses.show', compact('course'));
-    }
-    public function edit(Course $course)
-    {
-      
-        return view('users.courses.edit', compact('course'));
-    }
+        $user = auth()->user();
 
-public function update(Request $request, Course $course)
-{
-    $data = $request->validate([
-        'title'        => 'required|string|max:255',
-        'description'  => 'required',
-        'price'        => 'required|numeric',
-        'status'       => 'required|boolean',
+        // Course
+        $course = Course::with('lessons')->findOrFail($courseId);
 
-        'thumbnail'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        'cover_image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-        'trial_video'  => 'nullable|mimes:mp4,mov,avi|max:51200',
-    ]);
+        // Subscription check
+        $subscription = $user->subscriptions()
+            ->where('course_id', $courseId)
+            ->first();
 
-    // 🔁 Handle file uploads + delete old files
-    foreach (['thumbnail', 'cover_image', 'trial_video'] as $file) {
-
-        if ($request->hasFile($file)) {
-
-            // delete old file if exists
-            if ($course->$file && Storage::disk('public')->exists($course->$file)) {
-                Storage::disk('public')->delete($course->$file);
-            }
-
-            // store new file
-            $data[$file] = $request->file($file)->store('courses', 'public');
+        if (!$subscription) {
+            return redirect()->route('course.show', $courseId)
+                ->with('error', 'Please purchase this course first.');
         }
+
+        // Sections + lessons
+        $sections = Section::with(['lessons' => function ($q) {
+            $q->orderBy('id');
+        }])->where('course_id', $courseId)->get();
+
+        // Current lesson with comments + user
+        $currentLesson = Lesson::with(['comments.user'])
+            ->where('id', $lessonId)
+            ->firstOrFail();
+
+        // Progress
+        $completedLessons = $user->lessons()
+            ->where('course_id', $courseId)
+            ->count();
+
+        $totalLessons = Lesson::where('course_id', $courseId)->count();
+
+        $course->completionPercentage = $totalLessons > 0
+            ? round(($completedLessons / $totalLessons) * 100)
+            : 0;
+
+        return view('users.courses.show', compact(
+            'course',
+            'subscription',
+            'sections',
+            'currentLesson'
+        ));
     }
 
-    $course->update($data);
+    /**
+     * MARK LESSON COMPLETE (AJAX)
+     */
+    public function markComplete($courseId, $lessonId)
+    {
+        $user = auth()->user();
 
-    return redirect()
-        ->route('users.courses.index')
-        ->with('success', 'Course updated successfully');
+        // avoid duplicate
+        if (!$user->lessons()->where('lesson_id', $lessonId)->exists()) {
+            $user->lessons()->attach($lessonId);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lesson marked as completed'
+        ]);
+    }
+
+    /**
+     * STORE COMMENT
+     */
+   public function storeComment(Request $request)
+{
+    $request->validate([
+        'lesson_id' => 'required|exists:lessons,id',
+        'comment' => 'required|string|max:1000'
+    ]);
+
+    Comment::create([
+        'user_id'   => auth()->id(),
+        'lesson_id' => $request->lesson_id,
+        'parent_id' => $request->parent_id ?? null,
+        'comment'   => $request->comment
+    ]);
+
+    return back()->with('success', 'Comment added');
 }
-
-
-    public function destroy(Course $course)
-    {
-        $course->delete();
-        return redirect()->route('users.courses.index')->with('success', 'Course deleted successfully');
-    } 
-    
-    //assign course to user
-    public function assign(Request $request, Course $course)
-    {
-        $user = User::find($request->user_id);
-        $course->users()->attach($user);
-        return redirect()->route('users.courses.index')->with('success', 'Course assigned successfully');
-    }
-}   
+}

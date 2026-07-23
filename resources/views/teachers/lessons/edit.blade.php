@@ -147,7 +147,7 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button class="btn btn-success w-100">
+                        <button class="btn btn-primary w-100 text-white">
                             Update Lesson
                         </button>
                         <a href="{{ route('teacher.dashboard') }}"

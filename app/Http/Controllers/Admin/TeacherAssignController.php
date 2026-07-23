@@ -3,150 +3,180 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Course;
-use App\Models\TeacherUser;
+
+use App\Models\CourseAssignment;
+use App\Models\TeacherAssignUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TeacherAssignController extends Controller
 {
-    /* =====================================================
-     |  INDEX – list assignments + teachers
-     ===================================================== */
-    public function index()
+    // =========================
+    // LIST PAGE
+    // =========================
+    public function index(Request $request)
     {
-        $assignments = TeacherUser::with([
-                'teacher:id,name',
-                'user:id,name',
-                'course:id,title',
-            ])
-            ->latest()
-            ->paginate(10);
+        $search = $request->query('search');
+        $query = TeacherAssignUser::with(['teacher', 'user', 'course'])->latest();
 
-        $teachers = User::where('role', 'teacher')
-            ->select('id','name')
-            ->get();
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->whereHas('teacher', function($sub) use ($search) {
+                    $sub->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('user', function($sub) use ($search) {
+                    $sub->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('course', function($sub) use ($search) {
+                    $sub->where('title', 'like', "%{$search}%");
+                });
+            });
+        }
 
-        return view(
-            'admin.teacher_assign.index',
-            compact('assignments', 'teachers')
+        $assignments = $query->paginate(10)->withQueryString();
+
+        $teachers = User::where('role', 'teacher')->get();
+        $users = User::where('role', 'user')->get();
+
+        return view('admin.teacher_assign.index', compact(
+            'assignments',
+            'teachers',
+            'users'
+        ));
+    }
+
+    // =========================
+    // SHOW SINGLE
+    // =========================
+    public function show($id)
+    {
+        return response()->json(
+            TeacherAssignUser::with(['teacher', 'user', 'course'])->findOrFail($id)
         );
     }
 
-    /* =====================================================
-     |  SHOW – single assignment (for view / modal / ajax)
-     ===================================================== */
-    public function show($id)
-    {
-        $assignment = TeacherUser::with([
-                'teacher:id,name',
-                'user:id,name',
-                'course:id,title',
-            ])
-            ->findOrFail($id);
-
-        return response()->json($assignment);
-    }
-
-    /* =====================================================
-     |  AJAX – users list (students)
-     ===================================================== */
-    public function getUsersByTeacher($teacherId)
-    {
-        // NOTE: abhi teacher se depend nahi, sab users
-        return User::where('role', 'user')
-            ->orderBy('name')
-            ->select('id', 'name')
+    // =========================
+    // GET COURSES BY USER (AJAX)
+    // =========================
+public function getCoursesByUser($userId)
+{
+    try {
+        $courses = \DB::table('course_user_subscriptions')
+            ->where('course_user_subscriptions.user_id', $userId)
+            ->join('courses', 'courses.id', '=', 'course_user_subscriptions.course_id')
+            ->select('courses.id', 'courses.title')
             ->get();
-    }
 
-    /* =====================================================
-     |  AJAX – courses by teacher (IMPORTANT FIX)
-     ===================================================== */
-    public function getCoursesByTeacher($teacherId)
-    {
-        return Course::where('teacher_id', $teacherId)
-            ->where('status', 'published')   // optional but recommended
-            ->orderBy('title')
-            ->select('id', 'title')
-            ->get();
-    }
+        return response()->json($courses);
 
-    /* =====================================================
-     |  STORE – assign user to teacher + course
-     ===================================================== */
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Something went wrong',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+    // =========================
+    // STORE (ASSIGN TEACHER)
+    // =========================
     public function store(Request $request)
     {
-        $request->validate([
-            'teacher_id' => 'required|exists:users,id',
-            'user_id'    => 'required|exists:users,id',
-            'course_id'  => 'required|exists:courses,id',
-        ]);
+        try {
+            $validated = $request->validate([
+                'teacher_id' => 'required|exists:users,id',
+                'user_id'    => 'required|exists:users,id',
+                'course_id'  => 'required|exists:courses,id',
+            ]);
 
-        // prevent duplicate
-        $exists = TeacherUser::where([
-            'teacher_id' => $request->teacher_id,
-            'user_id'    => $request->user_id,
-            'course_id'  => $request->course_id,
-        ])->exists();
+            // Prevent duplicate
+            $exists = TeacherAssignUser::where([
+                'teacher_id' => $validated['teacher_id'],
+                'user_id'    => $validated['user_id'],
+                'course_id'  => $validated['course_id'],
+            ])->exists();
 
-        if ($exists) {
+            if ($exists) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Already assigned'
+                ], 422);
+            }
+
+            // Create assignment
+            TeacherAssignUser::create($validated);
+
             return response()->json([
-                'message' => 'This user is already assigned to this course'
+                'status' => true,
+                'message' => 'Teacher assigned successfully'
+            ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => false,
+                'errors' => $e->errors()
             ], 422);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $assign = TeacherUser::create([
-            'teacher_id' => $request->teacher_id,
-            'user_id'    => $request->user_id,
-            'course_id'  => $request->course_id,
-        ]);
-
-        // sync course_user pivot
-        Course::find($request->course_id)
-            ?->users()
-            ->syncWithoutDetaching($request->user_id);
-
-        return response()->json([
-            'success' => true,
-            'data'    => $assign
-        ]);
     }
 
-    /* =====================================================
-     |  UPDATE – change user
-     ===================================================== */
+    // =========================
+    // UPDATE
+    // =========================
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-        ]);
+        try {
+            $assign = TeacherAssignUser::findOrFail($id);
 
-        $assign = TeacherUser::findOrFail($id);
+            $request->validate([
+                'user_id' => 'required|exists:users,id',
+            ]);
 
-        $assign->update([
-            'user_id' => $request->user_id
-        ]);
+            $assign->update([
+                'user_id' => $request->user_id,
+            ]);
 
-        // keep pivot in sync
-        $assign->course?->users()
-            ->syncWithoutDetaching($request->user_id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Updated successfully'
+            ]);
 
-        return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Update failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
-    /* =====================================================
-     |  DELETE – remove assignment
-     ===================================================== */
+    // =========================
+    // DELETE
+    // =========================
     public function destroy($id)
     {
-        $assign = TeacherUser::findOrFail($id);
+        try {
+            TeacherAssignUser::findOrFail($id)->delete();
 
-        $assign->course?->users()
-            ->detach($assign->user_id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Deleted successfully'
+            ]);
 
-        $assign->delete();
-
-        return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Delete failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

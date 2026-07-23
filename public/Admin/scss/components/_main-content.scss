@@ -5,6 +5,7 @@
 	transition: $transition;
 	padding-right: 12px;
 	min-height: 100vh;
+	overflow-x: hidden;
 	.inner-main-content {
 		padding-right: 18px;
 		transition: all ease 0.5s;
@@ -13,6 +14,12 @@
 		justify-content: center;
 		min-height: 89.5vh;
 	}
+}
+
+.main-content-container {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 /* RTL SCSS

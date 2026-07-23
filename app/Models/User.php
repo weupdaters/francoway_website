@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
 use App\Models\Course;
 use App\Models\Lesson;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * Mass assignable attributes
@@ -131,5 +132,15 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    public function TeacherAssignUser()
+    {
+        return $this->hasMany(\App\Models\TeacherAssignUser::class, 'teacher_id');
+    }
+
+    public function aiPracticeAttempts()
+    {
+        return $this->hasMany(\App\Models\AiPracticeAttempt::class)->latest();
     }
 }

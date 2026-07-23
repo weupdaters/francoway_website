@@ -10,9 +10,19 @@ use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::latest()->paginate(10);
+        $search = $request->query('search');
+        $query = Course::latest();
+        
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+        
+        $courses = $query->paginate(10)->withQueryString();
         return view('admin.courses.index', compact('courses'));
     }
 
@@ -27,14 +37,23 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'description'  => 'required',
-            'price'        => 'required|numeric',
-            'status'       => 'required', // published / draft
-            'thumbnail'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'cover_image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'trial_video'  => 'nullable|mimes:mp4,mov,avi|max:51200',
+            'title' => 'required|string|max:255',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'status' => 'required', // published / draft
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'trial_video' => 'nullable',
+            'has_custom_prompt' => 'nullable',
+            'custom_prompt' => 'nullable|string',
         ]);
+
+        $data['has_custom_prompt'] = (bool) $request->input('has_custom_prompt');
+        if (!$data['has_custom_prompt']) {
+            $data['custom_prompt'] = null;
+        }
+
+
 
         // ✅ ADMIN creates course → teacher_id NULL
         $data['teacher_id'] = null;
@@ -78,14 +97,21 @@ class CourseController extends Controller
     public function update(Request $request, Course $course)
     {
         $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'description'  => 'required',
-            'price'        => 'required|numeric',
-            'status'       => 'required',
-            'thumbnail'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'cover_image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'trial_video'  => 'nullable|mimes:mp4,mov,avi|max:51200',
+            'title' => 'required|string|max:255',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'status' => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'trial_video' => 'nullable',
+            'has_custom_prompt' => 'nullable',
+            'custom_prompt' => 'nullable|string',
         ]);
+
+        $data['has_custom_prompt'] = (bool) $request->input('has_custom_prompt');
+        if (!$data['has_custom_prompt']) {
+            $data['custom_prompt'] = null;
+        }
 
         // 🔁 Update slug ONLY if title changed
         if ($course->title !== $request->title) {
@@ -117,7 +143,7 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        // ❗ Optional: delete files from storage
+    
         foreach (['thumbnail', 'cover_image', 'trial_video'] as $file) {
             if ($course->$file && Storage::disk('public')->exists($course->$file)) {
                 Storage::disk('public')->delete($course->$file);
@@ -130,4 +156,6 @@ class CourseController extends Controller
             ->route('admin.courses.index')
             ->with('success', 'Course deleted successfully');
     }
+    
+    
 }

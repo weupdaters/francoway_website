@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\TeacherAssignUser;
 use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
@@ -11,18 +12,23 @@ class TeacherController extends Controller
     {
         $teacher = Auth::user();
 
-        // 🔹 Teacher ke assigned users (students) with their courses
-        $users = $teacher->assignedUsers()
-            ->with('courses')
+        // All assignments for this teacher
+        $assignments = TeacherAssignUser::with(['user', 'course'])
+            ->where('teacher_id', $teacher->id)
             ->get();
 
-        // 🔹 Sab unique courses (jo assigned users ke paas hain)
-        $courses = $users
-            ->pluck('courses')
-            ->flatten()
+        // Get unique users
+        $users = $assignments
+            ->pluck('user')
             ->unique('id')
             ->values();
 
-        return view('teachers.dashboard', compact('users', 'courses'));
+        // Get unique courses
+        $courses = $assignments
+            ->pluck('course')
+            ->unique('id')
+            ->values();
+
+        return view('teachers.dashboard', compact('users', 'courses', 'assignments'));
     }
 }

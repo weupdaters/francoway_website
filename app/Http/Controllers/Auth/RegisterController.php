@@ -33,10 +33,10 @@ class RegisterController extends Controller
         $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
             'phone' => ['nullable', 'string', 'max:20'],
             'country_code' => ['nullable', 'string', 'max:5'],
-            'role' => ['nullable', 'string', 'in:cyber,user'],
+            'role' => ['nullable', 'string', 'in:teacher,user'],
         ]);
 
         if ($validator->fails()) {

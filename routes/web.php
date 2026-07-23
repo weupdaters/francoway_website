@@ -1,71 +1,130 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
-//home page
+
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+
+Route::get('/course/{id}', function ($id) {
+    return view('course_detail', ['courseId' => $id]);
+})->name('course.detail');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+// Home Page
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
- Route::get('/login', [LoginController::class, 'showLoginForm'])->name('auth.login');
-    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
-Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
+// About Page
+Route::get('/about', [HomeController::class, 'about'])->name('about');
 
- 
-    // Contact Page
+// Contact Page
 Route::get('/contact', [HomeController::class, 'contactUs'])->name('contactUs');
 Route::post('/contact', [HomeController::class, 'store'])->name('contact.store');
 
+// Courses
+Route::get('/courses', [HomeController::class, 'courses'])->name('courses.index');
+Route::get('/courses/{id}', [HomeController::class, 'show'])->name('courses.show');
 
-     Route::get('/courses', [HomeController::class, 'index'])->name('courses.index');
-    Route::get('/courses/{id}', [HomeController::class, 'show'])->name('courses.show');
+// Resources
+Route::get('/resources', [HomeController::class, 'resources'])->name('resources');
+Route::get('/resource/show/{id}', [HomeController::class, 'showResource'])->name('resource.show');
+Route::get('/resource/download/{id}', [HomeController::class, 'download'])->name('resource.download');
 
-   
-// Authentication Routes
+//about
+Route::get('/about', [HomeController::class, 'about'])->name('about.index');
+
+// Privacy Policy & Terms Conditions
+Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/terms-conditions', [HomeController::class, 'termsConditions'])->name('terms.conditions');
+
+
+/*
+|--------------------------------------------------------------------------
+| Guest Routes (Only for non-logged users)
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware('guest')->group(function () {
 
-
-   
+    // Login
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
     // Register
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('auth.register');
     Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
-    // Password Reset
-    Route::get('/password/request', [PasswordResetController::class, 'showRequestForm'])->name('password.request');
-    Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
-    Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
-    Route::post('/password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
+// forgot password page
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('auth.password.request');
+
+// send email
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// reset form
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// update password
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 });
 
 
-// Authenticated Routes
+/*
+|--------------------------------------------------------------------------
+| Authenticated Routes (Only logged users)
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware('auth')->group(function () {
 
-    // Dashboard (after login)
-    
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    
+    // Dashboard
+    Route::get('/dashboard', function () {
+        $user = auth()->user();
+        if ($user && $user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user && $user->role === 'teacher') {
+            return redirect()->route('teacher.dashboard');
+        } else {
+            return redirect()->route('users.dashboard');
+        }
+    })->name('dashboard');
+
+    // Logout (POST only - secure way)
+    Route::post('/logout', [LoginController::class, 'logout' ])->name('auth.logout');
     
 
+    // Chat Box
+    Route::get('/messages', [HomeController::class, 'messages'])->name('messages');
+    Route::post('/messages/send', [HomeController::class, 'send'])->name('messages.send');  
 
-    // Logout
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-   
-   
-    
 
-   //loading role-based routes
+// AI Practice Assistant (Requires Authentication)
+    Route::get('/ai-practice', [HomeController::class, 'aiPractice'])->name('ai.practice');
+    Route::post('/ai-practice/chat', [HomeController::class, 'chat'])->name('ai.chat');
+    Route::post('/ai-practice/submit-answer', [HomeController::class, 'submitAnswer'])->name('ai.submit_answer');
+
+    // Role Based Route Files
     require __DIR__ . '/admin.php';
     require __DIR__ . '/teacher.php';
     require __DIR__ . '/users.php';
-
-    //contact page
-   
 
 });

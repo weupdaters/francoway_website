@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\CourseUserSubscription;
+use App\Models\SubscriptionPlan;
 
 class LessonController extends Controller
 {
-    /**
-     * Course open → first lesson auto open
-     */
+    
     public function index(Course $course)
     {
         // 🔹 Sections with lessons
@@ -22,10 +22,7 @@ class LessonController extends Controller
             ->orderBy('id')
             ->get();
 
-        /**
-         * 🔥 FALLBACK
-         * Agar sections nahi hain, but lessons hain
-         */
+       
         if ($sections->isEmpty()) {
 
             $lessons = Lesson::where('course_id', $course->id)
@@ -63,43 +60,58 @@ class LessonController extends Controller
     /**
      * Sidebar lesson click
      */
-    public function show(Course $course, Lesson $lesson)
-    {
-        // 🔐 Security check
-        abort_if($lesson->course_id !== $course->id, 404);
+  public function show(Course $course, Lesson $lesson)
+{
+    // 🔐 Security check
+    abort_if($lesson->course_id !== $course->id, 404);
 
-        $sections = Section::where('course_id', $course->id)
-            ->with(['lessons' => function ($q) {
-                $q->orderBy('id');
-            }])
+    // 🔑 Check subscription
+    $subscription = CourseUserSubscription::where('user_id', auth()->id())
+        ->where('course_id', $course->id)
+        ->where('subscription_status', 'active')
+        ->first();
+
+    // 📦 Get course plans
+    $plans = SubscriptionPlan::where('course_id', $course->id)
+        ->where('status', 1)
+        ->get();
+
+    $sections = Section::where('course_id', $course->id)
+        ->with(['lessons' => function ($q) {
+            $q->orderBy('id');
+        }])
+        ->orderBy('id')
+        ->get();
+
+    // 🔥 SAME FALLBACK FOR DIRECT LESSON URL
+    if ($sections->isEmpty()) {
+
+        $lessons = Lesson::where('course_id', $course->id)
             ->orderBy('id')
             ->get();
 
-        // 🔥 SAME FALLBACK FOR DIRECT LESSON URL
-        if ($sections->isEmpty()) {
-
-            $lessons = Lesson::where('course_id', $course->id)
-                ->orderBy('id')
-                ->get();
-
-            return view('users.courses.show', [
-                'course'        => $course,
-                'sections'      => collect([
-                    (object)[
-                        'title'   => 'Lessons',
-                        'lessons' => $lessons
-                    ]
-                ]),
-                'currentLesson' => $lesson,
-            ]);
-        }
-
         return view('users.courses.show', [
             'course'        => $course,
-            'sections'      => $sections,
+            'sections'      => collect([
+                (object)[
+                    'title'   => 'Lessons',
+                    'lessons' => $lessons
+                ]
+            ]),
             'currentLesson' => $lesson,
+            'subscription'  => $subscription,
+            'plans'         => $plans,
         ]);
     }
+
+    return view('users.courses.show', [
+        'course'        => $course,
+        'sections'      => $sections,
+        'currentLesson' => $lesson,
+        'subscription'  => $subscription,
+        'plans'         => $plans,
+    ]);
+}
 
     /**
      * Mark lesson as completed (AJAX)

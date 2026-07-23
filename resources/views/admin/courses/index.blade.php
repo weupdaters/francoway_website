@@ -2,182 +2,195 @@
 
 @section('content')
 
-<div class="main-content-container overflow-hidden">
+<style>
+.course-card {
+    border-radius: 18px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
 
-    {{-- Header --}}
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
-        <h3 class="mb-0">Courses List</h3>
+.course-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.course-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#4e73df,#1cc88a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.progress {
+    height: 6px;
+    border-radius: 20px;
+    background-color: #f1f3f7;
+}
+
+.progress-bar {
+    border-radius: 20px;
+}
+</style>
+{{-- Breadcrumb --}}
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
+        <h3 class="mb-0">Course LIst</h3>
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb align-items-center mb-0 lh-1">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.dashboard') }}"
-                       class="d-flex align-items-center text-decoration-none">
+                    <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none">
                         <i class="ri-home-8-line fs-15 text-primary me-1"></i>
                         <span class="text-body fs-14 hover">Dashboard</span>
                     </a>
                 </li>
-                <li class="breadcrumb-item">
-                    <span>LMS</span>
-                </li>
-                <li class="breadcrumb-item active">
-                    <span class="text-secondary">Courses List</span>
-                </li>
+        
+                <li class="breadcrumb-item"><span>Courses</span></li>
+                
             </ol>
         </nav>
     </div>
 
-    {{-- Card --}}
-    <div class="card bg-white rounded-10 border border-white mb-4">
+<div class="main-content-container overflow-hidden">
 
-        {{-- Top Bar --}}
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-            <h3>Courses</h3>
+    {{-- Header --}}
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1 bg-white p-3 border border-white rounded-10">
+        <h3 class="mb-0 fw-semibold">Courses</h3>
 
-            <ul class="nav nav-tabs border-0 gap-2 tabs-default-active">
-
-                <li>
-                    <a href="{{ route('admin.courses.create') }}"
-                       class="btn btn-primary fs-16 text-white text-decoration-none">
-                        + Create Course
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request('type')==null ? 'active' : '' }}"
-                       href="{{ route('admin.courses.index') }}">
-                        All Courses
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request('type')=='paid' ? 'active' : '' }}"
-                       href="{{ route('admin.courses.index',['type'=>'paid']) }}">
-                        Paid
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request('type')=='free' ? 'active' : '' }}"
-                       href="{{ route('admin.courses.index',['type'=>'free']) }}">
-                        Free
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        {{-- Table --}}
-        <div class="default-table-area mx-minus-1 table-courses">
-            <div class="table-responsive">
-                <table class="table align-middle">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Course Name</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th class="text-end">Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    @forelse($courses as $course)
-                        <tr>
-                            <td>#{{ $course->id }}</td>
-
-                            <td>
-                                <a href="{{ route('admin.courses.show',$course->id) }}"
-                                   class="text-decoration-none fs-16 fw-medium text-secondary hover-text">
-                                    {{ $course->title }}
-                                </a>
-                            </td>
-
-                            <td>
-                                {{ $course->price > 0 ? '$'.$course->price : 'Free' }}
-                            </td>
-
-                            <td>
-                                @if($course->status)
-                                    <span class="text-success bg-success bg-opacity-10 default-badge">
-                                        Published
-                                    </span>
-                                @else
-                                    <span class="text-danger bg-danger bg-opacity-10 default-badge">
-                                        Draft
-                                    </span>
-                                @endif
-                            </td>
-
-                            {{-- Actions --}}
-                            <td>
-                                <div class="d-flex justify-content-end gap-3">
-
-                                    {{-- Add Lesson --}}
-                                    <a href="{{ route('admin.lessons.index', $course->id) }}"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-title="Add Lesson">
-                                        <i class="material-symbols-outlined fs-18 text-success">
-                                            playlist_add
-                                        </i>
-                                    </a>
-
-                                    {{-- View --}}
-                                    <a href="{{ route('admin.courses.show',$course->id) }}"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-title="View">
-                                        <i class="material-symbols-outlined fs-18 text-primary">
-                                            visibility
-                                        </i>
-                                    </a>
-
-                                    {{-- Edit --}}
-                                    <a href="{{ route('admin.courses.edit',$course->id) }}"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-title="Edit">
-                                        <i class="material-symbols-outlined fs-18 text-warning">
-                                            edit
-                                        </i>
-                                    </a>
-
-                                    {{-- Delete --}}
-                                    <form action="{{ route('admin.courses.destroy',$course->id) }}"
-                                          method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="bg-transparent border-0 p-0"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-title="Delete"
-                                                onclick="return confirm('Delete this course?')">
-                                            <i class="material-symbols-outlined fs-18 text-danger">
-                                                delete
-                                            </i>
-                                        </button>
-                                    </form>
-
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="10" class="text-center">
-                                No courses found
-                            </td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            {{-- Pagination --}}
-            <div class="d-flex justify-content-between align-items-center p-20">
-                <span class="fs-15">
-                    Showing {{ $courses->firstItem() }} to {{ $courses->lastItem() }}
-                    of {{ $courses->total() }} entries
-                </span>
-
-                {{ $courses->links() }}
-            </div>
-
-        </div>
+        <a href="{{ route('admin.courses.create') }}"
+           class="btn btn-primary px-4">
+            + Create Course
+        </a>
     </div>
+
+    <div class="row g-4">
+
+        @forelse($courses as $course)
+
+        @php
+            $progress = $course->status ? 90 : 40;
+        @endphp
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card border-0 shadow-sm course-card h-100 p-4">
+
+                {{-- Top Section --}}
+                <div class="d-flex align-items-center justify-content-between mb-4">
+
+                    <div class="d-flex align-items-center">
+                        <div class="course-avatar me-3">
+                            {{ strtoupper(substr($course->title,0,1)) }}
+                        </div>
+
+                        <div>
+                            <h5 class="mb-1 fw-semibold">
+                                {{ $course->title }}
+                            </h5>
+                            <small class="text-muted">
+                                Course ID: #{{ $course->id }}
+                            </small>
+                        </div>
+                    </div>
+
+                    @if($course->status)
+                        <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                            Published
+                        </span>
+                    @else
+                        <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
+                            Draft
+                        </span>
+                    @endif
+
+                </div>
+
+                {{-- Price & Prompt --}}
+                <div class="mb-4 d-flex justify-content-between align-items-center">
+                    <span class="fs-5 fw-bold text-dark">
+                        {{ $course->price > 0 ? '$'.$course->price : 'Free Course' }}
+                    </span>
+                    @if($course->has_custom_prompt)
+                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">
+                            Custom Prompt
+                        </span>
+                    @endif
+                </div>
+
+                {{-- Progress --}}
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <small class="text-muted">Completion</small>
+                        <small class="fw-semibold">{{ $progress }}%</small>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar bg-primary"
+                             style="width: {{ $progress }}%">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Button --}}
+                <div class="mt-auto">
+                    <a href="{{ route('admin.courses.show',$course->id) }}"
+                       class="btn btn-primary w-100 rounded-pill">
+                        View Details
+                    </a>
+                </div>
+
+                {{-- Icons --}}
+                <div class="d-flex justify-content-end gap-3 mt-4">
+
+                    <a href="{{ route('admin.lessons.index', $course->id) }}">
+                        <img src="https://img.icons8.com/color/48/add.png" style="width: 18px; height: 18px; object-fit: contain;" alt="add lessons">
+                    </a>
+
+                   
+
+                    <a href="{{ route('admin.courses.edit',$course->id) }}">
+                        <img src="https://img.icons8.com/color/48/edit.png" style="width: 18px; height: 18px; object-fit: contain;" alt="edit">
+                    </a>
+
+                    <form action="{{ route('admin.courses.destroy',$course->id) }}"
+                          method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="bg-transparent border-0 p-0"
+                                onclick="return confirm('Delete this course?')">
+                            <img src="https://img.icons8.com/color/48/trash.png" style="width: 18px; height: 18px; object-fit: contain;" alt="delete">
+                        </button>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        @empty
+            <div class="col-12 text-center">
+                No courses found
+            </div>
+        @endforelse
+
+    </div>
+
+    {{-- Pagination --}}
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        <span>
+            Showing {{ $courses->firstItem() ?? 0 }}
+            to {{ $courses->lastItem() ?? 0 }}
+            of {{ $courses->total() }} entries
+        </span>
+
+        {{ $courses->links() }}
+    </div>
+
 </div>
 
 @endsection

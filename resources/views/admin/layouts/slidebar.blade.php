@@ -7,119 +7,97 @@
         <img
             src="{{ isset($settings['logo'])
                     ? asset('storage/'.$settings['logo'])
-                    : asset('admin/images/logo.jpeg') }}"
+                    : asset('admin/images/logo .jpeg') }}"
             alt="logo-icon"
             class="logo-icon me-2 img-fluid"
-            style="width: 40px; height: 40px;"
+            style="height: 55px; width: auto; max-width: 160px; object-fit: contain;"
         >
 
         {{-- SITE NAME --}}
-        <span class="logo-text text-secondary fw-semibold">
-            {{ $settings['site_name'] ?? 'FrancoWay' }}
-        </span>
     </a>
 
-    {{-- CLOSE BUTTON --}}
-    <button
-        class="sidebar-burger-menu-close bg-transparent py-3 border-0 opacity-0 z-n1 position-absolute top-50 end-0 translate-middle-y"
-        id="sidebar-burger-menu-close">
-        <span class="border-1 d-block for-dark-burger"
-              style="border-bottom:1px solid #475569;width:25px;transform:rotate(45deg);"></span>
-        <span class="border-1 d-block for-dark-burger"
-              style="border-bottom:1px solid #475569;width:25px;transform:rotate(-45deg);"></span>
-    </button>
-
-    {{-- OPEN BUTTON --}}
-    <button class="sidebar-burger-menu bg-transparent p-0 border-0" id="sidebar-burger-menu">
-        <span class="border-1 d-block for-dark-burger"
-              style="border-bottom:1px solid #475569;width:25px;"></span>
-        <span class="border-1 d-block for-dark-burger"
-              style="border-bottom:1px solid #475569;width:25px;margin:6px 0;"></span>
-        <span class="border-1 d-block for-dark-burger"
-              style="border-bottom:1px solid #475569;width:25px;"></span>
-    </button>
 </div>
 
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu active" data-simplebar>
                 <ul class="menu-inner">
                    
-                    <li class="menu-item open">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle active">
-                            <span class="material-symbols-outlined menu-icon">dashboard</span>
-                            <span class="title">Dashboard</span>
-                            
-                        </a>
-                
-                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/dashboard.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
                             <li class="menu-item">
                                 <a href="{{ route('admin.users.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/group.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="users">
                                     User Management
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('admin.courses.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/book.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="courses">
                                     Course Management
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('admin.course-assign.create') }}" class="menu-link">
+                                <a href="{{ route('admin.course-assign.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/checked-user-male.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="assign">
                                     Course Assign 
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('admin.teacher.assign.index') }}" class="menu-link active">
-                                    Teacher Assign
+                                <a href="{{ route('admin.teacher.assign.index') }}" class="menu-link ">
+                                    <img src="https://img.icons8.com/color/48/classroom.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="teacher-assign">
+                                    Teacher User Assign
                                 </a>
                             </li>
-                            
-                        </ul>
-                    </li>
-
-                    
-
-                    <li class="menu-title small text-uppercase">
-                        <span class="menu-title-text">OTHERS</span>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="{{ route('admin.profile.index') }}" class="menu-link">
-                            <span class="material-symbols-outlined menu-icon">account_circle</span>
-                            <span class="title">My Profile</span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle active">
-                            <span class="material-symbols-outlined menu-icon">settings</span>
-                            <span class="title">Settings</span>
-                        </a>
-                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('admin.plans.index')}}" class="menu-link ">
+                                    <img src="https://img.icons8.com/color/48/price-tag.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="plans">
+                                    plans
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('admin.resources.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/downloads.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="resources">
+                                    Resources Management
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('admin.assignments.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/bill.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="transactions">
+                                   Transaction History
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('admin.profile.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/user-male-circle.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="profile">
+                                <span class="title">My Profile</span>
+                            </a>
+                            </li>                
+                
                             <li class="menu-item">
                                 <a href="{{ route('admin.settings.index') }}" class="menu-link">
+                                    <img src="https://img.icons8.com/color/48/settings.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="settings">
                                     Account Settings
                                 </a>
                             </li>
+                            
+                      
                             <li class="menu-item">
-                                <a href="notification-settings.html" class="menu-link">
-                                    Notification Settings
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="privacy-settings.html" class="menu-link">
-                                    Privacy Settings
-                                </a>
-                            </li>
-                        </ul>   
-
+    <form action="{{ route('auth.logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="menu-link border-0 bg-transparent w-100 text-start">
+            <img src="https://img.icons8.com/color/48/shutdown.png" class="menu-icon" style="width: 22px; height: 22px; object-fit: contain; margin-right: 10px;" alt="logout">
+            <span class="title">Logout</span>
+        </button>
+    </form>
+</li>
                     
 
-                    <li class="menu-item">
-                        <a href="logout.html" class="menu-link">
-                            <span class="material-symbols-outlined menu-icon">logout</span>
-                            <span class="title">Logout</span>
-                        </a>
-                    </li>
+    
+
                 </ul>
             </aside>
         </div>

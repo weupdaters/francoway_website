@@ -26,7 +26,7 @@
         <!-- LEFT PROFILE CARD -->
         <div class="col-md-4">
             <div class="card text-center mb-3">
-                <div class="card-body">
+                <div class="card-body bg-white">
 
                     <img id="previewImage"
                          src="{{ $user->image ? asset('storage/'.$user->image) : asset('admin/images/user.png') }}"
@@ -54,11 +54,11 @@
 
         <!-- RIGHT SECTION -->
         <div class="col-md-8">
-            <div class="card">
+            <div class="card bg-white">
                 <div class="card-header p-0">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#profileTab">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#profileTab w-50">
                                 Edit Profile
                             </a>
                         </li>

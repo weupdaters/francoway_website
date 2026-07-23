@@ -1,120 +1,246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--prettier-ignore-->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{-- ================= TITLE ================= --}}
-    <title>
-        {{ setting('meta_title')
-            ?? setting('site_name','FrancoWay') }}
-    </title>
+    <title>@yield('title', 'Francoway | Success in French. Success in Canada.')</title>
 
-    {{-- ================= META DESCRIPTION ================= --}}
-    <meta name="description"
-          content="{{ setting('meta_description','') }}">
+    <meta name="description" content="@yield('description', 'Learn French from Beginners to Advanced Level')">
 
-    {{-- ================= FAVICON ================= --}}
-    <link rel="icon" type="image/png"
-          href="{{ setting('favicon')
-                ? asset('storage/' . setting('favicon')) . '?v=' . time()
-                : asset('frontend/imgs/template/favicon.svg') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
 
-    {{-- ================= CSS FILES ================= --}}
-    <link rel="stylesheet" href="{{ asset('frontend/css/vendors/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/vendors/swiper-bundle.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/vendors/aos.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/vendors/carouselTicker.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/vendors/odometer.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/vendors/magnific-popup.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/fonts/bootstrap-icons/bootstrap-icons.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/fonts/boxicons/boxicons.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/fonts/remixicon/remixicon.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/fonts/fontawesome/fontawesome.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/fonts/fontawesome/solid.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/fonts/fontawesome/regular.min.css') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" />
+    <!-- Tailwind CSS (via Vite or Fallback CDN) -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                            heading: ['Cactus Classical Serif', 'serif'],
+                            script: ['Caveat', 'cursive'],
+                        },
+                        colors: {
+                            brandBlue: '#0B1E43',
+                            brandRed: '#E31B23',
+                            brandGold: '#F8B803',
+                        }
+                    }
+                }
+            }
+        </script>
+    @endif
 
-    {{-- ================= MAIN CSS ================= --}}
-    <link rel="stylesheet" href="{{ asset('frontend/css/main.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/elearning.css') }}" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Cactus Classical Serif', serif;
+        }
+        .font-script {
+            font-family: 'Caveat', cursive;
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+
+        /* PREMIUM SCROLL REVEAL ANIMATIONS */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
+        }
+        .reveal-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-bottom {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000), transform 0.85s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
+        }
+        .reveal-bottom.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* TRANSITION DELAYS FOR STAGGERED GRIDS */
+        .reveal-delay-100 { transition-delay: 100ms; }
+        .reveal-delay-200 { transition-delay: 200ms; }
+        .reveal-delay-300 { transition-delay: 300ms; }
+        .reveal-delay-400 { transition-delay: 400ms; }
+        .reveal-delay-500 { transition-delay: 500ms; }
+
+        /* BUTTON MICRO-PULSE GLOW EFFECT (HOVER) */
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 27, 37, 0.2); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(227, 27, 37, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 27, 37, 0); }
+        }
+        .btn-pulse-red:hover {
+            animation: subtle-pulse 1.6s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+        @keyframes subtle-pulse-blue {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(11, 30, 67, 0.2); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(11, 30, 67, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(11, 30, 67, 0); }
+        }
+        .btn-pulse-blue:hover {
+            animation: subtle-pulse-blue 1.6s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+        /* CUSTOM HOVER SLIDE-LINE */
+        .hover-slide-line {
+            position: relative;
+        }
+        .hover-slide-line::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #E31B23;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        .hover-slide-line:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* ================= CONTINUOUS LOOPING ANIMATIONS ================= */
+        @keyframes float-slow {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float-slow {
+            animation: float-slow 7s infinite ease-in-out;
+        }
+
+        @keyframes float-reverse {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float-reverse {
+            animation: float-reverse 8s infinite ease-in-out;
+        }
+
+        @keyframes subtle-pulse-infinite {
+            0% { box-shadow: 0 0 0 0 rgba(227, 27, 37, 0.25); }
+            70% { box-shadow: 0 0 0 12px rgba(227, 27, 37, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(227, 27, 37, 0); }
+        }
+        .btn-infinite-pulse-red {
+            animation: subtle-pulse-infinite 2.2s infinite ease-in-out;
+        }
+
+        @keyframes subtle-pulse-infinite-blue {
+            0% { box-shadow: 0 0 0 0 rgba(11, 30, 67, 0.25); }
+            70% { box-shadow: 0 0 0 12px rgba(11, 30, 67, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(11, 30, 67, 0); }
+        }
+        .btn-infinite-pulse-blue {
+            animation: subtle-pulse-infinite-blue 2.2s infinite ease-in-out;
+        }
+
+        @keyframes blur-orbit {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.15); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blur-orbit {
+            animation: blur-orbit 18s infinite ease-in-out;
+        }
+
+        @keyframes blur-orbit-reverse {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-30px, 50px) scale(0.85); }
+            66% { transform: translate(20px, -20px) scale(1.1); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blur-orbit-reverse {
+            animation: blur-orbit-reverse 20s infinite ease-in-out;
+        }
+    </style>
+    @stack('css')
 </head>
+<body class="bg-[#FDFDFC] text-[#1B1B18] antialiased overflow-x-hidden scroll-smooth">
 
-
-<body class="elearning">
-    <!--prettier-ignore-->
-    <!--Preloader-->
-    <div id="preloader">
-        <div id="loader" class="loader">
-            <div class="loader-container">
-                <div class="loader-icon">
-                   <img
-                        src="{{ setting('favicon')
-                                ? asset('storage/' . setting('favicon')) . '?v=' . time()
-                                : asset('frontend/imgs/template/favicon.svg') }}"
-                        alt="Site Icon"
-                        width="40"
-                        height="40"
-                        class="rotateme site-favicon"
-                    />
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Preloader-end -->
+    <!-- ================= HEADER ================= -->
     @include('layouts.header')
 
-    <!--custom-cursor-->
-    <div class="follower"></div>
-    <div class="custom-cursor-cover">
-        <span class="dot"></span>
-    </div>
-    <!--custom-cursor-end -->
-    <!-- Navbar landing page -->
-   
+    <!-- ================= CONTENT ================= -->
+    <main>
+        @yield('content')
+    </main>
 
-   
-    <!--prettier-ignore-->
- @yield('content')
-    <!-- Scroll top -->
-
-
+    <!-- ================= FOOTER ================= -->
     @include('layouts.footer')
-    <div class="btn-scroll-top">
-        <svg class="progress-square svg-content" width="100%" height="100%" viewBox="0 0 40 40">
-            <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" />
-        </svg>
-    </div>
 
-    <!-- Libs JS -->
-    <script src="{{ asset('frontend/js/vendors/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/aos.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/wow.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/headhesive.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/smart-stick-nav.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/jquery.carouselTicker.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/jquery.odometer.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/jquery.appear.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/jquery.magnific-popup.min.js') }}"></script>  
-    <script src="{{ asset('frontend/js/vendors/gsap.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/ScrollToPlugin.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/ScrollTrigger.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/aat.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/Splitetext.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/vendors/bouncing-blob.js') }}"></script>
-    <!-- Theme JS -->
-    <script src="{{ asset('frontend/js/gsap-custom.js') }}"></script>  
-    <script src="{{ asset('frontend/js/imageRevealHover.js') }}"></script>
-    <script src="{{ asset('frontend/js/main.js') }}"></script> 
-    
+    <!-- Global Scroll Reveal Intersection Observer -->
+    <script>
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.08
+        };
 
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.reveal-item, .reveal-left, .reveal-right, .reveal-bottom').forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+
+    @stack('js')
 </body>
-
 </html>

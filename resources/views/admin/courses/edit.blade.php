@@ -17,7 +17,10 @@
                     </a>
                 </li>
         
-                <li class="breadcrumb-item"><span>Courses</span></li>
+                <li class="breadcrumb-item">
+                <a href="{{ route('admin.courses.index') }}" class="d-flex align-items-center text-decoration-none">
+                    <span class="text-body fs-14 hover">Courses</span>
+                </a>
                 <li class="breadcrumb-item active">
                     <span class="text-secondary">Edit Course</span>
                 </li>
@@ -95,6 +98,20 @@
                         @endif
                     </div>
 
+                    {{-- Custom AI Prompt --}}
+                    <div class="mb-20">
+                        <label class="label fs-16 mb-2">Use Custom  Prompt?</label>
+                        <select class="form-select mb-20" name="has_custom_prompt" id="has_custom_prompt_select">
+                            <option value="0" {{ old('has_custom_prompt', $course->has_custom_prompt) ? '' : 'selected' }}>No</option>
+                            <option value="1" {{ old('has_custom_prompt', $course->has_custom_prompt) ? 'selected' : '' }}>Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-20" id="custom_prompt_container" style="display: none;">
+                        <label class="label fs-16 mb-2">Custom  Prompt</label>
+                        <textarea name="custom_prompt" class="form-control" style="height:120px;" placeholder="Enter the custom AI prompt for this course...">{{ old('custom_prompt', $course->custom_prompt) }}</textarea>
+                    </div>
+
                 </div>
             </div>
 
@@ -145,3 +162,20 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+  $(document).ready(function() {
+    function toggleCustomPrompt() {
+      if ($('#has_custom_prompt_select').val() == '1') {
+        $('#custom_prompt_container').slideDown(200);
+      } else {
+        $('#custom_prompt_container').slideUp(200);
+      }
+    }
+    
+    $('#has_custom_prompt_select').on('change', toggleCustomPrompt);
+    toggleCustomPrompt(); // run on load
+  });
+</script>
+@endpush

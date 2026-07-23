@@ -3,8 +3,11 @@
 @section('title', 'Website Settings')
 
 @section('content')
+{{--breadcrumb--}}
+<div class="card mb-20 bg-white">
 
-<div class="page-header mb-20">
+
+<div class="page-header mb-20 p-2">
   <h3 class="page-title">Website Settings</h3>
 </div>
 
@@ -23,7 +26,7 @@
   <div class="col-lg-8">
 
     {{-- GENERAL --}}
-    <div class="card mb-20">
+    <div class="card mb-20 bg-white m-2">
       <div class="card-header">
         <h5 class="mb-0">General</h5>
       </div>
@@ -73,7 +76,7 @@
     </div>
 
     {{-- SEO --}}
-    <div class="card mb-20">
+    <div class="card mb-20 bg-white m-2">
       <div class="card-header">
         <h5 class="mb-0">SEO & Meta</h5>
       </div>
@@ -94,7 +97,7 @@
     </div>
 
     {{-- OTHER --}}
-    <div class="card mb-20">
+    <div class="card mb-20 bg-white m-2">
       <div class="card-header">
         <h5 class="mb-0">Other</h5>
       </div>
@@ -131,7 +134,7 @@
   {{-- RIGHT --}}
   <div class="col-lg-4">
 
-    <div class="card mb-20 text-center">
+    <div class="card mb-20 text-center bg-white m-2">
       <div class="card-header">Logo</div>
       <div class="card-body">
         <img id="logoPreview"
@@ -141,19 +144,19 @@
       </div>
     </div>
 
-    <div class="card mb-20 text-center">
-      <div class="card-header">Favicon</div>
-      <div class="card-body">
+    <div class="card mb-20 text-center bg-white m-2">
+      <div class="card-header bg-white ">Favicon</div>
+      <div class="card-body bg-white">
         <img id="faviconPreview"
           src="{{ isset($settings['favicon']) ? asset('storage/'.$settings['favicon']) : asset('frontend/imgs/template/favicon.ico') }}"
           style="max-height:60px" class="mb-2">
-        <input type="file" name="favicon" onchange="previewImage(event,'faviconPreview')">
+        <input type="file" name="favicon" onchange="previewImage(event,'faviconPreview') ">
       </div>
     </div>
 
-    <div class="card mb-20">
-      <div class="card-header">Social Links</div>
-      <div class="card-body">
+    <div class="card mb-20 bg-white m-2">
+      <div class="card-header bg-white m-2">Social Links</div>
+      <div class="card-body bg-white">
         <input type="url" name="facebook" class="form-control mb-2" placeholder="Facebook"
           value="{{ $settings['facebook'] ?? '' }}">
         <input type="url" name="twitter" class="form-control mb-2" placeholder="Twitter"

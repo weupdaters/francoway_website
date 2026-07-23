@@ -17,9 +17,7 @@
                         <span class="text-body fs-14 hover">Dashboard</span>
                     </a>
                 </li>
-                <li class="breadcrumb-item">
-                    <span>Project Management</span>
-                </li>
+                
                 <li class="breadcrumb-item active">
                     <span class="text-secondary">Users List</span>
                 </li>
@@ -31,23 +29,12 @@
     <div class="card bg-white rounded-10 border border-white mb-4">
 
         {{-- Search + Add --}}
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
+        <div class=" text-end flex-wrap gap-3 p-20">
 
-            <form action="{{ route('admin.users.index') }}"
-                  method="GET"
-                  class="table-src-form position-relative m-0">
-                <input type="text"
-                       name="search"
-                       value="{{ request('search') }}"
-                       class="form-control w-350"
-                       placeholder="Search user...">
-                <button class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
-                    <span class="material-symbols-outlined">search</span>
-                </button>
-            </form>
+           
 
             <a href="{{ route('admin.users.create') }}"
-               class="text-primary fs-16 text-decoration-none">
+               class="text-white btn btn-primary fs-16 text-decoration-none">
                 + Add New User
             </a>
         </div>
@@ -117,27 +104,23 @@
                                     <a href="{{ route('admin.users.show', $user->id) }}"
                                         class="bg-transparent p-0 border-0 hover-text-success"
                                         title="View users">
-                                            <i class="material-symbols-outlined fs-16 fw-normal text-primary">
-                                                visibility
-                                            </i>
+                                            <img src="https://img.icons8.com/color/48/visible.png" style="width: 18px; height: 18px; object-fit: contain;" alt="view">
                                         </a>
 
 
 
                                     {{-- Edit --}}
                                     <a href="{{ route('admin.users.edit', $user->id) }}"
-                                    class="bg-transparent p-0 border-0 hover-text-success"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    data-bs-title="Edit">
-                                        <i class="material-symbols-outlined fs-16 fw-normal text-primary">
-                                            edit
-                                        </i>
+                                     class="bg-transparent p-0 border-0 hover-text-success"
+                                     data-bs-toggle="tooltip"
+                                     data-bs-placement="top"
+                                     data-bs-title="Edit">
+                                        <img src="https://img.icons8.com/color/48/edit.png" style="width: 18px; height: 18px; object-fit: contain;" alt="edit">
                                     </a>
 
                                     {{-- Delete --}}
                                     <form action="{{ route('admin.users.destroy', $user->id) }}"
-                                        method="POST">
+                                         method="POST">
                                         @csrf
                                         @method('DELETE')
 
@@ -147,14 +130,13 @@
                                                 data-bs-placement="top"
                                                 data-bs-title="Delete"
                                                 onclick="return confirm('Delete this user?')">
-                                            <i class="material-symbols-outlined fs-16 fw-normal text-body">
-                                                delete
-                                            </i>
+                                            <img src="https://img.icons8.com/color/48/trash.png" style="width: 18px; height: 18px; object-fit: contain;" alt="delete">
                                         </button>
                                     </form>
 
                                 </div>
                             </td>
+
 
                         </tr>
                     @empty

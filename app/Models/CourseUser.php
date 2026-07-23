@@ -12,6 +12,19 @@ class CourseUser extends Pivot
         'course_id',
         'user_id',
         'status',
-        
     ];
+
+    public $timestamps = true;
+
+    // 🔹 Course Relation
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    // 🔹 User Relation
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

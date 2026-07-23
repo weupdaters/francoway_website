@@ -4,19 +4,30 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\TeacherAssignUser;
 
 class CourseController extends Controller
 {
+
+   
+     public function index()
+    {
+        $courses = Course::latest()->paginate(10);
+
+        return view('teachers.courses.index', compact('courses'));
+    }
     /**
      * Teacher → sirf apne courses dekhe (OLD – KEEP)
      * /teacher/courses
      */
-    public function index()
+    public function getUserCourses($user_id)
     {
-        $courses = Course::where('teacher_id', auth()->id())
-            ->paginate(10);
+        $alluserCourses = TeacherAssignUser::with('course')
+        ->where('teacher_id', auth()->id())
+        ->where('user_id', $user_id)
+        ->get();
 
-        return view('teachers.course_lessons.index', compact('courses'));
+        return view('teachers.course_lessons.index', compact('alluserCourses'));
     }
 
     /**
@@ -28,7 +39,9 @@ class CourseController extends Controller
      */
     public function courseLessonPage()
     {
-        $courses = Course::where('teacher_id', auth()->id())->get();
+        $courses = TeacherAssignUser::with('course')
+            ->where('teacher_id', auth()->id())
+            ->get();
 
         return view('teachers.lessons.index', compact('courses'));
     }
@@ -40,10 +53,10 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         // 🔐 ownership check
-        abort_unless(
-            auth()->check() && auth()->id() === $course->teacher_id,
-            403
-        );
+        $isAssigned = TeacherAssignUser::where('teacher_id', auth()->id())
+            ->where('course_id', $course->id)
+            ->exists();
+        abort_unless($isAssigned, 403);
 
         return view('teachers.courses.show', compact('course'));
     }
