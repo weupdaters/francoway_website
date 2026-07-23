@@ -12,7 +12,11 @@ class CourseController extends Controller
    
      public function index()
     {
-        $courses = Course::latest()->paginate(10);
+        // BUG-021 fix: only show courses assigned to this teacher
+        $assignedCourseIds = TeacherAssignUser::where('teacher_id', auth()->id())
+            ->pluck('course_id');
+
+        $courses = Course::whereIn('id', $assignedCourseIds)->latest()->paginate(10);
 
         return view('teachers.courses.index', compact('courses'));
     }

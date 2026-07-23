@@ -58,6 +58,9 @@ $expiry = $start->copy()->addDays($plan->duration_value);
 break;
 
 case 'weeks':
+$expiry = $start->copy()->addWeeks($plan->duration_value);
+break;
+
 case 'months':
 $expiry = $start->copy()->addMonths($plan->duration_value);
 break;

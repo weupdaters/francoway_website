@@ -30,6 +30,7 @@ class Course extends Model
         'trial_video',
         'has_custom_prompt',
         'custom_prompt',
+        'teacher_id',
     ];
 
     /*

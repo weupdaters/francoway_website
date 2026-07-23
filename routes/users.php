@@ -9,7 +9,7 @@ use App\Http\Controllers\Users\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('users')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'role:user'])
     ->name('users.')
     ->group(function () {
 

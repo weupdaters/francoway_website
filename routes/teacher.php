@@ -42,8 +42,8 @@ Route::middleware(['auth', 'role:teacher'])
         */
         Route::get('/ajax/course/{course}/lessons', [LessonController::class, 'ajaxLessons'])->name('ajax.course.lessons');
 
-        // DELETE LESSON (AJAX)
-        Route::get('/ajax/lesson/{lesson}', [LessonController::class, 'destroy'])
+        // DELETE LESSON (AJAX - POST with method spoofing for CSRF safety)
+        Route::delete('/ajax/lesson/{lesson}', [LessonController::class, 'destroy'])
     ->name('ajax.lesson.destroy');
 
 

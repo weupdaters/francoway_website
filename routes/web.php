@@ -15,21 +15,7 @@ use App\Http\Controllers\Admin\DashboardController;
 | Public Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('index');
-})->name('index');
 
-Route::get('/course/{id}', function ($id) {
-    return view('course_detail', ['courseId' => $id]);
-})->name('course.detail');
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -40,21 +26,19 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contactUs'])->name('contactUs');
 Route::post('/contact', [HomeController::class, 'store'])->name('contact.store');
 
-// Courses
+// Courses (public listing & detail)
 Route::get('/courses', [HomeController::class, 'courses'])->name('courses.index');
 Route::get('/courses/{id}', [HomeController::class, 'show'])->name('courses.show');
 
-// Resources
+// Resources (public)
 Route::get('/resources', [HomeController::class, 'resources'])->name('resources');
 Route::get('/resource/show/{id}', [HomeController::class, 'showResource'])->name('resource.show');
 Route::get('/resource/download/{id}', [HomeController::class, 'download'])->name('resource.download');
 
-//about
-Route::get('/about', [HomeController::class, 'about'])->name('about.index');
-
 // Privacy Policy & Terms Conditions
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy.policy');
 Route::get('/terms-conditions', [HomeController::class, 'termsConditions'])->name('terms.conditions');
+
 
 
 /*

@@ -24,31 +24,19 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->validate([
-            'email' => ['required','email'],
+            'email'    => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        $dbUser = \App\Models\User::where('email', $request->input('email'))->first();
-        \Log::info('Login Attempt Info', [
-            'input_email' => $request->input('email'),
-            'input_password_length' => strlen($request->input('password')),
-            'input_password_hex' => bin2hex($request->input('password')),
-            'db_user_found' => !is_null($dbUser),
-            'db_role' => $dbUser ? $dbUser->role : null,
-            'db_status' => $dbUser ? $dbUser->status : null,
-            'password_matches' => $dbUser ? password_verify($request->input('password'), $dbUser->password) : false,
-        ]);
-
-        $key = Str::lower($request->input('email')).'|'.$request->ip();
+        $key = Str::lower($request->input('email')) . '|' . $request->ip();
 
         if (RateLimiter::tooManyAttempts($key, 5)) {
             return back()->withErrors([
-                'email' => 'Too many login attempts. Please try again later.'
+                'email' => 'Too many login attempts. Please try again in a minute.',
             ]);
         }
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
-
             RateLimiter::clear($key);
             $request->session()->regenerate();
 
@@ -62,15 +50,14 @@ class LoginController extends Controller
                 return redirect()->route('teacher.dashboard');
             }
 
-        
             return redirect()->route('users.dashboard');
         }
 
         RateLimiter::hit($key, 60);
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.'
-        ]);
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('email'));
     }
 
     public function logout(Request $request)
@@ -81,3 +68,4 @@ class LoginController extends Controller
         return redirect()->route('index');
     }
 }
+

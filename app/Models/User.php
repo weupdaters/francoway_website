@@ -21,10 +21,11 @@ class User extends Authenticatable
         'email',
         'phone',
         'bio',
+        'description',
         'image',
-        'role',
         'status',
         'password',
+        // NOTE: 'role' intentionally excluded — set programmatically only, never from request input
     ];
 
     /**

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class ForgotPasswordController extends Controller
 {
@@ -23,13 +25,26 @@ class ForgotPasswordController extends Controller
             'email' => 'required|email'
         ]);
 
+        // Rate limiting: max 3 OTP requests per email per 5 minutes (BUG-012)
+        $rateLimitKey = 'otp-request:' . Str::lower($request->email) . '|' . $request->ip();
+
+        if (RateLimiter::tooManyAttempts($rateLimitKey, 3)) {
+            $seconds = RateLimiter::availableIn($rateLimitKey);
+            return back()->withErrors([
+                'email' => "Too many password reset attempts. Please wait {$seconds} seconds before trying again.",
+            ]);
+        }
+
+        RateLimiter::hit($rateLimitKey, 300); // 5 minute window
+
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
+            // Don't reveal whether email exists (security best practice)
             return back()->with('status', 'If an account exists with that email address, a 6-digit OTP code has been sent.');
         }
 
-        // Delete any previous tokens for this email to ensure fresh state
+        // Delete any previous tokens for this email
         DB::table('password_reset_tokens')->where('email', $user->email)->delete();
 
         // Generate a new 6-digit numeric OTP code
@@ -37,21 +52,20 @@ class ForgotPasswordController extends Controller
 
         // Save fresh OTP to password_reset_tokens table
         DB::table('password_reset_tokens')->insert([
-            'email' => $user->email,
-            'token' => Hash::make($otp),
+            'email'      => $user->email,
+            'token'      => Hash::make($otp),
             'created_at' => now(),
         ]);
 
-        // Send fresh OTP via Email (including OTP in Subject so Gmail doesn't group threads)
+        // Send OTP via Email
         try {
             Mail::send('emails.password-otp', [
-                'otp' => $otp,
+                'otp'  => $otp,
                 'name' => $user->name,
             ], function ($message) use ($user, $otp) {
                 $message->to($user->email)
                         ->subject("Your Password Reset OTP Code: {$otp} - Francoway Academy");
             });
-            Log::info("Sent new OTP {$otp} to {$user->email}");
         } catch (\Throwable $e) {
             Log::error('Failed to send OTP email: ' . $e->getMessage());
         }

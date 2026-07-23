@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
-use App\Models\LessonComment;
+use App\Models\Comment;
 
 class LessonCommentController extends Controller
 {
-    public function destroy(LessonComment $comment)
+    public function destroy(Comment $comment)
     {
         $comment->delete();
 
