@@ -405,8 +405,7 @@
 
             {{-- Description --}}
             <div class="mb-3">
-              <label class="text-muted fs-11 fw-bold tracking-wider mb-1 uppercase">DESCRIPTION</label>
-              <h5 class="fw-bold mb-3 text-dark">RICH TEXT EDITOR</h5>
+              <label class="form-label text-primary-indigo fw-bold fs-11 tracking-wider mb-2">DESCRIPTION</label>
               <div class="editor-container">
                 <textarea name="description" id="description" class="form-control">{{ $lesson->description }}</textarea>
                 <div class="d-flex justify-content-end mt-2">
@@ -555,12 +554,12 @@
 
       // lesson type toggle
       function toggleTypeInputs(selected) {
-        $('.lesson-input').addClass('d-none');
-        if (selected === 'video') $('#videoInput').removeClass('d-none');
-        if (selected === 'pdf') $('#pdfInput').removeClass('d-none');
-        if (selected === 'image') $('#imageInput').removeClass('d-none');
-        if (selected === 'audio') $('#audioInput').removeClass('d-none');
-        if (selected === 'summary') $('#summaryInput').removeClass('d-none');
+        $('.lesson-input').addClass('d-none').hide();
+        if (selected === 'video') $('#videoInput').removeClass('d-none').hide().slideDown(200);
+        if (selected === 'pdf') $('#pdfInput').removeClass('d-none').hide().slideDown(200);
+        if (selected === 'image') $('#imageInput').removeClass('d-none').hide().slideDown(200);
+        if (selected === 'audio') $('#audioInput').removeClass('d-none').hide().slideDown(200);
+        if (selected === 'summary') $('#summaryInput').removeClass('d-none').hide().slideDown(200);
       }
 
       // Initial state load
@@ -568,16 +567,7 @@
 
       // Toggle change event
       $('#lessonType').on('change', function() {
-        const selected = this.value;
-        $('.lesson-input').slideUp(200);
-        
-        setTimeout(() => {
-          if (selected === 'video') $('#videoInput').slideDown(200);
-          if (selected === 'pdf') $('#pdfInput').slideDown(200);
-          if (selected === 'image') $('#imageInput').slideDown(200);
-          if (selected === 'audio') $('#audioInput').slideDown(200);
-          if (selected === 'summary') $('#summaryInput').slideDown(200);
-        }, 200);
+        toggleTypeInputs(this.value);
       });
 
       // ---- IMAGE PREVIEW (live) ----
