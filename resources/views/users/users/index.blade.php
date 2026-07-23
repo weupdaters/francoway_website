@@ -80,7 +80,7 @@
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $user->image
                                             ? asset('uploads/users/'.$user->image)
-                                            : asset('admin/assets/images/user1.jpg') }}"
+                                            : asset('admin/images/user1.jpg') }}"
                                          class="rounded-circle"
                                          style="width:35px;height:35px;">
                                     <h4 class="fw-medium fs-16 mb-0 ms-2">

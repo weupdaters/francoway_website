@@ -29,7 +29,7 @@
                 <div class="card-body bg-white">
 
                     <img id="previewImage"
-                         src="{{ $user->image ? asset('storage/'.$user->image) : asset('admin/images/user.png') }}"
+                         src="{{ $user->image ? asset('storage/'.$user->image) : asset('admin/images/user1.jpg') }}"
                          class="rounded-circle mb-3"
                          width="120"
                          height="120">

@@ -20,7 +20,7 @@
                   {{-- User Image --}}
                   <div class="flex-shrink-0">
                     <img
-                      src="{{ $user->image ? asset('storage/' . $user->image) : asset('admin/assets/images/user1.jpg') }}"
+                      src="{{ $user->image ? asset('storage/' . $user->image) : asset('admin/images/user1.jpg') }}"
                       class="rounded-circle bg-white" width="55" height="55" alt="User">
                   </div>
 

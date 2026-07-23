@@ -42,7 +42,7 @@
                                          <div class="flex-shrink-0 position-relative">
                                              <img class="rounded-circle admin-img-width-for-mobile"
                                                  style="width: 40px; height: 40px;"
-                                                 src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/assets/images/user1.jpeg') }}"
+                                                 src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/images/user1.jpg') }}"
                                                  alt="{{ auth()->user()->name }}">
 
                                              <span

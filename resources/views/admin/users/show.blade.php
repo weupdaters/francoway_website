@@ -39,7 +39,7 @@
                 <img
                     src="{{ $user->image
                         ? asset('storage/'.$user->image)
-                        : asset('admin/assets/images/user1.jpg') }}"
+                        : asset('admin/images/user1.jpg') }}"
                     class="rounded-circle mb-3"
                     width="120"
                     height="120"

@@ -67,7 +67,7 @@
                                 <div class="d-flex align-items-center">.
                                    <img src="{{ $user->image
                                         ? asset('storage/'.$user->image)
-                                        : asset('admin/assets/images/user1.jpg') }}"
+                                        : asset('admin/images/user1.jpg') }}"
                                         class="rounded-circle"
                                         style="width:35px;height:35px;">
 

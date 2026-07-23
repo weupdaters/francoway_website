@@ -7,7 +7,7 @@
         <img
             src="{{ isset($settings['logo'])
                     ? asset('storage/'.$settings['logo'])
-                    : asset('admin/images/logo .jpeg') }}"
+                    : asset('admin/images/logo.png') }}"
             alt="logo-icon"
             class="logo-icon me-2 img-fluid"
             style="height: 55px; width: auto; max-width: 160px; object-fit: contain;"

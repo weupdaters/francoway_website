@@ -41,7 +41,7 @@
                                                         style="width: 40px; height: 40px;"
                                                         src="{{ auth()->user()->image
                                                             ? asset('storage/' . auth()->user()->image)
-                                                            : asset('admin/assets/images/user1.jpg') }}"
+                                                            : asset('admin/images/user1.jpg') }}"
                                                         alt="{{ auth()->user()->name }}"
                                                     >
 

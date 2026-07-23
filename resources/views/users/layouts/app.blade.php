@@ -329,18 +329,18 @@
             </div>
             <div class="user-profile-dropdown dropdown">
                 <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown">
-                    <img class="user-avatar" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/assets/images/user1.jpg') }}" alt="avatar">
+                    <img class="user-avatar" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/images/user1.jpg') }}" alt="avatar">
                     <span class="user-name-text d-none d-md-inline-block">{{ auth()->user()->name }}</span>
                     <i class="bi bi-chevron-down text-muted small"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
-                    <li><a class="dropdown-item py-2 text-muted" href="#" onclick="alert('Profile section is loading. You can edit your settings here soon.'); event.preventDefault();"><img src="https://img.icons8.com/color/48/user-male-circle.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 8px;" alt="profile"> My Profile</a></li>
+                    <li><a class="dropdown-item py-2 text-muted" href="{{ route('users.profile.index') }}"><i class="bi bi-person-circle me-2 text-primary"></i> My Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('auth.logout') }}">
                             @csrf
                             <button type="submit" class="dropdown-item py-2 text-danger border-0 bg-transparent w-100 text-start">
-                                <img src="https://img.icons8.com/color/48/shutdown.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 8px;" alt="logout"> Logout
+                                <i class="bi bi-power me-2"></i> Logout
                             </button>
                         </form>
                     </li>
@@ -356,37 +356,37 @@
         <div class="left-sidebar-wrapper">
             <ul class="sidebar-menu-list">
                 <li class="sidebar-menu-item {{ request()->routeIs('users.dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('users.dashboard') }}" class="sidebar-menu-link">
-                        <img src="https://img.icons8.com/color/48/dashboard.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="dashboard">
-                        <span>Dashboard</span>
-                    </a>
+                        <a href="{{ route('users.dashboard') }}" class="sidebar-menu-link">
+                            <i class="bi bi-grid-1x2-fill me-2" style="color:#E53935;"></i>
+                            <span>Dashboard</span>
+                        </a>
                 </li>
                 <li class="sidebar-menu-item {{ request()->routeIs('users.courses.*') || request()->routeIs('users.lessons.*') ? 'active' : '' }}">
-                    <a href="{{ route('users.courses.index') }}" class="sidebar-menu-link">
-                        <img src="https://img.icons8.com/color/48/book.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="courses">
-                        <span>My Courses</span>
-                    </a>
+                        <a href="{{ route('users.courses.index') }}" class="sidebar-menu-link">
+                            <i class="bi bi-journal-richtext me-2" style="color:#E53935;"></i>
+                            <span>My Courses</span>
+                        </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="#" onclick="alert('Certificates section is loading.'); event.preventDefault();" class="sidebar-menu-link">
-                        <img src="https://img.icons8.com/color/48/certificate.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="certificates">
-                        <span>Certificates</span>
-                    </a>
+                    <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
+                            <i class="bi bi-award-fill me-2" style="color:#E53935;"></i>
+                            <span>Certificates</span>
+                        </a>
                 </li>
                 <li class="sidebar-menu-item {{ request()->routeIs('users.profile.*') ? 'active' : '' }}">
-                    <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
-                        <img src="https://img.icons8.com/color/48/user-male-circle.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="profile">
-                        <span>Profile</span>
-                    </a>
+                        <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
+                            <i class="bi bi-person-fill me-2" style="color:#E53935;"></i>
+                            <span>Profile</span>
+                        </a>
                 </li>
 
                 <li class="sidebar-menu-item border-top mt-4 pt-3">
                     <form method="POST" action="{{ route('auth.logout') }}" id="sidebar-logout-form-layout">
                         @csrf
                         <a href="#" onclick="document.getElementById('sidebar-logout-form-layout').submit(); event.preventDefault();" class="sidebar-menu-link text-danger">
-                            <img src="https://img.icons8.com/color/48/shutdown.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 10px;" alt="logout">
-                            <span>Logout</span>
-                        </a>
+                                <i class="bi bi-box-arrow-right me-2"></i>
+                                <span>Logout</span>
+                            </a>
                     </form>
                 </li>
 

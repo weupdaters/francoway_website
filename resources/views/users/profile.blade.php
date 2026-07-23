@@ -221,7 +221,7 @@
                     <div class="avatar-upload-box">
                         <div class="avatar-preview-wrapper">
                             @php
-                                $userAvatar = $user->image ? asset('storage/' . $user->image) : asset('admin/assets/images/user1.jpg');
+                                $userAvatar = $user->image ? asset('storage/' . $user->image) : asset('admin/images/user1.jpg');
                             @endphp
                             <img src="{{ $userAvatar }}" class="avatar-preview-img" id="profile-avatar-preview" alt="Avatar">
                             <label for="image-upload-input" class="avatar-upload-trigger">

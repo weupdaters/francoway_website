@@ -129,7 +129,7 @@
                     @if($user->image)
                        <img src="{{ $user->image
                         ? asset('storage/'.$user->image)
-                        : asset('admin/assets/images/user1.jpg') }}"
+                        : asset('admin/images/user1.jpg') }}"
                         class="mt-2 rounded"
                         width="80">
 

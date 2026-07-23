@@ -33,30 +33,74 @@ public function index()
 public function dashboard()
 {
     $userId = auth()->id();
+    $user   = auth()->user();
 
-    // Sirf wo courses jo user ne purchase kiye hain
+    // Enrolled course IDs
     $courseIds = CourseUserSubscription::where('user_id', $userId)
         ->pluck('course_id')
         ->unique();
 
     $courses = Course::whereIn('id', $courseIds)->latest()->get();
 
-        foreach ($courses as $course) {
+    // Per-course completion percentage
+    $totalLessonsCompleted = 0;
+    $totalLessonsAll       = 0;
 
+    foreach ($courses as $course) {
         $totalLessons = $course->lessons->count();
-
-        $completedLessons = auth()->user()->lessons()
+        $completedLessons = $user->lessons()
             ->whereIn('lesson_id', $course->lessons->pluck('id'))
             ->count();
 
         $course->completionPercentage = $totalLessons > 0
             ? round(($completedLessons / $totalLessons) * 100)
             : 0;
+
+        $totalLessonsCompleted += $completedLessons;
+        $totalLessonsAll       += $totalLessons;
     }
 
-    $aiPracticeAttempts = AiPracticeAttempt::where('user_id', $userId)->latest()->get();
+    // Overall progress across all courses
+    $overallProgress = $totalLessonsAll > 0
+        ? round(($totalLessonsCompleted / $totalLessonsAll) * 100)
+        : 0;
 
-    return view('users.dashboard', compact('courses', 'aiPracticeAttempts'));
+    // AI Practice attempts count
+    $aiPracticeAttempts = AiPracticeAttempt::where('user_id', $userId)->latest()->get();
+    $aiAttemptsCount    = $aiPracticeAttempts->count();
+
+    // Active subscriptions count
+    $activeSubscriptions = CourseUserSubscription::where('user_id', $userId)
+        ->where('subscription_status', 'active')
+        ->count();
+
+    // Next expiry: find the nearest active subscription expiry
+    $nextExpiry = CourseUserSubscription::where('user_id', $userId)
+        ->where('subscription_status', 'active')
+        ->whereNotNull('expiry_date')
+        ->where('expiry_date', '>=', now())
+        ->orderBy('expiry_date')
+        ->value('expiry_date');
+
+    $daysToExpiry = $nextExpiry ? now()->diffInDays(\Carbon\Carbon::parse($nextExpiry), false) : null;
+
+    // Profile completion percentage
+    $profileFields   = ['name', 'email', 'phone', 'bio', 'image'];
+    $filledFields    = collect($profileFields)->filter(fn($f) => !empty($user->$f))->count();
+    $profileComplete = round(($filledFields / count($profileFields)) * 100);
+
+    return view('users.dashboard', compact(
+        'courses',
+        'aiPracticeAttempts',
+        'aiAttemptsCount',
+        'activeSubscriptions',
+        'overallProgress',
+        'totalLessonsCompleted',
+        'totalLessonsAll',
+        'daysToExpiry',
+        'nextExpiry',
+        'profileComplete'
+    ));
 }
 
 

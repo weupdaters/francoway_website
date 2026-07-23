@@ -576,31 +576,31 @@
 
             <div class="mirror-stat-card">
                 <div class="mirror-stat-icon-box mirror-stat-icon-green">
-                    <i class="bi bi-check-circle-fill"></i>
+                    <i class="bi bi-bar-chart-line-fill"></i>
                 </div>
                 <div>
-                    <div class="mirror-stat-label">Completed</div>
-                    <div class="mirror-stat-val">{{ $courses->where('completionPercentage', '>=', 100)->count() }}</div>
+                    <div class="mirror-stat-label">Overall Progress</div>
+                    <div class="mirror-stat-val">{{ $overallProgress ?? 0 }}%</div>
                 </div>
             </div>
 
             <div class="mirror-stat-card">
                 <div class="mirror-stat-icon-box mirror-stat-icon-orange">
-                    <i class="bi bi-clock-fill"></i>
+                    <i class="bi bi-robot"></i>
                 </div>
                 <div>
-                    <div class="mirror-stat-label">In Progress</div>
-                    <div class="mirror-stat-val">{{ $courses->where('completionPercentage', '<', 100)->count() }}</div>
+                    <div class="mirror-stat-label">AI Practice Sessions</div>
+                    <div class="mirror-stat-val">{{ $aiAttemptsCount ?? 0 }}</div>
                 </div>
             </div>
 
             <div class="mirror-stat-card">
                 <div class="mirror-stat-icon-box mirror-stat-icon-blue">
-                    <i class="bi bi-award-fill"></i>
+                    <i class="bi bi-person-bounding-box"></i>
                 </div>
                 <div>
-                    <div class="mirror-stat-label">Certificates Earned</div>
-                    <div class="mirror-stat-val">{{ $courses->where('completionPercentage', '>=', 100)->count() }}</div>
+                    <div class="mirror-stat-label">Profile Completed</div>
+                    <div class="mirror-stat-val">{{ $profileComplete ?? 0 }}%</div>
                 </div>
             </div>
         </div>
