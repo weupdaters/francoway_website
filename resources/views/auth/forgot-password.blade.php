@@ -68,86 +68,134 @@
     <div class="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#0B1E43]/5 blur-[100px] pointer-events-none"></div>
     <div class="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-[#E31B23]/5 blur-[100px] pointer-events-none"></div>
 
-    <div class="w-full max-w-[520px] bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(11,30,67,0.06)] border border-gray-100 p-6 sm:p-10 relative z-10 space-y-6">
+    <div class="w-full max-w-[960px] bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(11,30,67,0.06)] border border-gray-100 overflow-hidden grid grid-cols-1 lg:grid-cols-12 relative z-10">
         
-        <!-- Header / Back Navigation -->
-        <div class="flex justify-between items-center">
-            <a href="/" class="flex items-center gap-1 text-xs font-bold text-gray-400 hover:text-brandRed transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                Back to Home
-            </a>
-            <a href="{{ route('login') }}" class="text-xs font-bold text-brandRed hover:underline">
-                Back to Login
-            </a>
-        </div>
-
-        <!-- Main Title & Description -->
-        <div class="space-y-2 text-left">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-brandRed font-bold text-[10px] uppercase tracking-widest">
-                ✦ Password Recovery
-            </span>
-            <h2 class="text-2xl sm:text-3xl font-heading font-black text-brandBlue tracking-tight leading-none">
-                Forgot Password
-            </h2>
-            <p class="text-sm text-gray-500 font-medium leading-relaxed">
-                Enter your email address and we will send you a password reset link to recover your account.
-            </p>
-        </div>
-
-        <!-- Session Status Alert -->
-        @if (session('status'))
-            <div class="p-4 rounded-2xl bg-green-50 border border-green-200 text-green-700 text-xs font-semibold">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <!-- Form -->
-        <form action="{{ route('password.email') }}" method="POST" class="space-y-5">
-            @csrf
+        <!-- Left Side: Password Reset Form (7 Columns) -->
+        <div class="lg:col-span-7 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6">
             
-            <!-- Email Input -->
-            <div class="space-y-2">
-                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Email Address</label>
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                    </span>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        value="{{ old('email') }}" 
-                        placeholder="email@example.com" 
-                        required 
-                        class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-brandRed focus:bg-white transition-all duration-300 shadow-sm"
-                    >
-                </div>
-                @error('email')
-                    <p class="text-xs text-brandRed font-semibold mt-1">{{ $message }}</p>
-                @enderror
+            <!-- Logo & Back Links -->
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-1 text-xs font-bold text-gray-400 hover:text-brandRed transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                    Back to Home
+                </a>
+                <a href="{{ route('login') }}" class="text-xs font-bold text-brandRed hover:underline">
+                    Back to Sign In
+                </a>
             </div>
 
-            <!-- Submit Button -->
-            <button 
-                type="submit" 
-                class="w-full py-3.5 px-6 bg-brandRed hover:bg-[#c9141b] text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl transition-all duration-300 shadow-lg shadow-red-500/20 btn-pulse-red flex items-center justify-center gap-2"
-            >
-                <span>Send Password Reset Link</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-            </button>
-        </form>
+            <!-- Main Heading & Form -->
+            <div class="space-y-6">
+                <div class="space-y-2 text-left">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-brandRed font-bold text-[10px] uppercase tracking-widest">
+                        ✦ Password Recovery
+                    </span>
+                    <h2 class="text-2xl sm:text-3.5xl font-heading font-black text-brandBlue tracking-tight leading-none">
+                        Forgot Password
+                    </h2>
+                    <p class="text-sm text-gray-550 font-medium leading-relaxed">
+                        Enter your email address and we will send you a password reset link.
+                    </p>
+                </div>
 
-        <!-- Footer Info -->
-        <div class="pt-4 border-t border-gray-100 text-center">
-            <p class="text-[11px] text-gray-400 font-medium">
-                Need extra assistance? Contact <a href="/contact" class="text-brandBlue font-bold hover:underline">Francoway Support</a>
+                <!-- Session Status Alert -->
+                @if (session('status'))
+                    <div class="p-4 rounded-2xl bg-green-50 border border-green-200 text-green-700 text-xs font-semibold">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                <!-- Form -->
+                <form action="{{ route('password.email') }}" method="POST" class="space-y-4">
+                    @csrf
+                    
+                    <!-- Email field -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Email Address</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                </svg>
+                            </span>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                value="{{ old('email') }}" 
+                                placeholder="name@example.com" 
+                                required 
+                                class="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-150 rounded-2xl text-sm focus:outline-none focus:border-brandRed focus:bg-white transition-all duration-300 shadow-sm"
+                            >
+                        </div>
+                        @error('email')
+                            <p class="text-xs text-brandRed font-semibold mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button 
+                            type="submit" 
+                            class="inline-flex items-center justify-center gap-2 w-full py-3 bg-brandRed hover:bg-brandBlue text-white font-extrabold text-xs uppercase tracking-widest rounded-2xl transition-all duration-300 shadow-md btn-pulse-red"
+                        >
+                            Send Password Reset Link
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer Meta -->
+            <p class="text-[10px] text-gray-400 font-medium text-center leading-normal">
+                Remembered your password? <a href="{{ route('login') }}" class="underline font-bold text-brandRed">Sign In Here</a>.
             </p>
+
         </div>
+
+        <!-- Right Side: Graphic Banner (5 Columns) -->
+        <div class="lg:col-span-5 bg-brandBlue relative overflow-hidden flex flex-col justify-between p-8 md:p-10 text-white">
+            <!-- Background Image Illustration -->
+            <img 
+                src="{{ asset('assets/images/form_illustration_new.jpg') }}" 
+                class="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+                alt="France Canada Slogan Banner"
+            >
+
+            <!-- Decorative Dot Grid in Top Right -->
+            <div class="absolute top-10 right-10 grid grid-cols-6 gap-1.5 opacity-25 select-none pointer-events-none z-10">
+                @for ($i = 0; $i < 24; $i++)
+                    <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                @endfor
+            </div>
+
+            <!-- Brand Header -->
+            <div class="relative z-10">
+                <span class="font-heading font-bold text-2xl tracking-tight text-white block">
+                    Franco<span class="text-brandRed font-black">way</span>
+                </span>
+            </div>
+
+            <!-- Dynamic Slogan -->
+            <div class="relative z-10 space-y-4">
+                <h3 class="font-heading font-black text-3xl sm:text-4xl leading-tight">
+                    Success in French.<br>Success in Canada.
+                </h3>
+                <p class="font-script text-2xl text-brandGold">
+                    Learn from the native experts.
+                </p>
+            </div>
+
+            <!-- Footer Badge -->
+            <div class="relative z-10 pt-8 border-t border-white/10 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-brandGold">✓</span>
+                <span class="text-xs text-white/80 font-semibold uppercase tracking-wider">CEFR & DELF Aligned Training</span>
+            </div>
+        </div>
+
     </div>
 
 </body>
