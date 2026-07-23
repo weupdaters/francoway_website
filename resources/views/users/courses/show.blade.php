@@ -50,8 +50,11 @@
             {{-- LEFT: COURSE DETAILS & BADGES --}}
             <div class="col-lg-7 col-md-12">
                 <div class="d-flex align-items-start gap-3">
-                    @if($course->thumbnail)
-                        <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}" class="course-icon-badge object-fit-cover">
+                    @if($course->thumbnail || $course->cover_image)
+                        <img src="{{ asset('storage/' . ($course->thumbnail ?? $course->cover_image)) }}" alt="{{ $course->title }}" class="course-icon-badge object-fit-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
+                        <div class="course-icon-badge d-none">
+                            {{ $initials }}
+                        </div>
                     @else
                         <div class="course-icon-badge">
                             {{ $initials }}

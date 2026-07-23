@@ -216,7 +216,10 @@
                         <div class="d-flex align-items-center gap-3 flex-grow-1">
                             <div class="course-thumb-box">
                                 @if($course->thumbnail || $course->cover_image)
-                                    <img src="{{ asset('storage/' . ($course->thumbnail ?? $course->cover_image)) }}" alt="{{ $course->title }}" class="course-thumb-img">
+                                    <img src="{{ asset('storage/' . ($course->thumbnail ?? $course->cover_image)) }}" alt="{{ $course->title }}" class="course-thumb-img" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('d-none');">
+                                    <div class="course-thumb-placeholder d-none">
+                                        {{ $initials }}
+                                    </div>
                                 @else
                                     <div class="course-thumb-placeholder">
                                         {{ $initials }}
