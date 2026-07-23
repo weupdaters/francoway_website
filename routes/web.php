@@ -19,8 +19,7 @@ use App\Http\Controllers\Admin\DashboardController;
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-// About Page
-Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/about', [HomeController::class, 'about'])->name('about.index');
 
 // Contact Page
 Route::get('/contact', [HomeController::class, 'contactUs'])->name('contactUs');
