@@ -19,8 +19,11 @@
                                          style="border-bottom: 1px solid #475569; height: 1px; width: 25px;"></span>
                                  </button>
                              </li>
-                             
-
+                             <li class="ms-2">
+                                 <a href="{{ auth()->check() ? route('dashboard') : route('index') }}" class="d-flex text-decoration-none align-items-center" style="gap: 8px;">
+                                     <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/' . $settings['logo']) : asset('assets/images/logo.png') }}" alt="logo-icon" class="logo-icon" style="height: 65px; width: auto; max-width: 240px; object-fit: contain;">
+                                 </a>
+                             </li>
                          </ul>
                      </div>
                  </div>
