@@ -34,7 +34,7 @@
                     <span class="badge bg-success-subtle text-success fs-11 fw-bold">Active Users</span>
                 </div>
                 <h6 class="text-secondary fw-semibold mb-1 text-uppercase fs-12" style="letter-spacing: 0.5px;">Total Students</h6>
-                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">{{ number_format($totalStudents) }}</h3>
+                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">{{ number_format($totalStudents ?? 0) }}</h3>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                     <span class="badge bg-info-subtle text-info fs-11 fw-bold">Instructors</span>
                 </div>
                 <h6 class="text-secondary fw-semibold mb-1 text-uppercase fs-12" style="letter-spacing: 0.5px;">Total Teachers</h6>
-                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">{{ number_format($totalTeachers) }}</h3>
+                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">{{ number_format($totalTeachers ?? 0) }}</h3>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                     <span class="badge bg-warning-subtle text-warning fs-11 fw-bold">Live Catalog</span>
                 </div>
                 <h6 class="text-secondary fw-semibold mb-1 text-uppercase fs-12" style="letter-spacing: 0.5px;">Total Courses</h6>
-                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">{{ number_format($totalCourses) }}</h3>
+                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">{{ number_format($totalCourses ?? 0) }}</h3>
             </div>
         </div>
 
@@ -76,7 +76,7 @@
                     <span class="badge bg-danger-subtle text-danger fs-11 fw-bold">Processed</span>
                 </div>
                 <h6 class="text-secondary fw-semibold mb-1 text-uppercase fs-12" style="letter-spacing: 0.5px;">Total Revenue</h6>
-                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">₹{{ number_format($totalRevenue, 2) }}</h3>
+                <h3 class="fw-bold mb-0 text-dark" style="font-size: 26px;">₹{{ number_format($totalRevenue ?? 0, 2) }}</h3>
             </div>
         </div>
 
