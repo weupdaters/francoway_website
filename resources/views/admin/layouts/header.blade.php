@@ -40,10 +40,15 @@
                                      <div class="d-xxl-flex align-items-center bg-transparent border-0 text-start p-0 cursor dropdown-toggle"
                                          data-bs-toggle="dropdown">
                                          <div class="flex-shrink-0 position-relative">
-                                             <img class="rounded-circle admin-img-width-for-mobile"
-                                                 style="width: 40px; height: 40px;"
-                                                 src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('admin/images/user1.jpg') }}"
-                                                 alt="{{ auth()->user()->name }}">
+                                              @php
+                                                  $avatarPlaceholder = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23eff3f9"/><circle cx="50" cy="40" r="20" fill="%2364748b"/><path d="M15,82 C15,65 30,55 50,55 C70,55 85,65 85,82" fill="%2364748b"/></svg>';
+                                                  $userAvatar = auth()->user()->image ? asset('storage/' . auth()->user()->image) : $avatarPlaceholder;
+                                              @endphp
+                                              <img class="rounded-circle admin-img-width-for-mobile"
+                                                  style="width: 40px; height: 40px; object-fit: cover;"
+                                                  src="{{ $userAvatar }}"
+                                                  alt="{{ auth()->user()->name }}"
+                                                  onerror="this.src='{{ $avatarPlaceholder }}'">
 
                                              <span
                                                  class="d-block bg-success-60 border border-2 border-white rounded-circle position-absolute end-0 bottom-0"
