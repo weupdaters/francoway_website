@@ -257,8 +257,28 @@
            ======================================================== */
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+        html {
+            scroll-behavior: smooth !important;
+        }
+
         body, .main-content-container, .card, .table, input, select, textarea, button, label {
             font-family: 'Outfit', sans-serif !important;
+        }
+
+        /* 2026 Micro-Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .main-content-card, .settings-page-header, .welcome-card {
+            animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         /* Premium Card Overrides */
@@ -270,6 +290,7 @@
             padding: 24px !important;
             margin-bottom: 25px !important;
             overflow: hidden !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease !important;
         }
         
         .card-header {
@@ -292,6 +313,7 @@
         .table tr {
             background-color: #ffffff !important;
             box-shadow: 0 4px 12px rgba(7, 21, 48, 0.01) !important;
+            transition: all 0.2s ease !important;
         }
 
         .table th {
@@ -315,7 +337,6 @@
         }
 
         .table tbody tr {
-            transition: all 0.2s ease !important;
             border-radius: 10px !important;
         }
 
@@ -346,6 +367,10 @@
         textarea, textarea.form-control {
             height: auto !important;
             padding: 14px 18px !important;
+        }
+
+        .form-control:hover, .form-select:hover, select:hover, input:hover, textarea:hover {
+            border-color: rgba(7, 21, 48, 0.25) !important;
         }
 
         .form-control:focus, .form-select:focus, select:focus, input:focus, textarea:focus {
@@ -402,6 +427,33 @@
             background-color: #071530 !important;
             color: #ffffff !important;
             box-shadow: 0 6px 20px rgba(7, 21, 48, 0.22) !important;
+        }
+
+        /* Modern Badge Overrides */
+        .badge {
+            border-radius: 30px !important;
+            padding: 6px 14px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.4px !important;
+            font-size: 11px !important;
+            text-transform: uppercase !important;
+            border: none !important;
+        }
+        .bg-success-subtle {
+            background-color: rgba(40, 167, 69, 0.08) !important;
+            color: #28a745 !important;
+        }
+        .bg-danger-subtle {
+            background-color: rgba(220, 53, 69, 0.08) !important;
+            color: #dc3545 !important;
+        }
+        .bg-warning-subtle {
+            background-color: rgba(255, 193, 7, 0.08) !important;
+            color: #b58100 !important;
+        }
+        .bg-info-subtle {
+            background-color: rgba(23, 162, 184, 0.08) !important;
+            color: #17a2b8 !important;
         }
 
         /* Dark theme tweaks to play nice with global overrides */
