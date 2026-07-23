@@ -182,9 +182,14 @@ class LessonController extends Controller
             ->orderBy('id')
             ->get();
 
+        $enrolledCount = \App\Models\CourseUserSubscription::where('course_id', $id)
+            ->where('subscription_status', 'active')
+            ->count();
+
         return response()->json([
             'course' => $course,
             'lessons' => $lessons,
+            'enrolled_count' => $enrolledCount,
         ]);
     }
 

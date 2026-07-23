@@ -33,10 +33,14 @@ class AppServiceProvider extends ServiceProvider
         }
  
         // Load settings globally for all views if table exists
-        if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
-            $settings = Setting::pluck('value', 'key')->toArray();
-            View::share('settings', $settings);
-        } else {
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
+                $settings = Setting::pluck('value', 'key')->toArray();
+                View::share('settings', $settings);
+            } else {
+                View::share('settings', []);
+            }
+        } catch (\Throwable $e) {
             View::share('settings', []);
         }
     }

@@ -14,14 +14,14 @@ class LessonController extends Controller
     
     public function index(Course $course)
     {
-        // Block access if course is paid and payment is pending
+        // Block access if course is paid and payment is pending or subscription is expired
         if ($course->price > 0) {
             $subscription = CourseUserSubscription::where('user_id', auth()->id())
                 ->where('course_id', $course->id)
                 ->latest()
                 ->first();
-            if (!$subscription || $subscription->payment_status === 'pending') {
-                return redirect()->route('users.checkout', $course->id)->with('error', 'Please complete the payment to access this course.');
+            if (!$subscription || $subscription->payment_status === 'pending' || ($subscription->expiry_date && \Carbon\Carbon::parse($subscription->expiry_date)->isPast())) {
+                return redirect()->route('users.checkout', $course->id)->with('error', 'Please complete payment or renew your subscription to access this course.');
             }
         }
 

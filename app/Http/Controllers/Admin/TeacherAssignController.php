@@ -110,10 +110,14 @@ public function getCoursesByUser($userId)
             // Create assignment
             TeacherAssignUser::create($validated);
 
-            return response()->json([
-                'status' => true,
-                'message' => 'Teacher assigned successfully'
-            ]);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Teacher assigned successfully'
+                ]);
+            }
+
+            return redirect()->route('admin.teacher.assign.index')->with('success', 'Teacher assigned successfully');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([

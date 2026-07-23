@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->boolean('has_custom_prompt')->default(false)->after('trial_video');
-            $table->text('custom_prompt')->nullable()->after('has_custom_prompt');
+            if (!Schema::hasColumn('courses', 'has_custom_prompt')) {
+                $table->boolean('has_custom_prompt')->default(false)->after('trial_video');
+            }
+            if (!Schema::hasColumn('courses', 'custom_prompt')) {
+                $table->text('custom_prompt')->nullable()->after('has_custom_prompt');
+            }
         });
     }
 

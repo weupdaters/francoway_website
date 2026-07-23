@@ -80,76 +80,66 @@ return view('admin.course_assign.create',compact(
 
 public function store(Request $request)
 {
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'course_id' => 'required|exists:courses,id',
+        'course_type' => 'required|in:free,paid',
+        'duration_value' => 'nullable|integer|min:1',
+        'duration_type' => 'nullable|in:days,weeks,months,years,lifetime',
+    ]);
 
-$payment_status = $request->course_type;
+    $payment_status = $request->course_type;
+    $start_date = date('Y-m-d');
+    $expiry_date = null;
+    $duration_value = $request->duration_value;
+    $duration_type = $request->duration_type;
 
-$start_date = date('Y-m-d');
+    if ($payment_status == 'paid') {
+        $duration = (int) ($duration_value ?? 1);
+        if ($duration_type == 'days') {
+            $expiry_date = date('Y-m-d', strtotime($start_date . " + $duration days"));
+        } elseif ($duration_type == 'weeks') {
+            $expiry_date = date('Y-m-d', strtotime($start_date . " + $duration weeks"));
+        } elseif ($duration_type == 'months') {
+            $expiry_date = date('Y-m-d', strtotime($start_date . " + $duration months"));
+        } elseif ($duration_type == 'years') {
+            $expiry_date = date('Y-m-d', strtotime($start_date . " + $duration years"));
+        } elseif ($duration_type == 'lifetime') {
+            $expiry_date = null;
+        }
+    } else {
+        $duration_value = null;
+        $duration_type = null;
+    }
 
-$expiry_date = null;
+    DB::table('course_user_subscriptions')->insert([
+        'user_id' => $request->user_id,
+        'course_id' => $request->course_id,
+        'plan_id' => null,
+        'price' => $request->price ?? 0,
+        'total_amount' => $request->price ?? 0,
+        'paid_amount' => $payment_status == 'paid' ? ($request->price ?? 0) : 0,
+        'remaining_amount' => 0,
+        'status' => $payment_status == 'paid' ? 'paid' : 'free',
+        'start_date' => $start_date,
+        'expiry_date' => $expiry_date,
+        'duration_value' => $duration_value,
+        'duration_type' => $duration_type,
+        'payment_status' => $payment_status,
+        'subscription_status' => 'active',
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
 
-$duration_value = $request->duration_value;
-$duration_type = $request->duration_type;
+    // Also sync course_user pivot table for Eloquent relationship
+    DB::table('course_user')->updateOrInsert(
+        ['course_id' => $request->course_id, 'user_id' => $request->user_id],
+        ['status' => 'active', 'updated_at' => now(), 'created_at' => now()]
+    );
 
-
-if($payment_status == 'paid'){
-
-$duration = (int)$duration_value;
-
-if($duration_type == 'days'){
-$expiry_date = date('Y-m-d', strtotime($start_date." + $duration days"));
-}
-
-if($duration_type == 'weeks'){
-$expiry_date = date('Y-m-d', strtotime($start_date." + $duration weeks"));
-}   
-
-if($duration_type == 'months'){
-$expiry_date = date('Y-m-d', strtotime($start_date." + $duration months"));
-}
-
-if($duration_type == 'years'){
-$expiry_date = date('Y-m-d', strtotime($start_date." + $duration years"));
-}
-
-}else{
-
-$duration_value = null;
-$duration_type = null;
-
-}
-
-DB::table('course_user_subscriptions')->insert([
-
-'user_id'=>$request->user_id,
-'course_id'=>$request->course_id,
-
-'plan_id'=>null,
-
-'price'=>$request->price,
-'total_amount'=>$request->price,
-'paid_amount'=>$payment_status == 'paid' ? $request->price : 0,
-'remaining_amount'=>0,
-'status'=>$payment_status == 'paid' ? 'paid' : 'unpaid',
-
-'start_date'=>$start_date,
-'expiry_date'=>$expiry_date,
-
-'duration_value'=>$duration_value,
-'duration_type'=>$duration_type,
-
-'payment_status'=>$payment_status,
-
-'subscription_status'=>$request->status ? 'active' : 'inactive',
-
-'created_at'=>now(),
-'updated_at'=>now()
-
-]);
-
-return redirect()
-->route('admin.course-assign.index')
-->with('success','Course Assigned Successfully');
-
+    return redirect()
+        ->route('admin.course-assign.index')
+        ->with('success', 'Course Assigned Successfully');
 }
 
 

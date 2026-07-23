@@ -36,7 +36,7 @@ class CheckoutController extends Controller
         $user   = auth()->user();
 
         $request->validate([
-            'payment_method' => 'required|string|in:card,upi,bank_transfer',
+            'payment_method' => 'required|string|in:card,upi,bank_transfer,manual',
             'card_name'      => 'required_if:payment_method,card|nullable|string|max:255',
             'card_number'    => 'required_if:payment_method,card|nullable|string|max:20',
             'upi_id'         => 'required_if:payment_method,upi|nullable|string|max:255',
