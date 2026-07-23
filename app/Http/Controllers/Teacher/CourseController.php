@@ -26,7 +26,8 @@ class CourseController extends Controller
      */
     public function getUserCourses($user_id)
     {
-        $alluserCourses = TeacherAssignUser::with('course')
+        $alluserCourses = TeacherAssignUser::whereHas('course')
+        ->with('course')
         ->where('teacher_id', auth()->id())
         ->where('user_id', $user_id)
         ->get();
@@ -43,7 +44,8 @@ class CourseController extends Controller
      */
     public function courseLessonPage()
     {
-        $courses = TeacherAssignUser::with('course')
+        $courses = TeacherAssignUser::whereHas('course')
+            ->with('course')
             ->where('teacher_id', auth()->id())
             ->get();
 

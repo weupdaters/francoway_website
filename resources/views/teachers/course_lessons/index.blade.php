@@ -32,6 +32,7 @@
           <div class="card-body p-0 bg-white">
             <ul class="list-group list-group-flush bg-white" id="courseList">
               @foreach ($alluserCourses as $alluserCourse)
+                @if($alluserCourse->course)
                 <li class="list-group-item d-flex align-items-center gap-3 px-4 py-3 bg-white"
                   data-id="{{ $alluserCourse->course->id }}" role="button">
 
@@ -51,6 +52,7 @@
 
                   <span class="text-muted"><i class="fas fa-chevron-right"></i></span>
                 </li>
+                @endif
               @endforeach
             </ul>
           </div>
