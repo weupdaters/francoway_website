@@ -443,6 +443,69 @@
       [data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, [data-bs-theme="dark"] h3, [data-bs-theme="dark"] h4, [data-bs-theme="dark"] h5, [data-bs-theme="dark"] h6 {
           color: #ffffff !important;
       }
+
+      /* Fullscreen Preloader Overlay Styles */
+      .preloader-overlay {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          background-color: #071530 !important; /* Premium brand navy */
+          z-index: 999999 !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 0.4s ease, visibility 0.4s ease !important;
+      }
+
+      .preloader-content-box {
+          text-align: center !important;
+          width: 320px !important;
+      }
+
+      .loader-logo-text {
+          font-family: 'Outfit', sans-serif !important;
+          font-weight: 900 !important;
+          font-size: 36px !important;
+          color: #ffffff !important;
+          letter-spacing: 2px !important;
+          margin-bottom: 24px !important;
+          text-transform: uppercase !important;
+          text-shadow: 0 4px 20px rgba(255, 255, 255, 0.15) !important;
+      }
+
+      /* Glow progress track */
+      .loader-progress-track {
+          width: 100% !important;
+          height: 4px !important;
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          border-radius: 10px !important;
+          overflow: hidden !important;
+          margin-bottom: 12px !important;
+          box-shadow: inset 0 1px 3px rgba(0,0,0,0.2) !important;
+      }
+
+      /* Glowing linear gradient loader bar */
+      .loader-progress-bar {
+          height: 100% !important;
+          width: 0%;
+          background: linear-gradient(90deg, #E53935 0%, #ff5252 50%, #E53935 100%) !important;
+          box-shadow: 0 0 12px #E53935 !important;
+          border-radius: 10px !important;
+          transition: width 0.08s linear !important;
+      }
+
+      /* Digital indicator styling */
+      .loader-percentage {
+          font-family: 'Outfit', sans-serif !important;
+          font-weight: 800 !important;
+          font-size: 16px !important;
+          color: rgba(255, 255, 255, 0.6) !important;
+          letter-spacing: 0.5px !important;
+      }
   </style>
 </head>
 
@@ -456,24 +519,47 @@
 
 
   <!-- Start Preloader Area -->
-  <div class="preloader" id="preloader">
-    <div class="preloader">
-      <div class="waviy position-relative">
-        <span class="d-inline-block">F</span>
-        <span class="d-inline-block">r</span>
-        <span class="d-inline-block">a</span>
-        <span class="d-inline-block">n</span>
-        <span class="d-inline-block">c</span>
-        <span class="d-inline-block">o</span>
-        <span class="d-inline-block">W</span>
-        <span class="d-inline-block">a</span>
-        <span class="d-inline-block">y</span>
-
-
+  <div class="preloader-overlay" id="preloader-overlay">
+      <div class="preloader-content-box">
+          <h1 class="loader-logo-text">FrancoWay</h1>
+          <div class="loader-progress-track">
+              <div class="loader-progress-bar" id="loader-progress-bar"></div>
+          </div>
+          <div class="loader-percentage" id="loader-percentage">0%</div>
       </div>
-    </div>
   </div>
-  End Preloader Area -->
+
+  <script>
+      (function() {
+          const progressBar = document.getElementById("loader-progress-bar");
+          const percentageText = document.getElementById("loader-percentage");
+          const loaderOverlay = document.getElementById("preloader-overlay");
+
+          let progress = 0;
+          const interval = setInterval(function() {
+              progress += Math.floor(Math.random() * 15) + 5;
+              if (progress >= 100) {
+                  progress = 100;
+                  clearInterval(interval);
+                  progressBar.style.width = "100%";
+                  percentageText.textContent = "100%";
+                  
+                  // Smooth fadeout
+                  setTimeout(function() {
+                      loaderOverlay.style.opacity = "0";
+                      loaderOverlay.style.visibility = "hidden";
+                      setTimeout(function() {
+                          loaderOverlay.style.display = "none";
+                      }, 400);
+                  }, 200);
+              } else {
+                  progressBar.style.width = progress + "%";
+                  percentageText.textContent = progress + "%";
+              }
+          }, 35); // Ticks up very fast but smoothly
+      })();
+  </script>
+  <!-- End Preloader Area -->
 
   @include('admin.layouts.slidebar')
 
