@@ -100,16 +100,32 @@
                                     </svg>
                                 </div>
 
+                                @php
+                                    $titleLower = strtolower($course->title);
+                                    if (strpos($titleLower, 'delf') !== false || strpos($titleLower, 'dalf') !== false || strpos($titleLower, 'exam') !== false || strpos($titleLower, 'prep') !== false) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=600';
+                                    } elseif (strpos($titleLower, 'business') !== false || strpos($titleLower, 'pro') !== false || strpos($titleLower, 'profession') !== false) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600';
+                                    } elseif (strpos($titleLower, 'a1') !== false || strpos($titleLower, 'a2') !== false || strpos($titleLower, 'begin') !== false) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=600';
+                                    } elseif (strpos($titleLower, 'intermediate') !== false || strpos($titleLower, 'upper') !== false) {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&q=80&w=600';
+                                    } else {
+                                        $imgUrl = 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&q=80&w=600';
+                                    }
+                                    $courseImage = $course->thumbnail ? asset('storage/' . $course->thumbnail) : $imgUrl;
+                                @endphp
+
                                 <!-- Card Body & Image -->
                                 <div class="p-4 md:p-5 flex flex-col flex-grow space-y-4">
                                     
                                     <!-- Arched Image Container (Visual Idea from the Dome/Arch Frames in the Image!) -->
                                     <div class="relative w-full aspect-[16/11] rounded-t-[2.2rem] rounded-b-[0.75rem] border-[3px] border-white shadow-md overflow-hidden bg-gray-50">
                                         <img 
-                                            src="{{ $course->thumbnail ? asset('storage/' . $course->thumbnail) : 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600' }}" 
+                                            src="{{ $courseImage }}" 
                                             alt="{{ $course->title }}"
                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                            onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600'"
+                                            onerror="this.src='{{ $imgUrl }}'"
                                         >
                                         <!-- Price Badge floating on image -->
                                         <span class="absolute bottom-3 right-3 bg-[#0B1E43] text-[#F8B803] font-bold text-[10px] px-2.5 py-1 rounded-full border border-[#F8B803]/30 shadow-md">
