@@ -64,6 +64,10 @@ Route::prefix('users')
         /* ================= LESSON COMMENTS ================= */
         Route::post('/lesson/comment', [CommentController::class, 'store'])
             ->name('comment.store');
+        Route::put('/lesson/comment/{id}', [CommentController::class, 'update'])
+            ->name('comment.update');
+        Route::delete('/lesson/comment/{id}', [CommentController::class, 'destroy'])
+            ->name('comment.destroy');
 
         /* ================= STUDENT PROFILE ================= */
         Route::get('/profile', [UserController::class, 'profile'])

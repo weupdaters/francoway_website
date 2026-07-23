@@ -415,39 +415,124 @@
                                                 <div class="flex-shrink-0">
                                                     <div class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold"
                                                          style="width: 38px; height: 38px; font-size: 14px; background: #071530;">
-                                                        {{ substr($comment->user->name, 0, 1) }}
+                                                        {{ substr($comment->user->name ?? 'User', 0, 1) }}
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <div class="d-flex justify-content-between align-items-start mb-1">
-                                                        <h6 class="fw-bold text-dark-slate mb-0" style="font-size: 14px;">{{ $comment->user->name }}</h6>
-                                                        <small class="text-muted" style="font-size: 11px;">{{ $comment->created_at->diffForHumans() }}</small>
-                                                    </div>
-                                                    <p class="mb-2 text-secondary font-fw" style="font-size: 13.5px;">{{ $comment->comment }}</p>
-
-                                                    <button class="btn btn-sm text-danger p-0 border-0 bg-transparent reply-btn d-inline-flex align-items-center gap-1 font-fw"
-                                                            data-id="{{ $comment->id }}" style="font-size: 12px; font-weight: 600;">
-                                                        <i class="bi bi-reply-fill"></i> Reply
-                                                    </button>
-
-                                                    {{-- REPLIES LIST --}}
-                                                    @foreach($currentLesson->comments->where('parent_id', $comment->id) as $reply)
-                                                        <div class="mt-3 ps-3 border-start border-2 border-danger-subtle">
-                                                            <div class="d-flex align-items-center gap-2 mb-1">
-                                                                <span class="fw-bold text-dark-slate" style="font-size: 13px;">{{ $reply->user->name }}</span>
-                                                                <small class="text-muted" style="font-size: 10px;">{{ $reply->created_at->diffForHumans() }}</small>
-                                                            </div>
-                                                            <p class="mb-0 text-secondary font-fw" style="font-size: 13px;">{{ $reply->comment }}</p>
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <h6 class="fw-bold text-dark-slate mb-0" style="font-size: 14px;">{{ $comment->user->name ?? 'User' }}</h6>
+                                                            @if(($comment->user->role ?? '') === 'teacher')
+                                                                <span class="badge bg-danger bg-opacity-10 text-danger" style="font-size: 9.5px;">Teacher</span>
+                                                            @endif
                                                         </div>
-                                                    @endforeach
+                                                        <small class="text-muted" style="font-size: 11px;">{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'Just now' }}</small>
+                                                    </div>
 
-                                                    {{-- REPLY FORM --}}
-                                                    <form method="POST" action="{{ route('users.comment.store') }}" class="reply-form d-none mt-3">
+                                                    {{-- Comment Body Text --}}
+                                                    <p id="comment-text-{{ $comment->id }}" class="mb-2 text-secondary font-fw" style="font-size: 13.5px;">{{ $comment->comment }}</p>
+
+                                                    {{-- Inline Edit Form for Main Comment --}}
+                                                    <form id="edit-form-{{ $comment->id }}" method="POST" action="{{ route('comment.update', $comment->id) }}" class="d-none mt-2 mb-3">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <textarea name="comment" class="form-control mb-2 rounded-10 font-fw" rows="2" required style="border-color: #CBD5E1;">{{ $comment->comment }}</textarea>
+                                                        <div class="d-flex gap-2 justify-content-end">
+                                                            <button type="button" class="btn btn-sm btn-light rounded-pill px-3" onclick="toggleEditForm({{ $comment->id }})">Cancel</button>
+                                                            <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background-color: #071530; border-color: #071530;">Save Changes</button>
+                                                        </div>
+                                                    </form>
+
+                                                    {{-- Actions Bar (Reply, Edit, Delete) --}}
+                                                    <div class="d-flex align-items-center gap-3 mb-2">
+                                                        <button class="btn btn-sm text-danger p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
+                                                                onclick="toggleReplyForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
+                                                            <i class="bi bi-reply-fill"></i> Reply
+                                                        </button>
+
+                                                        @if(auth()->check() && ($comment->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
+                                                            <button class="btn btn-sm text-primary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
+                                                                    onclick="toggleEditForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
+                                                                <i class="bi bi-pencil-square"></i> Edit
+                                                            </button>
+
+                                                            <form method="POST" action="{{ route('comment.destroy', $comment->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm text-secondary p-0 border-0 bg-transparent hover-red d-inline-flex align-items-center gap-1 font-fw"
+                                                                        style="font-size: 12px; font-weight: 600;">
+                                                                    <i class="bi bi-trash-fill"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    </div>
+
+                                                    {{-- REPLIES THREAD (Nested Below Main Comment) --}}
+                                                    @if($currentLesson->comments->where('parent_id', $comment->id)->count() > 0)
+                                                        <div class="replies-list mt-3 ps-3 border-start border-2 border-danger-subtle">
+                                                            @foreach($currentLesson->comments->where('parent_id', $comment->id) as $reply)
+                                                                <div class="reply-card bg-white p-3 rounded-12 border mb-2 shadow-2xs" style="border-color: #E2E8F0 !important;">
+                                                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                                                        <div class="d-flex align-items-center gap-2">
+                                                                            <div class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold"
+                                                                                 style="width: 26px; height: 26px; font-size: 11px; background: #071530;">
+                                                                                {{ substr($reply->user->name ?? 'User', 0, 1) }}
+                                                                            </div>
+                                                                            <span class="fw-bold text-dark-slate" style="font-size: 13px;">{{ $reply->user->name ?? 'User' }}</span>
+                                                                            @if(($reply->user->role ?? '') === 'teacher')
+                                                                                <span class="badge bg-danger bg-opacity-10 text-danger" style="font-size: 9px;">Teacher</span>
+                                                                            @endif
+                                                                        </div>
+                                                                        <small class="text-muted" style="font-size: 10px;">{{ $reply->created_at ? $reply->created_at->diffForHumans() : 'Just now' }}</small>
+                                                                    </div>
+
+                                                                    {{-- Reply Text --}}
+                                                                    <p id="comment-text-{{ $reply->id }}" class="mb-2 text-secondary font-fw" style="font-size: 13px;">{{ $reply->comment }}</p>
+
+                                                                    {{-- Inline Edit Form for Reply --}}
+                                                                    <form id="edit-form-{{ $reply->id }}" method="POST" action="{{ route('comment.update', $reply->id) }}" class="d-none mt-2 mb-2">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <textarea name="comment" class="form-control mb-2 rounded-10 font-fw" rows="2" required style="border-color: #CBD5E1;">{{ $reply->comment }}</textarea>
+                                                                        <div class="d-flex gap-2 justify-content-end">
+                                                                            <button type="button" class="btn btn-sm btn-light rounded-pill px-3" onclick="toggleEditForm({{ $reply->id }})">Cancel</button>
+                                                                            <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background-color: #071530; border-color: #071530;">Save</button>
+                                                                        </div>
+                                                                    </form>
+
+                                                                    {{-- Reply Edit / Delete Action Buttons --}}
+                                                                    @if(auth()->check() && ($reply->user_id == auth()->id() || in_array(auth()->user()->role ?? '', ['teacher', 'admin'])))
+                                                                        <div class="d-flex gap-3 align-items-center mt-1">
+                                                                            <button class="btn btn-sm text-primary p-0 border-0 bg-transparent font-fw d-inline-flex align-items-center gap-1"
+                                                                                    onclick="toggleEditForm({{ $reply->id }})" style="font-size: 11.5px; font-weight: 600;">
+                                                                                <i class="bi bi-pencil-square"></i> Edit
+                                                                            </button>
+
+                                                                            <form method="POST" action="{{ route('comment.destroy', $reply->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this reply?');">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit" class="btn btn-sm text-secondary p-0 border-0 bg-transparent hover-red font-fw d-inline-flex align-items-center gap-1"
+                                                                                        style="font-size: 11.5px; font-weight: 600;">
+                                                                                    <i class="bi bi-trash-fill"></i> Delete
+                                                                                </button>
+                                                                            </form>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+
+                                                    {{-- INLINE REPLY FORM --}}
+                                                    <form id="reply-form-{{ $comment->id }}" method="POST" action="{{ route('comment.store') }}" class="reply-form d-none mt-3 p-3 bg-white border rounded-12">
                                                         @csrf
                                                         <input type="hidden" name="lesson_id" value="{{ $currentLesson->id }}">
-                                                        <input type="hidden" name="parent_id" class="parent_id" value="{{ $comment->id }}">
-                                                        <textarea name="comment" class="form-control mb-2 rounded-10" rows="2" placeholder="Write a reply..."></textarea>
-                                                        <button class="btn btn-danger btn-sm rounded-pill px-3" style="background-color: #E53935; border-color: #E53935;">Reply</button>
+                                                        <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                                                        <textarea name="comment" class="form-control mb-2 rounded-10 font-fw" rows="2" placeholder="Write a reply..." required style="border-color: #CBD5E1;"></textarea>
+                                                        <div class="d-flex justify-content-end gap-2">
+                                                            <button type="button" class="btn btn-light btn-sm rounded-pill px-3" onclick="toggleReplyForm({{ $comment->id }})">Cancel</button>
+                                                            <button type="submit" class="btn btn-danger btn-sm rounded-pill px-3" style="background-color: #E53935; border-color: #E53935;">Post Reply</button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
@@ -730,22 +815,23 @@
 @endif
 
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-    // Reply toggle logic
-    document.querySelectorAll('.reply-btn').forEach(btn => {
-        btn.addEventListener('click', function(e){
-            e.preventDefault();
-            let parent = this.closest('.flex-grow-1');
-            let form = parent.querySelector('.reply-form');
+function toggleReplyForm(id) {
+    const form = document.getElementById('reply-form-' + id);
+    if (form) {
+        form.classList.toggle('d-none');
+    }
+}
 
-            document.querySelectorAll('.reply-form').forEach(f => {
-                if (f !== form) f.classList.add('d-none');
-            });
-
-            form.classList.toggle('d-none');
-        });
-    });
-});
+function toggleEditForm(id) {
+    const form = document.getElementById('edit-form-' + id);
+    const text = document.getElementById('comment-text-' + id);
+    if (form) {
+        form.classList.toggle('d-none');
+    }
+    if (text) {
+        text.classList.toggle('d-none');
+    }
+}
 </script>
 
 @endsection
