@@ -1787,6 +1787,311 @@
     .progress-bar#listeningProgressBar {
         background-color: #E31B23 !important;
     }
+
+    /* ========================================================
+       2026 PREMIUM UI/UX OVERRIDES FOR AI PRACTICE WORKSPACE
+       ======================================================== */
+    .chat-container-wrapper {
+        border: 1px solid #EAEAEA !important;
+        box-shadow: 0 15px 50px rgba(7, 21, 48, 0.04) !important;
+        background-color: #ffffff !important;
+        border-radius: 24px !important;
+        height: 750px !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Sidebar Refinements */
+    .chat-sidebar {
+        background-color: #f8fafc !important;
+        border-right: 1px solid #EAEAEA !important;
+        padding: 24px !important;
+    }
+
+    .sidebar-header h4 {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 800 !important;
+        color: #071530 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        font-size: 18px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .sidebar-header .status {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 12.5px !important;
+        color: #64748b !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .status-dot {
+        background-color: #E53935 !important;
+        box-shadow: 0 0 10px #E53935 !important;
+        animation: pulseActive 2s infinite !important;
+    }
+
+    /* Skill Cards (2026 Interactive Design) */
+    .skill-card {
+        background-color: #ffffff !important;
+        border: 1.5px solid #eff3f9 !important;
+        border-radius: 16px !important;
+        padding: 14px 18px !important;
+        margin-bottom: 12px !important;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        box-shadow: 0 4px 12px rgba(7, 21, 48, 0.01) !important;
+    }
+
+    .skill-card:hover {
+        transform: translateY(-2px) !important;
+        border-color: rgba(7, 21, 48, 0.2) !important;
+        box-shadow: 0 8px 24px rgba(7, 21, 48, 0.05) !important;
+    }
+
+    .skill-card.active, .skill-card:active {
+        border-color: #071530 !important;
+        background-color: rgba(7, 21, 48, 0.02) !important;
+    }
+
+    .skill-icon {
+        background-color: rgba(7, 21, 48, 0.06) !important;
+        color: #071530 !important;
+        border-radius: 12px !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+    }
+
+    .skill-info h5 {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 700 !important;
+        color: #071530 !important;
+        font-size: 14.5px !important;
+        margin-bottom: 3px !important;
+    }
+
+    .skill-info p {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 500 !important;
+        color: #64748b !important;
+        font-size: 11.5px !important;
+    }
+
+    /* History section overrides */
+    .history-item {
+        background: #ffffff !important;
+        border: 1.5px solid #eff3f9 !important;
+        border-radius: 12px !important;
+        padding: 10px 14px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .history-item:hover {
+        background: #fafbfd !important;
+        border-color: rgba(7, 21, 48, 0.1) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    .history-item .badge {
+        border-radius: 20px !important;
+        padding: 4px 10px !important;
+        font-size: 9.5px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    /* Chat Messages overrides */
+    .chat-main {
+        background-color: #ffffff !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .chat-messages {
+        padding: 30px !important;
+    }
+
+    .welcome-banner {
+        padding: 60px 40px !important;
+    }
+
+    .welcome-banner h3 {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 800 !important;
+        color: #071530 !important;
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .welcome-banner p {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 500 !important;
+        color: #64748b !important;
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+    }
+
+    .welcome-banner i.logo-icon {
+        color: #E53935 !important;
+        font-size: 3.5rem !important;
+        margin-bottom: 24px !important;
+        text-shadow: 0 0 30px rgba(229, 57, 53, 0.2) !important;
+    }
+
+    /* Message Bubble styles */
+    .message {
+        border-radius: 16px !important;
+        padding: 16px 20px !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        line-height: 1.6 !important;
+        max-width: 75% !important;
+    }
+
+    .message.user {
+        background: linear-gradient(135deg, #071530 0%, #1a2a4a 100%) !important;
+        color: #ffffff !important;
+        border-top-right-radius: 4px !important;
+        box-shadow: 0 4px 15px rgba(7, 21, 48, 0.1) !important;
+    }
+
+    .message.assistant {
+        background: #f8fafc !important;
+        color: #071530 !important;
+        border: 1px solid #eff3f9 !important;
+        border-top-left-radius: 4px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01) !important;
+    }
+
+    /* Chips overrides */
+    .quick-chips .chip {
+        background-color: rgba(7, 21, 48, 0.04) !important;
+        border: 1.5px solid rgba(7, 21, 48, 0.08) !important;
+        color: #071530 !important;
+        border-radius: 30px !important;
+        padding: 10px 20px !important;
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .quick-chips .chip:hover {
+        background-color: #E53935 !important;
+        border-color: #E53935 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 15px rgba(229, 57, 53, 0.18) !important;
+    }
+
+    /* Input area style improvements */
+    .chat-input-area {
+        background: #ffffff !important;
+        border-top: 1px solid #eff3f9 !important;
+        padding: 20px 24px !important;
+    }
+
+    .chat-input-area input {
+        border-radius: 12px !important;
+        border: 1.5px solid #eff3f9 !important;
+        height: 48px !important;
+        padding: 0 16px !important;
+    }
+
+    .chat-input-area button {
+        background-color: #071530 !important;
+        border: none !important;
+        border-radius: 12px !important;
+        height: 48px !important;
+        width: 48px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .chat-input-area button:hover {
+        background-color: #E53935 !important;
+        transform: scale(1.05) !important;
+    }
+
+    /* Premium Practice Workspace Textarea overrides */
+    .writing-textarea-wrapper {
+        flex: 1 !important;
+        height: 100% !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        border: 1.5px dashed rgba(7, 21, 48, 0.15) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        background: #f8fafc !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .writing-textarea-wrapper:focus-within {
+        border-color: #071530 !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 4px rgba(7, 21, 48, 0.04) !important;
+    }
+
+    .practice-workspace-textarea {
+        width: 100% !important;
+        height: 100% !important;
+        flex: 1 !important;
+        background-color: transparent !important;
+        color: #071530 !important;
+        border: none !important;
+        outline: none !important;
+        resize: none !important;
+        box-shadow: none !important;
+        font-size: 14.5px !important;
+        line-height: 1.7 !important;
+        font-family: 'Outfit', sans-serif !important;
+    }
+
+    /* Dark mode variants */
+    [data-bs-theme="dark"] .chat-container-wrapper {
+        background: #0d0d0d !important;
+        border-color: #222222 !important;
+    }
+    [data-bs-theme="dark"] .chat-sidebar {
+        background: #111111 !important;
+        border-right-color: #222222 !important;
+    }
+    [data-bs-theme="dark"] .skill-card {
+        background: #1a1a1a !important;
+        border-color: #222222 !important;
+    }
+    [data-bs-theme="dark"] .skill-card:hover {
+        background: #222222 !important;
+        border-color: #E53935 !important;
+    }
+    [data-bs-theme="dark"] .skill-card.active {
+        background: #071530 !important;
+        border-color: #071530 !important;
+    }
+    [data-bs-theme="dark"] .message.assistant {
+        background: #141414 !important;
+        border-color: #222222 !important;
+        color: #ffffff !important;
+    }
+    [data-bs-theme="dark"] .writing-textarea-wrapper {
+        background: #141414 !important;
+        border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+    [data-bs-theme="dark"] .writing-textarea-wrapper:focus-within {
+        background: #0d0d0d !important;
+        border-color: #E53935 !important;
+        box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.04) !important;
+    }
+    [data-bs-theme="dark"] .practice-workspace-textarea {
+        color: #ffffff !important;
+    }
 </style>
      <!--breadcrumb here-->
         <nav aria-label="breadcrumb" class="mb-3 ">
@@ -2026,8 +2331,8 @@
                             </div>
                         </div>
                         <div class="writing-card-body-light d-flex flex-column" style="flex: 1; padding: 20px; overflow: hidden;">
-                            <div style="flex: 1; height: 100%; width: 100%; display: flex; flex-direction: column; border: 1px dashed rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 12px; background: rgba(0, 0, 0, 0.4);">
-                                <textarea id="writingTextarea" placeholder="Enter your answer here and click Submit to see sample answer and score. Do not leave answer blank and write more than 500 words." oninput="updateWritingWordCount()" style="width: 100%; height: 100% !important; flex: 1; background-color: transparent !important; color: #ffffff !important; border: none !important; outline: none !important; resize: none; box-shadow: none !important; font-size: 14px; line-height: 1.6;"></textarea>
+                            <div class="writing-textarea-wrapper">
+                                <textarea id="writingTextarea" class="practice-workspace-textarea" placeholder="Enter your answer here and click Submit to see sample answer and score. Do not leave answer blank and write more than 500 words." oninput="updateWritingWordCount()"></textarea>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <div class="text-white-50" style="font-size: 13px;">
@@ -2097,8 +2402,8 @@
                             </div>
 
                             <!-- Real-time transcription area -->
-                            <div style="flex: 1; height: 100%; width: 100%; display: flex; flex-direction: column; border: 1px dashed rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 12px; background: rgba(0, 0, 0, 0.4);">
-                                <textarea id="speakingTextarea" placeholder="Click 'Start Recording' and start speaking. Your spoken words will be transcribed here in real-time. You can edit the text manually to correct any spelling." oninput="updateSpeakingWordCount()" style="width: 100%; height: 100% !important; flex: 1; background-color: transparent !important; color: #ffffff !important; border: none !important; outline: none !important; resize: none; box-shadow: none !important; font-size: 14px; line-height: 1.6;"></textarea>
+                            <div class="writing-textarea-wrapper">
+                                <textarea id="speakingTextarea" class="practice-workspace-textarea" placeholder="Click 'Start Recording' and start speaking. Your spoken words will be transcribed here in real-time. You can edit the text manually to correct any spelling." oninput="updateSpeakingWordCount()"></textarea>
                             </div>
                             
                             <div class="d-flex justify-content-between align-items-center mt-3">
