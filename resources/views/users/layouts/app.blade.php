@@ -411,12 +411,7 @@
                             <span>My Courses</span>
                         </a>
                 </li>
-                <li class="sidebar-menu-item">
-                    <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
-                            <i class="bi bi-award-fill me-2" style="color:#E53935;"></i>
-                            <span>Certificates</span>
-                        </a>
-                </li>
+
                 <li class="sidebar-menu-item {{ request()->routeIs('users.profile.*') ? 'active' : '' }}">
                         <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
                             <i class="bi bi-person-fill me-2" style="color:#E53935;"></i>
