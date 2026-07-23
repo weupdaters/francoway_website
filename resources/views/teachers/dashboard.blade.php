@@ -4,29 +4,30 @@
 
 @push('styles')
 <style>
-  /* Base & Wrapper */
+  /* Outer Page Wrapper with soft blue/lavender background tint */
   .assigned-users-page {
-    font-family: 'Outfit', 'Poppins', system-ui, -apple-system, sans-serif;
+    font-family: 'Outfit', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #F0F4FD;
+    padding: 24px;
+    border-radius: 20px;
   }
 
-  /* Top Header Banner */
+  /* Top Banner */
   .assigned-users-banner {
-    background: #ffffff;
-    border-radius: 20px;
-    border: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #E5EBF8;
     padding: 24px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.015);
   }
 
   .banner-icon-box {
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
     border-radius: 14px;
     background-color: #EEF2FF;
-    color: #4F46E5;
+    color: #5B50EC;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,48 +37,44 @@
 
   .banner-title {
     color: #0F172A;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
     letter-spacing: -0.3px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
   .banner-subtitle {
     color: #64748B;
-    font-size: 14px;
+    font-size: 13.5px;
     margin-bottom: 0;
   }
 
   .breadcrumb-item-custom {
-    font-size: 13.5px;
-    color: #64748B;
+    font-size: 13px;
+    color: #475569;
     text-decoration: none;
-    font-weight: 500;
-  }
-
-  .breadcrumb-item-custom:hover {
-    color: #4F46E5;
+    font-weight: 600;
   }
 
   .breadcrumb-active-custom {
-    font-size: 13.5px;
-    color: #4F46E5;
+    font-size: 13px;
+    color: #818CF8;
     font-weight: 700;
   }
 
-  /* Action Controls Bar */
+  /* Controls Bar */
   .controls-card {
-    background: #ffffff;
+    background: #FFFFFF;
     border-radius: 16px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid #E5EBF8;
     padding: 14px 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.015);
   }
 
   .search-wrapper {
     position: relative;
-    width: 250px;
+    width: 260px;
   }
 
   .search-wrapper i {
@@ -86,7 +83,7 @@
     top: 50%;
     transform: translateY(-50%);
     color: #94A3B8;
-    font-size: 16px;
+    font-size: 15px;
     pointer-events: none;
   }
 
@@ -95,16 +92,10 @@
     border: 1px solid #E2E8F0 !important;
     border-radius: 12px !important;
     height: 42px !important;
-    padding-left: 40px !important;
+    padding-left: 38px !important;
     padding-right: 14px !important;
-    font-size: 14px !important;
+    font-size: 13.5px !important;
     color: #0F172A !important;
-  }
-
-  .search-wrapper input:focus {
-    background-color: #ffffff !important;
-    border-color: #4F46E5 !important;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
   }
 
   .filter-wrapper {
@@ -118,7 +109,7 @@
     top: 50%;
     transform: translateY(-50%);
     color: #94A3B8;
-    font-size: 16px;
+    font-size: 15px;
     pointer-events: none;
   }
 
@@ -129,8 +120,8 @@
     height: 42px !important;
     padding-left: 38px !important;
     padding-right: 30px !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
     color: #0F172A !important;
     appearance: none;
     cursor: pointer;
@@ -147,7 +138,7 @@
   }
 
   .view-switch-box {
-    background-color: #F1F5F9;
+    background-color: #EEF2FF;
     border-radius: 12px;
     padding: 4px;
     display: inline-flex;
@@ -159,9 +150,9 @@
     background: transparent;
     padding: 7px 18px;
     border-radius: 9px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #64748B;
+    font-size: 13px;
+    font-weight: 700;
+    color: #818CF8;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -170,39 +161,33 @@
   }
 
   .view-switch-btn.active {
-    background-color: #ffffff;
-    color: #4F46E5;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    background-color: #FFFFFF;
+    color: #5B50EC;
+    box-shadow: 0 2px 8px rgba(91, 80, 236, 0.12);
   }
 
   /* Cards Grid */
   .teacher-user-card {
-    background: #ffffff;
-    border-radius: 20px;
-    border: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    border-radius: 18px;
+    border: 1px solid #E5EBF8;
     padding: 24px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.015);
     height: 100%;
     display: flex;
     flex-direction: column;
   }
 
-  .teacher-user-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
-  }
-
   .user-avatar-box {
     position: relative;
-    width: 62px;
-    height: 62px;
+    width: 58px;
+    height: 58px;
     flex-shrink: 0;
   }
 
   .user-avatar-box img {
-    width: 62px;
-    height: 62px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     object-fit: cover;
     background-color: #EFF3F9;
@@ -212,34 +197,52 @@
     position: absolute;
     bottom: 2px;
     right: 2px;
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     background-color: #22C55E;
-    border: 2.5px solid #ffffff;
+    border: 2.5px solid #FFFFFF;
     border-radius: 50%;
   }
 
   .card-user-name {
     color: #0F172A;
     font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 2px;
+    font-weight: 800;
+    margin-bottom: 1px;
   }
 
   .card-user-role {
-    color: #4F46E5;
-    font-size: 13.5px;
-    font-weight: 600;
+    color: #5B50EC;
+    font-size: 13px;
+    font-weight: 700;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
   .card-user-email {
     color: #64748B;
-    font-size: 13px;
+    font-size: 12.5px;
     display: flex;
     align-items: center;
     gap: 6px;
+  }
+
+  /* Three Dots Dark Navy Button */
+  .dots-menu-btn {
+    background-color: #0F172A;
+    color: #FFFFFF;
+    border-radius: 12px;
+    width: 48px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .dots-menu-btn:hover {
+    background-color: #1E293B;
   }
 
   .assigned-courses-title-row {
@@ -251,60 +254,60 @@
   }
 
   .courses-icon-badge {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 8px;
     background-color: #EEF2FF;
-    color: #4F46E5;
+    color: #5B50EC;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .courses-title-text {
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 14.5px;
+    font-weight: 800;
     color: #0F172A;
   }
 
   .course-count-pill {
     background-color: #EEF2FF;
-    color: #4F46E5;
+    color: #5B50EC;
     font-size: 12px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 20px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 16px;
   }
 
   .course-card-inner {
     background-color: #F8FAFC;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 16px;
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     border: 1px solid #F1F5F9;
   }
 
   .course-thumb-wrapper {
-    width: 70px;
-    height: 70px;
-    border-radius: 14px;
+    width: 68px;
+    height: 68px;
+    border-radius: 12px;
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+    background: #E8EEFF;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .course-thumb-text {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
-    color: #4F46E5;
+    color: #5B50EC;
     z-index: 2;
     letter-spacing: 0.5px;
   }
@@ -320,19 +323,19 @@
   }
 
   .course-heading {
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 14.5px;
+    font-weight: 800;
     color: #0F172A;
     margin-bottom: 4px;
   }
 
   .course-desc {
-    font-size: 12.5px;
+    font-size: 12px;
     color: #64748B;
-    line-height: 1.4;
+    line-height: 1.45;
     margin-bottom: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -343,7 +346,7 @@
     gap: 16px;
     font-size: 12px;
     color: #64748B;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .course-meta-tag {
@@ -353,17 +356,17 @@
   }
 
   .course-meta-tag i {
-    color: #4F46E5;
+    color: #5B50EC;
     font-size: 14px;
   }
 
   .btn-details-dark {
-    background-color: #0B132B !important;
-    color: #ffffff !important;
-    height: 48px;
+    background-color: #0F172A !important;
+    color: #FFFFFF !important;
+    height: 46px;
     border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 13.5px;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -376,23 +379,16 @@
 
   .btn-details-dark:hover {
     background-color: #1E293B !important;
-    color: #ffffff !important;
-    box-shadow: 0 6px 20px rgba(11, 19, 43, 0.2);
-    transform: translateY(-1px);
+    color: #FFFFFF !important;
   }
 
   .btn-details-dark .arrow-right {
     position: absolute;
     right: 20px;
-    font-size: 16px;
-    transition: transform 0.2s ease;
+    font-size: 15px;
   }
 
-  .btn-details-dark:hover .arrow-right {
-    transform: translateX(4px);
-  }
-
-  /* List view container */
+  /* List View Area */
   #listViewArea {
     display: none;
   }
@@ -504,31 +500,31 @@
           (object)[
             'id' => 1,
             'name' => 'Debra Noel',
-            'role' => 'Teacher',
-            'email' => 'debra.noel@francoway.com',
+            'role' => 'User',
+            'email' => 'users@gmail.com',
             'image' => null,
             'demo_courses' => [
               (object)[
                 'title' => 'Intermediate French (B1)',
-                'description' => 'Strengthen your French skills with grammar, vocabulary and conversation.',
-                'lessons_count' => 24,
-                'duration' => '18h 30m',
+                'description' => 'Develop confidence in speaking, reading, writing, and listening. Learn more advanced grammar, expand your vocabulary, and communicate effectively in real-life situations.',
+                'lessons_count' => 0,
+                'duration' => '22h 45m',
                 'code' => 'FR'
               ]
             ]
           ],
           (object)[
             'id' => 2,
-            'name' => 'Aishveer',
-            'role' => 'Teacher',
-            'email' => 'aishveer@francoway.com',
+            'name' => 'aishveer',
+            'role' => 'User',
+            'email' => 'user@gmail.com',
             'image' => null,
             'demo_courses' => [
               (object)[
                 'title' => 'DELF Exam Preparation',
-                'description' => 'Comprehensive preparation for DELF exam with practice tests and strategies.',
-                'lessons_count' => 30,
-                'duration' => '22h 45m',
+                'description' => 'Prepare for the internationally recognized DELF examination with expert guidance, practice tests, grammar revision, listening exercises, speaking practice, and exam strategies.',
+                'lessons_count' => 2,
+                'duration' => '18h 30m',
                 'code' => 'DELF'
               ]
             ]
@@ -570,7 +566,7 @@
 
                 <div class="ms-3">
                   <h4 class="card-user-name">{{ $u->name }}</h4>
-                  <span class="card-user-role">{{ isset($u->role) ? ucfirst($u->role) : 'Teacher' }}</span>
+                  <span class="card-user-role">{{ isset($u->role) ? ucfirst($u->role) : 'User' }}</span>
                   <span class="card-user-email">
                     <i class="ri-mail-line"></i> {{ $u->email }}
                   </span>
@@ -578,7 +574,7 @@
               </div>
 
               <div>
-                <button type="button" class="btn p-1 text-secondary bg-transparent border-0">
+                <button type="button" class="dots-menu-btn">
                   <i class="ri-more-2-fill fs-18"></i>
                 </button>
               </div>
@@ -604,9 +600,9 @@
               @foreach ($userCoursesList as $index => $c)
                 @php
                   $cTitle = $c->title ?? 'Intermediate French (B1)';
-                  $cDesc = $c->description ?? 'Strengthen your French skills with grammar, vocabulary and conversation.';
-                  $cLessons = isset($c->lessons_count) ? $c->lessons_count : (isset($c->lessons) ? $c->lessons->count() : ($index == 0 ? 24 : 30));
-                  $cDuration = isset($c->duration) ? $c->duration : ($index == 0 ? '18h 30m' : '22h 45m');
+                  $cDesc = $c->description ?? 'Develop confidence in speaking, reading, writing, and listening. Learn more advanced grammar, expand your vocabulary, and communicate effectively in real-life situations.';
+                  $cLessons = isset($c->lessons_count) ? $c->lessons_count : (isset($c->lessons) ? $c->lessons->count() : ($index == 0 ? 0 : 2));
+                  $cDuration = isset($c->duration) ? $c->duration : ($index == 0 ? '22h 45m' : '18h 30m');
                   $cCode = isset($c->code) ? $c->code : (str_contains(strtolower($cTitle), 'delf') ? 'DELF' : 'FR');
                 @endphp
 
@@ -614,12 +610,12 @@
                   <div class="course-thumb-wrapper">
                     <span class="course-thumb-text">{{ $cCode }}</span>
                     <svg class="course-thumb-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M50 10 L54 35 L62 75 L75 90 H25 L38 75 L46 35 Z" fill="#4F46E5" fill-opacity="0.15" />
-                      <line x1="50" y1="10" x2="50" y2="90" stroke="#4F46E5" stroke-width="1.5" stroke-opacity="0.3" />
-                      <line x1="30" y1="80" x2="70" y2="80" stroke="#4F46E5" stroke-width="1.5" stroke-opacity="0.3" />
-                      <line x1="36" y1="65" x2="64" y2="65" stroke="#4F46E5" stroke-width="1.5" stroke-opacity="0.3" />
-                      <line x1="42" y1="45" x2="58" y2="45" stroke="#4F46E5" stroke-width="1.5" stroke-opacity="0.3" />
-                      <path d="M40 90 C40 82 45 78 50 78 C55 78 60 82 60 90" stroke="#4F46E5" stroke-width="1.5" stroke-opacity="0.4" fill="none" />
+                      <path d="M50 10 L54 35 L62 75 L75 90 H25 L38 75 L46 35 Z" fill="#5B50EC" fill-opacity="0.15" />
+                      <line x1="50" y1="10" x2="50" y2="90" stroke="#5B50EC" stroke-width="1.5" stroke-opacity="0.3" />
+                      <line x1="30" y1="80" x2="70" y2="80" stroke="#5B50EC" stroke-width="1.5" stroke-opacity="0.3" />
+                      <line x1="36" y1="65" x2="64" y2="65" stroke="#5B50EC" stroke-width="1.5" stroke-opacity="0.3" />
+                      <line x1="42" y1="45" x2="58" y2="45" stroke="#5B50EC" stroke-width="1.5" stroke-opacity="0.3" />
+                      <path d="M40 90 C40 82 45 78 50 78 C55 78 60 82 60 90" stroke="#5B50EC" stroke-width="1.5" stroke-opacity="0.4" fill="none" />
                     </svg>
                   </div>
 
@@ -690,7 +686,7 @@
                   <span class="fw-bold text-dark fs-15">{{ $u->name }}</span>
                 </div>
               </td>
-              <td><span class="badge bg-primary-subtle text-primary">{{ isset($u->role) ? ucfirst($u->role) : 'Teacher' }}</span></td>
+              <td><span class="badge bg-primary-subtle text-primary">{{ isset($u->role) ? ucfirst($u->role) : 'User' }}</span></td>
               <td>{{ $u->email }}</td>
               <td>
                 <span class="badge bg-light text-dark border fw-semibold">
