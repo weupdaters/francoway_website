@@ -685,15 +685,15 @@
     ===============================*/
     $(document).on('click', '.deleteLesson', function() {
         let lessonId = $(this).data('id');
-        if (!confirm('Delete this lesson?')) return;
-
-        $.ajax({
-            url: '/teacher/ajax/lesson/' + lessonId,
-            method: 'GET',
-            success: function(res) {
-                alert('Deleted Successfully');
-                loadLessons(selectedCourse);
-            }
+        confirmAction('Delete Lesson', 'Are you sure you want to delete this lesson?', 'Yes, delete it!', function() {
+            $.ajax({
+                url: '/teacher/ajax/lesson/' + lessonId,
+                method: 'GET',
+                success: function(res) {
+                    showToast('Lesson deleted successfully', 'success');
+                    loadLessons(selectedCourse);
+                }
+            });
         });
     });
 </script>

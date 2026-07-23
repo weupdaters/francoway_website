@@ -681,6 +681,46 @@
     <script src="{{ asset('admin/js/custom/echarts.js') }}"></script>
     <script src="{{ asset('admin/js/custom/maps.js') }}"></script>
     <script src="{{ asset('admin/js/custom/custom.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Global toast function
+        window.showToast = function(message, type = 'success') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            Toast.fire({
+                icon: type,
+                title: message
+            });
+        };
+
+        // Global confirmation helper
+        window.confirmAction = function(title, text, confirmButtonText, callback) {
+            Swal.fire({
+                title: title || 'Are you sure?',
+                text: text || '',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#E31B23', // Matches primary brand color
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: confirmButtonText || 'Yes, proceed!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    callback();
+                }
+            });
+        };
+    </script>
 
     {{-- Page Scripts --}}
     @stack('scripts')

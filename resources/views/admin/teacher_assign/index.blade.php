@@ -272,9 +272,15 @@
           $(this).serialize(),
 
           function() {
-            alert('Assignment Added');
-            $('#assignModal').modal('hide');
-            location.reload();
+            Swal.fire({
+              icon: 'success',
+              title: 'Assignment Added',
+              showConfirmButton: true,
+              confirmButtonColor: '#E31B23'
+            }).then(() => {
+              $('#assignModal').modal('hide');
+              location.reload();
+            });
           });
 
       });
@@ -317,8 +323,14 @@
             course_id: $('#edit_course').val()
           },
           success: function() {
-            alert('Updated');
-            location.reload();
+            Swal.fire({
+              icon: 'success',
+              title: 'Assignment Updated',
+              showConfirmButton: true,
+              confirmButtonColor: '#E31B23'
+            }).then(() => {
+              location.reload();
+            });
           }
         });
 
@@ -328,21 +340,27 @@
       /* DELETE */
       $('.deleteBtn').click(function() {
 
-        if (!confirm('Delete?')) return;
-
         let id = $(this).data('id');
 
-        $.ajax({
-          url: `/admin/teacher-assign/${id}`,
-          type: 'POST',
-          data: {
-            _token: "{{ csrf_token() }}",
-            _method: 'DELETE'
-          },
-          success: function() {
-            alert('Deleted');
-            location.reload();
-          }
+        confirmAction('Delete Assignment', 'Are you sure you want to delete this teacher assignment?', 'Yes, delete it!', function() {
+          $.ajax({
+            url: `/admin/teacher-assign/${id}`,
+            type: 'POST',
+            data: {
+              _token: "{{ csrf_token() }}",
+              _method: 'DELETE'
+            },
+            success: function() {
+              Swal.fire({
+                icon: 'success',
+                title: 'Assignment Deleted',
+                showConfirmButton: true,
+                confirmButtonColor: '#E31B23'
+              }).then(() => {
+                location.reload();
+              });
+            }
+          });
         });
 
       });

@@ -115,27 +115,54 @@
           <div class="card bg-white p-20 rounded-10 border border-white mb-4">
 
             <div class="lesson-input d-none mb-3" id="videoInput">
-              <label>Upload Video</label>
-              <input type="file" name="video_file" class="form-control" accept="video/*">
+              <label class="fw-semibold"><i class="bi bi-camera-video text-primary me-1"></i>Upload Video</label>
+              <div id="videoPreviewWrap" class="d-none mb-2">
+                <div style="position:relative;border-radius:8px;overflow:hidden;background:#071530;">
+                  <video id="videoPreviewEl" controls style="width:100%;max-height:180px;display:block;"></video>
+                  <button type="button" id="clearVideoBtn"
+                    style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);border:none;border-radius:50%;width:26px;height:26px;color:#fff;font-size:13px;cursor:pointer;">✕</button>
+                </div>
+                <small class="text-muted mt-1 d-block" id="videoFileName"></small>
+              </div>
+              <input type="file" name="video_file" id="videoFileInput" class="form-control" accept="video/mp4,video/mov,video/avi">
             </div>
 
             <div class="lesson-input d-none mb-3" id="pdfInput">
-              <label>Upload PDF</label>
-              <input type="file" name="pdf_file" class="form-control" accept="application/pdf">
+              <label class="fw-semibold"><i class="bi bi-file-earmark-pdf text-danger me-1"></i>Upload PDF</label>
+              <div id="pdfPreviewWrap" class="d-none mb-2">
+                <div class="d-flex align-items-center gap-2 p-2 rounded" style="background:#fff0f0;border:1px dashed #e74c3c;">
+                  <i class="bi bi-file-earmark-pdf-fill text-danger fs-3"></i>
+                  <small class="text-dark fw-semibold" id="pdfFileName"></small>
+                </div>
+              </div>
+              <input type="file" name="pdf_file" id="pdfFileInput" class="form-control" accept="application/pdf">
             </div>
 
             <div class="lesson-input d-none mb-3" id="imageInput">
-              <label>Upload Image</label>
-              <input type="file" name="image_file" class="form-control" accept="image/*">
+              <label class="fw-semibold"><i class="bi bi-image text-success me-1"></i>Upload Image</label>
+              <div id="imagePreviewWrap" class="d-none mb-2">
+                <div style="position:relative;display:inline-block;width:100%;">
+                  <img id="imagePreviewEl" src="" alt="Preview"
+                    style="width:100%;max-height:180px;object-fit:cover;border-radius:8px;border:1px solid #e0e0e0;">
+                  <button type="button" id="clearImageBtn"
+                    style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);border:none;border-radius:50%;width:26px;height:26px;color:#fff;font-size:13px;cursor:pointer;">✕</button>
+                </div>
+                <small class="text-muted mt-1 d-block" id="imageFileName"></small>
+              </div>
+              <input type="file" name="image_file" id="imageFileInput" class="form-control" accept="image/jpg,image/jpeg,image/png,image/webp">
             </div>
 
             <div class="lesson-input d-none mb-3" id="audioInput">
-              <label>Upload Audio</label>
-              <input type="file" name="audio_file" class="form-control" accept="audio/*">
+              <label class="fw-semibold"><i class="bi bi-mic text-warning me-1"></i>Upload Audio</label>
+              <div id="audioPreviewWrap" class="d-none mb-2">
+                <audio id="audioPreviewEl" controls style="width:100%;"></audio>
+                <small class="text-muted mt-1 d-block" id="audioFileName"></small>
+              </div>
+              <input type="file" name="audio_file" id="audioFileInput" class="form-control" accept="audio/mp3,audio/wav">
             </div>
 
             <div class="lesson-input d-none mb-3" id="summaryInput">
-              <label>Summary</label>
+              <label class="fw-semibold">Summary</label>
               <textarea name="summary" class="form-control"></textarea>
             </div>
 
@@ -192,6 +219,57 @@
         if (this.value === 'summary') $('#summaryInput').removeClass('d-none');
       });
 
+      // ---- IMAGE PREVIEW ----
+      $('#imageFileInput').on('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        $('#imagePreviewEl').attr('src', URL.createObjectURL(file));
+        $('#imageFileName').text(file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)');
+        $('#imagePreviewWrap').removeClass('d-none');
+      });
+      $('#clearImageBtn').on('click', function() {
+        $('#imageFileInput').val('');
+        $('#imagePreviewEl').attr('src', '');
+        $('#imageFileName').text('');
+        $('#imagePreviewWrap').addClass('d-none');
+      });
+
+      // ---- VIDEO PREVIEW ----
+      $('#videoFileInput').on('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const v = document.getElementById('videoPreviewEl');
+        v.src = URL.createObjectURL(file);
+        v.load();
+        $('#videoFileName').text(file.name + ' (' + (file.size / 1024 / 1024).toFixed(1) + ' MB)');
+        $('#videoPreviewWrap').removeClass('d-none');
+      });
+      $('#clearVideoBtn').on('click', function() {
+        $('#videoFileInput').val('');
+        document.getElementById('videoPreviewEl').src = '';
+        $('#videoFileName').text('');
+        $('#videoPreviewWrap').addClass('d-none');
+      });
+
+      // ---- AUDIO PREVIEW ----
+      $('#audioFileInput').on('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const a = document.getElementById('audioPreviewEl');
+        a.src = URL.createObjectURL(file);
+        a.load();
+        $('#audioFileName').text(file.name);
+        $('#audioPreviewWrap').removeClass('d-none');
+      });
+
+      // ---- PDF INDICATOR ----
+      $('#pdfFileInput').on('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        $('#pdfFileName').text(file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)');
+        $('#pdfPreviewWrap').removeClass('d-none');
+      });
+
 
       $('#saveSectionBtn').on('click', function() {
 
@@ -222,7 +300,7 @@
                 .removeClass('d-none');
               return;
             } else {
-              alert(data.message || 'Section added successfully!');
+              showToast(data.message || 'Section added successfully!', 'success');
             }
 
 

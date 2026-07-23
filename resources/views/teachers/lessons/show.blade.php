@@ -17,9 +17,9 @@
           <p class="text-muted">{{ $lesson->course->title ?? 'N/A' }}</p>
 
           <p class="mb-1 fw-semibold">Description</p>
-          <p class="text-muted">
-            {{ $lesson->description ?? 'No description available' }}
-          </p>
+          <div class="text-muted" style="line-height:1.6; font-size:14px;">
+            {!! $lesson->description ? $lesson->description : '<em>No description available</em>' !!}
+          </div>
 
           <a href="{{ route('teacher.lessons.edit', $lesson->id) }}" class="btn btn-primary btn-sm mt-3">
             Edit Lesson
@@ -39,23 +39,38 @@
 
           {{-- VIDEO --}}
           @if ($lesson->video_file)
-            <video class="w-100" height="400" controls controlsList="nodownload" disablePictureInPicture>
-              <source src="{{ asset('storage/' . $lesson->video_file) }}" type="video/mp4">
-            </video>
+            <div style="width:100%; max-height:400px; overflow:hidden; border-radius:12px;">
+              <video
+                style="width:100%; height:400px; display:block; object-fit:contain; background:#000; border-radius:12px;"
+                controls
+                controlsList="nodownload"
+                disablePictureInPicture>
+                <source src="{{ asset('storage/' . $lesson->video_file) }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
 
             {{-- AUDIO --}}
           @elseif($lesson->audio_file)
-            <audio class="w-100" controls controlsList="nodownload">
+            <audio class="w-100" controls controlsList="nodownload" style="border-radius:12px;">
               <source src="{{ asset('storage/' . $lesson->audio_file) }}">
             </audio>
 
             {{-- PDF --}}
           @elseif($lesson->pdf_file)
-            <iframe src="{{ asset('storage/' . $lesson->pdf_file) }}" width="100%" height="500"></iframe>
+            <iframe
+              src="{{ asset('storage/' . $lesson->pdf_file) }}"
+              style="width:100%; height:500px; border:none; border-radius:12px; display:block;">
+            </iframe>
 
             {{-- IMAGE --}}
           @elseif($lesson->image_file)
-            <img src="{{ asset('storage/' . $lesson->image_file) }}" class="img-fluid rounded">
+            <div style="width:100%; text-align:center;">
+              <img
+                src="{{ asset('storage/' . $lesson->image_file) }}"
+                style="max-width:100%; max-height:400px; width:auto; height:auto; object-fit:contain; border-radius:12px; display:block; margin:0 auto;"
+                alt="Lesson Image">
+            </div>
 
             {{-- SUMMARY --}}
           @elseif($lesson->summary)

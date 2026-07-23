@@ -5,24 +5,51 @@
 @section('content')
 
   <style>
-    /* ===== Lesson Video Styling ===== */
+    /* ===== Lesson Media Styling ===== */
     .lesson-video-wrapper {
       max-width: 800px;
-      /* 👈 video size control */
       margin: 0 auto 20px;
-      /* center + spacing */
     }
 
-    .lesson-video-wrapper video,
+    .lesson-video-wrapper video {
+      width: 100%;
+      height: 420px;
+      display: block;
+      object-fit: contain;
+      background: #000;
+      border-radius: 12px;
+    }
+
     .lesson-video-wrapper iframe {
       width: 100%;
-      height: auto;
       border-radius: 12px;
+      border: none;
+    }
+
+    .lesson-video-wrapper img {
+      max-width: 100%;
+      max-height: 420px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
     }
 
     .lesson-content {
       max-width: 900px;
       margin: 0 auto;
+    }
+
+    .lesson-description {
+      line-height: 1.8;
+      font-size: 15px;
+      color: #4a5568;
+    }
+
+    .lesson-description p {
+      margin-bottom: 1rem;
     }
   </style>
 
@@ -44,42 +71,54 @@
           {{ $lesson->title }}
         </h3>
 
-        {{-- ================= VIDEO SECTION ================= --}}
+        {{-- ================= MEDIA SECTION ================= --}}
 
         {{-- YouTube / iframe video --}}
         @if ($lesson->video_url)
           <div class="lesson-video-wrapper">
-            <div class="ratio ratio-16x9">
-              <iframe src="{{ $lesson->video_url }}" allowfullscreen>
-              </iframe>
+            <div class="ratio ratio-16x9" style="border-radius:12px; overflow:hidden;">
+              <iframe src="{{ $lesson->video_url }}" allowfullscreen style="border-radius:12px;"></iframe>
             </div>
           </div>
 
-          {{-- Uploaded video file --}}
+        {{-- Uploaded video file --}}
         @elseif($lesson->video_file)
           <div class="lesson-video-wrapper">
-            <video controls>
-              <source src="{{ asset('storage/' . $lesson->video_file) }}">
+            <video controls controlsList="nodownload" disablePictureInPicture>
+              <source src="{{ asset('storage/' . $lesson->video_file) }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
 
-
-
-          {{-- PDF file --}}
+        {{-- PDF file --}}
         @elseif($lesson->pdf_file)
           <div class="lesson-video-wrapper">
-            <a href="{{ asset('storage/' . $lesson->pdf_file) }}" target="_blank"
-              class="btn btn-outline-primary w-100 mb-2">
-              View PDF
-            </a>
+            <iframe
+              src="{{ asset('storage/' . $lesson->pdf_file) }}"
+              style="width:100%; height:500px; border:none; border-radius:12px; display:block;">
+            </iframe>
+          </div>
+
+        {{-- Image file --}}
+        @elseif($lesson->image_file)
+          <div class="lesson-video-wrapper" style="text-align:center;">
+            <img src="{{ asset('storage/' . $lesson->image_file) }}" alt="{{ $lesson->title }}">
+          </div>
+
+        {{-- Audio file --}}
+        @elseif($lesson->audio_file)
+          <div class="lesson-video-wrapper">
+            <audio controls class="w-100" style="border-radius:12px;">
+              <source src="{{ asset('storage/' . $lesson->audio_file) }}">
+              Your browser does not support the audio tag.
+            </audio>
           </div>
         @endif
 
 
         {{-- ================= DESCRIPTION ================= --}}
         @if ($lesson->description)
-          <div class="mt-4">
+          <div class="mt-4 lesson-description">
             {!! $lesson->description !!}
           </div>
         @else

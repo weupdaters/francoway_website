@@ -62,8 +62,8 @@
 
                 <div class="mb-20">
                     <label class="label fs-16 mb-2 fw-bold">Description</label>
-                    <div class="text-secondary">
-                        {!! $lesson->description ?: '<em>No description available</em>' !!}
+                    <div class="text-secondary" style="line-height:1.7; font-size:14.5px;">
+                        {!! $lesson->description ? $lesson->description : '<em>No description available</em>' !!}
                     </div>
                 </div>
 
@@ -77,13 +77,18 @@
 
                 {{-- VIDEO --}}
                 @if($lesson->video_file)
-                    <video controls width="100%" class="mb-3 rounded">
-                        <source src="{{ asset('storage/'.$lesson->video_file) }}" type="video/mp4">
-                    </video>
+                    <div style="width:100%; border-radius:12px; overflow:hidden;">
+                        <video
+                            style="width:100%; height:240px; display:block; object-fit:contain; background:#000; border-radius:12px;"
+                            controls>
+                            <source src="{{ asset('storage/'.$lesson->video_file) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
 
                 {{-- AUDIO --}}
                 @elseif($lesson->audio_file)
-                    <audio controls class="w-100 mb-3">
+                    <audio controls class="w-100 mb-3" style="border-radius:12px;">
                         <source src="{{ asset('storage/'.$lesson->audio_file) }}" type="audio/mpeg">
                     </audio>
 
@@ -97,8 +102,11 @@
 
                 {{-- IMAGE --}}
                 @elseif($lesson->image_file)
-                    <img src="{{ asset('storage/'.$lesson->image_file) }}"
-                         class="img-fluid rounded mb-3">
+                    <div style="width:100%; text-align:center;">
+                        <img src="{{ asset('storage/'.$lesson->image_file) }}"
+                             style="max-width:100%; max-height:280px; width:auto; height:auto; object-fit:contain; border-radius:12px; display:block; margin:0 auto;"
+                             alt="Lesson Image">
+                    </div>
 
                 @else
                     <p class="text-muted">No media available</p>
