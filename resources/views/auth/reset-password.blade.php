@@ -105,8 +105,8 @@
                     </div>
                 @endif
 
-                <!-- Form -->
-                <form action="{{ route('password.update') }}" method="POST" class="space-y-4">
+                <!-- Main Password Update Form -->
+                <form id="resetPasswordForm" action="{{ route('password.update') }}" method="POST" class="space-y-4">
                     @csrf
                     
                     <!-- Email field -->
@@ -121,6 +121,7 @@
                             <input 
                                 type="email" 
                                 name="email" 
+                                id="emailInput"
                                 value="{{ old('email', $email) }}" 
                                 placeholder="name@example.com" 
                                 required 
@@ -136,13 +137,9 @@
                     <div class="space-y-1.5">
                         <div class="flex justify-between items-center">
                             <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">6-Digit OTP Code</label>
-                            <form action="{{ route('password.otp.resend') }}" method="POST" class="inline">
-                                @csrf
-                                <input type="hidden" name="email" value="{{ old('email', $email) }}">
-                                <button type="submit" class="text-xs font-bold text-brandRed hover:underline bg-transparent border-0 p-0 cursor-pointer">
-                                    Resend OTP Mail?
-                                </button>
-                            </form>
+                            <button type="submit" form="resendOtpForm" class="text-xs font-bold text-brandRed hover:underline bg-transparent border-0 p-0 cursor-pointer">
+                                Resend OTP Mail?
+                            </button>
                         </div>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
@@ -214,19 +211,21 @@
                             </svg>
                         </button>
                     </div>
-
-                    <!-- Resend OTP Mail Box -->
-                    <div class="p-3.5 bg-gray-50 border border-gray-150 rounded-2xl flex items-center justify-between text-xs">
-                        <span class="text-gray-500 font-medium">Didn't receive the OTP mail?</span>
-                        <form action="{{ route('password.otp.resend') }}" method="POST" class="inline">
-                            @csrf
-                            <input type="hidden" name="email" value="{{ old('email', $email) }}">
-                            <button type="submit" class="font-bold text-brandRed hover:underline bg-transparent border-0 p-0 cursor-pointer">
-                                Resend Mail
-                            </button>
-                        </form>
-                    </div>
                 </form>
+
+                <!-- Separate Resend OTP Form (No Form Nesting) -->
+                <form id="resendOtpForm" action="{{ route('password.otp.resend') }}" method="POST" class="hidden">
+                    @csrf
+                    <input type="hidden" name="email" value="{{ old('email', $email) }}" id="resendEmailInput">
+                </form>
+
+                <!-- Resend OTP Mail Box -->
+                <div class="p-3.5 bg-gray-50 border border-gray-150 rounded-2xl flex items-center justify-between text-xs">
+                    <span class="text-gray-500 font-medium">Didn't receive the OTP mail?</span>
+                    <button type="submit" form="resendOtpForm" class="font-bold text-brandRed hover:underline bg-transparent border-0 p-0 cursor-pointer">
+                        Resend Mail
+                    </button>
+                </div>
             </div>
 
             <!-- Footer Meta -->
@@ -278,5 +277,15 @@
 
     </div>
 
+    <script>
+        // Sync email input between main form and resend form dynamically
+        const emailInput = document.getElementById('emailInput');
+        const resendEmailInput = document.getElementById('resendEmailInput');
+        if (emailInput && resendEmailInput) {
+            emailInput.addEventListener('input', function() {
+                resendEmailInput.value = this.value;
+            });
+        }
+    </script>
 </body>
 </html>
