@@ -124,6 +124,136 @@
     .mirror-badge-blue-progress {
         background-color: #0B1F4D; /* Blue in screenshot */
     }
+    .mirror-badge-premium {
+        background: linear-gradient(135deg, #d63384 0%, #e91e8c 100%);
+        top: 12px;
+        right: 12px;
+        bottom: auto;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        box-shadow: 0 2px 12px rgba(214, 51, 132, 0.45);
+    }
+
+    /* ===== Course Locked Overlay ===== */
+    .course-locked-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba(10,15,40,0.88) 0%, rgba(30,10,40,0.92) 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 16px;
+        z-index: 10;
+        text-align: center;
+        gap: 8px;
+        backdrop-filter: blur(2px);
+    }
+    .locked-glow-ring {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(229,57,53,0.30) 0%, rgba(229,57,53,0.06) 65%, transparent 100%);
+        border: 2px solid rgba(229,57,53,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 4px;
+        box-shadow: 0 0 18px rgba(229,57,53,0.25), inset 0 0 18px rgba(229,57,53,0.10);
+        animation: lockedPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes lockedPulse {
+        0%, 100% { box-shadow: 0 0 18px rgba(229,57,53,0.25), inset 0 0 18px rgba(229,57,53,0.10); }
+        50%       { box-shadow: 0 0 32px rgba(229,57,53,0.50), inset 0 0 24px rgba(229,57,53,0.20); }
+    }
+    .locked-glow-ring i {
+        font-size: 26px;
+        color: #ffffff;
+    }
+    /* Decorative particles */
+    .locked-particle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(229,57,53,0.7);
+        animation: particleFloat 3s ease-in-out infinite;
+    }
+    .locked-particle:nth-child(1){ top: 8px; left: 14px; animation-delay: 0s; }
+    .locked-particle:nth-child(2){ top: 14px; right: 10px; animation-delay: 0.8s; width:4px; height:4px; }
+    .locked-particle:nth-child(3){ bottom: 10px; left: 20px; animation-delay: 1.4s; width:3px; height:3px; }
+    @keyframes particleFloat {
+        0%, 100% { opacity: 0.4; transform: translateY(0); }
+        50%       { opacity: 1;   transform: translateY(-5px); }
+    }
+    .locked-title {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.2;
+    }
+    .locked-subtitle {
+        font-size: 11px;
+        color: rgba(255,255,255,0.72);
+        line-height: 1.4;
+        margin: 0;
+        max-width: 200px;
+    }
+    .locked-cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100%;
+        max-width: 220px;
+        height: 40px;
+        border-radius: 22px;
+        background: linear-gradient(90deg, #E53935 0%, #c0392b 100%);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 12.5px;
+        text-decoration: none;
+        border: none;
+        margin-top: 4px;
+        box-shadow: 0 4px 14px rgba(229,57,53,0.40);
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+    }
+    .locked-cta-btn::after {
+        content: '→';
+        margin-left: 4px;
+        transition: transform 0.2s;
+    }
+    .locked-cta-btn:hover {
+        background: linear-gradient(90deg, #c0392b 0%, #a93226 100%);
+        color: #ffffff;
+        box-shadow: 0 6px 20px rgba(229,57,53,0.55);
+        transform: translateY(-1px);
+    }
+    .locked-cta-btn:hover::after {
+        transform: translateX(4px);
+    }
+    .locked-secure-text {
+        font-size: 10px;
+        color: rgba(255,255,255,0.50);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 2px;
+    }
+    .locked-secure-text i {
+        font-size: 10px;
+    }
     .mirror-card-body {
         padding: 20px;
         flex-grow: 1;
@@ -393,8 +523,8 @@
                             $badgeClass = 'mirror-badge-in-progress';
                             $statusText = 'In Progress';
                             if($isPending) {
-                                $badgeClass = 'bg-warning text-dark';
-                                $statusText = '🔒 Pending Payment';
+                                $badgeClass = 'mirror-badge-premium';
+                                $statusText = '&#x1F48E; Premium Course';
                             } elseif($completed){
                                 $badgeClass = 'mirror-badge-completed';
                                 $statusText = 'Completed';
@@ -415,7 +545,25 @@
                             <div class="mirror-course-card">
                                 <div class="mirror-card-img-box">
                                     <img src="{{ $courseImage }}" class="mirror-card-img" alt="{{ $course->title }}" onerror="this.src='{{ $noImageBanner }}'">
-                                    <span class="mirror-status-badge {{ $badgeClass }}">{{ $statusText }}</span>
+                                    <span class="mirror-status-badge {{ $badgeClass }}">{!! $statusText !!}</span>
+                                    @if($isPending)
+                                    <div class="course-locked-overlay">
+                                        <div class="locked-glow-ring">
+                                            <span class="locked-particle"></span>
+                                            <span class="locked-particle"></span>
+                                            <span class="locked-particle"></span>
+                                            <i class="bi bi-lock-fill"></i>
+                                        </div>
+                                        <p class="locked-title">Course Locked</p>
+                                        <p class="locked-subtitle">Complete your payment to unlock all lessons, quizzes and certificates.</p>
+                                        <a href="{{ route('users.checkout', $course->id) }}" class="locked-cta-btn">
+                                            <i class="bi bi-lock-fill"></i> Complete Payment
+                                        </a>
+                                        <span class="locked-secure-text">
+                                            <i class="bi bi-shield-check"></i> Secure &amp; Safe Payment
+                                        </span>
+                                    </div>
+                                    @endif
                                 </div>
 
                                 <div class="mirror-card-body">
@@ -439,9 +587,7 @@
                                         @if($isExpired)
                                             <button class="mirror-btn-navy w-100" disabled>🔒 Expired</button>
                                         @elseif($isPending)
-                                            <a href="{{ route('users.checkout', $course->id) }}" class="mirror-btn-red w-100 text-center text-truncate d-block">
-                                                <i class="bi bi-credit-card-2-front-fill"></i> Complete Payment
-                                            </a>
+                                            {{-- No button below card for pending: CTA is inside the locked overlay --}}
                                         @else
                                             <div class="d-flex gap-2">
                                                 @if($completed)
