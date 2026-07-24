@@ -111,4 +111,30 @@ class StudentAccessAndExpiryTest extends TestCase
             'is_completed' => 1,
         ]);
     }
+
+    public function test_student_with_expired_subscription_accessing_checkout_does_not_loop()
+    {
+        $student = User::factory()->create(['role' => 'user']);
+        $paidCourse = Course::create([
+            'title' => 'Advanced French Vocab',
+            'price' => 2499.00,
+            'status' => 1,
+        ]);
+
+        DB::table('course_user_subscriptions')->insert([
+            'user_id' => $student->id,
+            'course_id' => $paidCourse->id,
+            'payment_status' => 'paid',
+            'subscription_status' => 'active',
+            'start_date' => now()->subDays(40),
+            'expiry_date' => now()->subDays(10), // EXPIRED but status was still active
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $response = $this->actingAs($student)->get("/users/courses/{$paidCourse->id}/checkout");
+        $response->assertStatus(200);
+        $response->assertViewIs('users.checkout.index');
+    }
 }
+

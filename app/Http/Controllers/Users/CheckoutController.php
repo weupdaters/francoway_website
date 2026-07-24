@@ -16,15 +16,26 @@ class CheckoutController extends Controller
     {
         $course = Course::findOrFail($id);
 
-        // Check if user is already enrolled
-        $alreadySubscribed = CourseUserSubscription::where('user_id', auth()->id())
+        // Check if user is already enrolled with an active, non-expired, paid subscription
+        $subscription = CourseUserSubscription::where('user_id', auth()->id())
             ->where('course_id', $course->id)
-            ->where('subscription_status', 'active')
+            ->latest()
             ->first();
 
-        if ($alreadySubscribed) {
-            return redirect()->route('users.lessons.index', $course->id)
-                ->with('info', 'You are already enrolled in this course.');
+        if ($subscription) {
+            $isExpired = $subscription->expiry_date && Carbon::parse($subscription->expiry_date)->isPast();
+
+            if ($isExpired && $subscription->subscription_status === 'active') {
+                $subscription->update([
+                    'subscription_status' => 'expired',
+                    'status'              => 'expired',
+                ]);
+            }
+
+            if ($subscription->subscription_status === 'active' && $subscription->payment_status !== 'pending' && !$isExpired) {
+                return redirect()->route('users.lessons.index', $course->id)
+                    ->with('info', 'You are already enrolled in this course.');
+            }
         }
 
         return view('users.checkout.index', compact('course'));
@@ -48,10 +59,18 @@ class CheckoutController extends Controller
         try {
             DB::beginTransaction();
 
-            // Race condition guard: re-check inside transaction
+            // Race condition guard: re-check inside transaction for active valid subscription
             $alreadySubscribed = CourseUserSubscription::where('user_id', $user->id)
                 ->where('course_id', $course->id)
                 ->where('subscription_status', 'active')
+                ->where(function ($q) {
+                    $q->whereNull('payment_status')
+                      ->orWhere('payment_status', '!=', 'pending');
+                })
+                ->where(function ($q) {
+                    $q->whereNull('expiry_date')
+                      ->orWhere('expiry_date', '>', now());
+                })
                 ->lockForUpdate()
                 ->first();
 
