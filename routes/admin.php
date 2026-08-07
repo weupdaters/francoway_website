@@ -39,6 +39,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
 
     Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
+    Route::patch('/courses/{course}/prompt', [CourseController::class, 'updatePrompt'])->name('courses.update-prompt');
     Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
     //   Lesson Routes

@@ -241,6 +241,75 @@
         });
     </script>
 
+    @if(isset($locale_not_chosen) && $locale_not_chosen)
+        <!-- Language Selection Popup Modal -->
+        <div id="language-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md transition-opacity duration-500 ease-out opacity-0 pointer-events-none">
+            <div class="relative w-full max-w-md p-8 bg-white border border-gray-100 rounded-3xl shadow-2xl transform translate-y-8 scale-95 transition-all duration-500 ease-out">
+                <!-- Decorative French flag stripes at the top -->
+                <div class="absolute inset-x-0 top-0 h-1.5 flex rounded-t-3xl overflow-hidden">
+                    <div class="w-1/3 bg-blue-600"></div>
+                    <div class="w-1/3 bg-white"></div>
+                    <div class="w-1/3 bg-red-600"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="text-center mt-2">
+                    <!-- Icon/Globe -->
+                    <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-blue-600 mb-5 animate-pulse">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253"/>
+                        </svg>
+                    </div>
+
+                    <!-- Headings -->
+                    <h3 class="text-2xl font-black text-[#0B1E43] tracking-tight">Choose Your Language</h3>
+                    <p class="text-base font-semibold text-gray-500 mt-1 mb-6">Choisissez votre langue</p>
+
+                    <!-- Language Buttons -->
+                    <div class="flex flex-col gap-3">
+                        <!-- English Option -->
+                        <a href="?lang=en" class="flex items-center justify-between px-6 py-4 border-2 border-gray-200 hover:border-[#0B1E43] rounded-2xl font-bold text-gray-800 hover:text-[#0B1E43] bg-gray-50/50 hover:bg-blue-50/30 transition-all duration-300 group">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🇬🇧</span>
+                                <span class="text-left font-bold text-base leading-tight">English <span class="block text-xs text-gray-500 font-medium">Continue in English</span></span>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-[#0B1E43] transition-colors" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+
+                        <!-- French Option -->
+                        <a href="?lang=fr" class="flex items-center justify-between px-6 py-4 border-2 border-gray-200 hover:border-[#E31B23] rounded-2xl font-bold text-gray-800 hover:text-[#E31B23] bg-gray-50/50 hover:bg-red-50/30 transition-all duration-300 group">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🇫🇷</span>
+                                <span class="text-left font-bold text-base leading-tight">Français <span class="block text-xs text-gray-500 font-medium">Continuer en français</span></span>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-[#E31B23] transition-colors" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script to handle entry animation -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const modal = document.getElementById('language-modal');
+                const modalBox = modal.querySelector('div');
+
+                // Trigger smooth show after short delay
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0', 'pointer-events-none');
+                    modalBox.classList.remove('translate-y-8', 'scale-95');
+                    modal.classList.add('opacity-100');
+                    modalBox.classList.add('translate-y-0', 'scale-100');
+                }, 300);
+            });
+        </script>
+    @endif
+
     @stack('js')
 </body>
 </html>

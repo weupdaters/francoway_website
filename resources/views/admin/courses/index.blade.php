@@ -36,6 +36,35 @@
 .progress-bar {
     border-radius: 20px;
 }
+
+.btn-prompt {
+    background: #071530 !important;
+    color: #ffffff !important;
+    border: 1px solid #071530 !important;
+    box-shadow: 0 4px 14px rgba(7, 21, 48, 0.12) !important;
+}
+
+.btn-prompt:hover {
+    background: #E53935 !important;
+    color: #ffffff !important;
+    border-color: #E53935 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.22) !important;
+}
+
+.list-group-item.active {
+    background: #071530 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+.list-group-item:not(.active) {
+    background-color: #f8fafc !important;
+    color: #4a5568 !important;
+}
+.list-group-item:not(.active):hover {
+    background-color: #eff3f9 !important;
+    color: #071530 !important;
+}
 </style>
 {{-- Breadcrumb --}}
 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
@@ -135,12 +164,18 @@
                     </div>
                 </div>
 
-                {{-- Button --}}
-                <div class="mt-auto">
+                {{-- Buttons --}}
+                <div class="mt-auto d-flex gap-2">
                     <a href="{{ route('admin.courses.show',$course->id) }}"
-                       class="btn btn-primary w-100 rounded-pill">
+                       class="btn btn-primary flex-grow-1 rounded-pill">
                         View Details
                     </a>
+                    <button type="button" 
+                            class="btn btn-prompt rounded-pill px-3" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#promptModal-{{ $course->id }}">
+                        {{ $course->has_custom_prompt ? 'Edit Prompt' : 'Add Prompt' }}
+                    </button>
                 </div>
 
                 {{-- Icons --}}
@@ -172,6 +207,86 @@
             </div>
         </div>
 
+        <!-- Modal for Custom Prompt -->
+        <div class="modal fade" id="promptModal-{{ $course->id }}" tabindex="-1" aria-labelledby="promptModalLabel-{{ $course->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 bg-white">
+                    <div class="modal-header border-bottom-0 pb-0">
+                        <h5 class="modal-title fw-bold text-dark fs-18" id="promptModalLabel-{{ $course->id }}">
+                            AI Custom Prompts: {{ $course->title }}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    @php
+                        $prompts = [];
+                        if ($course->custom_prompt) {
+                            $prompts = json_decode($course->custom_prompt, true);
+                            if (json_last_error() !== JSON_ERROR_NONE || !is_array($prompts)) {
+                                $prompts = [
+                                    'reading' => $course->custom_prompt,
+                                    'listening' => '',
+                                    'speaking' => '',
+                                    'writing' => '',
+                                ];
+                            }
+                        }
+                        $readingPrompt = $prompts['reading'] ?? '';
+                        $listeningPrompt = $prompts['listening'] ?? '';
+                        $speakingPrompt = $prompts['speaking'] ?? '';
+                        $writingPrompt = $prompts['writing'] ?? '';
+                    @endphp
+                    <form action="{{ route('admin.courses.update-prompt', $course->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <div class="modal-body py-4">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="list-group rounded-3 shadow-sm border-0" id="modalModuleList-{{ $course->id }}" role="tablist">
+                                        <button type="button" class="list-group-item list-group-item-action active border-0 py-3 d-flex align-items-center gap-2" id="modal-reading-list-{{ $course->id }}" data-bs-toggle="list" href="#modal-reading-{{ $course->id }}" role="tab" aria-controls="modal-reading-{{ $course->id }}">
+                                            <i class="ri-book-open-line fs-18"></i> <span>Reading</span>
+                                        </button>
+                                        <button type="button" class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center gap-2" id="modal-listening-list-{{ $course->id }}" data-bs-toggle="list" href="#modal-listening-{{ $course->id }}" role="tab" aria-controls="modal-listening-{{ $course->id }}">
+                                            <i class="ri-customer-service-line fs-18"></i> <span>Listening</span>
+                                        </button>
+                                        <button type="button" class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center gap-2" id="modal-speaking-list-{{ $course->id }}" data-bs-toggle="list" href="#modal-speaking-{{ $course->id }}" role="tab" aria-controls="modal-speaking-{{ $course->id }}">
+                                            <i class="ri-mic-line fs-18"></i> <span>Speaking</span>
+                                        </button>
+                                        <button type="button" class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center gap-2" id="modal-writing-list-{{ $course->id }}" data-bs-toggle="list" href="#modal-writing-{{ $course->id }}" role="tab" aria-controls="modal-writing-{{ $course->id }}">
+                                            <i class="ri-edit-2-line fs-18"></i> <span>Writing</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="tab-content" id="modalTabContent-{{ $course->id }}">
+                                        <div class="tab-pane fade show active p-3 bg-light rounded-3 border-0" id="modal-reading-{{ $course->id }}" role="tabpanel" aria-labelledby="modal-reading-list-{{ $course->id }}">
+                                            <label class="label fs-13 mb-2 text-muted uppercase">Reading Custom Prompt</label>
+                                            <textarea name="prompts[reading]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Reading...">{{ $readingPrompt }}</textarea>
+                                        </div>
+                                        <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="modal-listening-{{ $course->id }}" role="tabpanel" aria-labelledby="modal-listening-list-{{ $course->id }}">
+                                            <label class="label fs-13 mb-2 text-muted uppercase">Listening Custom Prompt</label>
+                                            <textarea name="prompts[listening]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Listening...">{{ $listeningPrompt }}</textarea>
+                                        </div>
+                                        <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="modal-speaking-{{ $course->id }}" role="tabpanel" aria-labelledby="modal-speaking-list-{{ $course->id }}">
+                                            <label class="label fs-13 mb-2 text-muted uppercase">Speaking Custom Prompt</label>
+                                            <textarea name="prompts[speaking]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Speaking...">{{ $speakingPrompt }}</textarea>
+                                        </div>
+                                        <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="modal-writing-{{ $course->id }}" role="tabpanel" aria-labelledby="modal-writing-list-{{ $course->id }}">
+                                            <label class="label fs-13 mb-2 text-muted uppercase">Writing Custom Prompt</label>
+                                            <textarea name="prompts[writing]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Writing...">{{ $writingPrompt }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 pt-0 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal" style="background-color: transparent !important; border: 1.5px solid #EAEAEA !important; color: #6c757d !important; box-shadow: none !important;">Cancel</button>
+                            <button type="submit" class="btn btn-prompt rounded-pill px-4">Save Prompt</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         @empty
             <div class="col-12 text-center">
                 No courses found
@@ -192,5 +307,7 @@
     </div>
 
 </div>
+
+
 
 @endsection
