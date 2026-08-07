@@ -116,9 +116,13 @@ class TranslatorService
         // Check Cache first
         foreach ($strings as $string) {
             $cacheKey = 'tr_' . md5($string) . '_' . $targetLocale;
-            if (Cache::has($cacheKey)) {
-                $results[$string] = Cache::get($cacheKey);
-            } else {
+            try {
+                if (Cache::has($cacheKey)) {
+                    $results[$string] = Cache::get($cacheKey);
+                } else {
+                    $missingStrings[] = $string;
+                }
+            } catch (\Throwable $e) {
                 $missingStrings[] = $string;
             }
         }
@@ -177,10 +181,14 @@ class TranslatorService
                             $translatedPart = $originalString;
                         }
 
-                        // Store translation in results and cache it forever
+                        // Store translation in results and cache it
                         $results[$originalString] = $translatedPart;
                         $cacheKey = 'tr_' . md5($originalString) . '_' . $targetLocale;
-                        Cache::forever($cacheKey, $translatedPart);
+                        try {
+                            Cache::forever($cacheKey, $translatedPart);
+                        } catch (\Throwable $e) {
+                            // Ignore cache write error
+                        }
                     }
                 } else {
                     // Fail gracefully
@@ -188,7 +196,7 @@ class TranslatorService
                         $results[$originalString] = $originalString;
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 // Fail gracefully
                 foreach ($batch as $originalString) {
                     $results[$originalString] = $originalString;
