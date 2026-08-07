@@ -175,6 +175,24 @@ class HomeController extends Controller
         $activeSkill = session('active_practice_skill');
         $activeQuestion = session('active_practice_question');
         $customPrompt = session('active_custom_prompt');
+        $activeSkillLower = strtolower($activeSkill ?? '');
+
+        if ($customPrompt) {
+            $decodedPrompt = json_decode($customPrompt, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decodedPrompt)) {
+                if ($activeSkillLower && isset($decodedPrompt[$activeSkillLower]) && !empty($decodedPrompt[$activeSkillLower])) {
+                    $customPrompt = $decodedPrompt[$activeSkillLower];
+                } else {
+                    $combined = "";
+                    foreach (['reading', 'listening', 'speaking', 'writing'] as $mod) {
+                        if (!empty($decodedPrompt[$mod])) {
+                            $combined .= "\n- " . ucfirst($mod) . " module custom prompt:\n" . $decodedPrompt[$mod];
+                        }
+                    }
+                    $customPrompt = !empty($combined) ? trim($combined) : null;
+                }
+            }
+        }
 
         $systemPrompt = "You are FrancoWay's AI Study Assistant. Your goal is to help students practice their English skills in 4 categories: Listening, Speaking, Writing, and Reading.
 

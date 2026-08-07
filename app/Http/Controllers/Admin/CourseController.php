@@ -44,14 +44,10 @@ class CourseController extends Controller
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'trial_video' => 'nullable',
-            'has_custom_prompt' => 'nullable',
-            'custom_prompt' => 'nullable|string',
         ]);
 
-        $data['has_custom_prompt'] = (bool) $request->input('has_custom_prompt');
-        if (!$data['has_custom_prompt']) {
-            $data['custom_prompt'] = null;
-        }
+        $data['has_custom_prompt'] = false;
+        $data['custom_prompt'] = null;
 
 
 
@@ -104,14 +100,7 @@ class CourseController extends Controller
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'trial_video' => 'nullable',
-            'has_custom_prompt' => 'nullable',
-            'custom_prompt' => 'nullable|string',
         ]);
-
-        $data['has_custom_prompt'] = (bool) $request->input('has_custom_prompt');
-        if (!$data['has_custom_prompt']) {
-            $data['custom_prompt'] = null;
-        }
 
         // 🔁 Update slug ONLY if title changed
         if ($course->title !== $request->title) {
@@ -139,6 +128,39 @@ class CourseController extends Controller
         return redirect()
             ->route('admin.courses.index')
             ->with('success', 'Course updated successfully');
+    }
+
+    public function updatePrompt(Request $request, Course $course)
+    {
+        $request->validate([
+            'prompts' => 'nullable|array',
+        ]);
+
+        $prompts = $request->input('prompts', []);
+        $cleanPrompts = [
+            'reading' => $prompts['reading'] ?? null,
+            'listening' => $prompts['listening'] ?? null,
+            'speaking' => $prompts['speaking'] ?? null,
+            'writing' => $prompts['writing'] ?? null,
+        ];
+
+        // Determine if there is any custom prompt configured
+        $hasCustomPrompt = false;
+        foreach ($cleanPrompts as $value) {
+            if (!empty(trim($value ?? ''))) {
+                $hasCustomPrompt = true;
+                break;
+            }
+        }
+
+        $course->update([
+            'has_custom_prompt' => $hasCustomPrompt,
+            'custom_prompt' => $hasCustomPrompt ? json_encode($cleanPrompts) : null,
+        ]);
+
+        return redirect()
+            ->back()
+            ->with('success', 'AI custom prompts updated successfully');
     }
 
     public function destroy(Course $course)
