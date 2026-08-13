@@ -146,7 +146,7 @@
 
                                 <!-- Bottom Solid Title Banner (Exact Visual Match to the Red Bands at the Bottom of Cards in the Image) -->
                                 <a 
-                                    href="{{ route('courses.show', $course->id) }}"
+                                    href="{{ route('courses.show', $course->slug ?? $course->id) }}"
                                     class="w-full bg-[#E31B23] group-hover:bg-[#0B1E43] text-white py-3 px-4 md:px-5 flex justify-between items-center transition-all duration-300 shadow-inner mt-auto"
                                 >
                                     <span class="font-heading font-bold text-sm md:text-base tracking-wide truncate pr-2">

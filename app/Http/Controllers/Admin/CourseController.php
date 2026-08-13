@@ -13,7 +13,18 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
+        $locale = app()->getLocale();
         $query = Course::latest();
+
+        if ($locale === 'fr') {
+            $query->where('lang', 'fr');
+        } else {
+            $query->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
         
         if ($search) {
             $query->where(function($q) use ($search) {
@@ -44,10 +55,33 @@ class CourseController extends Controller
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'trial_video' => 'nullable',
+            'prompts' => 'nullable|array',
+            'lang' => 'nullable|string|in:en,fr',
         ]);
 
-        $data['has_custom_prompt'] = false;
-        $data['custom_prompt'] = null;
+        if (empty($data['lang'])) {
+            $data['lang'] = app()->getLocale();
+        }
+
+        $prompts = $request->input('prompts', []);
+        $cleanPrompts = [
+            'reading' => $prompts['reading'] ?? null,
+            'listening' => $prompts['listening'] ?? null,
+            'speaking' => $prompts['speaking'] ?? null,
+            'writing' => $prompts['writing'] ?? null,
+        ];
+
+        // Determine if there is any custom prompt configured
+        $hasCustomPrompt = false;
+        foreach ($cleanPrompts as $value) {
+            if (!empty(trim($value ?? ''))) {
+                $hasCustomPrompt = true;
+                break;
+            }
+        }
+
+        $data['has_custom_prompt'] = $hasCustomPrompt;
+        $data['custom_prompt'] = $hasCustomPrompt ? json_encode($cleanPrompts) : null;
 
 
 
@@ -100,10 +134,32 @@ class CourseController extends Controller
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'trial_video' => 'nullable',
+            'prompts' => 'nullable|array',
+            'lang' => 'nullable|string|in:en,fr',
         ]);
 
-        // 🔁 Update slug ONLY if title changed
-        if ($course->title !== $request->title) {
+        $prompts = $request->input('prompts', []);
+        $cleanPrompts = [
+            'reading' => $prompts['reading'] ?? null,
+            'listening' => $prompts['listening'] ?? null,
+            'speaking' => $prompts['speaking'] ?? null,
+            'writing' => $prompts['writing'] ?? null,
+        ];
+
+        // Determine if there is any custom prompt configured
+        $hasCustomPrompt = false;
+        foreach ($cleanPrompts as $value) {
+            if (!empty(trim($value ?? ''))) {
+                $hasCustomPrompt = true;
+                break;
+            }
+        }
+
+        $data['has_custom_prompt'] = $hasCustomPrompt;
+        $data['custom_prompt'] = $hasCustomPrompt ? json_encode($cleanPrompts) : null;
+
+        // 🔁 Update slug if title changed or if slug is currently empty
+        if ($course->title !== $request->title || empty($course->slug)) {
             $data['slug'] = Str::slug($request->title) . '-' . $course->id;
         }
 

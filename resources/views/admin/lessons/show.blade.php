@@ -21,7 +21,7 @@
                 </li>
 
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.lessons.index', $lesson->course_id) }}"
+                    <a href="{{ route('admin.lessons.index', $lesson->course->slug ?? $lesson->course_id) }}"
                        class="d-flex align-items-center text-decoration-none">
                         <span class="text-body fs-14 hover">Lessons</span>
                     </a>
@@ -114,12 +114,12 @@
 
                 {{-- Buttons --}}
                 <div class="d-flex justify-content-between gap-2 mt-4">
-                    <a href="{{ route('admin.lessons.edit', [$lesson->course_id, $lesson->id]) }}"
+                    <a href="{{ route('admin.lessons.edit', [$lesson->course->slug ?? $lesson->course_id, $lesson->id]) }}"
                        class="btn btn-primary fw-normal text-white w-50">
                         Edit
                     </a>
 
-                    <a href="{{ route('admin.lessons.index', $lesson->course_id) }}"
+                    <a href="{{ route('admin.lessons.index', $lesson->course->slug ?? $lesson->course_id) }}"
                        class="btn btn-outline-border-color text-secondary fw-normal w-50">
                         Back
                     </a>

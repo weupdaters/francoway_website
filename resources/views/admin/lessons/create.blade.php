@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="breadcrumb-item">
-                <a href="{{ route('admin.lessons.index', $course->id) }}" class="text-decoration-none">
+                <a href="{{ route('admin.lessons.index', $course->slug ?? $course->id) }}" class="text-decoration-none">
                     <span class="text-body fs-14 hover">Lesson</span>
                 </a>
                 </li> 
@@ -53,7 +53,7 @@
       </div>
     @endif
 
-    <form action="{{ route('admin.lessons.store', $course->id) }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('admin.lessons.store', $course->slug ?? $course->id) }}" method="POST" enctype="multipart/form-data"
       class="needs-validation " novalidate>
       @csrf
 
@@ -286,7 +286,7 @@
         }
 
         $.ajax({
-          url: "{{ route('admin.sections.store', $course->id) }}",
+          url: "{{ route('admin.sections.store', $course->slug ?? $course->id) }}",
           type: "POST",
           data: {
             title: title,

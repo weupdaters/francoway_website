@@ -133,6 +133,7 @@ public function store(Request $request)
         'role' => $request->role,
         'status' => $request->status,
         'description' => $request->description,
+        'lang' => app()->getLocale(),
     ]);
 
     return redirect()->route('users.index')

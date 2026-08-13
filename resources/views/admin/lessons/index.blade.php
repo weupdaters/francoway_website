@@ -40,7 +40,7 @@
 
         <div class="d-flex gap-3">
 
-          <a href="{{ route('admin.lessons.create', $course->id) }}" class="btn btn-primary">
+          <a href="{{ route('admin.lessons.create', $course->slug ?? $course->id) }}" class="btn btn-primary">
             + Create Lesson
           </a>
 
@@ -134,20 +134,20 @@
 
                   {{-- View --}}
                   <a href="{{ route('admin.lessons.show', [
-                      'course' => $lesson->course_id,
+                      'course' => $lesson->course->slug ?? $lesson->course_id,
                       'lesson' => $lesson->id
                   ]) }}">
                     <img src="https://img.icons8.com/color/48/visible.png" style="width: 22px; height: 22px; object-fit: contain;" alt="view">
                   </a>
 
                   {{-- Edit --}}
-                  <a href="{{ route('admin.lessons.edit', [$lesson->course->id, $lesson->id]) }}" data-bs-toggle="tooltip"
+                  <a href="{{ route('admin.lessons.edit', [$lesson->course->slug ?? $lesson->course->id, $lesson->id]) }}" data-bs-toggle="tooltip"
                     title="Edit">
                     <img src="https://img.icons8.com/color/48/edit.png" style="width: 22px; height: 22px; object-fit: contain;" alt="edit">
                   </a>
 
                   {{-- Delete --}}
-                  <form action="{{ route('admin.lessons.destroy', [$lesson->course->id, $lesson->id]) }}" method="POST">
+                  <form action="{{ route('admin.lessons.destroy', [$lesson->course->slug ?? $lesson->course->id, $lesson->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-transparent border-0 p-0" data-bs-toggle="tooltip" title="Delete"

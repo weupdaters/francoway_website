@@ -166,7 +166,7 @@
 
                 {{-- Buttons --}}
                 <div class="mt-auto d-flex gap-2">
-                    <a href="{{ route('admin.courses.show',$course->id) }}"
+                    <a href="{{ route('admin.courses.show',$course->slug ?? $course->id) }}"
                        class="btn btn-primary flex-grow-1 rounded-pill">
                         View Details
                     </a>
@@ -181,17 +181,17 @@
                 {{-- Icons --}}
                 <div class="d-flex justify-content-end gap-3 mt-4">
 
-                    <a href="{{ route('admin.lessons.index', $course->id) }}">
+                    <a href="{{ route('admin.lessons.index', $course->slug ?? $course->id) }}">
                         <img src="https://img.icons8.com/color/48/add.png" style="width: 18px; height: 18px; object-fit: contain;" alt="add lessons">
                     </a>
 
                    
 
-                    <a href="{{ route('admin.courses.edit',$course->id) }}">
+                    <a href="{{ route('admin.courses.edit',$course->slug ?? $course->id) }}">
                         <img src="https://img.icons8.com/color/48/edit.png" style="width: 18px; height: 18px; object-fit: contain;" alt="edit">
                     </a>
 
-                    <form action="{{ route('admin.courses.destroy',$course->id) }}"
+                    <form action="{{ route('admin.courses.destroy',$course->slug ?? $course->id) }}"
                           method="POST">
                         @csrf
                         @method('DELETE')
@@ -235,7 +235,7 @@
                         $speakingPrompt = $prompts['speaking'] ?? '';
                         $writingPrompt = $prompts['writing'] ?? '';
                     @endphp
-                    <form action="{{ route('admin.courses.update-prompt', $course->id) }}" method="POST">
+                    <form action="{{ route('admin.courses.update-prompt', $course->slug ?? $course->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
                         <div class="modal-body py-4">

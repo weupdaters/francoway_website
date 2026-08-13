@@ -10,8 +10,19 @@ class ResourceController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
+        $locale = app()->getLocale();
         $query = Resource::latest();
         
+        if ($locale === 'fr') {
+            $query->where('lang', 'fr');
+        } else {
+            $query->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
@@ -34,7 +45,8 @@ class ResourceController extends Controller
             'title'=>'required',
             'description'=>'required',
             'image'=>'required|image',
-            'pdf'=>'required|mimes:pdf'
+            'pdf'=>'required|mimes:pdf',
+            'lang'=>'nullable|string|in:en,fr'
         ]);
 
         $image = $request->file('image')->store('resources','public');
@@ -44,7 +56,8 @@ class ResourceController extends Controller
             'title'=>$request->title,
             'description'=>$request->description,
             'image'=>$image,
-            'pdf'=>$pdf
+            'pdf'=>$pdf,
+            'lang'=>$request->lang ?: app()->getLocale()
         ]);
 
         return redirect()->route('admin.resources.index');
@@ -59,7 +72,8 @@ class ResourceController extends Controller
             'title'=>'required',
             'description'=>'required',
             'image'=>'nullable|image',
-            'pdf'=>'nullable|mimes:pdf'
+            'pdf'=>'nullable|mimes:pdf',
+            'lang'=>'nullable|string|in:en,fr'
         ]);
 
         $image = $request->file('image') ? $request->file('image')->store('resources','public') : $resource->image;
@@ -69,7 +83,8 @@ class ResourceController extends Controller
             'title'=>$request->title,
             'description'=>$request->description,
             'image'=>$image,
-            'pdf'=>$pdf
+            'pdf'=>$pdf,
+            'lang'=>$request->lang
         ]);
 
         return redirect()->route('admin.resources.index');

@@ -50,6 +50,7 @@ class UserController extends Controller
             'role'        => $request->role,   // admin | user | teacher
             'status'      => $request->status, // 1 | 0
             'description' => $request->description,
+            'lang'        => app()->getLocale(),
         ]);
 
         return redirect()->route('admin.users.index')

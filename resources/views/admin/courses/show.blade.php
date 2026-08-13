@@ -125,7 +125,7 @@
 
                 {{-- Buttons --}}
                 <div class="d-flex justify-content-between gap-2">
-                    <a href="{{ route('admin.courses.edit', $course->id) }}"
+                    <a href="{{ route('admin.courses.edit', $course->slug ?? $course->id) }}"
                        class="btn btn-primary fw-normal text-white">
                         Edit Course
                     </a>

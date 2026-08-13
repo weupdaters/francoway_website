@@ -14,32 +14,87 @@ class HomeController extends Controller
 {
     // HOME PAGE
     public function index()
-{
-    $courses = Course::where('status', 'published')
-                ->latest()
-                ->paginate(6);
+    {
+        $locale = app()->getLocale();
+        
+        $coursesQuery = Course::where('status', 'published')->latest();
+        if ($locale === 'fr') {
+            $coursesQuery->where('lang', 'fr');
+        } else {
+            $coursesQuery->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+        $courses = $coursesQuery->paginate(6);
 
-    $resources = Resource::latest()->take(3)->get();
+        $resourcesQuery = Resource::latest();
+        if ($locale === 'fr') {
+            $resourcesQuery->where('lang', 'fr');
+        } else {
+            $resourcesQuery->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+        $resources = $resourcesQuery->take(3)->get();
 
-    return view('index', compact('courses','resources'));
-}
+        return view('index', compact('courses','resources'));
+    }
 
     // ALL COURSES PAGE
     public function courses()
     {
-        $courses = Course::where('status', 'published')
-                    ->latest()
-                    ->paginate(9);
-        $resources = Resource::latest()->paginate(6);            
+        $locale = app()->getLocale();
+
+        $coursesQuery = Course::where('status', 'published')->latest();
+        if ($locale === 'fr') {
+            $coursesQuery->where('lang', 'fr');
+        } else {
+            $coursesQuery->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+        $courses = $coursesQuery->paginate(9);
+
+        $resourcesQuery = Resource::latest();
+        if ($locale === 'fr') {
+            $resourcesQuery->where('lang', 'fr');
+        } else {
+            $resourcesQuery->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+        $resources = $resourcesQuery->paginate(6);            
 
         return view('courses.index', compact('courses','resources'));
     }
     // SINGLE COURSE PAGE
-    public function show($id)
+    public function show($slug)
     {
-        $course = Course::where('id',$id)
-            ->with(['lessons', 'teacher', 'sections.lessons'])
-            ->firstOrFail();
+        $locale = app()->getLocale();
+        $query = Course::where(function($q) use ($slug) {
+            $q->where('slug', $slug)
+              ->orWhere('id', $slug);
+        });
+
+        if ($locale === 'fr') {
+            $query->where('lang', 'fr');
+        } else {
+            $query->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+
+        $course = $query->with(['lessons', 'teacher', 'sections.lessons'])->firstOrFail();
 
         $lessonCount = $course->lessons->count();
 
@@ -52,14 +107,25 @@ class HomeController extends Controller
         ));
     }
     // RESOURCES PAGE
-   public function resources()
-{
-    $settings = Setting::pluck('value', 'key')->toArray();
+    public function resources()
+    {
+        $settings = Setting::pluck('value', 'key')->toArray();
+        $locale = app()->getLocale();
 
-    $resources = Resource::latest()->paginate(6);
+        $resourcesQuery = Resource::latest();
+        if ($locale === 'fr') {
+            $resourcesQuery->where('lang', 'fr');
+        } else {
+            $resourcesQuery->where(function($q) {
+                $q->where('lang', 'en')
+                  ->orWhereNull('lang')
+                  ->orWhere('lang', '');
+            });
+        }
+        $resources = $resourcesQuery->paginate(6);
 
-    return view('resource', compact('settings','resources'));
-}
+        return view('resource', compact('settings','resources'));
+    }
 
     //contact page
      public function contactUs()
@@ -81,6 +147,7 @@ class HomeController extends Controller
         'name'    => $request->name,
         'email'   => $request->email,
         'message' => $request->message,
+        'lang'    => app()->getLocale(),
     ]);
 
     return back()->with('success', 'Message saved successfully!');

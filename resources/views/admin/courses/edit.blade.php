@@ -29,7 +29,7 @@
     </div>
 
     {{-- MAIN FORM --}}
-    <form action="{{ route('admin.courses.update', $course->id) }}"
+    <form action="{{ route('admin.courses.update', $course->slug ?? $course->id) }}"
           method="POST"
           enctype="multipart/form-data">
         @csrf
@@ -100,6 +100,68 @@
 
 
 
+                    @php
+                        $prompts = [];
+                        if ($course->custom_prompt) {
+                            $prompts = json_decode($course->custom_prompt, true);
+                            if (json_last_error() !== JSON_ERROR_NONE || !is_array($prompts)) {
+                                $prompts = [
+                                    'reading' => $course->custom_prompt,
+                                    'listening' => '',
+                                    'speaking' => '',
+                                    'writing' => '',
+                                ];
+                            }
+                        }
+                        $readingPrompt = $prompts['reading'] ?? '';
+                        $listeningPrompt = $prompts['listening'] ?? '';
+                        $speakingPrompt = $prompts['speaking'] ?? '';
+                        $writingPrompt = $prompts['writing'] ?? '';
+                    @endphp
+
+                    {{-- Custom AI Prompts --}}
+                    <div class="mb-4">
+                        <label class="label fs-16 mb-2">Custom AI Prompts</label>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="list-group rounded-3 shadow-sm border-0" id="promptModuleList" role="tablist">
+                                    <button type="button" class="list-group-item list-group-item-action active border-0 py-3 d-flex align-items-center gap-2" id="reading-list" data-bs-toggle="list" href="#prompt-reading" role="tab" aria-controls="prompt-reading">
+                                        <i class="ri-book-open-line fs-18"></i> <span>Reading</span>
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center gap-2" id="listening-list" data-bs-toggle="list" href="#prompt-listening" role="tab" aria-controls="prompt-listening">
+                                        <i class="ri-customer-service-line fs-18"></i> <span>Listening</span>
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center gap-2" id="speaking-list" data-bs-toggle="list" href="#prompt-speaking" role="tab" aria-controls="prompt-speaking">
+                                        <i class="ri-mic-line fs-18"></i> <span>Speaking</span>
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center gap-2" id="writing-list" data-bs-toggle="list" href="#prompt-writing" role="tab" aria-controls="prompt-writing">
+                                        <i class="ri-edit-2-line fs-18"></i> <span>Writing</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="tab-content" id="promptTabContent">
+                                    <div class="tab-pane fade show active p-3 bg-light rounded-3 border-0" id="prompt-reading" role="tabpanel" aria-labelledby="reading-list">
+                                        <label class="label fs-13 mb-2 text-muted uppercase">Reading Custom Prompt</label>
+                                        <textarea name="prompts[reading]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Reading...">{{ old('prompts.reading', $readingPrompt) }}</textarea>
+                                    </div>
+                                    <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="prompt-listening" role="tabpanel" aria-labelledby="listening-list">
+                                        <label class="label fs-13 mb-2 text-muted uppercase">Listening Custom Prompt</label>
+                                        <textarea name="prompts[listening]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Listening...">{{ old('prompts.listening', $listeningPrompt) }}</textarea>
+                                    </div>
+                                    <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="prompt-speaking" role="tabpanel" aria-labelledby="speaking-list">
+                                        <label class="label fs-13 mb-2 text-muted uppercase">Speaking Custom Prompt</label>
+                                        <textarea name="prompts[speaking]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Speaking...">{{ old('prompts.speaking', $speakingPrompt) }}</textarea>
+                                    </div>
+                                    <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="prompt-writing" role="tabpanel" aria-labelledby="writing-list">
+                                        <label class="label fs-13 mb-2 text-muted uppercase">Writing Custom Prompt</label>
+                                        <textarea name="prompts[writing]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Writing...">{{ old('prompts.writing', $writingPrompt) }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -114,6 +176,15 @@
                         <select class="form-select" name="status">
                             <option value="1" {{ $course->status == 1 ? 'selected' : '' }}>Published</option>
                             <option value="0" {{ $course->status == 0 ? 'selected' : '' }}>Draft</option>
+                        </select>
+                    </div>
+
+                    {{-- Language --}}
+                    <div class="mb-20">
+                        <label class="label fs-16 mb-2">Language</label>
+                        <select class="form-select" name="lang">
+                            <option value="en" {{ old('lang', $course->lang) === 'en' ? 'selected' : '' }}>English</option>
+                            <option value="fr" {{ old('lang', $course->lang) === 'fr' ? 'selected' : '' }}>French</option>
                         </select>
                     </div>
 
@@ -150,5 +221,23 @@
 </div>
 
 @endsection
+
+@push('styles')
+<style>
+.list-group-item.active {
+    background: #071530 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+.list-group-item:not(.active) {
+    background-color: #f8fafc !important;
+    color: #4a5568 !important;
+}
+.list-group-item:not(.active):hover {
+    background-color: #eff3f9 !important;
+    color: #071530 !important;
+}
+</style>
+@endpush
 
 

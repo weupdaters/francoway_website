@@ -12,6 +12,7 @@ class Resource extends Model
         'title',
         'description',
         'image',
-        'pdf'
+        'pdf',
+        'lang'
     ];
 }   

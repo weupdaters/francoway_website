@@ -94,7 +94,19 @@
         <div class="absolute right-0 top-0 bottom-0 w-full lg:w-[58%] h-full z-0 select-none pointer-events-none">
             <!-- Gradient overlay for desktop to fade smoothly into the text area -->
             <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 hidden lg:block"></div>
-            <img src="{{ asset('assets/images/hero_banner.png') }}" class="w-full h-full object-cover object-center lg:object-right opacity-35 lg:opacity-100" alt="Paris Banner">
+            @php
+                $banner_img = '';
+                if ($current_locale === 'fr') {
+                    $banner_img = isset($settings['hero_banner_fr']) && $settings['hero_banner_fr']
+                        ? asset('storage/' . $settings['hero_banner_fr'])
+                        : asset('assets/images/hero_banner.png');
+                } else {
+                    $banner_img = isset($settings['hero_banner_en']) && $settings['hero_banner_en']
+                        ? asset('storage/' . $settings['hero_banner_en'])
+                        : asset('assets/images/hero_banner.png');
+                }
+            @endphp
+            <img src="{{ $banner_img }}" class="w-full h-full object-cover object-center lg:object-right opacity-35 lg:opacity-100" alt="Paris Banner">
         </div>
         
         <!-- Max-w Container to align text content with page margins -->
@@ -106,18 +118,38 @@
                     <!-- Cursive Script Tagline -->
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-0.5 bg-[#E31B23]"></span>
-                        <span class="font-script text-2xl md:text-3xl text-gray-700 leading-none">Learn. Speak. Success.</span>
+                        @if($current_locale === 'fr')
+                            <span class="font-script text-2xl md:text-3xl text-gray-700 leading-none notranslate" translate="no">
+                                {{ $settings['hero_tagline_fr'] ?? 'Apprendre. Parler. Réussir.' }}
+                            </span>
+                        @else
+                            <span class="font-script text-2xl md:text-3xl text-gray-700 leading-none">
+                                {{ $settings['hero_tagline_en'] ?? 'Learn. Speak. Success.' }}
+                            </span>
+                        @endif
                     </div>
                     
                     <!-- Main Heading -->
-                    <h1 class="text-4xl md:text-5xl lg:text-[58px] font-heading font-black text-[#0B1E43] uppercase leading-[1.08] tracking-tight">
-                        FRENCH <span class="text-[#E31B23]">COURSES</span>
-                    </h1>
+                    @if($current_locale === 'fr')
+                        <h1 class="text-4xl md:text-5xl lg:text-[58px] font-heading font-black text-[#0B1E43] uppercase leading-[1.08] tracking-tight notranslate" translate="no">
+                            {!! $settings['hero_title_fr'] ?? 'COURS DE <span class="text-[#E31B23]">FRANÇAIS</span>' !!}
+                        </h1>
+                    @else
+                        <h1 class="text-4xl md:text-5xl lg:text-[58px] font-heading font-black text-[#0B1E43] uppercase leading-[1.08] tracking-tight">
+                            {!! $settings['hero_title_en'] ?? 'FRENCH <span class="text-[#E31B23]">COURSES</span>' !!}
+                        </h1>
+                    @endif
                     
                     <!-- Subheading -->
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 tracking-tight leading-snug">
-                        For Every Goal & Every Level
-                    </h2>
+                    @if($current_locale === 'fr')
+                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 tracking-tight leading-snug notranslate" translate="no">
+                            {{ $settings['hero_subtitle_fr'] ?? 'Pour chaque objectif et chaque niveau' }}
+                        </h2>
+                    @else
+                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 tracking-tight leading-snug">
+                            {{ $settings['hero_subtitle_en'] ?? 'For Every Goal & Every Level' }}
+                        </h2>
+                    @endif
                     
                     <!-- Checklist -->
                     <ul class="space-y-3 pt-2">
@@ -334,7 +366,7 @@
                                 </p>
                             </div>
                             <div>
-                                <a href="{{ route('courses.show', $course->id) }}" class="inline-flex items-center justify-center gap-1 px-4 py-2 {{ $btnBg }} text-white text-[11px] font-bold uppercase rounded-lg {{ $btnHover }} transition-colors duration-300">
+                                <a href="{{ route('courses.show', $course->slug ?? $course->id) }}" class="inline-flex items-center justify-center gap-1 px-4 py-2 {{ $btnBg }} text-white text-[11px] font-bold uppercase rounded-lg {{ $btnHover }} transition-colors duration-300">
                                     Learn More
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />

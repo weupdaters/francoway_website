@@ -119,6 +119,15 @@
                         </select>
                     </div>
 
+                    {{-- Language --}}
+                    <div class="mb-20">
+                        <label class="label fs-16 mb-2">Language</label>
+                        <select class="form-select" name="lang">
+                            <option value="en" {{ old('lang', app()->getLocale()) === 'en' ? 'selected' : '' }}>English</option>
+                            <option value="fr" {{ old('lang', app()->getLocale()) === 'fr' ? 'selected' : '' }}>French</option>
+                        </select>
+                    </div>
+
                     {{-- Buttons --}}
                     <div class="d-flex justify-content-between gap-2">
                         <button type="submit"

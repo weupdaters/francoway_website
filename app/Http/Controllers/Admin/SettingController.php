@@ -32,6 +32,10 @@ class SettingController extends Controller
             'favicon' => 'nullable|image|mimes:png,ico,svg|max:1024',
             'address' => 'nullable|string|max:500',
             'footer_text' => 'nullable|string|max:500',
+            'footer_text_en' => 'nullable|string|max:500',
+            'footer_text_fr' => 'nullable|string|max:500',
+            'footer_copyright_en' => 'nullable|string|max:255',
+            'footer_copyright_fr' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:200',
             'meta_description' => 'nullable|string|max:1000',
             'items_per_page' => 'nullable|integer|min:1|max:100',
@@ -50,6 +54,14 @@ class SettingController extends Controller
             'checkout_pay_netbanking_enabled' => 'nullable|boolean',
             'checkout_upi_id' => 'nullable|string|max:150',
             'checkout_upi_qr_enabled' => 'nullable|boolean',
+            'hero_banner_en' => 'nullable|image|mimes:png,jpg,jpeg,svg,webp|max:3072',
+            'hero_banner_fr' => 'nullable|image|mimes:png,jpg,jpeg,svg,webp|max:3072',
+            'hero_tagline_en' => 'nullable|string|max:150',
+            'hero_tagline_fr' => 'nullable|string|max:150',
+            'hero_title_en' => 'nullable|string|max:255',
+            'hero_title_fr' => 'nullable|string|max:255',
+            'hero_subtitle_en' => 'nullable|string|max:255',
+            'hero_subtitle_fr' => 'nullable|string|max:255',
         ];
 
         $data = $request->validate($rules);
@@ -62,6 +74,14 @@ class SettingController extends Controller
 
         if ($request->hasFile('favicon')) {
             $data['favicon'] = $request->file('favicon')->store('settings', 'public');
+        }
+
+        if ($request->hasFile('hero_banner_en')) {
+            $data['hero_banner_en'] = $request->file('hero_banner_en')->store('settings', 'public');
+        }
+
+        if ($request->hasFile('hero_banner_fr')) {
+            $data['hero_banner_fr'] = $request->file('hero_banner_fr')->store('settings', 'public');
         }
 
         // checkbox fix

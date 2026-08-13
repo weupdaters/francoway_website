@@ -45,10 +45,23 @@ class TranslatorService
         $nodeMappings = [];
 
         foreach ($textNodes as $node) {
-            // Skip text nodes inside excluded tags
+            // Skip text nodes inside excluded tags or if an ancestor has translate="no" or class="notranslate"
             if ($node->parentNode) {
-                $parentName = strtolower($node->parentNode->nodeName);
-                if (in_array($parentName, self::$excludeTags)) {
+                $parent = $node->parentNode;
+                $shouldExclude = false;
+                while ($parent && $parent->nodeType === XML_ELEMENT_NODE) {
+                    $parentName = strtolower($parent->nodeName);
+                    if (in_array($parentName, self::$excludeTags)) {
+                        $shouldExclude = true;
+                        break;
+                    }
+                    if ($parent->getAttribute('translate') === 'no' || str_contains($parent->getAttribute('class') ?? '', 'notranslate')) {
+                        $shouldExclude = true;
+                        break;
+                    }
+                    $parent = $parent->parentNode;
+                }
+                if ($shouldExclude) {
                     continue;
                 }
             }

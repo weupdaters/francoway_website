@@ -876,7 +876,7 @@ if ($isDynamic) {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach($relatedCourses as $rel)
                     @php
-                        $relUrl = $isDynamic && !isset($rel->is_mock) ? route('courses.show', $rel->id) : url('/course/' . $rel->id);
+                        $relUrl = $isDynamic && !isset($rel->is_mock) ? route('courses.show', $rel->slug ?? $rel->id) : url('/course/' . ($rel->slug ?? $rel->id));
                         
                         $bgImage = 'assets/images/course_bg_a1.png';
                         $textColor = '#E31B23';

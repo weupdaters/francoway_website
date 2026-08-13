@@ -9,8 +9,12 @@
         <!-- Col 1: About/Branding -->
         <div class="space-y-4">
             <img src="{{ isset($settings['logo']) && $settings['logo'] ? asset('storage/' . $settings['logo']) : asset('assets/images/logo.png') }}" alt="{{ $settings['site_name'] ?? 'Francoway' }} Logo" class="h-20 w-auto object-contain bg-white rounded-xl px-4 py-2 shadow-md">
-            <p class="text-sm text-gray-400 leading-relaxed pt-2">
-                {{ $settings['footer_text'] ?? 'Empowering dreams through quality education & language skills for a better tomorrow.' }}
+            <p class="text-sm text-gray-400 leading-relaxed pt-2 notranslate" translate="no">
+                @if(app()->getLocale() === 'fr')
+                    {{ $settings['footer_text_fr'] ?? 'Autonomiser les rêves grâce à une éducation de qualité et des compétences linguistiques pour un avenir meilleur.' }}
+                @else
+                    {{ $settings['footer_text_en'] ?? ($settings['footer_text'] ?? 'Empowering dreams through quality education & language skills for a better tomorrow.') }}
+                @endif
             </p>
             <div class="flex gap-4 pt-2 text-gray-400">
                 @if(isset($settings['facebook']) && $settings['facebook'])
@@ -41,7 +45,7 @@
             <h3 class="font-bold text-lg border-l-2 border-red-500 pl-3">Explore Courses</h3>
             <ul class="space-y-2 text-sm text-gray-400">
                 @forelse($footerCourses as $fc)
-                    <li><a href="{{ route('courses.show', $fc->id) }}" class="hover:text-red-500 hover:underline transition-all">{{ $fc->title }}</a></li>
+                    <li><a href="{{ route('courses.show', $fc->slug ?? $fc->id) }}" class="hover:text-red-500 hover:underline transition-all">{{ $fc->title }}</a></li>
                 @empty
                     <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">French A1 - Beginner</a></li>
                     <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">French A2 - Elementary</a></li>
@@ -96,7 +100,13 @@
 
     <!-- Bottom Line -->
     <div class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4 relative z-20">
-        <span>© {{ date('Y') }} {{ $settings['site_name'] ?? 'Francoway' }} (Education Tree Academy). All Rights Reserved.</span>
+        <span class="notranslate" translate="no">
+            @if(app()->getLocale() === 'fr')
+                {{ $settings['footer_copyright_fr'] ?? ('© ' . date('Y') . ' ' . ($settings['site_name'] ?? 'Francoway') . ' (Education Tree Academy). Tous droits réservés.') }}
+            @else
+                {{ $settings['footer_copyright_en'] ?? ('© ' . date('Y') . ' ' . ($settings['site_name'] ?? 'Francoway') . ' (Education Tree Academy). All Rights Reserved.') }}
+            @endif
+        </span>
         <div class="flex gap-4">
             <a href="{{ route('privacy.policy') }}" class="hover:text-white transition-colors">Privacy Policy</a>
             <span>|</span>

@@ -57,6 +57,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'phone' => $phone,
                 'role' => $data['role'] ?? 'user',
+                'lang' => app()->getLocale(),
             ]);
 
             auth()->login($user);

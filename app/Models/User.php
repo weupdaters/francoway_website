@@ -25,6 +25,7 @@ class User extends Authenticatable
         'image',
         'status',
         'password',
+        'lang',
         // NOTE: 'role' intentionally excluded — set programmatically only, never from request input
     ];
 

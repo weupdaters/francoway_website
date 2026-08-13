@@ -31,6 +31,7 @@ class Course extends Model
         'has_custom_prompt',
         'custom_prompt',
         'teacher_id',
+        'lang',
     ];
 
     /*
@@ -111,6 +112,17 @@ class Course extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
-    //
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where('slug', $value)
+                    ->orWhere('id', $value)
+                    ->firstOrFail();
+    }
 
 }

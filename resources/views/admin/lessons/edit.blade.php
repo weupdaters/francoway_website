@@ -19,19 +19,19 @@
             </a>
           </li>
           <li class="breadcrumb-item active">
-          <a href="{{ route('admin.courses.index', $course->id) }}" class="d-flex align-items-center text-decoration-none">
+          <a href="{{ route('admin.courses.index', $course->slug ?? $course->id) }}" class="d-flex align-items-center text-decoration-none">
               <i class="ri-home-8-line fs-15 text-primary me-1"></i>
               <span class="text-body fs-14 hover">course</span>
             </a>
           </li>
           <li class="breadcrumb-item active">
-            <a href="{{ route('admin.lessons.index', $course->id) }}" class="d-flex align-items-center text-decoration-none">
+            <a href="{{ route('admin.lessons.index', $course->slug ?? $course->id) }}" class="d-flex align-items-center text-decoration-none">
               <i class="ri-home-8-line fs-15 text-primary me-1"></i>
               <span class="text-body fs-14 hover">Lessons</span>
             </a>
           </li>
           <li class="breadcrumb-item active">
-           <a href="{{ route('admin.lessons.edit', [$course->id, $lesson->id]) }}" class="d-flex align-items-center text-decoration-none">
+            <a href="{{ route('admin.lessons.edit', [$course->slug ?? $course->id, $lesson->id]) }}" class="d-flex align-items-center text-decoration-none">
               <i class="ri-home-8-line fs-15 text-primary me-1"></i>
               <span class="text-body fs-14 hover">{{ $lesson->title }}</span>
             </a>
@@ -52,7 +52,7 @@
       </div>
     @endif
 
-    <form action="{{ route('admin.lessons.update', [$course->id, $lesson->id]) }}" method="POST"
+    <form action="{{ route('admin.lessons.update', [$course->slug ?? $course->id, $lesson->id]) }}" method="POST"
       enctype="multipart/form-data">
       @csrf
       @method('PUT')

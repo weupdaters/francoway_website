@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'check-subscription' => \App\Http\Middleware\CheckCourseSubscription::class,
+            'clean-locale' => \App\Http\Middleware\CleanLocaleRouteParam::class,
         ]);
 
     })

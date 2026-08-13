@@ -293,9 +293,152 @@
                             <textarea name="address" class="form-control premium-textarea" rows="3" placeholder="Enter physical office address">{{ old('address', $settings['address'] ?? '') }}</textarea>
                         </div>
 
-                        <div class="d-flex flex-column">
-                            <label class="premium-form-label">Footer Copyright Text</label>
-                            <textarea name="footer_text" class="form-control premium-textarea" rows="2" placeholder="Copyright © All rights reserved.">{{ old('footer_text', $settings['footer_text'] ?? '') }}</textarea>
+                    </div>
+                </div>
+
+                {{-- FOOTER SETTINGS --}}
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h5 class="settings-card-title">
+                            <i class="ri-menu-add-fill"></i> Footer Configuration
+                        </h5>
+                    </div>
+                    <div class="settings-card-body d-flex flex-column gap-4">
+                        
+                        {{-- Hidden field to support legacy footer_text fallback --}}
+                        <input type="hidden" name="footer_text" value="{{ $settings['footer_text'] ?? '' }}">
+
+                        <div class="row g-4">
+                            {{-- English Footer Section --}}
+                            <div class="col-md-6 border-end pe-md-4">
+                                <h6 class="fw-bold mb-3 text-primary d-flex align-items-center gap-2" style="font-size: 14px;">
+                                    <span class="badge bg-primary text-white">EN</span> English Footer Content
+                                </h6>
+                                
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Footer About Description (English)</label>
+                                    <textarea name="footer_text_en" class="form-control premium-textarea" rows="3" placeholder="e.g. Empowering dreams through quality education & language skills for a better tomorrow.">{{ old('footer_text_en', $settings['footer_text_en'] ?? ($settings['footer_text'] ?? '')) }}</textarea>
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <label class="premium-form-label">Copyright Text (English)</label>
+                                    <input type="text" name="footer_copyright_en" class="form-control premium-input"
+                                        value="{{ old('footer_copyright_en', $settings['footer_copyright_en'] ?? '') }}" placeholder="e.g. © 2026 Francoway. All Rights Reserved.">
+                                </div>
+                            </div>
+
+                            {{-- French Footer Section --}}
+                            <div class="col-md-6 ps-md-4">
+                                <h6 class="fw-bold mb-3 text-danger d-flex align-items-center gap-2" style="font-size: 14px;">
+                                    <span class="badge bg-danger text-white">FR</span> French Footer Content
+                                </h6>
+                                
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Footer About Description (French)</label>
+                                    <textarea name="footer_text_fr" class="form-control premium-textarea" rows="3" placeholder="e.g. Autonomiser les rêves grâce à une éducation de qualité et des compétences linguistiques pour un avenir meilleur.">{{ old('footer_text_fr', $settings['footer_text_fr'] ?? '') }}</textarea>
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <label class="premium-form-label">Copyright Text (French)</label>
+                                    <input type="text" name="footer_copyright_fr" class="form-control premium-input"
+                                        value="{{ old('footer_copyright_fr', $settings['footer_copyright_fr'] ?? '') }}" placeholder="e.g. © 2026 Francoway. Tous droits réservés.">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- HERO BANNER SETTINGS --}}
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h5 class="settings-card-title">
+                            <i class="ri-image-edit-fill"></i> Hero Banner Configuration
+                        </h5>
+                    </div>
+                    <div class="settings-card-body d-flex flex-column gap-4">
+                        
+                        <div class="row g-4">
+                            {{-- English Banner Section --}}
+                            <div class="col-md-6 border-end pe-md-4">
+                                <h6 class="fw-bold mb-3 text-primary d-flex align-items-center gap-2" style="font-size: 14px;">
+                                    <span class="badge bg-primary text-white">EN</span> English Banner Content
+                                </h6>
+                                
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Tagline (English)</label>
+                                    <input type="text" name="hero_tagline_en" class="form-control premium-input"
+                                        value="{{ old('hero_tagline_en', $settings['hero_tagline_en'] ?? '') }}" placeholder="e.g. Learn. Speak. Success.">
+                                </div>
+
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Title (English)</label>
+                                    <input type="text" name="hero_title_en" class="form-control premium-input"
+                                        value="{{ old('hero_title_en', $settings['hero_title_en'] ?? '') }}" placeholder="e.g. FRENCH <span class='text-[#E31B23]'>COURSES</span>">
+                                    <small class="text-muted mt-1" style="font-size: 11px;">You can use HTML tags like <code>&lt;span class="text-[#E31B23]"&gt;COURSES&lt;/span&gt;</code> for red highlight.</small>
+                                </div>
+
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Subtitle (English)</label>
+                                    <input type="text" name="hero_subtitle_en" class="form-control premium-input"
+                                        value="{{ old('hero_subtitle_en', $settings['hero_subtitle_en'] ?? '') }}" placeholder="e.g. For Every Goal & Every Level">
+                                </div>
+
+                                <div class="d-flex flex-column align-items-center text-center gap-2 mt-4">
+                                    <label class="premium-form-label align-self-start">Banner Image (English)</label>
+                                    <div class="preview-box w-100" style="background: #f8fafc; border-radius: 12px; height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border-color);">
+                                        <img id="bannerEnPreview"
+                                            src="{{ isset($settings['hero_banner_en']) && $settings['hero_banner_en'] ? asset('storage/'.$settings['hero_banner_en']) : asset('assets/images/hero_banner.png') }}"
+                                            class="img-fluid" style="max-height: 100%; object-fit: cover; width: 100%;">
+                                    </div>
+                                    <div class="media-upload-wrapper w-100 mt-2">
+                                        <input type="file" name="hero_banner_en" class="custom-file-input" onchange="previewImage(event,'bannerEnPreview')">
+                                        <i class="ri-upload-cloud-2-line fs-3 d-block text-muted mb-1"></i>
+                                        <span class="d-block small text-muted" style="font-size: 11px;">Upload English Banner Image</span>
+                                        <span class="upload-btn-premium"><i class="ri-image-add-line"></i> Choose Image</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- French Banner Section --}}
+                            <div class="col-md-6 ps-md-4">
+                                <h6 class="fw-bold mb-3 text-danger d-flex align-items-center gap-2" style="font-size: 14px;">
+                                    <span class="badge bg-danger text-white">FR</span> French Banner Content (Custom)
+                                </h6>
+                                
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Tagline (French)</label>
+                                    <input type="text" name="hero_tagline_fr" class="form-control premium-input"
+                                        value="{{ old('hero_tagline_fr', $settings['hero_tagline_fr'] ?? '') }}" placeholder="e.g. Apprendre. Parler. Réussir.">
+                                </div>
+
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Title (French)</label>
+                                    <input type="text" name="hero_title_fr" class="form-control premium-input"
+                                        value="{{ old('hero_title_fr', $settings['hero_title_fr'] ?? '') }}" placeholder="e.g. COURS DE <span class='text-[#E31B23]'>FRANÇAIS</span>">
+                                    <small class="text-muted mt-1" style="font-size: 11px;">You can use HTML tags like <code>&lt;span class="text-[#E31B23]"&gt;FRANÇAIS&lt;/span&gt;</code> for red highlight.</small>
+                                </div>
+
+                                <div class="d-flex flex-column mb-3">
+                                    <label class="premium-form-label">Subtitle (French)</label>
+                                    <input type="text" name="hero_subtitle_fr" class="form-control premium-input"
+                                        value="{{ old('hero_subtitle_fr', $settings['hero_subtitle_fr'] ?? '') }}" placeholder="e.g. Pour chaque objectif et chaque niveau">
+                                </div>
+
+                                <div class="d-flex flex-column align-items-center text-center gap-2 mt-4">
+                                    <label class="premium-form-label align-self-start">Banner Image (French)</label>
+                                    <div class="preview-box w-100" style="background: #f8fafc; border-radius: 12px; height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border-color);">
+                                        <img id="bannerFrPreview"
+                                            src="{{ isset($settings['hero_banner_fr']) && $settings['hero_banner_fr'] ? asset('storage/'.$settings['hero_banner_fr']) : asset('assets/images/hero_banner.png') }}"
+                                            class="img-fluid" style="max-height: 100%; object-fit: cover; width: 100%;">
+                                    </div>
+                                    <div class="media-upload-wrapper w-100 mt-2">
+                                        <input type="file" name="hero_banner_fr" class="custom-file-input" onchange="previewImage(event,'bannerFrPreview')">
+                                        <i class="ri-upload-cloud-2-line fs-3 d-block text-muted mb-1"></i>
+                                        <span class="d-block small text-muted" style="font-size: 11px;">Upload French Banner Image</span>
+                                        <span class="upload-btn-premium"><i class="ri-image-add-line"></i> Choose Image</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
