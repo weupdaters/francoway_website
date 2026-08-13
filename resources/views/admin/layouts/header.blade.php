@@ -37,7 +37,7 @@
                                  <div class="dropdown" style="font-family: 'Outfit', sans-serif;">
                                      <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                          @if(session('locale', 'en') === 'fr')
-                                             <span>🇫🇷</span> French
+                                             <span>🇫🇷</span> Français
                                          @else
                                              <span>🇬🇧</span> English
                                          @endif
@@ -50,7 +50,7 @@
                                          </li>
                                          <li>
                                              <a class="dropdown-item d-flex align-items-center gap-2" href="?lang=fr">
-                                                 <span>🇫🇷</span> French
+                                                 <span>🇫🇷</span> Français
                                              </a>
                                          </li>
                                      </ul>

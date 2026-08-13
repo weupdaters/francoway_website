@@ -119,6 +119,14 @@
                 </a>
             </li>
 
+            {{-- Prompts --}}
+            <li class="menu-item {{ request()->routeIs('admin.prompts.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.prompts.index') }}" class="menu-link">
+                    <i class="ri-terminal-box-fill menu-icon-ri"></i>
+                    <span>Prompts Management</span>
+                </a>
+            </li>
+
             {{-- Course Assign --}}
             <li class="menu-item {{ request()->routeIs('admin.course-assign.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.course-assign.index') }}" class="menu-link">
@@ -142,6 +150,8 @@
                     <span>Plans</span>
                 </a>
             </li>
+
+
 
             {{-- Resources --}}
             <li class="menu-item {{ request()->routeIs('admin.resources.*') ? 'active' : '' }}">

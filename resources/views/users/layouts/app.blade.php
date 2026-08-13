@@ -385,6 +385,30 @@
                     </li>
                 </ul>
             </div>
+
+            {{-- Language Switcher --}}
+            <div class="dropdown me-3" style="font-family: 'Outfit', sans-serif;">
+                <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @if(session('locale', 'en') === 'fr')
+                        <span>🇫🇷</span> Français
+                    @else
+                        <span>🇬🇧</span> English
+                    @endif
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2" href="?lang=en">
+                            <span>🇬🇧</span> English
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2" href="?lang=fr">
+                            <span>🇫🇷</span> Français
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="user-profile-dropdown dropdown">
                 <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown">
                     @php

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Prompt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -34,12 +35,14 @@ class CourseController extends Controller
         }
         
         $courses = $query->paginate(10)->withQueryString();
-        return view('admin.courses.index', compact('courses'));
+        $allPrompts = \App\Models\Prompt::with('course')->latest()->paginate(10, ['*'], 'prompts_page')->withQueryString();
+        return view('admin.courses.index', compact('courses', 'allPrompts'));
     }
 
     public function create()
     {
-        return view('admin.courses.create');
+        $predefinedPrompts = Prompt::where('status', true)->get();
+        return view('admin.courses.create', compact('predefinedPrompts'));
     }
 
     // =========================
@@ -118,7 +121,8 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        return view('admin.courses.edit', compact('course'));
+        $predefinedPrompts = Prompt::where('status', true)->get();
+        return view('admin.courses.edit', compact('course', 'predefinedPrompts'));
     }
 
     // =========================

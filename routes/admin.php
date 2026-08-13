@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Admin\CourseAssignmentController;
+use App\Http\Controllers\Admin\PromptController;
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
 
@@ -123,6 +124,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     //plan routes
      Route::resource('plans', PlanController::class);
+
+    //prompt routes
+    Route::resource('prompts', PromptController::class);
 
     //resource routes
     Route::resource('resources', ResourceController::class)->names([

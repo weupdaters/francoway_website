@@ -101,6 +101,12 @@ class Course extends Model
     {
         return $this->hasMany(SubscriptionPlan::class);
     }
+
+    //prompts
+    public function prompts()
+    {
+        return $this->hasMany(Prompt::class);
+    }
     // ✅ Course subscriptions
     public function courseUserSubscription()
     {

@@ -140,21 +140,53 @@
                                 </div>
                             </div>
                             <div class="col-md-9">
-                                <div class="tab-content" id="promptTabContent">
+                                   <div class="tab-content" id="promptTabContent">
                                     <div class="tab-pane fade show active p-3 bg-light rounded-3 border-0" id="prompt-reading" role="tabpanel" aria-labelledby="reading-list">
-                                        <label class="label fs-13 mb-2 text-muted uppercase">Reading Custom Prompt</label>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="label fs-13 text-muted uppercase mb-0">Reading Custom Prompt</label>
+                                            <select class="form-select form-select-sm w-auto predefined-prompt-select" data-target="prompts[reading]">
+                                                <option value="">Load Predefined Prompt...</option>
+                                                @foreach($predefinedPrompts->where('skill', 'reading') as $p)
+                                                    <option value="{{ $p->prompt_text }}">{{ $p->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <textarea name="prompts[reading]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Reading...">{{ old('prompts.reading', $readingPrompt) }}</textarea>
                                     </div>
                                     <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="prompt-listening" role="tabpanel" aria-labelledby="listening-list">
-                                        <label class="label fs-13 mb-2 text-muted uppercase">Listening Custom Prompt</label>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="label fs-13 text-muted uppercase mb-0">Listening Custom Prompt</label>
+                                            <select class="form-select form-select-sm w-auto predefined-prompt-select" data-target="prompts[listening]">
+                                                <option value="">Load Predefined Prompt...</option>
+                                                @foreach($predefinedPrompts->where('skill', 'listening') as $p)
+                                                    <option value="{{ $p->prompt_text }}">{{ $p->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <textarea name="prompts[listening]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Listening...">{{ old('prompts.listening', $listeningPrompt) }}</textarea>
                                     </div>
                                     <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="prompt-speaking" role="tabpanel" aria-labelledby="speaking-list">
-                                        <label class="label fs-13 mb-2 text-muted uppercase">Speaking Custom Prompt</label>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="label fs-13 text-muted uppercase mb-0">Speaking Custom Prompt</label>
+                                            <select class="form-select form-select-sm w-auto predefined-prompt-select" data-target="prompts[speaking]">
+                                                <option value="">Load Predefined Prompt...</option>
+                                                @foreach($predefinedPrompts->where('skill', 'speaking') as $p)
+                                                    <option value="{{ $p->prompt_text }}">{{ $p->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <textarea name="prompts[speaking]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Speaking...">{{ old('prompts.speaking', $speakingPrompt) }}</textarea>
                                     </div>
                                     <div class="tab-pane fade p-3 bg-light rounded-3 border-0" id="prompt-writing" role="tabpanel" aria-labelledby="writing-list">
-                                        <label class="label fs-13 mb-2 text-muted uppercase">Writing Custom Prompt</label>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="label fs-13 text-muted uppercase mb-0">Writing Custom Prompt</label>
+                                            <select class="form-select form-select-sm w-auto predefined-prompt-select" data-target="prompts[writing]">
+                                                <option value="">Load Predefined Prompt...</option>
+                                                @foreach($predefinedPrompts->where('skill', 'writing') as $p)
+                                                    <option value="{{ $p->prompt_text }}">{{ $p->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <textarea name="prompts[writing]" class="form-control" style="height:180px;" placeholder="Enter custom prompt for Writing...">{{ old('prompts.writing', $writingPrompt) }}</textarea>
                                     </div>
                                 </div>
@@ -238,6 +270,26 @@
     color: #071530 !important;
 }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.predefined-prompt-select').forEach(select => {
+        select.addEventListener('change', function() {
+            const targetName = this.getAttribute('data-target');
+            const textarea = document.querySelector(`textarea[name="${targetName}"]`);
+            if (textarea && this.value) {
+                if (confirm('Are you sure you want to load this predefined prompt? This will overwrite the current content in the textarea.')) {
+                    textarea.value = this.value;
+                } else {
+                    this.value = '';
+                }
+            }
+        });
+    });
+});
+</script>
 @endpush
 
 

@@ -243,8 +243,19 @@ class HomeController extends Controller
         $activeQuestion = session('active_practice_question');
         $customPrompt = session('active_custom_prompt');
         $activeSkillLower = strtolower($activeSkill ?? '');
+        $activeCourseId = session('active_course_id');
 
-        if ($customPrompt) {
+        $dbPrompt = null;
+        if ($activeCourseId && $activeSkillLower) {
+            $dbPrompt = \App\Models\Prompt::where('course_id', $activeCourseId)
+                ->where('skill', $activeSkillLower)
+                ->where('status', true)
+                ->value('prompt_text');
+        }
+
+        if ($dbPrompt) {
+            $customPrompt = $dbPrompt;
+        } elseif ($customPrompt) {
             $decodedPrompt = json_decode($customPrompt, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($decodedPrompt)) {
                 if ($activeSkillLower && isset($decodedPrompt[$activeSkillLower]) && !empty($decodedPrompt[$activeSkillLower])) {

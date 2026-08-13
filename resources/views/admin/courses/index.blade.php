@@ -306,6 +306,118 @@
         {{ $courses->links() }}
     </div>
 
+    {{-- Prompts Management Section --}}
+    <div class="card bg-white rounded-10 border border-white mt-5 mb-4 shadow-sm p-4">
+        
+        {{-- TOP BAR --}}
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 pb-3 border-bottom mb-4">
+            <h3 class="mb-0 fw-semibold">Prompts Management</h3>
+            <a href="{{ route('admin.prompts.create') }}" class="btn btn-primary px-4">
+                + Add Prompt
+            </a>
+        </div>
+
+        {{-- TABLE --}}
+        <div class="default-table-area mx-minus-1">
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Course</th>
+                            <th>Skill</th>
+                            <th>Prompt Preview</th>
+                            <th>Status</th>
+                            <th width="120">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($allPrompts as $prompt)
+                        <tr>
+                            <td>#{{ $prompt->id }}</td>
+                            <td><strong>{{ $prompt->title }}</strong></td>
+                            <td>
+                                @if($prompt->course)
+                                    <span class="text-body fw-medium">{{ $prompt->course->title }}</span>
+                                @else
+                                    <span class="badge bg-secondary text-white">Global</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($prompt->skill === 'reading')
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle">
+                                        <i class="ri-book-open-line me-1"></i> Reading
+                                    </span>
+                                @elseif($prompt->skill === 'listening')
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle">
+                                        <i class="ri-customer-service-line me-1"></i> Listening
+                                    </span>
+                                @elseif($prompt->skill === 'speaking')
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle">
+                                        <i class="ri-mic-line me-1"></i> Speaking
+                                    </span>
+                                @elseif($prompt->skill === 'writing')
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle">
+                                        <i class="ri-edit-2-line me-1"></i> Writing
+                                    </span>
+                                @else
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">
+                                        {{ ucfirst($prompt->skill) }}
+                                    </span>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="text-muted d-inline-block text-truncate" style="max-width: 350px;" title="{{ $prompt->prompt_text }}">
+                                    {{ Str::limit($prompt->prompt_text, 100) }}
+                                </span>
+                            </td>
+                            <td>
+                                @if($prompt->status)
+                                    <span class="badge bg-success">Active</span>
+                                @else
+                                    <span class="badge bg-danger">Inactive</span>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('admin.prompts.edit', $prompt->id) }}" class="bg-transparent border-0">
+                                        <img src="https://img.icons8.com/color/48/edit.png" style="width: 18px; height: 18px; object-fit: contain;" alt="edit">
+                                    </a>
+                                    <form action="{{ route('admin.prompts.destroy', $prompt->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="bg-transparent border-0" onclick="return confirm('Delete this prompt?')">
+                                            <img src="https://img.icons8.com/color/48/trash.png" style="width: 18px; height: 18px; object-fit: contain;" alt="delete">
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">
+                                No Prompts Found
+                            </td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            {{-- PAGINATION --}}
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <span class="fs-15 text-muted">
+                    Showing {{ $allPrompts->firstItem() ?? 0 }}
+                    to {{ $allPrompts->lastItem() ?? 0 }}
+                    of {{ $allPrompts->total() ?? 0 }} entries
+                </span>
+                {{ $allPrompts->links() }}
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 
