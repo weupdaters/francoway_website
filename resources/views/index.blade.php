@@ -77,6 +77,15 @@
         border-color: #E31B23 !important;
         transform: scale(1.1) !important;
     }
+
+    /* Hide scrollbar for student selectors */
+    #student-selectors {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    #student-selectors::-webkit-scrollbar {
+        display: none;             /* Chrome, Safari and Opera */
+    }
 </style>
 @endpush
 

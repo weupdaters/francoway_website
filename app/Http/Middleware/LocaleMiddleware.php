@@ -13,14 +13,16 @@ class LocaleMiddleware
      * Map between standard locale codes and URL slugs.
      */
     protected $slugMap = [
-        'en' => 'english',
-        'fr' => 'french',
+        'en' => 'en',
+        'fr' => 'fr',
     ];
 
     /**
      * Map between URL slugs and standard locale codes.
      */
     protected $reverseSlugMap = [
+        'en' => 'en',
+        'fr' => 'fr',
         'english' => 'en',
         'french' => 'fr',
     ];
@@ -46,7 +48,7 @@ class LocaleMiddleware
                 $segments = $request->segments();
                 
                 // Replace or prepend the first segment with the slug
-                if (count($segments) > 0 && in_array($segments[0], ['english', 'french'])) {
+                if (count($segments) > 0 && in_array($segments[0], ['english', 'french', 'en', 'fr'])) {
                     $segments[0] = $localeSlug;
                 } else {
                     array_unshift($segments, $localeSlug);
@@ -65,6 +67,15 @@ class LocaleMiddleware
         $firstSegment = count($segments) > 0 ? $segments[0] : null;
 
         if ($firstSegment && isset($this->reverseSlugMap[$firstSegment])) {
+            // Check if current segment is a legacy slug ('english' or 'french') and redirect to correct slug ('en' or 'fr')
+            if ($firstSegment === 'english' || $firstSegment === 'french') {
+                $correctSlug = $firstSegment === 'english' ? 'en' : 'fr';
+                $segments[0] = $correctSlug;
+                $newPath = implode('/', $segments);
+                $queryString = $request->getQueryString();
+                return redirect()->to('/' . $newPath . ($queryString ? '?' . $queryString : ''));
+            }
+
             $lang = $this->reverseSlugMap[$firstSegment];
             app()->setLocale($lang);
             
@@ -125,7 +136,7 @@ class LocaleMiddleware
             app()->setLocale($locale);
             
             // Set URL defaults for generated routes
-            $localeSlug = $this->slugMap[$locale] ?? 'english';
+            $localeSlug = $this->slugMap[$locale] ?? 'en';
             \Illuminate\Support\Facades\URL::defaults(['locale' => $localeSlug]);
             
             return $next($request);
@@ -142,7 +153,7 @@ class LocaleMiddleware
             $locale = 'en'; // default
         }
         
-        $localeSlug = $this->slugMap[$locale] ?? 'english';
+        $localeSlug = $this->slugMap[$locale] ?? 'en';
 
         $isGet = $request->isMethod('get');
         $isAjax = $request->ajax() || $request->expectsJson();

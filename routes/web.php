@@ -125,6 +125,6 @@ Route::group([], $registerRoutes);
 // 2. Pre-prefixed routes (for clean URLs and routing logic)
 Route::group([
     'prefix' => '{locale}',
-    'where' => ['locale' => 'english|french'],
+    'where' => ['locale' => 'en|fr'],
     'middleware' => ['clean-locale'],
 ], $registerRoutes);
