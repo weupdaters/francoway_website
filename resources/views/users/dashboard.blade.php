@@ -23,8 +23,8 @@
         color: #071530;
         line-height: 1.25;
     }
-    .welcome-text-title span.highlight-red {
-        color: #E53935;
+    .welcome-text-title span.highlight-navy {
+        color: #E31B23;
     }
     .welcome-user-greeting {
         font-family: 'Outfit', sans-serif;
@@ -59,22 +59,22 @@
         color: #071530;
     }
     .card-container-title i {
-        color: #E53935;
+        color: #E31B23;
         font-size: 20px;
     }
     .btn-view-all-courses {
-        color: #E53935;
+        color: #E31B23;
         font-weight: 700;
         font-size: 13.5px;
         text-decoration: none;
         display: flex;
         align-items: center;
         gap: 5px;
-        transition: gap 0.2s;
+        transition: all 0.2s;
     }
     .btn-view-all-courses:hover {
         gap: 8px;
-        color: #0B1F4D;
+        color: #B91C1C;
     }
 
     /* Premium Course Cards inside Grid */
@@ -122,10 +122,10 @@
         background-color: #16A34A; /* Green in screenshot */
     }
     .mirror-badge-blue-progress {
-        background-color: #0B1F4D; /* Blue in screenshot */
+        background-color: #E31B23; /* Solid Logo Red */
     }
     .mirror-badge-premium {
-        background: linear-gradient(135deg, #d63384 0%, #e91e8c 100%);
+        background-color: #E31B23; /* Solid Red */
         top: 12px;
         right: 12px;
         bottom: auto;
@@ -137,14 +137,14 @@
         font-size: 10px;
         font-weight: 800;
         letter-spacing: 0.3px;
-        box-shadow: 0 2px 12px rgba(214, 51, 132, 0.45);
+        box-shadow: 0 2px 10px rgba(227, 27, 35, 0.3);
     }
 
     /* ===== Course Locked Overlay ===== */
     .course-locked-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(160deg, rgba(10,15,40,0.88) 0%, rgba(30,10,40,0.92) 100%);
+        background: rgba(7, 21, 48, 0.92);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -159,19 +159,14 @@
         width: 72px;
         height: 72px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(229,57,53,0.30) 0%, rgba(229,57,53,0.06) 65%, transparent 100%);
-        border: 2px solid rgba(229,57,53,0.45);
+        background: rgba(227, 27, 35, 0.15);
+        border: 2px solid rgba(227, 27, 35, 0.5);
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
         margin-bottom: 4px;
-        box-shadow: 0 0 18px rgba(229,57,53,0.25), inset 0 0 18px rgba(229,57,53,0.10);
-        animation: lockedPulse 2.4s ease-in-out infinite;
-    }
-    @keyframes lockedPulse {
-        0%, 100% { box-shadow: 0 0 18px rgba(229,57,53,0.25), inset 0 0 18px rgba(229,57,53,0.10); }
-        50%       { box-shadow: 0 0 32px rgba(229,57,53,0.50), inset 0 0 24px rgba(229,57,53,0.20); }
+        box-shadow: 0 0 18px rgba(227, 27, 35, 0.2);
     }
     .locked-glow-ring i {
         font-size: 26px;
@@ -183,7 +178,7 @@
         width: 5px;
         height: 5px;
         border-radius: 50%;
-        background: rgba(229,57,53,0.7);
+        background: rgba(227, 27, 35, 0.7);
         animation: particleFloat 3s ease-in-out infinite;
     }
     .locked-particle:nth-child(1){ top: 8px; left: 14px; animation-delay: 0s; }
@@ -217,14 +212,14 @@
         max-width: 220px;
         height: 40px;
         border-radius: 22px;
-        background: linear-gradient(90deg, #E53935 0%, #c0392b 100%);
+        background-color: #E31B23;
         color: #ffffff;
         font-weight: 800;
         font-size: 12.5px;
         text-decoration: none;
         border: none;
         margin-top: 4px;
-        box-shadow: 0 4px 14px rgba(229,57,53,0.40);
+        box-shadow: 0 4px 14px rgba(227, 27, 35, 0.3);
         transition: all 0.25s;
         position: relative;
         overflow: hidden;
@@ -235,9 +230,9 @@
         transition: transform 0.2s;
     }
     .locked-cta-btn:hover {
-        background: linear-gradient(90deg, #c0392b 0%, #a93226 100%);
+        background-color: #0B1F4D;
         color: #ffffff;
-        box-shadow: 0 6px 20px rgba(229,57,53,0.55);
+        box-shadow: 0 6px 20px rgba(11, 31, 77, 0.4);
         transform: translateY(-1px);
     }
     .locked-cta-btn:hover::after {
@@ -288,7 +283,7 @@
     }
     .mirror-progress-bar-fill {
         height: 100%;
-        background-color: #E53935; /* Red bar in screenshot */
+        background-color: #E31B23;
         border-radius: 3px;
     }
     .mirror-progress-pct {
@@ -298,11 +293,11 @@
         text-align: right;
     }
 
-    /* Buttons */
+    /* Solid Logo-Matched Red Buttons */
     .mirror-btn-navy {
         height: 44px;
         border-radius: 10px;
-        background-color: #0B1F4D;
+        background-color: #E31B23;
         color: #ffffff;
         font-weight: 700;
         font-size: 13px;
@@ -312,17 +307,22 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        transition: background-color 0.2s;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.25);
     }
     .mirror-btn-navy:hover {
-        background-color: #E53935;
+        background-color: #0B1F4D;
+        color: #ffffff;
+        box-shadow: 0 6px 16px rgba(11, 31, 77, 0.35);
+        transform: translateY(-1px);
     }
     .mirror-btn-outline {
         height: 44px;
         border-radius: 10px;
         background-color: transparent;
-        border: 1px solid #0B1F4D;
-        color: #0B1F4D;
+        border: 1.5px solid #E31B23;
+        color: #E31B23;
         font-weight: 700;
         font-size: 13px;
         width: 100%;
@@ -330,16 +330,20 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        transition: all 0.2s;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
     }
     .mirror-btn-outline:hover {
-        background-color: #0B1F4D;
+        background-color: #E31B23;
+        border-color: #E31B23;
         color: #ffffff;
+        box-shadow: 0 4px 14px rgba(227, 27, 35, 0.25);
+        transform: translateY(-1px);
     }
-    .mirror-btn-red {
+    .mirror-btn-navy-accent {
         height: 44px;
         border-radius: 10px;
-        background-color: #E53935;
+        background-color: #E31B23;
         color: #ffffff;
         font-weight: 700;
         font-size: 13px;
@@ -349,12 +353,15 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        transition: background-color 0.2s;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none;
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.25);
     }
-    .mirror-btn-red:hover {
+    .mirror-btn-navy-accent:hover {
         background-color: #0B1F4D;
         color: #ffffff;
+        box-shadow: 0 6px 18px rgba(11, 31, 77, 0.35);
+        transform: translateY(-1px);
     }
 
     /* Right Stack Statistics Cards */
@@ -382,8 +389,8 @@
         font-size: 18px;
     }
     .mirror-stat-icon-blue {
-        background-color: rgba(11, 31, 77, 0.06);
-        color: #0B1F4D;
+        background-color: rgba(227, 27, 35, 0.08);
+        color: #E31B23;
     }
     .mirror-stat-icon-green {
         background-color: rgba(22, 163, 74, 0.06);
@@ -427,7 +434,7 @@
     }
     .mirror-feature-icon {
         font-size: 26px;
-        color: #0B1F4D;
+        color: #E31B23;
         margin-bottom: 8px;
     }
     .mirror-feature-title {
@@ -474,7 +481,7 @@
         <div class="col-lg-6 z-3">
             <span class="welcome-user-greeting">Bonjour, {{ auth()->user()->name }}! 👋</span>
             <h1 class="welcome-text-title mt-2">
-                Welcome to your <span class="highlight-red">French</span><br>learning journey.
+                Welcome to your <span class="highlight-navy">French</span><br>learning journey.
             </h1>
             <p class="text-muted small mt-3">Continue learning and achieve your goals.</p>
         </div>
@@ -599,7 +606,7 @@
                                                         <i class="bi bi-play-fill"></i> Continue
                                                     </a>
                                                 @endif
-                                                <a href="{{ route('ai.practice', ['course_id' => $course->id]) }}" class="mirror-btn-red flex-grow-1 text-truncate">
+                                                <a href="{{ route('ai.practice', ['course_id' => $course->id, 'quick_start' => 1]) }}" class="mirror-btn-navy-accent flex-grow-1 text-truncate">
                                                     <i class="bi bi-robot"></i> Start Quiz
                                                 </a>
                                             </div>
@@ -633,7 +640,7 @@
                                          <a href="/users/courses/24" class="mirror-btn-navy flex-grow-1 text-truncate">
                                              <i class="bi bi-play-fill"></i> Continue
                                          </a>
-                                         <a href="{{ route('ai.practice', ['course_id' => 24]) }}" class="mirror-btn-red flex-grow-1 text-truncate">
+                                         <a href="{{ route('ai.practice', ['course_id' => 24, 'quick_start' => 1]) }}" class="mirror-btn-navy-accent flex-grow-1 text-truncate">
                                              <i class="bi bi-robot"></i> Start Quiz
                                          </a>
                                      </div>
@@ -665,7 +672,7 @@
                                          <a href="/users/courses/25" class="mirror-btn-outline flex-grow-1 text-truncate">
                                              <i class="bi bi-book-half"></i> Review
                                          </a>
-                                         <a href="{{ route('ai.practice', ['course_id' => 25]) }}" class="mirror-btn-red flex-grow-1 text-truncate">
+                                         <a href="{{ route('ai.practice', ['course_id' => 25, 'quick_start' => 1]) }}" class="mirror-btn-navy-accent flex-grow-1 text-truncate">
                                              <i class="bi bi-robot"></i> Start Quiz
                                          </a>
                                      </div>
@@ -697,7 +704,7 @@
                                          <a href="/users/courses/26" class="mirror-btn-navy flex-grow-1 text-truncate">
                                              <i class="bi bi-play-fill"></i> Continue
                                          </a>
-                                         <a href="{{ route('ai.practice', ['course_id' => 26]) }}" class="mirror-btn-red flex-grow-1 text-truncate">
+                                         <a href="{{ route('ai.practice', ['course_id' => 26, 'quick_start' => 1]) }}" class="mirror-btn-navy-accent flex-grow-1 text-truncate">
                                              <i class="bi bi-robot"></i> Start Quiz
                                          </a>
                                      </div>

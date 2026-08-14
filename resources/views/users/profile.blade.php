@@ -15,7 +15,7 @@
     }
     .profile-card-title {
         font-family: 'Outfit', sans-serif;
-        font-weight: 800;
+        font-weight: 600;
         font-size: 18px;
         color: #071530;
         border-bottom: 1px solid #F1F5F9;
@@ -26,13 +26,13 @@
         gap: 10px;
     }
     .profile-card-title i {
-        color: #E53935;
+        color: #E31B23;
     }
 
     /* Form control premium styles */
     .form-label {
-        font-size: 13px;
-        font-weight: 700;
+        font-size: 12.5px;
+        font-weight: 600;
         color: #5A6A85;
         margin-bottom: 8px;
         text-transform: uppercase;
@@ -50,8 +50,8 @@
         transition: all 0.2s ease-in-out;
     }
     .form-control-premium:focus {
-        border-color: #E53935;
-        box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.08);
+        border-color: #E31B23;
+        box-shadow: 0 0 0 3px rgba(227, 27, 35, 0.12);
         outline: none;
     }
     .form-control-premium::placeholder {
@@ -97,60 +97,64 @@
         transition: background-color 0.2s;
     }
     .avatar-upload-trigger:hover {
-        background-color: rgba(229, 57, 53, 0.85);
+        background-color: #E31B23;
     }
     
     /* Submit Buttons */
     .btn-profile-save {
         height: 48px;
-        background-color: #0B1F4D;
+        background-color: #E31B23;
         color: #ffffff;
-        font-weight: 700;
+        font-weight: 600;
         font-size: 14px;
         border-radius: 10px;
         border: none;
         transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.2);
     }
     .btn-profile-save:hover {
-        background-color: #E53935;
+        background-color: #0B1F4D;
+        color: #ffffff;
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(229, 57, 53, 0.15);
+        box-shadow: 0 6px 16px rgba(11, 31, 77, 0.3);
     }
     .btn-profile-password {
         height: 48px;
         background-color: transparent;
-        border: 1.5px solid #0B1F4D;
-        color: #0B1F4D;
-        font-weight: 700;
+        border: 1.5px solid #E31B23;
+        color: #E31B23;
+        font-weight: 600;
         font-size: 14px;
         border-radius: 10px;
         transition: all 0.2s;
     }
     .btn-profile-password:hover {
-        background-color: #0B1F4D;
+        background-color: #E31B23;
+        border-color: #E31B23;
         color: #ffffff;
         transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(227, 27, 35, 0.25);
     }
 
     /* Page structure styling */
     .page-title-text {
         font-family: 'Outfit', sans-serif;
-        font-weight: 800;
+        font-weight: 600;
         font-size: 24px;
         color: #071530;
     }
     .breadcrumb-item a {
         color: #5A6A85;
-        font-weight: 600;
+        font-weight: 500;
         text-decoration: none;
         transition: color 0.2s;
     }
     .breadcrumb-item a:hover {
-        color: #E53935;
+        color: #E31B23;
     }
     .breadcrumb-item.active {
-        color: #E53935;
-        font-weight: 700;
+        color: #E31B23;
+        font-weight: 600;
     }
 </style>
 @endpush
@@ -273,19 +277,34 @@
                     <!-- Current Password -->
                     <div class="mb-3">
                         <label for="current_password" class="form-label">Current Password</label>
-                        <input type="password" name="current_password" id="current_password" class="form-control form-control-premium w-100" required placeholder="••••••••">
+                        <div class="position-relative">
+                            <input type="password" name="current_password" id="current_password" class="form-control form-control-premium w-100 pe-5" required placeholder="••••••••">
+                            <button type="button" id="toggle-current-password" class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0 bg-transparent text-muted" style="z-index: 10;">
+                                <i class="bi bi-eye fs-5" id="current-password-icon"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- New Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">New Password</label>
-                        <input type="password" name="password" id="password" class="form-control form-control-premium w-100" required placeholder="Minimum 8 characters">
+                        <div class="position-relative">
+                            <input type="password" name="password" id="password" class="form-control form-control-premium w-100 pe-5" required placeholder="Minimum 8 characters">
+                            <button type="button" id="toggle-password" class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0 bg-transparent text-muted" style="z-index: 10;">
+                                <i class="bi bi-eye fs-5" id="password-icon"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Confirm Password -->
                     <div class="mb-4">
                         <label for="password_confirmation" class="form-label">Confirm New Password</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control form-control-premium w-100" required placeholder="Re-enter new password">
+                        <div class="position-relative">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control form-control-premium w-100 pe-5" required placeholder="Re-enter new password">
+                            <button type="button" id="toggle-password-confirm" class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0 bg-transparent text-muted" style="z-index: 10;">
+                                <i class="bi bi-eye fs-5" id="password-confirm-icon"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Submit -->
@@ -316,6 +335,31 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // Password toggles helper
+        function setupPasswordToggle(inputId, toggleId, iconId) {
+            const input = document.getElementById(inputId);
+            const button = document.getElementById(toggleId);
+            const icon = document.getElementById(iconId);
+
+            if (input && button && icon) {
+                button.addEventListener('click', function() {
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye');
+                    }
+                });
+            }
+        }
+
+        setupPasswordToggle('current_password', 'toggle-current-password', 'current-password-icon');
+        setupPasswordToggle('password', 'toggle-password', 'password-icon');
+        setupPasswordToggle('password_confirmation', 'toggle-password-confirm', 'password-confirm-icon');
     });
 </script>
 @endpush

@@ -107,7 +107,7 @@
             transition: color 0.2s;
         }
         .top-info-bar a:hover {
-            color: #E53935;
+            color: #0B1F4D;
         }
         .top-info-bar .social-links a {
             margin-left: 15px;
@@ -146,7 +146,7 @@
         }
         .nav-brand-subtext {
             font-size: 9px;
-            color: #E53935;
+            color: #E31B23;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -168,7 +168,7 @@
             position: absolute;
             top: -2px;
             right: -3px;
-            background-color: #E53935;
+            background-color: #E31B23;
             color: #ffffff;
             font-size: 8px;
             font-weight: 800;
@@ -235,13 +235,13 @@
             transition: all 0.25s ease;
         }
         .sidebar-menu-link:hover {
-            background-color: rgba(229, 57, 53, 0.05);
-            color: #E53935;
+            background-color: rgba(227, 27, 35, 0.08);
+            color: #E31B23;
         }
         .sidebar-menu-item.active .sidebar-menu-link {
-            background: linear-gradient(90deg, #E53935 0%, #FF6B6B 100%) !important;
+            background-color: #E31B23 !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+            box-shadow: 0 4px 15px rgba(227, 27, 35, 0.25);
             border-left: none;
             border-radius: 14px;
         }
@@ -250,14 +250,14 @@
         }
         .sidebar-menu-link i {
             font-size: 18px;
-            color: #5A6A85;
+            color: #E31B23;
             transition: color 0.25s ease;
         }
         .sidebar-menu-link:hover i {
-            color: #E53935;
+            color: #E31B23;
         }
         .badge-count-red {
-            background-color: #E53935;
+            background-color: #0B1F4D;
             color: #ffffff;
             font-size: 10px;
             font-weight: 800;
@@ -349,7 +349,7 @@
                     </li>
                     <li class="mb-2">
                         <a class="dropdown-item p-2 rounded d-flex gap-3 align-items-start" href="{{ route('users.courses.index') }}" style="white-space: normal; background: transparent;">
-                            <div class="bg-primary-subtle text-primary rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; min-width: 36px;">
+                            <div class="rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; min-width: 36px; background-color: rgba(11, 31, 77, 0.08) !important; color: #0B1F4D !important;">
                                 <i class="bi bi-book-half"></i>
                             </div>
                             <div style="flex: 1;">
@@ -420,7 +420,7 @@
                     <i class="bi bi-chevron-down text-muted small"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2">
-                    <li><a class="dropdown-item py-2 text-muted" href="{{ route('users.profile.index') }}"><i class="bi bi-person-circle me-2 text-primary"></i> My Profile</a></li>
+                    <li><a class="dropdown-item py-2 text-muted" href="{{ route('users.profile.index') }}"><i class="bi bi-person-circle me-2" style="color: #0B1F4D !important;"></i> My Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('auth.logout') }}">
@@ -443,20 +443,20 @@
             <ul class="sidebar-menu-list">
                 <li class="sidebar-menu-item {{ request()->routeIs('users.dashboard') ? 'active' : '' }}">
                         <a href="{{ route('users.dashboard') }}" class="sidebar-menu-link">
-                            <i class="bi bi-grid-1x2-fill me-2" style="color:#E53935;"></i>
+                            <i class="bi bi-grid-1x2-fill me-2" style="color:#0B1F4D;"></i>
                             <span>Dashboard</span>
                         </a>
                 </li>
                 <li class="sidebar-menu-item {{ request()->routeIs('users.courses.*') || request()->routeIs('users.lessons.*') ? 'active' : '' }}">
                         <a href="{{ route('users.courses.index') }}" class="sidebar-menu-link">
-                            <i class="bi bi-journal-richtext me-2" style="color:#E53935;"></i>
+                            <i class="bi bi-journal-richtext me-2" style="color:#0B1F4D;"></i>
                             <span>My Courses</span>
                         </a>
                 </li>
 
                 <li class="sidebar-menu-item {{ request()->routeIs('users.profile.*') ? 'active' : '' }}">
                         <a href="{{ route('users.profile.index') }}" class="sidebar-menu-link">
-                            <i class="bi bi-person-fill me-2" style="color:#E53935;"></i>
+                            <i class="bi bi-person-fill me-2" style="color:#0B1F4D;"></i>
                             <span>Profile</span>
                         </a>
                 </li>

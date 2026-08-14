@@ -66,7 +66,7 @@
         }
 
         .checkout-logo span {
-            color: #E53935;
+            color: #0B1F4D;
         }
 
         .btn-back-dashboard {
@@ -89,8 +89,8 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background-color: rgba(229, 57, 53, 0.1);
-            color: #E53935;
+            background-color: rgba(11, 31, 77, 0.1);
+            color: #0B1F4D;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,10 +177,10 @@
         }
 
         .btn-checkout:hover {
-            background-color: #E53935 !important;
+            background-color: #0B1F4D !important;
             color: #ffffff !important;
             transform: translateY(-1px) !important;
-            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.22) !important;
+            box-shadow: 0 6px 20px rgba(11, 31, 77, 0.22) !important;
         }
     </style>
 </head>
@@ -190,7 +190,7 @@
     <header class="checkout-navbar">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="/" class="checkout-logo">
-                <i class="ri-navigation-line text-danger"></i> Franco<span>Way</span>
+                <i class="ri-navigation-line" style="color: #0B1F4D !important;"></i> Franco<span>Way</span>
             </a>
             <a href="/dashboard" class="btn-back-dashboard">
                 <i class="fas fa-arrow-left"></i> Back to Dashboard
@@ -205,7 +205,7 @@
             <!-- Page Title -->
             <div class="checkout-header mb-5">
                 <h1 class="fw-black text-dark text-uppercase tracking-wider m-0" style="font-weight: 900; font-size: 32px;">
-                    Secure <span class="text-danger">Checkout</span>
+                    Secure <span style="color: #0B1F4D !important;">Checkout</span>
                 </h1>
                 <p class="text-muted small font-medium mt-1">Complete your enrollment details below to start learning immediately.</p>
             </div>
@@ -369,7 +369,7 @@
                                 <img src="{{ $courseImage }}" class="rounded-3 border" style="width: 100px; height: 70px; object-fit: cover;" onerror="this.src='{{ $noImageBanner }}'">
                                 <div>
                                     <h6 class="fw-bold text-dark mb-1" style="font-size: 15px; line-height: 1.3;">{{ $course->title }}</h6>
-                                    <span class="badge bg-danger-subtle text-danger text-uppercase px-2 py-1 rounded" style="font-size: 10px; font-weight: 700;">12-Month Access</span>
+                                    <span class="badge text-uppercase px-2 py-1 rounded" style="font-size: 10px; font-weight: 700; background-color: rgba(11, 31, 77, 0.08); color: #0B1F4D !important;">12-Month Access</span>
                                 </div>
                             </div>
 
@@ -389,7 +389,7 @@
 
                                 <div class="d-flex justify-content-between align-items-baseline border-top pt-3">
                                     <span class="fw-bold text-dark" style="font-size: 15px;">Total Amount</span>
-                                    <span class="fs-3 fw-bold text-danger">₹{{ number_format($totalAmount, 2) }}</span>
+                                    <span class="fs-3 fw-bold" style="color: #0B1F4D !important;">₹{{ number_format($totalAmount, 2) }}</span>
                                 </div>
                             </div>
 

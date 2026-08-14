@@ -4,9 +4,9 @@
 
 @section('content')
 
-<div class="main-content-container overflow-hidden">
+<div class="main-content-container overflow-hidden text-end">
 
-    {{-- HEADER --}}
+    {{-- Page Heading --}}
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
         <h3 class="mb-0">Prompts Management</h3>
 
@@ -15,38 +15,32 @@
                 <li class="breadcrumb-item">
                     <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none">
                         <i class="ri-home-8-line fs-15 text-primary me-1"></i>
-                        <span class="text-body fs-14">Dashboard</span>
+                        <span class="text-body fs-14 hover">Dashboard</span>
                     </a>
                 </li>
+
                 <li class="breadcrumb-item active">
-                    Prompts
+                    <span class="text-secondary fs-14">Prompts Management</span>
                 </li>
             </ol>
         </nav>
     </div>
 
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1 bg-white p-20 rounded-10 border border-white">
+        {{-- Search Form --}}
+        <form action="{{ route('admin.prompts.index') }}" method="GET" class="d-flex align-items-center gap-2">
+            <input type="text" name="search" class="form-control bg-light border-0" placeholder="Search prompts..." value="{{ request('search') }}" style="width: 250px !important;">
+            <button class="btn btn-primary" type="submit" style="width: 48px !important; height: 48px !important; padding: 0 !important; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;">
+                <i class="ri-search-line"></i>
+            </button>
+        </form>
+
+        <a href="{{ route('admin.prompts.create') }}" class="btn btn-primary text-end">
+            + Add Prompt
+        </a>
+    </div>
+
     <div class="card bg-white rounded-10 border border-white mb-4">
-
-        {{-- TOP BAR --}}
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-            <h4 class="mb-0">All Prompts</h4>
-
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-                {{-- Search Form --}}
-                <form action="{{ route('admin.prompts.index') }}" method="GET" class="d-flex align-items-center me-2">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control bg-light border-0" placeholder="Search prompts..." value="{{ request('search') }}">
-                        <button class="btn btn-outline-secondary border-0 bg-light" type="submit">
-                            <i class="ri-search-line"></i>
-                        </button>
-                    </div>
-                </form>
-
-                <a href="{{ route('admin.prompts.create') }}" class="btn btn-primary">
-                    + Add Prompt
-                </a>
-            </div>
-        </div>
 
         {{-- TABLE --}}
         <div class="default-table-area mx-minus-1 style-two">
@@ -105,9 +99,13 @@
                             </td>
                             <td>
                                 @if($prompt->status)
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-primary">
+                                        ACTIVE
+                                    </span>
                                 @else
-                                    <span class="badge bg-danger">Inactive</span>
+                                    <span class="badge bg-danger">
+                                        INACTIVE
+                                    </span>
                                 @endif
                             </td>
                             <td>
@@ -138,7 +136,7 @@
 
             {{-- PAGINATION --}}
             <div class="d-flex justify-content-between align-items-center p-20">
-                <span class="fs-15 text-muted">
+                <span class="fs-15">
                     Showing {{ $prompts->firstItem() ?? 0 }}
                     to {{ $prompts->lastItem() ?? 0 }}
                     of {{ $prompts->total() ?? 0 }}

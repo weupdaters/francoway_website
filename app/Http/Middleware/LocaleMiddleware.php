@@ -109,7 +109,7 @@ class LocaleMiddleware
                 array_shift($cleanSegments); // remove 'french'
                 $cleanPath = implode('/', $cleanSegments);
                 
-                $isSkipRoute = str_starts_with($cleanPath, 'teacher') || str_starts_with($cleanPath, 'api');
+                $isSkipRoute = str_starts_with($cleanPath, 'api');
                 
                 if (!$isSkipRoute && str_contains($contentType, 'text/html')) {
                     $originalHtml = $response->getContent();
@@ -189,7 +189,7 @@ class LocaleMiddleware
         // Translate the HTML content if fallback locale is French
         if ($locale === 'fr' && $response instanceof \Illuminate\Http\Response) {
             $contentType = $response->headers->get('Content-Type');
-            $isSkipRoute = $request->is('teacher*') || $request->is('api*') || $request->is('*/teacher*');
+            $isSkipRoute = $request->is('api*');
 
             if (!$isSkipRoute && str_contains($contentType, 'text/html')) {
                 $originalHtml = $response->getContent();

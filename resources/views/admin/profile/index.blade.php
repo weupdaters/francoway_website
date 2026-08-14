@@ -357,17 +357,32 @@
                             <div class="row g-3">
                                 <div class="col-md-12 d-flex flex-column">
                                     <label class="premium-form-label">Current Password</label>
-                                    <input type="password" name="current_password" required class="form-control premium-input-field" placeholder="Enter current password">
+                                    <div class="position-relative">
+                                        <input type="password" name="current_password" id="admin_current_password" required class="form-control premium-input-field w-100 pe-5" placeholder="Enter current password">
+                                        <button type="button" id="toggle-admin-current-password" class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0 bg-transparent text-muted" style="z-index: 10;">
+                                            <i class="bi bi-eye fs-5" id="admin-current-password-icon"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6 d-flex flex-column">
                                     <label class="premium-form-label">New Password</label>
-                                    <input type="password" name="password" required class="form-control premium-input-field" placeholder="Min 8 characters">
+                                    <div class="position-relative">
+                                        <input type="password" name="password" id="admin_password" required class="form-control premium-input-field w-100 pe-5" placeholder="Min 8 characters">
+                                        <button type="button" id="toggle-admin-password" class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0 bg-transparent text-muted" style="z-index: 10;">
+                                            <i class="bi bi-eye fs-5" id="admin-password-icon"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6 d-flex flex-column">
                                     <label class="premium-form-label">Confirm New Password</label>
-                                    <input type="password" name="password_confirmation" required class="form-control premium-input-field" placeholder="Re-enter new password">
+                                    <div class="position-relative">
+                                        <input type="password" name="password_confirmation" id="admin_password_confirmation" required class="form-control premium-input-field w-100 pe-5" placeholder="Re-enter new password">
+                                        <button type="button" id="toggle-admin-password-confirm" class="btn position-absolute end-0 top-50 translate-middle-y me-2 border-0 bg-transparent text-muted" style="z-index: 10;">
+                                            <i class="bi bi-eye fs-5" id="admin-password-confirm-icon"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-12 pt-2">
@@ -419,5 +434,32 @@
             passwordSection.style.display = 'block';
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Password toggles helper
+        function setupPasswordToggle(inputId, toggleId, iconId) {
+            const input = document.getElementById(inputId);
+            const button = document.getElementById(toggleId);
+            const icon = document.getElementById(iconId);
+
+            if (input && button && icon) {
+                button.addEventListener('click', function() {
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye');
+                    }
+                });
+            }
+        }
+
+        setupPasswordToggle('admin_current_password', 'toggle-admin-current-password', 'admin-current-password-icon');
+        setupPasswordToggle('admin_password', 'toggle-admin-password', 'admin-password-icon');
+        setupPasswordToggle('admin_password_confirmation', 'toggle-admin-password-confirm', 'admin-password-confirm-icon');
+    });
 </script>
 @endpush

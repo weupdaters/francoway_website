@@ -27,10 +27,10 @@
         transition: color 0.2s;
     }
     .breadcrumb-item a:hover {
-        color: #E31B23;
+        color: #0B1F4D;
     }
     .breadcrumb-item.active {
-        color: #E31B23;
+        color: #0B1F4D;
         font-weight: 700;
     }
 
@@ -46,12 +46,12 @@
     }
     .mirror-tabs .nav-link:hover {
         color: #E31B23;
-        background-color: rgba(227, 27, 35, 0.04);
+        background-color: rgba(227, 27, 35, 0.06);
     }
     .mirror-tabs .nav-link.active {
         background-color: #E31B23 !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.2);
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.3);
     }
 
     /* Course Card Row Item Styling */
@@ -77,7 +77,7 @@
         overflow: hidden;
         flex-shrink: 0;
         position: relative;
-        background: linear-gradient(135deg, #071530 0%, #101F42 100%);
+        background-color: #E31B23;
     }
 
     .course-thumb-img {
@@ -98,13 +98,13 @@
         font-family: 'Outfit', sans-serif;
     }
 
-    .hover-text-danger:hover {
+    .hover-text-navy:hover {
         color: #E31B23 !important;
     }
 
     /* Buttons styling */
     .btn-action-primary {
-        background-color: #071530;
+        background-color: #E31B23;
         color: #ffffff;
         font-weight: 700;
         font-size: 12.5px;
@@ -116,12 +116,13 @@
         align-items: center;
         gap: 6px;
         text-decoration: none;
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.25);
     }
     .btn-action-primary:hover {
-        background-color: #E31B23;
+        background-color: #0B1F4D;
         color: #ffffff;
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.25);
+        box-shadow: 0 6px 16px rgba(11, 31, 77, 0.35);
     }
 
     .btn-action-outline {
@@ -140,13 +141,14 @@
     }
     .btn-action-outline:hover {
         background-color: #E31B23 !important;
+        border-color: #E31B23 !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.2);
+        box-shadow: 0 4px 14px rgba(227, 27, 35, 0.25);
         transform: translateY(-1px);
     }
 
     .progress-bar-gradient {
-        background: linear-gradient(90deg, #E53935 0%, #8B5CF6 100%);
+        background-color: #E31B23;
         border-radius: 10px;
     }
 </style>
@@ -237,8 +239,8 @@
                                             <i class="bi bi-check-circle-fill me-1"></i> Completed
                                         </span>
                                     @elseif($progress > 0)
-                                        <span class="badge bg-primary bg-opacity-10 text-primary fw-bold" style="font-size: 11px; border-radius: 6px;">
-                                            <i class="bi bi-play-circle-fill me-1"></i> In Progress
+                                        <span class="badge fw-bold" style="font-size: 11px; border-radius: 6px; background-color: rgba(11, 31, 77, 0.08); color: #0B1F4D !important;">
+                                            <i class="bi bi-play-circle-fill me-1" style="color: #0B1F4D !important;"></i> In Progress
                                         </span>
                                     @else
                                         <span class="badge bg-secondary bg-opacity-10 text-secondary fw-bold" style="font-size: 11px; border-radius: 6px;">
@@ -248,13 +250,13 @@
                                 </div>
 
                                 <h5 class="fw-bold text-dark mb-1" style="font-size: 16px; font-family: 'Outfit', sans-serif;">
-                                    <a href="{{ route('users.lessons.index', $course->id) }}" class="text-decoration-none text-dark hover-text-danger">
+                                    <a href="{{ route('users.lessons.index', $course->id) }}" class="text-decoration-none text-dark hover-text-navy">
                                         {{ $course->title }}
                                     </a>
                                 </h5>
 
                                 <div class="d-flex flex-wrap align-items-center gap-3 text-muted small mt-1" style="font-size: 12.5px;">
-                                    <span><i class="bi bi-journal-text me-1 text-danger"></i> {{ $totalLessons }} Lessons</span>
+                                    <span><i class="bi bi-journal-text me-1" style="color: #0B1F4D;"></i> {{ $totalLessons }} Lessons</span>
                                     <span><i class="bi bi-tag me-1 text-secondary"></i> {{ $course->price > 0 ? '₹' . number_format($course->price) : 'Free' }}</span>
                                 </div>
 
@@ -280,7 +282,7 @@
                                 <i class="bi bi-play-fill fs-6"></i>
                                 <span>{{ $progress > 0 ? 'Continue' : 'Open Course' }}</span>
                             </a>
-                            <a href="{{ route('ai.practice', ['course_id' => $course->id]) }}" class="btn-action-outline">
+                            <a href="{{ route('ai.practice', ['course_id' => $course->id, 'quick_start' => 1]) }}" class="btn-action-outline">
                                 <i class="bi bi-robot fs-6"></i>
                                 <span>AI Practice</span>
                             </a>

@@ -230,6 +230,32 @@ class HomeController extends Controller
             return response()->json(['success' => false, 'error' => 'Attempt not found.']);
         }
 
+        if ($message === 'start_practice_session') {
+            $skill = $request->input('skill');
+            $question = $request->input('question');
+            
+            $attempt = \App\Models\AiPracticeAttempt::create([
+                'user_id' => auth()->id(),
+                'course_id' => session('active_course_id'),
+                'skill' => $skill,
+                'question' => $question,
+                'user_answer' => '',
+                'score' => 'Pending',
+                'feedback' => 'Pending evaluation',
+            ]);
+
+            session([
+                'active_practice_skill' => $skill,
+                'active_practice_question' => $question,
+                'active_attempt_id' => $attempt->id
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'attempt_id' => $attempt->id
+            ]);
+        }
+
         // Forget active practice session if starting fresh or switching modes
         $msgLower = strtolower($message);
         if (str_contains($msgLower, 'bonjour') || str_contains($msgLower, 'hello') || str_contains($msgLower, 'practice') || str_contains($msgLower, 'entraîner') || str_contains($msgLower, 'start') || str_contains($msgLower, 'commencer')) {
@@ -241,46 +267,94 @@ class HomeController extends Controller
 
         $activeSkill = session('active_practice_skill');
         $activeQuestion = session('active_practice_question');
-        $customPrompt = session('active_custom_prompt');
+        $sessionCustomPrompt = session('active_custom_prompt');
         $activeSkillLower = strtolower($activeSkill ?? '');
         $activeCourseId = session('active_course_id');
 
-        $dbPrompt = null;
-        if ($activeCourseId && $activeSkillLower) {
-            $dbPrompt = \App\Models\Prompt::where('course_id', $activeCourseId)
-                ->where('skill', $activeSkillLower)
-                ->where('status', true)
-                ->value('prompt_text');
+        // Detect skill from request parameter or message if active skill is not set in session yet
+        $detectedSkill = null;
+        if ($request->filled('skill')) {
+            $detectedSkill = strtolower($request->input('skill'));
         }
 
-        if ($dbPrompt) {
-            $customPrompt = $dbPrompt;
-        } elseif ($customPrompt) {
-            $decodedPrompt = json_decode($customPrompt, true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decodedPrompt)) {
-                if ($activeSkillLower && isset($decodedPrompt[$activeSkillLower]) && !empty($decodedPrompt[$activeSkillLower])) {
-                    $customPrompt = $decodedPrompt[$activeSkillLower];
-                } else {
-                    $combined = "";
-                    foreach (['reading', 'listening', 'speaking', 'writing'] as $mod) {
-                        if (!empty($decodedPrompt[$mod])) {
-                            $combined .= "\n- " . ucfirst($mod) . " module custom prompt:\n" . $decodedPrompt[$mod];
+        if (!$activeSkillLower && !$detectedSkill) {
+            $msgLower = strtolower($message);
+            if (str_contains($msgLower, 'reading') || str_contains($msgLower, 'lecture') || str_contains($msgLower, 'lire')) {
+                $detectedSkill = 'reading';
+            } elseif (str_contains($msgLower, 'listening') || str_contains($msgLower, 'écoute') || str_contains($msgLower, 'ecoute') || str_contains($msgLower, 'écouter')) {
+                $detectedSkill = 'listening';
+            } elseif (str_contains($msgLower, 'writing') || str_contains($msgLower, 'écriture') || str_contains($msgLower, 'ecriture') || str_contains($msgLower, 'écrire')) {
+                $detectedSkill = 'writing';
+            } elseif (str_contains($msgLower, 'speaking') || str_contains($msgLower, 'conversation') || str_contains($msgLower, 'oral') || str_contains($msgLower, 'parler')) {
+                $detectedSkill = 'speaking';
+            }
+        }
+
+        // Fallback target skill detection if still null and a course is active
+        if (!$activeSkillLower && !$detectedSkill && $activeCourseId) {
+            $courseObj = Course::find($activeCourseId);
+            if ($courseObj) {
+                $titleLower = strtolower($courseObj->title);
+                if (str_contains($titleLower, 'reading') || str_contains($titleLower, 'lecture')) {
+                    $detectedSkill = 'reading';
+                } elseif (str_contains($titleLower, 'listening') || str_contains($titleLower, 'écoute') || str_contains($titleLower, 'ecoute')) {
+                    $detectedSkill = 'listening';
+                } elseif (str_contains($titleLower, 'writing') || str_contains($titleLower, 'écriture') || str_contains($titleLower, 'ecriture')) {
+                    $detectedSkill = 'writing';
+                } elseif (str_contains($titleLower, 'speaking') || str_contains($titleLower, 'conversation') || str_contains($titleLower, 'oral')) {
+                    $detectedSkill = 'speaking';
+                }
+
+                if (!$detectedSkill) {
+                    $availableSkills = [];
+                    $dbSkills = \App\Models\Prompt::where('course_id', $activeCourseId)->where('status', true)->pluck('skill')->toArray();
+                    foreach ($dbSkills as $s) {
+                        $availableSkills[] = strtolower($s);
+                    }
+                    if ($courseObj->has_custom_prompt && $courseObj->custom_prompt) {
+                        $dec = json_decode($courseObj->custom_prompt, true);
+                        if (json_last_error() === JSON_ERROR_NONE && is_array($dec)) {
+                            foreach (['reading', 'listening', 'speaking', 'writing'] as $s) {
+                                if (!empty($dec[$s])) {
+                                    $availableSkills[] = $s;
+                                }
+                            }
                         }
                     }
-                    $customPrompt = !empty($combined) ? trim($combined) : null;
+                    $availableSkills = array_unique($availableSkills);
+                    if (count($availableSkills) === 1) {
+                        $detectedSkill = $availableSkills[0];
+                    }
                 }
             }
         }
 
-        $systemPrompt = "You are FrancoWay's AI Study Assistant. Your goal is to help students practice their English skills in 4 categories: Listening, Speaking, Writing, and Reading.
+        $targetSkill = $activeSkillLower ?: $detectedSkill;
+
+        // Load prompt configured in Admin for the specific module/skill
+        $customPrompt = $this->getModulePrompt($targetSkill, $activeCourseId);
+        if (!$customPrompt && $sessionCustomPrompt) {
+            if ($targetSkill && is_string($sessionCustomPrompt)) {
+                $dec = json_decode($sessionCustomPrompt, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($dec) && !empty($dec[$targetSkill])) {
+                    $customPrompt = $dec[$targetSkill];
+                }
+            } elseif (!$targetSkill && is_string($sessionCustomPrompt)) {
+                $customPrompt = $sessionCustomPrompt;
+            }
+        }
+
+        $systemPrompt = "You are FrancoWay's AI Study Assistant. Your goal is to help students practice their French or English language skills in 4 categories: Listening, Speaking, Writing, and Reading.
 
 If a student asks to discuss, introduce, prepare for, or start a Reading, Writing, or Listening module, you MUST immediately generate the actual exercise/passage/prompt wrapped inside the `<exercise skill=\"reading|writing|listening\">` tag. Do not output any introductory chat, greetings, or conversational questions before the tag for these skills; output the exercise block immediately so the student's interactive workspace opens right away.
-For the Speaking module, greet them warmly in English, explain the format and guidelines, and ask if they are ready for you to generate the test/exercise.
+For the Speaking module, greet them warmly in English or French (depending on the course language or the language of the custom prompt), explain the format and guidelines, and ask if they are ready for you to generate the test/exercise.
 
 Whenever you generate a new practice task/exercise for the student, you MUST wrap the complete task content (including the answers key at the bottom) inside `<exercise skill=\"reading|listening|writing|speaking\">...</exercise>` tags.
 
 CRITICAL RULE FOR EXERCISES:
-You MUST always include a correct answers key at the very bottom of the generated exercise content (inside the `<exercise>` block) using the heading `### Answers` or `### Answer Key`.
+1. For Reading and Listening exercises, you MUST generate exactly 10 questions (numbered 1 to 10).
+2. For Listening exercises, the questions MUST be directly and strictly based on the content of the generated transcript/dialogue, as that transcript will be converted to audio for the student. The transcript/dialogue MUST contain all the information necessary to answer the 10 questions.
+3. You MUST always include a correct answers key at the very bottom of the generated exercise content (inside the `<exercise>` block) using the heading `### Answers` or `### Answer Key`.
 
 For Reading exercises, structure it like this:
 <exercise skill=\"reading\">
@@ -288,24 +362,60 @@ For Reading exercises, structure it like this:
 [Passage text...]
 
 ### Questions
-1. [Question text...]
+1. [Question 1 text...]
+2. [Question 2 text...]
+3. [Question 3 text...]
+4. [Question 4 text...]
+5. [Question 5 text...]
+6. [Question 6 text...]
+7. [Question 7 text...]
+8. [Question 8 text...]
+9. [Question 9 text...]
+10. [Question 10 text...]
 
 ### Answer Key
-1. [Correct Answer] - [Short explanation]
+1. [Correct Answer 1] - [Short explanation]
+2. [Correct Answer 2] - [Short explanation]
+3. [Correct Answer 3] - [Short explanation]
+4. [Correct Answer 4] - [Short explanation]
+5. [Correct Answer 5] - [Short explanation]
+6. [Correct Answer 6] - [Short explanation]
+7. [Correct Answer 7] - [Short explanation]
+8. [Correct Answer 8] - [Short explanation]
+9. [Correct Answer 9] - [Short explanation]
+10. [Correct Answer 10] - [Short explanation]
 </exercise>
 
 For Listening exercises, you MUST include a clean Transcript/Dialogue section so that our front-end text-to-speech engine can read the audio out loud to the student. Structure it like this:
 <exercise skill=\"listening\">
 ### 🎧 Transcript: [Title or Topic]
-[Write a clean dialogue script or monologue here. Format:
+[Write a clean, detailed dialogue script or monologue here. Make sure it is long and detailed enough to support 10 distinct questions. Format:
 Speaker 1: ...
 Speaker 2: ... ]
 
 ### Questions
-1. [Question text...]
+1. [Question 1 text...]
+2. [Question 2 text...]
+3. [Question 3 text...]
+4. [Question 4 text...]
+5. [Question 5 text...]
+6. [Question 6 text...]
+7. [Question 7 text...]
+8. [Question 8 text...]
+9. [Question 9 text...]
+10. [Question 10 text...]
 
 ### Answer Key
-1. [Correct Answer] - [Short explanation]
+1. [Correct Answer 1] - [Short explanation]
+2. [Correct Answer 2] - [Short explanation]
+3. [Correct Answer 3] - [Short explanation]
+4. [Correct Answer 4] - [Short explanation]
+5. [Correct Answer 5] - [Short explanation]
+6. [Correct Answer 6] - [Short explanation]
+7. [Correct Answer 7] - [Short explanation]
+8. [Correct Answer 8] - [Short explanation]
+9. [Correct Answer 9] - [Short explanation]
+10. [Correct Answer 10] - [Short explanation]
 </exercise>
 
 Do not wrap normal chat dialogue, explanations, greetings, or evaluations in this tag. Wrap ONLY the generated exercise itself.";
@@ -316,13 +426,24 @@ Do not wrap normal chat dialogue, explanations, greetings, or evaluations in thi
 If these custom course rules/guidelines contain a specific text/passage, transcript, dialogue, questions list, or essay prompt, you MUST output them exactly as the exercise, wrapped inside the `<exercise skill=\"...\">` tag. Do not invent new questions or change the provided passage/questions/prompt unless explicitly requested. If there are no answers provided in the custom prompt guidelines, you MUST generate the correct answers yourself and include them under `### Answer Key` at the bottom inside the `<exercise>` block. Make sure to identify the correct skill (reading, listening, writing, speaking) from the custom prompt and set the skill attribute accordingly.";
         }
 
+        if ($targetSkill) {
+            $systemPrompt .= "\n\nCRITICAL DIRECTIVE FOR TARGET MODULE '{$targetSkill}':
+1. You MUST generate ONLY a '{$targetSkill}' exercise wrapped in `<exercise skill=\"{$targetSkill}\">`.
+2. Even if the custom course rules/guidelines ask for a different exercise format, you MUST adapt those rules to fit the '{$targetSkill}' format.
+3. For Reading ('reading'): You MUST generate a full reading passage (minimum 150 words) and exactly 10 questions (numbered 1 to 10). Do NOT generate a single sentence or a speaking dialogue.
+4. For Listening ('listening'): You MUST generate a detailed transcript/dialogue (minimum 150 words) and exactly 10 questions (numbered 1 to 10).
+5. For Writing ('writing'): You MUST generate an essay prompt or writing task description.
+6. For Speaking ('speaking'): You MUST generate an oral topic or discussion prompt.
+7. You MUST NOT mix content from other modules. Do not generate reading passages when the active skill is writing or speaking, and do not generate speaking/oral prompts when the active skill is reading.";
+        }
+
         $systemPrompt .= "\n\nRules:
 1. NEVER mention that you are OpenAI, ChatGPT, or Gemini. You are the native 'FrancoWay AI Study Assistant' developed by FrancoWay.
-2. ALL conversation, practice prompts, passages, questions, and explanations MUST be in the English language.
+2. ALL conversation, practice prompts, passages, questions, and explanations MUST be in the language appropriate for the course or custom prompt (e.g., French for French courses/prompts, English for English courses/prompts). If the custom prompt specifies testing in a certain language (like French) or is written in French, you MUST generate all exercises, questions, and evaluations in that language.
 3. Keep your tone encouraging, professional, and clear. Use Markdown to format all exercises beautifully.";
 
         if ($activeSkill && $activeQuestion) {
-            $systemPrompt .= "\n\nCRITICAL CONTEXT: The user is currently in an active practice session for the skill: '{$activeSkill}'. The task/question they were given is:\n---\n{$activeQuestion}\n---\n\nIf the user's message is an answer or submission for this task, you MUST evaluate it in English. Provide a clear score (e.g. Band score or X/Y) and feedback. If it is indeed their answer, append a JSON block inside `<evaluation>` tags at the very end of your response like this:\n<evaluation>\n{\n  \"is_evaluation\": true,\n  \"score\": \"Band 7.0 or 3/3\",\n  \"feedback\": \"Detailed tutor feedback...\"\n}\n</evaluation>\nIf they are just asking a question about the task and not submitting an answer, do NOT include the `<evaluation>` block.";
+            $systemPrompt .= "\n\nCRITICAL CONTEXT: The user is currently in an active practice session for the skill: '{$activeSkill}'. The task/question they were given is:\n---\n{$activeQuestion}\n---\n\nIf the user's message is an answer or submission for this task, you MUST evaluate it in the language of the task (English or French). Provide a clear score (e.g. Band score or X/Y) and feedback. If it is indeed their answer, append a JSON block inside `<evaluation>` tags at the very end of your response like this:\n<evaluation>\n{\n  \"is_evaluation\": true,\n  \"score\": \"Band 7.0 or 3/3\",\n  \"feedback\": \"Detailed tutor feedback...\"\n}\n</evaluation>\nIf they are just asking a question about the task and not submitting an answer, do NOT include the `<evaluation>` block.";
         }
 
         if ($openAiKey) {
@@ -471,7 +592,7 @@ If these custom course rules/guidelines contain a specific text/passage, transcr
         }
 
         // Fallback response if no key is configured or requests fail
-        $reply = $this->getFallbackResponse($message);
+        $reply = $this->getFallbackResponse($message, $targetSkill, $customPrompt);
 
         $attemptSaved = null;
         if ($activeSkill && $activeQuestion) {
@@ -822,18 +943,32 @@ Your response MUST be in the following strict JSON format:
                     if (str_contains($userAnswerLower, 'miller')) $scoreCount++;
                     if (str_contains($userAnswerLower, 'lm-90231') || str_contains($userAnswerLower, 'lm90231')) $scoreCount++;
                     if (str_contains($userAnswerLower, 'a') && (str_contains($userAnswerLower, '3. a') || str_contains($userAnswerLower, '3.a') || str_contains($userAnswerLower, 'room a') || str_contains($userAnswerLower, 'room. a'))) $scoreCount++;
+                    if (str_contains($userAnswerLower, 'presentation')) $scoreCount++;
+                    if (str_contains($userAnswerLower, '5:00') || str_contains($userAnswerLower, '5 pm') || str_contains($userAnswerLower, '5pm')) $scoreCount++;
+                    if (str_contains($userAnswerLower, '7:00') || str_contains($userAnswerLower, '7 pm') || str_contains($userAnswerLower, '7pm')) $scoreCount++;
+                    if (str_contains($userAnswerLower, '10') || str_contains($userAnswerLower, 'ten')) $scoreCount++;
+                    if (str_contains($userAnswerLower, 'credit card') || str_contains($userAnswerLower, 'card')) $scoreCount++;
+                    if (str_contains($userAnswerLower, 'bottled')) $scoreCount++;
+                    if (str_contains($userAnswerLower, 'sr-452') || str_contains($userAnswerLower, 'sr452')) $scoreCount++;
                     return [
-                        'score' => "{$scoreCount}/3",
-                        'feedback' => "Based on our automatic evaluation key:\n- Question 1 (Last Name): **Miller**\n- Question 2 (Card Number): **LM-90231**\n- Question 3 (Room): **A**\n\nYour score: **{$scoreCount}/3**"
+                        'score' => "{$scoreCount}/10",
+                        'feedback' => "Based on our automatic evaluation key:\n- Question 1: **Miller**\n- Question 2: **LM-90231**\n- Question 3: **A**\n- Question 4: **presentation**\n- Question 5: **5:00**\n- Question 6: **7:00**\n- Question 7: **10**\n- Question 8: **credit card**\n- Question 9: **bottled**\n- Question 10: **SR-452**\n\nYour score: **{$scoreCount}/10**"
                     ];
                 } else {
                     $scoreCount = 0;
-                    if (str_contains($userAnswerLower, 'vrai') || str_contains($userAnswerLower, 'true')) $scoreCount++;
-                    if (str_contains($userAnswerLower, 'non mention') || str_contains($userAnswerLower, 'not given')) $scoreCount++;
-                    if (str_contains($userAnswerLower, 'faux') || str_contains($userAnswerLower, 'false')) $scoreCount++;
+                    if (preg_match('/1\.\s*(true|vrai)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/2\.\s*(true|vrai)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/3\.\s*(not given|non mention)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/4\.\s*(true|vrai)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/5\.\s*(false|faux)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/6\.\s*(false|faux)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/7\.\s*(false|faux)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/8\.\s*(true|vrai)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/9\.\s*(true|vrai)/i', $userAnswerLower)) $scoreCount++;
+                    if (preg_match('/10\.\s*(not given|non mention)/i', $userAnswerLower)) $scoreCount++;
                     return [
-                        'score' => "{$scoreCount}/3",
-                        'feedback' => "Based on our automatic evaluation key:\n- Question 1: **True**\n- Question 2: **Not Given**\n- Question 3: **False**\n\nYour score: **{$scoreCount}/3**"
+                        'score' => "{$scoreCount}/10",
+                        'feedback' => "Based on our automatic evaluation key:\n- Question 1: **True**\n- Question 2: **True**\n- Question 3: **Not Given**\n- Question 4: **True**\n- Question 5: **False**\n- Question 6: **False**\n- Question 7: **False**\n- Question 8: **True**\n- Question 9: **True**\n- Question 10: **Not Given**\n\nYour score: **{$scoreCount}/10**"
                     ];
                 }
             }
@@ -948,8 +1083,88 @@ Your response MUST be in the following strict JSON format:
         return $answers;
     }
 
-    private function getFallbackResponse($message)
+    private function getModulePrompt($targetSkill = null, $activeCourseId = null)
     {
+        if ($targetSkill) {
+            $targetSkill = strtolower($targetSkill);
+
+            // 1. Check Prompt model for activeCourseId + skill
+            if ($activeCourseId) {
+                $prompt = \App\Models\Prompt::where('course_id', $activeCourseId)
+                    ->where('skill', $targetSkill)
+                    ->where('status', true)
+                    ->latest()
+                    ->value('prompt_text');
+                if ($prompt) return $prompt;
+            }
+
+            // 2. Check Course custom_prompt JSON
+            if ($activeCourseId) {
+                $courseObj = Course::find($activeCourseId);
+                if ($courseObj && $courseObj->has_custom_prompt && $courseObj->custom_prompt) {
+                    $dec = json_decode($courseObj->custom_prompt, true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($dec) && !empty($dec[$targetSkill])) {
+                        return $dec[$targetSkill];
+                    }
+                }
+            }
+
+            // 3. Check Prompt model for global prompt for this skill (course_id IS NULL or any active prompt)
+            $globalPrompt = \App\Models\Prompt::where('skill', $targetSkill)
+                ->where('status', true)
+                ->where(function($q) use ($activeCourseId) {
+                    if ($activeCourseId) {
+                        $q->where('course_id', $activeCourseId)->orWhereNull('course_id');
+                    } else {
+                        $q->whereNull('course_id');
+                    }
+                })
+                ->latest()
+                ->value('prompt_text');
+            if ($globalPrompt) return $globalPrompt;
+
+            // 4. Fallback: Any active prompt for this skill in Prompt model
+            return \App\Models\Prompt::where('skill', $targetSkill)->where('status', true)->latest()->value('prompt_text');
+        }
+
+        // If no target skill specified, aggregate all active module prompts
+        $skillsPrompts = [];
+        foreach (['reading', 'listening', 'speaking', 'writing'] as $s) {
+            $p = $this->getModulePrompt($s, $activeCourseId);
+            if ($p) {
+                $skillsPrompts[] = "- " . ucfirst($s) . " Module Admin Prompt:\n" . $p;
+            }
+        }
+
+        return !empty($skillsPrompts) ? implode("\n\n", $skillsPrompts) : null;
+    }
+
+    private function getFallbackResponse($message, $targetSkill = null, $customPrompt = null)
+    {
+        if ($targetSkill && $customPrompt) {
+            if (preg_match('/<exercise skill="[^"]+">.*?<\/exercise>/s', $customPrompt)) {
+                return $customPrompt;
+            }
+
+            $skillEmoji = [
+                'reading' => '📖',
+                'listening' => '🎧',
+                'writing' => '✍️',
+                'speaking' => '🗣️'
+            ][$targetSkill] ?? '📝';
+
+            $formattedContent = $customPrompt;
+            $hasAnswerKey = str_contains(strtolower($customPrompt), 'answer key') 
+                || str_contains(strtolower($customPrompt), 'answers') 
+                || str_contains(strtolower($customPrompt), 'corrigé') 
+                || str_contains(strtolower($customPrompt), 'réponses');
+
+            if (!$hasAnswerKey && ($targetSkill === 'reading' || $targetSkill === 'listening')) {
+                $formattedContent .= "\n\n### Answer Key\n1. Correct Answer - Reference admin guidelines.";
+            }
+
+            return "<exercise skill=\"{$targetSkill}\">\n### {$skillEmoji} " . ucfirst($targetSkill) . " Practice (Admin Prompt)\n\n{$formattedContent}\n</exercise>";
+        }
          // Speaking / Cue Card
         if (str_contains($message, 'cue') || str_contains($message, 'speaking') || str_contains($message, 'talk') || str_contains($message, 'speak') || str_contains($message, 'orale') || str_contains($message, 'parler')) {
             return "<exercise skill=\"speaking\">### 🗣️ Speaking Practice: Cue Card Topic\n\n**Topic:**\nDescribe a beautiful place you have visited in your country.\n\n*You should say:*\n* Where this place is located\n* When you went there\n* Whom you went with\n* And explain why you find this place so beautiful.\n\n---\n\n### 💡 Practice Tips:\n1. Take **1 minute** to prepare your notes in writing.\n2. Talk continuously for **1 to 2 minutes** on this topic.\n3. Record your voice to check your fluency, pronunciation, and grammatical accuracy.\n\n---\n\n### ❓ Follow-up Questions (Part 3):\n* Why do people like to travel to beautiful places?\n* Do you think tourist sites are well protected in your country?\n* How can local communities benefit from tourism?</exercise>";
@@ -957,12 +1172,88 @@ Your response MUST be in the following strict JSON format:
         
         // Reading
         if (str_contains($message, 'reading') || str_contains($message, 'passage') || str_contains($message, 'read') || str_contains($message, 'écrite') || str_contains($message, 'lecture')) {
-            return "<exercise skill=\"reading\">### 📖 Reading Comprehension: Passage and Questions\n\n**Text: The Rise of Online Learning (E-Learning)**\nThe digital revolution has transformed education worldwide. Online learning, or e-learning, refers to instruction facilitated by digital technologies. While traditional classrooms rely on physical presence and printed textbooks, e-learning allows students to access resources from anywhere in the world and at any time.\n\nProponents of online learning argue that its primary benefit is flexibility. Students can learn at their own pace, which is ideal for working professionals. Furthermore, educational platforms offer a wider variety of courses than physical schools. However, critics point out that online learning requires a high degree of self-discipline. Without the structure of a classroom, many students struggle to complete their courses. In addition, the lack of face-to-face interaction can lead to feelings of isolation.\n\n#### 📝 Questions 1-3 (True / False / Not Given)\n*Determine if the following statements agree with the text:*\n\n1. **Traditional classrooms use printed textbooks.** (True/False/Not Given)\n2. **Online courses are less expensive than physical courses.** (True/False/Not Given)\n3. **Self-discipline is not necessary to succeed in online training.** (True/False/Not Given)\n\n---\n\n**👁️ Answers:**\n\n* **1. True** - The text states: \"While traditional classrooms rely on physical presence and printed textbooks...\"\n* **2. Not Given** - The text does not mention the cost of online or physical courses.\n* **3. False** - The text states: \"online learning requires a high degree of self-discipline.\"</exercise>";
+            return "<exercise skill=\"reading\">### 📖 Reading Comprehension: Passage and Questions
+
+**Text: The Rise of Online Learning (E-Learning)**
+The digital revolution has transformed education worldwide. Online learning, or e-learning, refers to instruction facilitated by digital technologies. While traditional classrooms rely on physical presence and printed textbooks, e-learning allows students to access resources from anywhere in the world and at any time.
+
+Proponents of online learning argue that its primary benefit is flexibility. Students can learn at their own pace, which is ideal for working professionals. Furthermore, educational platforms offer a wider variety of courses than physical schools. However, critics point out that online learning requires a high degree of self-discipline. Without the structure of a classroom, many students struggle to complete their courses. In addition, the lack of face-to-face interaction can lead to feelings of isolation.
+
+#### 📝 Questions 1-10 (True / False / Not Given)
+*Determine if the following statements agree with the text:*
+
+1. **Traditional classrooms rely on physical presence.** (True/False/Not Given)
+2. **E-learning allows resource access from anywhere at any time.** (True/False/Not Given)
+3. **E-learning has completely replaced traditional universities.** (True/False/Not Given)
+4. **Flexibility is considered a main advantage of online learning.** (True/False/Not Given)
+5. **Only working professionals can benefit from learning at their own pace.** (True/False/Not Given)
+6. **Physical schools offer a wider variety of courses than e-learning platforms.** (True/False/Not Given)
+7. **Online learning does not require any self-discipline.** (True/False/Not Given)
+8. **Without classroom structure, many students fail to complete online courses.** (True/False/Not Given)
+9. **The lack of face-to-face interaction can cause feelings of isolation.** (True/False/Not Given)
+10. **Students find online exams harder than traditional ones.** (True/False/Not Given)
+
+---
+
+### Answer Key
+1. True
+2. True
+3. Not Given
+4. True
+5. False
+6. False
+7. False
+8. True
+9. True
+10. Not Given</exercise>";
         }
         
         // Listening
         if (str_contains($message, 'listening') || str_contains($message, 'listen') || str_contains($message, 'audio') || str_contains($message, 'orale') || str_contains($message, 'écoute')) {
-            return "<exercise skill=\"listening\">### 🎧 Listening Comprehension: Transcript and Questions\n\n**Transcript: Booking a Study Room at the Library**\n*Librarian:* Hello, welcome to the city library services. How can I help you?\n*Student:* Hello, I would like to reserve a private study room for tomorrow evening, please.\n*Librarian:* Sure. May I have your full name and library card number?\n*Student:* Yes, my name is John Miller, and my card number is **LM-90231**.\n*Librarian:* Thank you. We have two rooms available tomorrow: Room A, which has a projector, and Room B, which is a quiet study room with a computer.\n*Student:* The room with a projector (Room A) would be perfect, as I need to practice for a presentation. I will need it from 5:00 PM to 7:00 PM.\n\n#### 📝 Questions 1-3 (Complete the Information)\n*Complete the details below using **NO MORE THAN TWO WORDS AND/OR A NUMBER** :*\n\n1. The student's last name is John **__________**.\n2. The student's library card number is **__________**.\n3. The student wants to book Room **__________** because it has a projector.\n\n---\n\n**👁️ Answers:**\n\n* **1. Miller**\n* **2. LM-90231**\n* **3. A**</exercise>";
+            return "<exercise skill=\"listening\">### 🎧 Listening Comprehension: Transcript and Questions
+
+**Transcript: Booking a Study Room at the Library**
+*Librarian:* Hello, welcome to the city library services. How can I help you?
+*Student:* Hello, I would like to reserve a private study room for tomorrow evening, please.
+*Librarian:* Sure. May I have your full name and library card number?
+*Student:* Yes, my name is John Miller, and my card number is **LM-90231**.
+*Librarian:* Thank you. We have two rooms available tomorrow: Room A, which has a projector, and Room B, which is a quiet study room with a computer.
+*Student:* The room with a projector (Room A) would be perfect, as I need to practice for a presentation. I will need it from 5:00 PM to 7:00 PM.
+*Librarian:* Great. That will be for two hours. The reservation fee is ten dollars per hour, so it will be a total of twenty dollars.
+*Student:* That is fine. Do I pay now or tomorrow?
+*Librarian:* You need to pay now to secure the slot. We accept cash, credit cards, or mobile pay.
+*Student:* I will pay with my credit card.
+*Librarian:* Excellent. Also, please remember that no food is allowed inside the study rooms, but you may bring bottled water.
+*Student:* Got it. Thank you for your help.
+*Librarian:* You are welcome. Your reservation code is **SR-452**. See you tomorrow, John!
+
+#### 📝 Questions 1-10 (Complete the Information)
+*Complete the details below using **NO MORE THAN TWO WORDS AND/OR A NUMBER** :*
+
+1. The student's last name is John **__________**.
+2. The student's library card number is **__________**.
+3. The student wants to book Room **__________** because it has a projector.
+4. The student wants to practice for a **__________**.
+5. The booking time starts at **__________** PM.
+6. The booking time ends at **__________** PM.
+7. The reservation fee is **__________** dollars per hour.
+8. The student pays for the booking using a **__________**.
+9. The only drink allowed in the study room is **__________** water.
+10. The student's reservation code is **__________**.
+
+---
+
+### Answer Key
+1. Miller
+2. LM-90231
+3. A
+4. presentation
+5. 5:00
+6. 7:00
+7. 10
+8. credit card
+9. bottled
+10. SR-452</exercise>";
         }
         
         if (str_contains($message, 'writing') || str_contains($message, 'essay') || str_contains($message, 'write') || str_contains($message, 'écrite') || str_contains($message, 'rédaction')) {

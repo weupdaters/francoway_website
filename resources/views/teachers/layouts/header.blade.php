@@ -27,10 +27,31 @@
 
                             <div class="right-header-content mt-3 mt-md-0">
                                 <ul class="d-flex align-items-center justify-content-center justify-content-md-end ps-0 mb-0 list-unstyled">
+                                    {{-- Language Switcher --}}
+                                    <li class="header-right-item me-3">
+                                        <div class="dropdown" style="font-family: 'Outfit', sans-serif;">
+                                            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2 border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                @if(session('locale', 'en') === 'fr')
+                                                    <span>🇫🇷</span> Français
+                                                @else
+                                                    <span>🇬🇧</span> English
+                                                @endif
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm">
+                                                <li>
+                                                    <a class="dropdown-item d-flex align-items-center gap-2" href="?lang=en">
+                                                        <span>🇬🇧</span> English
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item d-flex align-items-center gap-2" href="?lang=fr">
+                                                        <span>🇫🇷</span> Français
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
 
-                                   
-                                    
-                                     
                                     <li class="header-right-item">
                                         <div class="dropdown admin-profile">
                                             <div class="d-xxl-flex align-items-center bg-transparent border-0 text-start p-0 cursor dropdown-toggle"

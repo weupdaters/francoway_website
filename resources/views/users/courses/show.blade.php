@@ -69,7 +69,7 @@
                         
                         <div class="d-flex flex-wrap align-items-center gap-2">
                             <span class="meta-pill">
-                                <i class="bi bi-journal-text text-danger"></i> {{ $totalLessons }} Lessons
+                                <i class="bi bi-journal-text" style="color: var(--navy-primary) !important;"></i> {{ $totalLessons }} Lessons
                             </span>
                             <span class="meta-pill">
                                 <i class="bi bi-clock text-secondary"></i> 18h 30m
@@ -81,7 +81,7 @@
                             @if($course->has_custom_prompt && $course->custom_prompt)
                                 <a href="{{ route('ai.practice') }}?course_id={{ $course->id }}&quick_start=1" 
                                    class="btn btn-sm btn-primary text-white fw-bold rounded-pill px-3 shadow-sm d-inline-flex align-items-center gap-1 ms-lg-2" 
-                                   style="background-color: #0d6efd !important; border-color: #0d6efd !important;">
+                                   style="background-color: #0B1F4D !important; border-color: #0B1F4D !important;">
                                     <i class="bi bi-lightning-charge-fill text-warning"></i> AI Practice
                                 </a>
                             @endif
@@ -96,7 +96,7 @@
                     <svg width="110" height="90" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 70L60 20L100 70H20Z" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="2"/>
                         <path d="M45 45H75" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
-                        <circle cx="60" cy="35" r="5" fill="#E53935"/>
+                        <circle cx="60" cy="35" r="5" fill="#0B1F4D"/>
                         <path d="M15 80C30 75 90 75 105 80" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                 </div>
@@ -107,7 +107,7 @@
                 <div class="progress-card-box">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <span class="text-secondary fw-semibold" style="font-size: 13px;">
-                            <i class="bi bi-pie-chart-fill text-danger me-1"></i> Your Progress
+                            <i class="bi bi-pie-chart-fill me-1" style="color: var(--navy-primary) !important;"></i> Your Progress
                         </span>
                     </div>
                     <div class="fw-bold mb-2 text-dark-slate" style="font-size: 18px;">
@@ -145,7 +145,7 @@
                             id="tab-lessons-btn" data-bs-toggle="pill" data-bs-target="#tab-lessons" type="button" role="tab">
                         <span class="d-flex align-items-center gap-2">
                             <span>Lessons</span>
-                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
+                            <span class="badge rounded-pill px-2 py-1" style="font-size: 11px; background-color: rgba(11, 31, 77, 0.08); color: var(--navy-primary) !important;">
                                 {{ $totalLessons }}
                             </span>
                         </span>
@@ -268,7 +268,7 @@
                             id="tab-quizzes-btn" data-bs-toggle="pill" data-bs-target="#tab-quizzes" type="button" role="tab">
                         <span class="d-flex align-items-center gap-2">
                             <span>Quizzes</span>
-                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
+                            <span class="badge rounded-pill px-2 py-1" style="font-size: 11px; background-color: rgba(11, 31, 77, 0.08); color: var(--navy-primary) !important;">
                                 0
                             </span>
                         </span>
@@ -283,7 +283,7 @@
                             @php
                                 $pdfCount = $course->lessons->whereNotNull('pdf_file')->count();
                             @endphp
-                            <span class="badge rounded-pill bg-danger-subtle text-danger px-2 py-1" style="font-size: 11px;">
+                            <span class="badge rounded-pill px-2 py-1" style="font-size: 11px; background-color: rgba(11, 31, 77, 0.08); color: var(--navy-primary) !important;">
                                 {{ $pdfCount }}
                             </span>
                         </span>
@@ -368,10 +368,10 @@
                         {{-- PDF FILE --}}
                         @elseif($currentLesson->pdf_file)
                             <div class="lesson-pdf-wrapper mb-4 text-center p-4 bg-light rounded-16">
-                                <i class="bi bi-file-earmark-pdf text-danger fs-1 mb-2 d-block"></i>
+                                <i class="bi bi-file-earmark-pdf fs-1 mb-2 d-block" style="color: var(--navy-primary) !important;"></i>
                                 <h6 class="fw-bold text-dark-slate mb-3">Lesson Document (PDF)</h6>
                                 <a href="{{ asset('storage/' . $currentLesson->pdf_file) }}" target="_blank"
-                                   class="btn btn-outline-danger px-4 rounded-pill">
+                                   class="btn btn-outline-primary px-4 rounded-pill" style="border-color: var(--navy-primary) !important; color: var(--navy-primary) !important;">
                                     <i class="bi bi-eye me-1"></i> View / Download PDF
                                 </a>
                             </div>
@@ -381,7 +381,7 @@
                         @if($currentLesson->description)
                             <div class="card border-0 bg-light-subtle rounded-16 p-4 mb-4 shadow-2xs" style="border: 1px solid #F1F5F9 !important;">
                                 <h6 class="fw-bold text-dark-slate mb-3 d-flex align-items-center gap-2" style="font-size: 15px;">
-                                    <i class="bi bi-file-text text-danger"></i> Lesson Description
+                                    <i class="bi bi-file-text" style="color: var(--navy-primary) !important;"></i> Lesson Description
                                 </h6>
                                 <div class="lesson-description-content text-secondary leading-relaxed font-fw" style="font-size: 14.5px; line-height: 1.7;">
                                     {!! $currentLesson->description !!}
@@ -392,7 +392,7 @@
                         {{-- COMMENTS & DISCUSSION SECTION --}}
                         <div class="border-top pt-4 mt-4">
                             <h6 class="fw-bold text-dark-slate mb-3">
-                                <i class="bi bi-chat-left-text me-1 text-danger"></i> Lesson Discussion
+                                <i class="bi bi-chat-left-text me-1" style="color: var(--navy-primary) !important;"></i> Lesson Discussion
                             </h6>
 
                             <form method="POST" action="{{ route('users.comment.store') }}" class="mb-4">
@@ -401,7 +401,7 @@
                                 <textarea name="comment" class="form-control mb-2 rounded-12 p-3 font-fw" rows="3" placeholder="Ask a question or share your feedback..." required style="border-color: #E2E8F0;"></textarea>
 
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-primary btn-sm px-4 rounded-pill shadow-sm" style="background-color: #E53935 !important; border-color: #E53935 !important;">
+                                    <button class="btn btn-primary btn-sm px-4 rounded-pill shadow-sm" style="background-color: #0B1F4D !important; border-color: #0B1F4D !important;">
                                         <i class="bi bi-send me-1"></i> Post Comment
                                     </button>
                                 </div>
@@ -453,8 +453,8 @@
                                                         @endif
 
                                                         @if(auth()->check() && $comment->user_id == auth()->id())
-                                                            <button class="btn btn-sm text-primary p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
-                                                                    onclick="toggleEditForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600;">
+                                                            <button class="btn btn-sm p-0 border-0 bg-transparent d-inline-flex align-items-center gap-1 font-fw"
+                                                                    onclick="toggleEditForm({{ $comment->id }})" style="font-size: 12px; font-weight: 600; color: #0B1F4D !important;">
                                                                 <i class="bi bi-pencil-square"></i> Edit
                                                             </button>
                                                         @endif
@@ -507,8 +507,8 @@
                                                                     {{-- Reply Edit / Delete Action Buttons --}}
                                                                     <div class="d-flex gap-3 align-items-center mt-1">
                                                                         @if(auth()->check() && $reply->user_id == auth()->id())
-                                                                            <button class="btn btn-sm text-primary p-0 border-0 bg-transparent font-fw d-inline-flex align-items-center gap-1"
-                                                                                    onclick="toggleEditForm({{ $reply->id }})" style="font-size: 11.5px; font-weight: 600;">
+                                                                            <button class="btn btn-sm p-0 border-0 bg-transparent font-fw d-inline-flex align-items-center gap-1"
+                                                                                    onclick="toggleEditForm({{ $reply->id }})" style="font-size: 11.5px; font-weight: 600; color: #0B1F4D !important;">
                                                                                 <i class="bi bi-pencil-square"></i> Edit
                                                                             </button>
                                                                         @endif
@@ -537,7 +537,7 @@
                                                         <textarea name="comment" class="form-control mb-2 rounded-10 font-fw" rows="2" placeholder="Write a reply..." required style="border-color: #CBD5E1;"></textarea>
                                                         <div class="d-flex justify-content-end gap-2">
                                                             <button type="button" class="btn btn-light btn-sm rounded-pill px-3" onclick="toggleReplyForm({{ $comment->id }})">Cancel</button>
-                                                            <button type="submit" class="btn btn-danger btn-sm rounded-pill px-3" style="background-color: #E53935; border-color: #E53935;">Post Reply</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm rounded-pill px-3" style="background-color: #0B1F4D; border-color: #0B1F4D;">Post Reply</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -559,10 +559,10 @@
                         <div class="text-center py-5 my-4">
                             <div class="empty-state-circle">
                                 <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" stroke="#E53935" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" stroke="#E53935" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M9 7H15" stroke="#E53935" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M9 11H15" stroke="#E53935" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" stroke="#0B1F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" stroke="#0B1F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 7H15" stroke="#0B1F4D" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M9 11H15" stroke="#0B1F4D" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
                             </div>
                             <h5 class="fw-bold text-dark-slate mb-2" style="font-size: 20px;">No lesson selected</h5>
@@ -586,7 +586,7 @@
         --font-main: 'Poppins', 'Outfit', system-ui, -apple-system, sans-serif;
         --text-dark: #071530;
         --text-sub: #5A6A85;
-        --red-primary: #E53935;
+        --navy-primary: #0B1F4D;
     }
 
     body, button, input, textarea, select {
@@ -603,8 +603,8 @@
         font-family: var(--font-main) !important;
     }
 
-    .hover-red:hover {
-        color: var(--red-primary) !important;
+    .hover-navy:hover {
+        color: var(--navy-primary) !important;
     }
 
     .rounded-12 { border-radius: 12px !important; }
@@ -624,7 +624,7 @@
         height: 76px;
         min-width: 76px;
         border-radius: 18px;
-        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        background-color: #0B1F4D;
         color: #ffffff;
         display: flex;
         align-items: center;
@@ -672,7 +672,7 @@
         width: 260px;
     }
     .progress-bar-gradient {
-        background: linear-gradient(90deg, #E53935 0%, #FF6B6B 100%) !important;
+        background-color: #E31B23 !important;
     }
 
     /* Left Navigation List */
@@ -685,13 +685,13 @@
         transition: all 0.2s ease;
     }
     .custom-course-tabs .nav-link:hover {
-        background: #FFF5F5;
-        color: var(--red-primary) !important;
+        background: #F4F7FC;
+        color: var(--navy-primary) !important;
     }
     .custom-course-tabs .nav-link.active {
-        background: #FDF2F2 !important;
-        color: var(--red-primary) !important;
-        border-color: #F87171 !important;
+        background: rgba(11, 31, 77, 0.05) !important;
+        color: var(--navy-primary) !important;
+        border-color: #0B1F4D !important;
     }
 
     /* Lesson Items */
@@ -713,12 +713,12 @@
     .lesson-item-link:hover {
         background: #F8FAFC;
         border-color: #CBD5E1;
-        color: var(--red-primary) !important;
+        color: var(--navy-primary) !important;
     }
     .lesson-item-link.active-lesson {
-        background: var(--red-primary) !important;
+        background: var(--navy-primary) !important;
         color: #ffffff !important;
-        border-color: var(--red-primary) !important;
+        border-color: var(--navy-primary) !important;
     }
     .lesson-item-link.active-lesson i,
     .lesson-item-link.active-lesson span {
@@ -730,7 +730,7 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background: #FDF2F2;
+        background: rgba(11, 31, 77, 0.05);
         display: flex;
         align-items: center;
         justify-content: center;

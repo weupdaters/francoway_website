@@ -18,7 +18,7 @@
         display: flex;
         height: 720px;
         background: #ffffff;
-        border: 1px solid rgba(13, 110, 253, 0.15);
+        border: 1px solid rgba(11, 31, 77, 0.15);
         border-radius: 24px;
         overflow: hidden;
         margin: 40px auto;
@@ -40,7 +40,7 @@
 
     .sidebar-header h4 {
         font-family: 'Fraunces', serif;
-        font-weight: bold;
+        font-weight: 600;
         color: #0f172a;
         font-size: 22px;
         margin-bottom: 8px;
@@ -81,7 +81,7 @@
     /* Skill Cards */
     .skill-card {
         background: #ffffff;
-        border: 1px solid rgba(13, 110, 253, 0.1);
+        border: 1px solid rgba(11, 31, 77, 0.1);
         border-radius: 12px;
         padding: 12px 16px;
         margin-bottom: 12px;
@@ -93,16 +93,16 @@
     }
 
     .skill-card:hover {
-        background: rgba(13, 110, 253, 0.04);
-        border-color: rgba(13, 110, 253, 0.3);
+        background: rgba(227, 27, 35, 0.04);
+        border-color: rgba(227, 27, 35, 0.3);
         transform: translateY(-2px);
     }
 
     .skill-icon {
         width: 36px;
         height: 36px;
-        background: rgba(13, 110, 253, 0.08);
-        color: #0d6efd;
+        background: rgba(227, 27, 35, 0.08);
+        color: #E31B23;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -114,7 +114,7 @@
         margin: 0;
         color: #0f172a;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         text-align: left;
     }
 
@@ -132,14 +132,14 @@
         transition: all 0.2s;
     }
     .history-item:hover {
-        background: rgba(13, 110, 253, 0.04) !important;
-        border-color: rgba(13, 110, 253, 0.25) !important;
+        background: rgba(227, 27, 35, 0.04) !important;
+        border-color: rgba(227, 27, 35, 0.25) !important;
     }
     .history-item .text-secondary {
         color: #64748b !important;
     }
     .history-item .text-primary {
-        color: #0d6efd !important;
+        color: #E31B23 !important;
     }
     .chat-sidebar h5.text-white {
         color: #0f172a !important;
@@ -173,9 +173,9 @@
 
     .welcome-banner i.logo-icon {
         font-size: 4rem;
-        color: #0d6efd;
+        color: #E31B23;
         margin-bottom: 20px;
-        text-shadow: 0 0 20px rgba(13, 110, 253, 0.15);
+        text-shadow: 0 0 20px rgba(227, 27, 35, 0.15);
     }
 
     .welcome-banner h3 {
@@ -216,7 +216,7 @@
 
     .message.user {
         align-self: flex-end;
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        background-color: #E31B23 !important;
         color: #ffffff !important;
         border-top-right-radius: 2px;
         font-weight: 500;
@@ -231,21 +231,21 @@
     }
 
     /* Markdown Formatting inside assistant bubble */
-    .message.assistant h3 {
-        color: #0d6efd;
+    .message.assistant h3, .message.assistant h3 span {
+        color: #E31B23 !important;
         font-size: 1.25rem;
         margin-top: 15px;
         margin-bottom: 8px;
-        font-weight: 600;
+        font-weight: 700;
         font-family: 'Fraunces', serif;
     }
 
-    .message.assistant h4 {
-        color: #0f172a;
+    .message.assistant h4, .message.assistant h4 span {
+        color: #E31B23 !important;
         font-size: 1.1rem;
         margin-top: 12px;
         margin-bottom: 6px;
-        font-weight: 500;
+        font-weight: 700;
     }
 
     .message.assistant p {
@@ -269,7 +269,7 @@
     /* Collapsible Answers */
     .message.assistant details {
         background: #ffffff;
-        border: 1px solid rgba(13, 110, 253, 0.15);
+        border: 1px solid rgba(227, 27, 35, 0.15);
         padding: 12px;
         border-radius: 10px;
         margin-top: 12px;
@@ -278,8 +278,8 @@
 
     .message.assistant summary {
         cursor: pointer;
-        font-weight: bold;
-        color: #0d6efd;
+        font-weight: 500;
+        color: #E31B23;
         outline: none;
     }
 
@@ -294,9 +294,9 @@
     }
 
     .chip {
-        background: rgba(13, 110, 253, 0.05);
-        border: 1px solid rgba(13, 110, 253, 0.15);
-        color: #0d6efd;
+        background: rgba(227, 27, 35, 0.05);
+        border: 1px solid rgba(227, 27, 35, 0.15);
+        color: #E31B23;
         padding: 10px 20px;
         border-radius: 50px;
         cursor: pointer;
@@ -306,10 +306,10 @@
     }
 
     .chip:hover {
-        background: #0d6efd;
+        background: #E31B23;
         color: #ffffff;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.15);
     }
 
     /* Chat Input Bar */
@@ -325,7 +325,7 @@
     .chat-input {
         flex: 1;
         background: #ffffff !important;
-        border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        border: 1.5px solid #E31B23 !important;
         color: #0f172a !important;
         border-radius: 50px !important;
         padding: 14px 24px !important;
@@ -339,12 +339,12 @@
     }
 
     .chat-input:focus {
-        border-color: #0d6efd !important;
-        box-shadow: 0 0 12px rgba(13, 110, 253, 0.15) !important;
+        border-color: #E31B23 !important;
+        box-shadow: 0 0 12px rgba(227, 27, 35, 0.25) !important;
     }
 
     .chat-submit-btn {
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        background-color: #E31B23 !important;
         color: #ffffff;
         border: none;
         width: 50px;
@@ -359,8 +359,9 @@
     }
 
     .chat-submit-btn:hover {
+        background-color: #C0141C !important;
         transform: scale(1.06);
-        box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
+        box-shadow: 0 0 15px rgba(227, 27, 35, 0.4);
     }
 
     /* Typing Loader */
@@ -380,7 +381,7 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #0d6efd;
+        background: #E31B23;
         animation: typingBounce 1.4s infinite both;
         margin-right: 4px;
     }
@@ -413,28 +414,28 @@
 
     .reading-header-title {
         font-family: 'Fraunces', serif;
-        color: #0d6efd;
+        color: #E31B23;
         font-size: 20px;
         margin: 0;
-        font-weight: bold;
+        font-weight: 600;
     }
 
     .reading-timer {
         display: flex;
         align-items: center;
         gap: 8px;
-        color: #0d6efd;
-        background: rgba(13, 110, 253, 0.06);
-        border: 1px solid rgba(13, 110, 253, 0.15);
+        color: #E31B23;
+        background: rgba(227, 27, 35, 0.06);
+        border: 1px solid rgba(227, 27, 35, 0.15);
         padding: 6px 16px;
         border-radius: 50px;
         font-family: monospace;
         font-size: 16px;
-        font-weight: bold;
+        font-weight: 500;
     }
 
     .reading-timer i {
-        color: #0d6efd;
+        color: #E31B23;
         animation: pulseTimer 1s infinite alternate;
     }
 
@@ -463,8 +464,8 @@
     .reading-nav-title {
         padding: 20px 24px;
         font-family: 'Fraunces', serif;
-        color: #0d6efd;
-        font-weight: bold;
+        color: #E31B23;
+        font-weight: 600;
         font-size: 14px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         text-transform: uppercase;
@@ -491,13 +492,13 @@
     }
 
     .reading-sec-item:hover {
-        background: rgba(13, 110, 253, 0.04);
-        border-color: rgba(13, 110, 253, 0.2);
+        background: rgba(227, 27, 35, 0.04);
+        border-color: rgba(227, 27, 35, 0.2);
     }
 
     .reading-sec-item.active {
-        background: rgba(13, 110, 253, 0.08);
-        border-color: #0d6efd;
+        background: rgba(227, 27, 35, 0.08);
+        border-color: #E31B23;
     }
 
     .reading-sec-item .sec-name {
@@ -513,9 +514,9 @@
 
     .reading-sec-item .sec-progress {
         font-size: 11px;
-        color: #0d6efd;
-        font-weight: bold;
-        background: rgba(13, 110, 253, 0.1);
+        color: #E31B23;
+        font-weight: 500;
+        background: rgba(227, 27, 35, 0.1);
         padding: 2px 6px;
         border-radius: 4px;
     }
@@ -533,7 +534,7 @@
 
     .reading-passage-pane h1, .reading-passage-pane h2, .reading-passage-pane h3 {
         font-family: 'Fraunces', serif;
-        color: #0d6efd;
+        color: #E31B23;
         margin-top: 0;
         margin-bottom: 20px;
     }
@@ -559,7 +560,7 @@
     }
 
     .reading-question-card:hover {
-        border-color: rgba(13, 110, 253, 0.2);
+        border-color: rgba(227, 27, 35, 0.2);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
     }
 
@@ -571,15 +572,15 @@
     }
 
     .reading-question-number {
-        background: rgba(13, 110, 253, 0.1);
-        color: #0d6efd;
+        background: rgba(227, 27, 35, 0.1);
+        color: #E31B23;
         width: 28px;
         height: 28px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: bold;
+        font-weight: 500;
         font-size: 14px;
         flex-shrink: 0;
     }
@@ -610,22 +611,22 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
         transition: all 0.2s ease;
         text-align: left;
     }
 
     .reading-option-btn:hover {
-        background: rgba(13, 110, 253, 0.04);
-        color: #0d6efd;
-        border-color: rgba(13, 110, 253, 0.2);
+        background: rgba(227, 27, 35, 0.04);
+        color: #E31B23;
+        border-color: rgba(227, 27, 35, 0.2);
     }
 
     .reading-option-btn.active {
-        background: #0d6efd;
+        background: #E31B23;
         color: #ffffff !important;
-        border-color: #0d6efd;
-        box-shadow: 0 2px 8px rgba(13, 110, 253, 0.2);
+        border-color: #E31B23;
+        box-shadow: 0 2px 8px rgba(227, 27, 35, 0.2);
     }
 
     .reading-input-text {
@@ -641,8 +642,8 @@
     }
 
     .reading-input-text:focus {
-        border-color: #0d6efd;
-        box-shadow: 0 0 8px rgba(13, 110, 253, 0.15);
+        border-color: #E31B23;
+        box-shadow: 0 0 8px rgba(227, 27, 35, 0.15);
     }
 
     .reading-footer {
@@ -685,22 +686,22 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 13px;
         transition: all 0.2s ease;
         flex-shrink: 0;
     }
 
     .question-nav-dot:hover {
-        background: rgba(13, 110, 253, 0.05);
-        color: #0d6efd;
-        border-color: rgba(13, 110, 253, 0.2);
+        background: rgba(227, 27, 35, 0.05);
+        color: #E31B23;
+        border-color: rgba(227, 27, 35, 0.2);
     }
 
     .question-nav-dot.answered {
-        background: rgba(13, 110, 253, 0.1);
-        border-color: #0d6efd;
-        color: #0d6efd;
+        background: rgba(227, 27, 35, 0.1);
+        border-color: #E31B23;
+        color: #E31B23;
     }
 
     .question-nav-dot.active {
@@ -722,9 +723,9 @@
     }
 
     .question-nav-dot.unanswered {
-        background: rgba(13, 110, 253, 0.05) !important;
-        border-color: rgba(13, 110, 253, 0.2) !important;
-        color: #0d6efd !important;
+        background: rgba(227, 27, 35, 0.05) !important;
+        border-color: rgba(227, 27, 35, 0.2) !important;
+        color: #E31B23 !important;
     }
 
     @media (max-width: 991px) {
@@ -790,16 +791,16 @@
         background: none;
         border: none;
         font-size: 18px;
-        color: #0d6efd;
+        color: #E31B23;
         padding: 4px 8px;
         cursor: pointer;
     }
 
     .writing-title-text-light {
         font-family: 'Fraunces', serif;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 16px;
-        color: #0d6efd;
+        color: #E31B23;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
@@ -813,14 +814,14 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #0d6efd;
+        color: #E31B23;
         background: #ffffff;
-        border: 1px solid rgba(13, 110, 253, 0.2);
+        border: 1px solid rgba(227, 27, 35, 0.2);
         padding: 4px 16px;
         border-radius: 20px;
         font-family: monospace;
         font-size: 15px;
-        font-weight: 700;
+        font-weight: 500;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
@@ -847,7 +848,7 @@
     .writing-card-light {
         background: #ffffff !important;
         border-radius: 12px;
-        border: 1px solid rgba(13, 110, 253, 0.2) !important;
+        border: 1px solid rgba(227, 27, 35, 0.2) !important;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -874,8 +875,8 @@
         justify-content: center;
         width: 24px;
         height: 24px;
-        background-color: rgba(13, 110, 253, 0.1);
-        color: #0d6efd;
+        background-color: rgba(227, 27, 35, 0.1);
+        color: #E31B23;
         border-radius: 50%;
         font-size: 12px;
     }
@@ -886,7 +887,7 @@
         justify-content: center;
         width: 24px;
         height: 24px;
-        background-color: #0d6efd;
+        background-color: #E31B23;
         color: #fff;
         border-radius: 50%;
         font-size: 12px;
@@ -933,7 +934,7 @@
         flex: 1;
         width: 100%;
         height: 100%; /* Ensure it takes full height */
-        border: 1px dashed rgba(13, 110, 253, 0.3);
+        border: 1px dashed rgba(227, 27, 35, 0.3);
         border-radius: 8px;
         padding: 12px;
         background: #f8fafc;
@@ -972,8 +973,8 @@
 
     .writing-word-count-light {
         font-size: 14px;
-        color: #0d6efd;
-        font-weight: 600;
+        color: #E31B23;
+        font-weight: 500;
         margin-top: 12px;
         text-align: left;
     }
@@ -1054,17 +1055,17 @@
         border-radius: 50%;
         border: 1px solid rgba(0, 0, 0, 0.08);
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
         color: #64748b;
         cursor: pointer;
         background: transparent;
     }
 
     .nav-circle-light.active {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
+        background-color: #E31B23;
+        border-color: #E31B23;
         color: #ffffff !important;
-        box-shadow: 0 2px 8px rgba(13, 110, 253, 0.2);
+        box-shadow: 0 2px 8px rgba(227, 27, 35, 0.2);
     }
 
     .footer-right-light {
@@ -1075,10 +1076,10 @@
     }
 
     .btn-submit-light {
-        background-color: #0d6efd;
-        border: 1px solid #0d6efd;
+        background-color: #E31B23;
+        border: 1px solid #E31B23;
         color: #ffffff !important;
-        font-weight: 700;
+        font-weight: 500;
         padding: 6px 16px;
         border-radius: 20px;
         font-size: 14px;
@@ -1087,15 +1088,15 @@
     }
 
     .btn-submit-light:hover {
-        background-color: #0b5ed7;
-        border-color: #0a58ca;
+        background-color: #C0141C;
+        border-color: #C0141C;
     }
 
     .btn-back-btn-light {
         background-color: transparent;
         border: 1px solid rgba(0, 0, 0, 0.12);
         color: #64748b;
-        font-weight: 700;
+        font-weight: 500;
         padding: 6px 16px;
         border-radius: 20px;
         font-size: 14px;
@@ -1126,8 +1127,8 @@
     }
     .writing-sidebar-right-light button:hover {
         opacity: 1;
-        background-color: rgba(13, 110, 253, 0.08);
-        color: #0d6efd !important;
+        background-color: rgba(227, 27, 35, 0.08);
+        color: #E31B23 !important;
     }
     #writingPromptPane img {
         max-width: 90%;
@@ -1235,7 +1236,7 @@
     .modal-content.bg-dark {
         background-color: #ffffff !important;
         color: #1e293b !important;
-        border-color: rgba(13, 110, 253, 0.2) !important;
+        border-color: rgba(227, 27, 35, 0.2) !important;
     }
     
     .modal-header .btn-close-white {
@@ -1263,7 +1264,7 @@
     }
     
     .modal-content .text-primary {
-        color: #0d6efd !important;
+        color: #E31B23 !important;
     }
     
     .modal-content .text-secondary {
@@ -1285,13 +1286,14 @@
     }
     
     .modal-footer .btn-primary {
-        background-color: #0d6efd !important;
-        border-color: #0d6efd !important;
+        background-color: #E31B23 !important;
+        border-color: #E31B23 !important;
         color: #ffffff !important;
     }
     
     .modal-footer .btn-primary:hover {
-        background-color: #0b5ed7 !important;
+        background-color: #C0141C !important;
+        border-color: #C0141C !important;
     }
     
     #btnSubmitAnswer, #btnResumeAttempt {
@@ -1325,7 +1327,7 @@
 
     [data-bs-theme="dark"] .skill-card:hover {
         background: #262626 !important;
-        border-color: #3b82f6 !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .skill-info h5 {
@@ -1355,7 +1357,7 @@
 
     [data-bs-theme="dark"] .history-item:hover {
         background: #262626 !important;
-        border-color: #3b82f6 !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .history-item .text-secondary {
@@ -1386,7 +1388,7 @@
 
     [data-bs-theme="dark"] .message.assistant details {
         background: #111111 !important;
-        border-color: #3b82f6 !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .chat-input-area {
@@ -1438,8 +1440,8 @@
     }
 
     [data-bs-theme="dark"] .reading-sec-item.active {
-        background: rgba(13, 110, 253, 0.15) !important;
-        border-color: #0d6efd !important;
+        background: rgba(227, 27, 35, 0.15) !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .reading-sec-item .sec-name {
@@ -1461,7 +1463,7 @@
     }
 
     [data-bs-theme="dark"] .reading-question-card:hover {
-        border-color: rgba(13, 110, 253, 0.3) !important;
+        border-color: rgba(227, 27, 35, 0.3) !important;
     }
 
     [data-bs-theme="dark"] .reading-question-text {
@@ -1476,14 +1478,14 @@
 
     [data-bs-theme="dark"] .reading-option-btn:hover {
         background: #262626 !important;
-        color: #3b82f6 !important;
-        border-color: #3b82f6 !important;
+        color: #E31B23 !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .reading-option-btn.active {
-        background: #0d6efd !important;
+        background: #E31B23 !important;
         color: #ffffff !important;
-        border-color: #0d6efd !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .reading-input-text {
@@ -1513,8 +1515,8 @@
 
     [data-bs-theme="dark"] .question-nav-dot:hover {
         background: #262626 !important;
-        color: #3b82f6 !important;
-        border-color: #3b82f6 !important;
+        color: #E31B23 !important;
+        border-color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .question-nav-dot.active {
@@ -1535,8 +1537,8 @@
 
     [data-bs-theme="dark"] .writing-timer-light {
         background: #1a1a1a !important;
-        border-color: #3b82f6 !important;
-        color: #3b82f6 !important;
+        border-color: #E31B23 !important;
+        color: #E31B23 !important;
         box-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
     }
 
@@ -1567,8 +1569,8 @@
     }
 
     [data-bs-theme="dark"] .writing-sidebar-right-light button:hover {
-        background-color: rgba(13, 110, 253, 0.15) !important;
-        color: #3b82f6 !important;
+        background-color: rgba(227, 27, 35, 0.15) !important;
+        color: #E31B23 !important;
     }
 
     [data-bs-theme="dark"] .writing-footer-light {
@@ -1582,8 +1584,8 @@
     }
 
     [data-bs-theme="dark"] .nav-circle-light.active {
-        background-color: #0d6efd !important;
-        border-color: #0d6efd !important;
+        background-color: #E31B23 !important;
+        border-color: #E31B23 !important;
         color: #ffffff !important;
     }
 
@@ -1625,7 +1627,7 @@
     }
 
     /* ====================================================
-       FRANCOWAY BRAND OVERRIDES (RED & NAVY ACCENTS)
+       FRANCOWAY BRAND OVERRIDES (RED ACCENTS)
        ==================================================== */
     
     /* Welcome Banner & Robot Icon */
@@ -1636,7 +1638,7 @@
     
     /* Skill Cards & Active highlights */
     .skill-card {
-        border-color: rgba(11, 30, 67, 0.1) !important;
+        border-color: rgba(227, 27, 35, 0.15) !important;
     }
     .skill-card:hover {
         background: rgba(227, 27, 35, 0.04) !important;
@@ -1654,33 +1656,34 @@
     /* Chips / Suggestion Buttons */
     .chip {
         background: rgba(227, 27, 35, 0.05) !important;
-        border: 1px solid rgba(227, 27, 35, 0.15) !important;
+        border: 1px solid rgba(227, 27, 35, 0.18) !important;
         color: #E31B23 !important;
     }
     .chip:hover {
         background: #E31B23 !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.15) !important;
+        box-shadow: 0 4px 12px rgba(227, 27, 35, 0.25) !important;
     }
     
     /* Chat inputs & submit button */
     .chat-container-wrapper {
-        border-color: rgba(11, 30, 67, 0.15) !important;
+        border-color: rgba(227, 27, 35, 0.15) !important;
     }
     .chat-input:focus {
         border-color: #E31B23 !important;
-        box-shadow: 0 0 12px rgba(227, 27, 35, 0.15) !important;
+        box-shadow: 0 0 12px rgba(227, 27, 35, 0.25) !important;
     }
     .chat-submit-btn {
-        background: linear-gradient(135deg, #E31B23, #0B1E43) !important;
+        background-color: #E31B23 !important;
     }
     .chat-submit-btn:hover {
-        box-shadow: 0 0 15px rgba(227, 27, 35, 0.3) !important;
+        background-color: #C0141C !important;
+        box-shadow: 0 0 15px rgba(227, 27, 35, 0.4) !important;
     }
     
     /* User Chat Bubbles */
     .message.user {
-        background: linear-gradient(135deg, #E31B23, #0B1E43) !important;
+        background-color: #E31B23 !important;
     }
     
     /* Details & assistant elements */
@@ -1702,20 +1705,20 @@
     .reading-header-title {
         color: #0F172A !important;
         font-family: 'Outfit', sans-serif !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
         font-size: 19px !important;
     }
     .reading-nav-title {
         color: #0F172A !important;
         font-family: 'Outfit', sans-serif !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
         font-size: 13px !important;
         letter-spacing: 0.5px !important;
     }
     .reading-passage-pane h1, .reading-passage-pane h2, .reading-passage-pane h3 {
         color: #0F172A !important;
         font-family: 'Outfit', sans-serif !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
     }
     .reading-passage-pane p {
         color: #334155 !important;
@@ -1740,21 +1743,21 @@
         border-color: #CBD5E1 !important;
     }
     .reading-sec-item.active {
-        background: #EFF6FF !important;
-        border-color: #2563EB !important;
+        background: rgba(227, 27, 35, 0.05) !important;
+        border-color: #E31B23 !important;
     }
     .reading-sec-item .sec-name {
         color: #0F172A !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         max-width: 100% !important;
         white-space: normal !important;
         overflow: visible !important;
         text-overflow: clip !important;
     }
     .reading-sec-item .sec-progress {
-        color: #2563EB !important;
-        background: #EFF6FF !important;
-        font-weight: 700 !important;
+        color: #E31B23 !important;
+        background: rgba(227, 27, 35, 0.08) !important;
+        font-weight: 500 !important;
     }
     .reading-question-card {
         background: #ffffff !important;
@@ -1766,9 +1769,9 @@
         border-color: #CBD5E1 !important;
     }
     .reading-question-number {
-        background: #EFF6FF !important;
-        color: #2563EB !important;
-        font-weight: 700 !important;
+        background: rgba(227, 27, 35, 0.08) !important;
+        color: #E31B23 !important;
+        font-weight: 500 !important;
     }
     .reading-option-btn {
         border: 1px solid #E2E8F0 !important;
@@ -1778,34 +1781,34 @@
         transition: all 0.2s ease !important;
     }
     .reading-option-btn:hover {
-        background: #EFF6FF !important;
-        color: #2563EB !important;
-        border-color: #93C5FD !important;
+        background: rgba(227, 27, 35, 0.05) !important;
+        color: #E31B23 !important;
+        border-color: rgba(227, 27, 35, 0.2) !important;
     }
     .reading-option-btn.active {
-        background: #2563EB !important;
-        border-color: #2563EB !important;
+        background: #E31B23 !important;
+        border-color: #E31B23 !important;
         color: #FFFFFF !important;
-        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+        box-shadow: 0 2px 8px rgba(227, 27, 35, 0.25) !important;
     }
     .reading-input-text:focus {
-        border-color: #2563EB !important;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+        border-color: #E31B23 !important;
+        box-shadow: 0 0 0 3px rgba(227, 27, 35, 0.1) !important;
     }
     .question-nav-dot {
         border: 1px solid #CBD5E1 !important;
         color: #475569 !important;
         background: #F8FAFC !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
     }
     .question-nav-dot:hover {
-        background: #EFF6FF !important;
-        color: #2563EB !important;
-        border-color: #2563EB !important;
+        background: rgba(227, 27, 35, 0.05) !important;
+        color: #E31B23 !important;
+        border-color: #E31B23 !important;
     }
     .question-nav-dot.answered {
-        background: #2563EB !important;
-        border-color: #2563EB !important;
+        background: #E31B23 !important;
+        border-color: #E31B23 !important;
         color: #FFFFFF !important;
     }
     .question-nav-dot.unanswered {
@@ -1844,6 +1847,10 @@
         background: #E31B23 !important;
         box-shadow: 0 0 10px rgba(227, 27, 35, 0.3) !important;
     }
+    .btn-primary#btnPlayListening:hover, #writingSubmitBtn:hover, #speakingSubmitBtn:hover, #btnToggleSpeakingMic:hover {
+        background-color: #C0141C !important;
+        background: #C0141C !important;
+    }
     .progress-bar#listeningProgressBar {
         background-color: #E31B23 !important;
     }
@@ -1861,6 +1868,39 @@
         transition: all 0.3s ease !important;
     }
 
+    /* General Bootstrap Override to enforce Francoway Red color system */
+    .btn-primary {
+        background-color: #E31B23 !important;
+        border-color: #E31B23 !important;
+        color: #ffffff !important;
+    }
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+        background-color: #C0141C !important;
+        border-color: #C0141C !important;
+        color: #ffffff !important;
+    }
+    .btn-outline-primary {
+        border-color: #E31B23 !important;
+        color: #E31B23 !important;
+    }
+    .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+        background-color: #E31B23 !important;
+        border-color: #E31B23 !important;
+        color: #ffffff !important;
+    }
+    .text-primary {
+        color: #E31B23 !important;
+    }
+    .bg-primary {
+        background-color: #E31B23 !important;
+    }
+    .bg-primary.text-dark, .badge.bg-primary, .badge.bg-primary.text-dark {
+        color: #ffffff !important;
+    }
+    .bg-primary-subtle {
+        background-color: rgba(227, 27, 35, 0.08) !important;
+    }
+
     /* Sidebar Refinements */
     .chat-sidebar {
         background-color: #f8fafc !important;
@@ -1870,7 +1910,7 @@
 
     .sidebar-header h4 {
         font-family: 'Outfit', sans-serif !important;
-        font-weight: 800 !important;
+        font-weight: 600 !important;
         color: #071530 !important;
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
@@ -1880,7 +1920,7 @@
 
     .sidebar-header .status {
         font-family: 'Outfit', sans-serif !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         font-size: 12.5px !important;
         color: #64748b !important;
         display: flex !important;
@@ -1890,8 +1930,8 @@
     }
 
     .status-dot {
-        background-color: #E53935 !important;
-        box-shadow: 0 0 10px #E53935 !important;
+        background-color: #2ec4b6 !important;
+        box-shadow: 0 0 10px #2ec4b6 !important;
         animation: pulseActive 2s infinite !important;
     }
 
@@ -1908,18 +1948,18 @@
 
     .skill-card:hover {
         transform: translateY(-2px) !important;
-        border-color: rgba(7, 21, 48, 0.2) !important;
-        box-shadow: 0 8px 24px rgba(7, 21, 48, 0.05) !important;
+        border-color: rgba(227, 27, 35, 0.3) !important;
+        box-shadow: 0 8px 24px rgba(227, 27, 35, 0.08) !important;
     }
 
     .skill-card.active, .skill-card:active {
-        border-color: #071530 !important;
-        background-color: rgba(7, 21, 48, 0.02) !important;
+        border-color: #E31B23 !important;
+        background-color: rgba(227, 27, 35, 0.04) !important;
     }
 
     .skill-icon {
-        background-color: rgba(7, 21, 48, 0.06) !important;
-        color: #071530 !important;
+        background-color: rgba(227, 27, 35, 0.08) !important;
+        color: #E31B23 !important;
         border-radius: 12px !important;
         width: 40px !important;
         height: 40px !important;
@@ -1955,7 +1995,7 @@
 
     .history-item:hover {
         background: #fafbfd !important;
-        border-color: rgba(7, 21, 48, 0.1) !important;
+        border-color: rgba(227, 27, 35, 0.25) !important;
         transform: translateY(-1px) !important;
     }
 
@@ -2000,10 +2040,10 @@
     }
 
     .welcome-banner i.logo-icon {
-        color: #E53935 !important;
+        color: #E31B23 !important;
         font-size: 3.5rem !important;
         margin-bottom: 24px !important;
-        text-shadow: 0 0 30px rgba(229, 57, 53, 0.2) !important;
+        text-shadow: 0 0 30px rgba(227, 27, 35, 0.2) !important;
     }
 
     /* Message Bubble styles */
@@ -2017,10 +2057,10 @@
     }
 
     .message.user {
-        background: linear-gradient(135deg, #071530 0%, #1a2a4a 100%) !important;
+        background-color: #E31B23 !important;
         color: #ffffff !important;
         border-top-right-radius: 4px !important;
-        box-shadow: 0 4px 15px rgba(7, 21, 48, 0.1) !important;
+        box-shadow: 0 4px 15px rgba(227, 27, 35, 0.2) !important;
     }
 
     .message.assistant {
@@ -2033,9 +2073,9 @@
 
     /* Chips overrides */
     .quick-chips .chip {
-        background-color: rgba(7, 21, 48, 0.04) !important;
-        border: 1.5px solid rgba(7, 21, 48, 0.08) !important;
-        color: #071530 !important;
+        background-color: rgba(227, 27, 35, 0.05) !important;
+        border: 1.5px solid rgba(227, 27, 35, 0.15) !important;
+        color: #E31B23 !important;
         border-radius: 30px !important;
         padding: 10px 20px !important;
         font-size: 13.5px !important;
@@ -2044,11 +2084,11 @@
     }
 
     .quick-chips .chip:hover {
-        background-color: #E53935 !important;
-        border-color: #E53935 !important;
+        background-color: #E31B23 !important;
+        border-color: #E31B23 !important;
         color: #ffffff !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 6px 15px rgba(229, 57, 53, 0.18) !important;
+        box-shadow: 0 6px 15px rgba(227, 27, 35, 0.25) !important;
     }
 
     /* Input area style improvements */
@@ -2060,13 +2100,13 @@
 
     .chat-input-area input {
         border-radius: 12px !important;
-        border: 1.5px solid #eff3f9 !important;
+        border: 1.5px solid #E31B23 !important;
         height: 48px !important;
         padding: 0 16px !important;
     }
 
     .chat-input-area button {
-        background-color: #071530 !important;
+        background-color: #E31B23 !important;
         border: none !important;
         border-radius: 12px !important;
         height: 48px !important;
@@ -2075,7 +2115,7 @@
     }
 
     .chat-input-area button:hover {
-        background-color: #E53935 !important;
+        background-color: #C0141C !important;
         transform: scale(1.05) !important;
     }
 
@@ -2086,7 +2126,7 @@
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        border: 1.5px dashed rgba(7, 21, 48, 0.15) !important;
+        border: 1.5px dashed rgba(227, 27, 35, 0.25) !important;
         border-radius: 12px !important;
         padding: 16px !important;
         background: #f8fafc !important;
@@ -2094,9 +2134,9 @@
     }
     
     .writing-textarea-wrapper:focus-within {
-        border-color: #071530 !important;
+        border-color: #E31B23 !important;
         background: #ffffff !important;
-        box-shadow: 0 0 0 4px rgba(7, 21, 48, 0.04) !important;
+        box-shadow: 0 0 0 4px rgba(227, 27, 35, 0.08) !important;
     }
 
     .practice-workspace-textarea {
@@ -2129,11 +2169,11 @@
     }
     [data-bs-theme="dark"] .skill-card:hover {
         background: #222222 !important;
-        border-color: #E53935 !important;
+        border-color: #E31B23 !important;
     }
     [data-bs-theme="dark"] .skill-card.active {
-        background: #071530 !important;
-        border-color: #071530 !important;
+        background: rgba(227, 27, 35, 0.15) !important;
+        border-color: #E31B23 !important;
     }
     [data-bs-theme="dark"] .message.assistant {
         background: #141414 !important;
@@ -2146,11 +2186,34 @@
     }
     [data-bs-theme="dark"] .writing-textarea-wrapper:focus-within {
         background: #0d0d0d !important;
-        border-color: #E53935 !important;
-        box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.04) !important;
+        border-color: #E31B23 !important;
+        box-shadow: 0 0 0 4px rgba(227, 27, 35, 0.08) !important;
     }
     [data-bs-theme="dark"] .practice-workspace-textarea {
         color: #ffffff !important;
+    }
+
+    /* ========================================================
+       AI PRACTICE REDUCED BOLDNESS SYSTEM
+       ======================================================== */
+    b, strong, .fw-bold, .fw-bolder, .fw-semibold, .font-weight-bold,
+    .chat-container-wrapper strong, .chat-container-wrapper b,
+    .reading-workspace strong, .reading-workspace b,
+    .writing-workspace-light strong, .writing-workspace-light b,
+    .speaking-workspace strong, .speaking-workspace b,
+    .modal strong, .modal b,
+    [data-bs-theme="dark"] strong, [data-bs-theme="dark"] b {
+        font-weight: 500 !important;
+    }
+
+    .chat-container-wrapper h1, .chat-container-wrapper h2, .chat-container-wrapper h3,
+    .chat-container-wrapper h4, .chat-container-wrapper h5, .chat-container-wrapper h6,
+    .reading-workspace h1, .reading-workspace h2, .reading-workspace h3,
+    .reading-workspace h4, .reading-workspace h5, .reading-workspace h6,
+    .writing-workspace-light h1, .writing-workspace-light h2, .writing-workspace-light h3,
+    .writing-workspace-light h4, .writing-workspace-light h5, .writing-workspace-light h6,
+    .modal h1, .modal h2, .modal h3, .modal h4, .modal h5, .modal h6 {
+        font-weight: 550 !important;
     }
 </style>
      <!--breadcrumb here-->
@@ -2286,11 +2349,11 @@
         </div>
 
         <!-- READING WORKSPACE -->
-        <div id="readingWorkspace" class="reading-workspace">
+        <div id="readingWorkspace" class="reading-workspace" style="display: none;">
             <!-- Top Header -->
             <div class="reading-header">
                 <div class="d-flex align-items-center gap-3">
-                    <button type="button" class="btn btn-outline-primary btn-sm text-primary" onclick="exitReadingMode()" style="border-radius: 50px; padding: 6px 16px; background: transparent; border: 1px solid #3b82f6;">
+                    <button type="button" id="btnExitWorkspace" class="btn btn-sm" onclick="exitReadingMode()" style="border-radius: 50px; padding: 6px 16px; background: transparent; border: 1.5px solid #E31B23; color: #E31B23; font-weight: 500;">
                         <i class="fas fa-arrow-left me-1"></i> Exit Reading
                     </button>
                     <span class="reading-header-title">READING PASSAGE 1</span>
@@ -2304,7 +2367,7 @@
                 
                 <!-- Header Actions -->
                 <div>
-                    <span class="badge bg-primary text-dark px-3 py-2 fw-bold" style="border-radius: 50px;">IELTS-Style Practice</span>
+                    <span class="badge bg-primary px-3 py-2 fw-bold" style="border-radius: 50px; color: #ffffff !important;">IELTS-Style Practice</span>
                 </div>
             </div>
 
@@ -2333,14 +2396,14 @@
             <div class="reading-footer" style="flex-direction: column; align-items: stretch; gap: 15px; padding: 20px 30px;">
                 <!-- Row 1: Title & Stats -->
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <span class="fw-bold text-white fs-15" id="readingQuestionsTitle">Questions 1-3</span>
+                    <span class="fw-bold text-white fs-15" id="readingQuestionsTitle">Questions</span>
                     <div class="d-flex gap-4 align-items-center text-white-50 fs-13">
                         <div class="d-flex align-items-center gap-2">
-                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #0d6efd; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #E31B23; display: inline-block;"></span>
                             <span id="statsAnswered">0 Answered</span>
                         </div>
                         <div class="d-flex align-items-center gap-2">
-                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #60a5fa; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(227, 27, 35, 0.4); display: inline-block;"></span>
                             <span id="statsUnanswered">0 Unanswered</span>
                         </div>
                     </div>
@@ -2357,126 +2420,199 @@
             </div>
         </div> <!-- End readingWorkspace -->
 
-        <!-- WRITING WORKSPACE (LIGHT THEME LIKE THE IMAGE) -->
-        <div id="writingWorkspace" class="writing-workspace-light">
+        <!-- WRITING WORKSPACE -->
+        <div id="writingWorkspace" class="reading-workspace" style="display: none;">
+            <!-- Top Header -->
+            <div class="reading-header">
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-sm" onclick="exitWritingMode()" style="border-radius: 50px; padding: 6px 16px; background: transparent; border: 1.5px solid #E31B23; color: #E31B23; font-weight: 500;">
+                        <i class="fas fa-arrow-left me-1"></i> Exit Writing
+                    </button>
+                    <span class="reading-header-title" id="writingHeaderTitle">WRITING TASK 1</span>
+                </div>
+                
+                <!-- Timer -->
+                <div class="reading-timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="writingTimerClock">00:40:00</span>
+                </div>
+                
+                <!-- Header Actions -->
+                <div>
+                    <span class="badge bg-primary px-3 py-2 fw-bold" style="border-radius: 50px; color: #ffffff !important;">IELTS Writing Practice</span>
+                </div>
+            </div>
 
-            <!-- Main Workspace Body (Occupies full height) -->
-            <div class="writing-body-light d-flex" style="flex: 1; overflow: hidden; position: relative;">
-                <!-- Left Column: Question Card -->
-                <div class="writing-pane-light" style="flex: 1; padding: 16px; overflow: hidden;">
-                    <div class="writing-card-light">
-                        <div class="writing-card-header-light">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="icon-circle-blue-light"><i class="fas fa-question text-white" style="font-size: 11px;"></i></span>
-                                <span class="fw-bold text-white" style="font-size: 14px;" id="writingHeaderTitle">WRITING TASK 1</span>
-                            </div>
+            <!-- Main Workspace Content (2 Columns on Desktop) -->
+            <div class="reading-body">
+                <!-- Column 1: Writing Prompt -->
+                <div class="reading-passage-pane" id="writingPromptPane" style="flex: 1; border-right: 1px solid rgba(0, 0, 0, 0.08); padding: 24px; overflow-y: auto; text-align: left;">
+                    <!-- Question text will load here -->
+                </div>
+
+                <!-- Column 2: Answer Input -->
+                <div class="reading-questions-pane d-flex flex-column" style="flex: 1; padding: 24px; overflow: hidden; background: #ffffff;">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="listening-icon-circle" style="background: rgba(227, 27, 35, 0.06); color: #E31B23; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(227, 27, 35, 0.15);">
+                            <i class="fas fa-keyboard" style="font-size: 13px;"></i>
+                        </span>
+                        <h6 class="mb-0 fw-bold text-primary" style="font-family: 'Fraunces', serif; font-size: 15px;">Your Answer:</h6>
+                    </div>
+                    <div class="writing-textarea-wrapper" style="flex: 1; min-height: 0; margin-bottom: 15px;">
+                        <textarea id="writingTextarea" class="practice-workspace-textarea" placeholder="Enter your answer here and click Submit to see sample answer and score. Do not leave answer blank and write more than 500 words." oninput="updateWritingWordCount()" style="width: 100%; height: 100%; resize: none; border: 1px solid rgba(227, 27, 35, 0.2); border-radius: 12px; padding: 15px; outline: none; transition: border-color 0.2s;"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation & Submission Bar -->
+            <div class="reading-footer" style="flex-direction: column; align-items: stretch; gap: 15px; padding: 20px 30px;">
+                <!-- Row 1: Title & Stats -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span class="fw-bold text-white fs-15">Writing Task</span>
+                    <div class="d-flex gap-4 align-items-center text-white-50 fs-13">
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #E31B23; display: inline-block;"></span>
+                            <span id="footerAnsweredStatus">0 Answered</span>
                         </div>
-                        <div class="writing-card-body-light" id="writingPromptPane" style="flex: 1; padding: 20px; overflow-y: auto; text-align: left;">
-                            <!-- Question text and images will load here -->
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(227, 27, 35, 0.4); display: inline-block;"></span>
+                            <span id="footerUnansweredStatus">1 Unanswered</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Column: Answer Card -->
-                <div class="writing-pane-light" style="flex: 1; padding: 16px; overflow: hidden;">
-                    <div class="writing-card-light">
-                        <div class="writing-card-header-light">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="icon-circle-darkblue-light"><i class="fas fa-keyboard text-white" style="font-size: 11px;"></i></span>
-                                <span class="fw-bold text-white" style="font-size: 14px;">Your answer:</span>
-                            </div>
-                            <div class="d-flex align-items-center gap-2" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 4px 12px; border-radius: 15px; font-family: monospace; font-size: 13px; color: #3b82f6; font-weight: 700;">
-                                <i class="far fa-clock"></i>
-                                <span id="writingTimerClock">00:40:00</span>
-                            </div>
-                        </div>
-                        <div class="writing-card-body-light d-flex flex-column" style="flex: 1; padding: 20px; overflow: hidden;">
-                            <div class="writing-textarea-wrapper">
-                                <textarea id="writingTextarea" class="practice-workspace-textarea" placeholder="Enter your answer here and click Submit to see sample answer and score. Do not leave answer blank and write more than 500 words." oninput="updateWritingWordCount()"></textarea>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="text-white-50" style="font-size: 13px;">
-                                    <span id="writingWordCount">Word count: 0</span>
-                                </div>
-                                <div class="d-flex gap-2">
-                                    <button type="button" class="btn" onclick="exitWritingMode()" style="border: 1px solid rgba(59, 130, 246, 0.4); color: #3b82f6; background: transparent; border-radius: 20px; font-weight: 600; padding: 6px 16px; font-size: 12px; transition: all 0.2s;">Back</button>
-                                    <button type="button" id="writingSubmitBtn" class="btn" onclick="submitWritingAnswer()" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #000; border: none; border-radius: 20px; font-weight: 700; padding: 6px 20px; font-size: 12px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3); transition: all 0.2s;">Submit</button>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Row 2: Ribbon and Submit button -->
+                <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap">
+                    <div class="question-nav-ribbon" id="writingNavRibbon" style="margin-bottom: 0;">
+                        <span class="question-nav-dot unanswered" id="writingNavCircle" style="cursor: default;">1</span>
                     </div>
+                    <div class="text-white-50 ms-3" style="font-size: 13px;">
+                        <span id="writingWordCount">Word count: 0</span>
+                    </div>
+                    <button type="button" id="writingSubmitBtn" class="btn btn-primary text-dark fw-bold px-4 py-2" onclick="submitWritingAnswer()" style="border-radius: 50px; min-width: 140px;">
+                        <i class="fas fa-check-circle me-1"></i> Submit Test
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- SPEAKING WORKSPACE -->
-        <div id="speakingWorkspace" class="writing-workspace-light" style="display: none;">
-            <!-- Main Workspace Body (Occupies full height) -->
-            <div class="writing-body-light d-flex" style="flex: 1; overflow: hidden; position: relative;">
-                <!-- Left Column: Question Card -->
-                <div class="writing-pane-light" style="flex: 1; padding: 16px; overflow: hidden;">
-                    <div class="writing-card-light">
-                        <div class="writing-card-header-light">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="icon-circle-blue-light"><i class="fas fa-comment-dots text-white" style="font-size: 11px;"></i></span>
-                                <span class="fw-bold text-white" style="font-size: 14px;" id="speakingHeaderTitle">SPEAKING CUE CARD</span>
-                            </div>
+        <div id="speakingWorkspace" class="reading-workspace" style="display: none;">
+            <!-- Top Header -->
+            <div class="reading-header">
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-sm" onclick="exitSpeakingMode()" style="border-radius: 50px; padding: 6px 16px; background: transparent; border: 1.5px solid #E31B23; color: #E31B23; font-weight: 500;">
+                        <i class="fas fa-arrow-left me-1"></i> Exit Speaking
+                    </button>
+                    <span class="reading-header-title" id="speakingHeaderTitle">SPEAKING CUE CARD</span>
+                </div>
+                
+                <!-- Timer -->
+                <div class="reading-timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="speakingTimerClock">00:02:00</span>
+                </div>
+                
+                <!-- Header Actions -->
+                <div>
+                    <span class="badge bg-primary px-3 py-2 fw-bold" style="border-radius: 50px; color: #ffffff !important;">IELTS Speaking Practice</span>
+                </div>
+            </div>
+
+            <!-- Main Workspace Content (2 Columns on Desktop) -->
+            <div class="reading-body">
+                <!-- Column 1: Speaking Prompt -->
+                <div class="reading-passage-pane" id="speakingPromptPane" style="flex: 1; border-right: 1px solid rgba(0, 0, 0, 0.08); padding: 24px; overflow-y: auto; text-align: left;">
+                    <!-- Topic/cue card details will load here -->
+                </div>
+
+                <!-- Column 2: Answer Input / AI Listener -->
+                <div class="reading-questions-pane d-flex flex-column" id="speakingRightPane" style="flex: 1; padding: 24px; overflow: hidden; background: #ffffff;">
+                    <!-- Area A: Speech Input & Recording (The AI Listener Input) -->
+                    <div id="speakingInputArea" class="d-flex flex-column h-100" style="flex: 1; min-height: 0;">
+                        <!-- Header -->
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="listening-icon-circle" style="background: rgba(227, 27, 35, 0.06); color: #E31B23; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(227, 27, 35, 0.15);">
+                                <i class="fas fa-microphone" style="font-size: 13px;"></i>
+                            </span>
+                            <h6 class="mb-0 fw-bold text-primary" style="font-family: 'Fraunces', serif; font-size: 15px;">Your Speech Transcript:</h6>
                         </div>
-                        <div class="writing-card-body-light" id="speakingPromptPane" style="flex: 1; padding: 20px; overflow-y: auto; text-align: left;">
-                            <!-- Speaking topic/cue card details will load here -->
+
+                        <!-- Recording controls banner -->
+                        <div class="d-flex align-items-center justify-content-between p-3 mb-3 rounded" style="background: #f1f5f9; border: 1px solid rgba(227, 27, 35, 0.1);">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="recording-status-dot" id="speakingMicStatusDot" style="width: 10px; height: 10px; border-radius: 50%; background: #64748b; display: inline-block;"></span>
+                                <span class="fw-semibold text-secondary small" id="speakingMicStatusText">Status: Microphone Ready</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <label for="speakingLanguageSelect" class="text-secondary small fw-bold mb-0">Lang:</label>
+                                <select id="speakingLanguageSelect" class="form-select form-select-sm" style="width: 110px; border-radius: 20px; font-size: 11px; padding: 2px 10px; height: 26px; border: 1px solid rgba(227, 27, 35, 0.3); background-color: #ffffff; color: #333;" onchange="updateSpeakingLanguage()">
+                                    <option value="en-US" selected>English 🇺🇸</option>
+                                    <option value="fr-FR">French 🇫🇷</option>
+                                </select>
+                            </div>
+                            <button type="button" id="btnToggleSpeakingMic" class="btn btn-sm btn-primary d-flex align-items-center gap-1" onclick="toggleSpeakingRecognition()" style="border-radius: 20px; font-size: 12px; background-color: #E31B23 !important; border: none; padding: 6px 16px; color: #fff !important; font-weight: 500;">
+                                <i class="fas fa-microphone"></i> Start Recording
+                            </button>
+                        </div>
+
+                        <!-- Real-time transcription area -->
+                        <div class="writing-textarea-wrapper" style="flex: 1; min-height: 0; margin-bottom: 15px;">
+                            <textarea id="speakingTextarea" class="practice-workspace-textarea" placeholder="Click 'Start Recording' and start speaking. Your spoken words will be transcribed here in real-time. You can edit the text manually to correct any spelling." oninput="updateSpeakingWordCount()" style="width: 100%; height: 100%; resize: none; border: 1px solid rgba(227, 27, 35, 0.2); border-radius: 12px; padding: 15px; outline: none; transition: border-color 0.2s;"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Area B: AI Observer Scoring & Evaluation -->
+                    <div id="speakingEvaluationArea" class="d-flex flex-column h-100" style="flex: 1; min-height: 0; display: none; overflow-y: auto;">
+                        <!-- AI Listener Header -->
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="listening-icon-circle" style="background: rgba(46, 196, 182, 0.1); color: #2ec4b6; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(46, 196, 182, 0.3);">
+                                <i class="fas fa-robot" style="font-size: 13px;"></i>
+                            </span>
+                            <h6 class="mb-0 fw-bold text-success" style="font-family: 'Fraunces', serif; font-size: 16px;">AI Listener Observation Report</h6>
+                        </div>
+
+                        <!-- Scoring & Report Content -->
+                        <div id="speakingObservationReport">
+                            <!-- Scoring results will render here dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Area C: Loading State -->
+                    <div id="speakingEvaluationLoading" class="d-flex flex-column align-items-center justify-content-center h-100" style="flex: 1; display: none; min-height: 200px;">
+                        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem; color: #E31B23 !important;"></div>
+                        <h6 class="fw-bold text-primary mb-1">AI Listener is observing your response...</h6>
+                        <p class="text-muted small">Analyzing grammar, vocabulary, pronunciation, and coherence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation & Submission Bar -->
+            <div class="reading-footer" id="speakingFooter" style="flex-direction: column; align-items: stretch; gap: 15px; padding: 20px 30px;">
+                <!-- Row 1: Title & Stats -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span class="fw-bold text-white fs-15">Speaking Task</span>
+                    <div class="d-flex gap-4 align-items-center text-white-50 fs-13">
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #E31B23; display: inline-block;"></span>
+                            <span id="speakingFooterAnsweredStatus">0 Answered</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: rgba(227, 27, 35, 0.4); display: inline-block;"></span>
+                            <span id="speakingFooterUnansweredStatus">1 Unanswered</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Column: Speech Recognition / Recording Panel -->
-                <div class="writing-pane-light" style="flex: 1; padding: 16px; overflow: hidden;">
-                    <div class="writing-card-light">
-                        <div class="writing-card-header-light">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="icon-circle-darkblue-light"><i class="fas fa-microphone text-white" style="font-size: 11px;"></i></span>
-                                <span class="fw-bold text-white" style="font-size: 14px;">Your Speech Transcript:</span>
-                            </div>
-                            <div class="d-flex align-items-center gap-2" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 4px 12px; border-radius: 15px; font-family: monospace; font-size: 13px; color: #3b82f6; font-weight: 700;">
-                                <i class="far fa-clock"></i>
-                                <span id="speakingTimerClock">00:02:00</span>
-                            </div>
-                        </div>
-                        <div class="writing-card-body-light d-flex flex-column" style="flex: 1; padding: 20px; overflow: hidden;">
-                            
-                            <!-- Recording controls banner -->
-                            <div class="d-flex align-items-center justify-content-between p-3 mb-3 rounded" style="background: #f1f5f9; border: 1px solid rgba(13, 110, 253, 0.1);">
-                                <div class="d-flex align-items-center gap-2">
-                                    <span class="recording-status-dot" id="speakingMicStatusDot" style="width: 10px; height: 10px; border-radius: 50%; background: #64748b; display: inline-block;"></span>
-                                    <span class="fw-semibold text-secondary small" id="speakingMicStatusText">Status: Microphone Ready</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-2">
-                                    <label for="speakingLanguageSelect" class="text-secondary small fw-bold mb-0">Lang:</label>
-                                    <select id="speakingLanguageSelect" class="form-select form-select-sm" style="width: 110px; border-radius: 20px; font-size: 11px; padding: 2px 10px; height: 26px; border: 1px solid rgba(59, 130, 246, 0.3); background-color: #ffffff; color: #333;" onchange="updateSpeakingLanguage()">
-                                        <option value="en-US" selected>English 🇺🇸</option>
-                                        <option value="fr-FR">French 🇫🇷</option>
-                                    </select>
-                                </div>
-                                <button type="button" id="btnToggleSpeakingMic" class="btn btn-sm btn-primary d-flex align-items-center gap-1" onclick="toggleSpeakingRecognition()" style="border-radius: 20px; font-size: 12px; background-color: #3b82f6 !important; border: none; padding: 6px 16px; color: #fff !important; font-weight: bold;">
-                                    <i class="fas fa-microphone"></i> Start Recording
-                                </button>
-                            </div>
-
-                            <!-- Real-time transcription area -->
-                            <div class="writing-textarea-wrapper">
-                                <textarea id="speakingTextarea" class="practice-workspace-textarea" placeholder="Click 'Start Recording' and start speaking. Your spoken words will be transcribed here in real-time. You can edit the text manually to correct any spelling." oninput="updateSpeakingWordCount()"></textarea>
-                            </div>
-                            
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="text-white-50" style="font-size: 13px;">
-                                    <span id="speakingWordCount">Word count: 0</span>
-                                </div>
-                                <div class="d-flex gap-2">
-                                    <button type="button" class="btn" onclick="exitSpeakingMode()" style="border: 1px solid rgba(59, 130, 246, 0.4); color: #3b82f6; background: transparent; border-radius: 20px; font-weight: 600; padding: 6px 16px; font-size: 12px; transition: all 0.2s;">Back</button>
-                                    <button type="button" id="speakingSubmitBtn" class="btn" onclick="submitSpeakingAnswer()" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #000; border: none; border-radius: 20px; font-weight: 700; padding: 6px 20px; font-size: 12px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3); transition: all 0.2s;">Submit</button>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Row 2: Ribbon and Submit button -->
+                <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap">
+                    <div class="question-nav-ribbon" id="speakingNavRibbon" style="margin-bottom: 0;">
+                        <span class="question-nav-dot unanswered" id="speakingNavCircle" style="cursor: default;">1</span>
                     </div>
+                    <div class="text-white-50 ms-3" style="font-size: 13px;">
+                        <span id="speakingWordCount">Word count: 0</span>
+                    </div>
+                    <button type="button" id="speakingSubmitBtn" class="btn btn-primary text-dark fw-bold px-4 py-2" onclick="submitSpeakingAnswer()" style="border-radius: 50px; min-width: 140px;">
+                        <i class="fas fa-check-circle me-1"></i> Submit Test
+                    </button>
                 </div>
             </div>
         </div>
@@ -2565,7 +2701,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center mb-4">
-                    <div class="display-4 text-primary fw-bold mb-2" id="readingResultScore">3/3</div>
+                    <div class="display-4 text-primary fw-bold mb-2" id="readingResultScore">-</div>
                     <p class="text-secondary">Your AI Estimated Score</p>
                 </div>
                 
@@ -2711,20 +2847,45 @@
         messageDiv.classList.add('message', sender);
         
         if (sender === 'assistant') {
+            // Store raw text for startPracticeFromChat helper
+            messageDiv.setAttribute('data-raw-text', text);
+            
             // Parse Markdown for assistant responses
             let parsedHtml = marked.parse(text);
             
             // Only show audio script player for listening tasks (matches 'listening' or '🎧')
             let isListening = text.toLowerCase().includes('listening') || text.includes('🎧');
             
-            // Check if this is a practice task
-            let isPracticeTask = !!activeSkill || text.includes('Practice:') || text.includes('Task Prompt:') || text.includes('Cue Card') || text.includes('passage') || text.includes('questions') || text.includes('exercise');
-            
-            // Exclude Reading and Writing from chat-based submission actions (handled inside their workspaces)
-            let lowerSkill = (activeSkill || '').toLowerCase();
-            if (lowerSkill === 'reading' || lowerSkill === 'writing' || text.toLowerCase().includes('reading comprehension') || text.toLowerCase().includes('writing task')) {
-                isPracticeTask = false;
+            // Detect skill
+            let lowerText = text.toLowerCase();
+            let detectedSkill = activeSkill;
+            if (!detectedSkill) {
+                if (lowerText.includes('reading') || lowerText.includes('passage') || lowerText.includes('lecture')) {
+                    detectedSkill = 'reading';
+                } else if (lowerText.includes('listening') || lowerText.includes('dialogue') || lowerText.includes('transcript') || lowerText.includes('écoute')) {
+                    detectedSkill = 'listening';
+                } else if (lowerText.includes('writing') || lowerText.includes('essay') || lowerText.includes('rédaction') || lowerText.includes('prompt')) {
+                    detectedSkill = 'writing';
+                } else if (lowerText.includes('speaking') || lowerText.includes('cue card') || lowerText.includes('parler')) {
+                    detectedSkill = 'speaking';
+                }
             }
+            
+            // Check if this is a practice task
+            let isPracticeTask = !!detectedSkill && (
+                lowerText.includes('prompt') ||
+                lowerText.includes('task') ||
+                lowerText.includes('cue card') ||
+                lowerText.includes('passage') ||
+                lowerText.includes('questions') ||
+                lowerText.includes('exercise') ||
+                lowerText.includes('dialogue') ||
+                lowerText.includes('transcript') ||
+                lowerText.includes('write') ||
+                lowerText.includes('speak') ||
+                lowerText.includes('listen') ||
+                lowerText.includes('read')
+            );
             
             let actionButtons = '';
             
@@ -2741,10 +2902,9 @@
             
             if (isPracticeTask) {
                 if (actionButtons) actionButtons += '<span class="text-secondary mx-1">|</span>';
-                let skillAttr = activeSkill ? `data-skill="${activeSkill}"` : '';
                 actionButtons += `
-                    <button type="button" class="btn btn-sm btn-link text-primary p-0 text-decoration-none d-flex align-items-center gap-1 btn-submit-eval" ${skillAttr} onclick="openSubmitModal(this)" style="font-size: 13px;">
-                        <i class="fas fa-edit"></i> Submit Answer for Evaluation
+                    <button type="button" class="btn btn-sm btn-link text-primary p-0 text-decoration-none d-flex align-items-center gap-1 btn-start-practice" data-skill="${detectedSkill}" onclick="startPracticeFromChat(this)" style="font-size: 13px; font-weight: 500;">
+                        <i class="fas fa-play-circle"></i> Open Test in Workspace
                     </button>
                 `;
             }
@@ -2766,6 +2926,65 @@
 
         chatMessages.appendChild(messageDiv);
         scrollChatToBottom();
+    }
+
+    window.startPracticeFromChat = function(btn) {
+        let messageEl = btn.closest('.message');
+        if (!messageEl) return;
+        
+        let questionText = messageEl.getAttribute('data-raw-text');
+        let skill = btn.getAttribute('data-skill');
+        
+        if (!skill || !questionText) {
+            alert("Unable to load test content. Please try again.");
+            return;
+        }
+        
+        // Show loader/indicator
+        btn.disabled = true;
+        let originalHtml = btn.innerHTML;
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Initializing...`;
+        
+        fetch("{{ route('ai.chat') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                message: 'start_practice_session',
+                skill: skill,
+                question: questionText
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Server error');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                // Initialize the workspace based on skill
+                if (skill === 'reading' || skill === 'listening') {
+                    initReadingWorkspace(questionText, skill);
+                } else if (skill === 'writing') {
+                    initWritingWorkspace(questionText);
+                } else if (skill === 'speaking') {
+                    initSpeakingWorkspace(questionText);
+                }
+            } else {
+                alert("Failed to start practice session.");
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
+        })
+        .catch(err => {
+            console.error('Error starting practice:', err);
+            alert("Network error. Please try again.");
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+        });
     }
 
     let currentUtterance = null;
@@ -3216,26 +3435,26 @@
             // Render the audio player box at the very top of the questions pane
             let playerCard = document.createElement('div');
             playerCard.className = 'listening-player-card mb-4 p-4 rounded border';
-            playerCard.style.cssText = 'background: rgba(20, 20, 20, 0.9) !important; border: 1px solid rgba(59, 130, 246, 0.3) !important;';
+            playerCard.style.cssText = 'background: #E31B23 !important; border: 1px solid rgba(255, 255, 255, 0.15) !important;';
             playerCard.innerHTML = `
-                <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
                     <div class="d-flex align-items-center gap-3">
-                        <span class="icon-circle" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(59, 130, 246, 0.25);">
+                        <span class="listening-icon-circle" style="background: rgba(255, 255, 255, 0.15) !important; color: #ffffff !important; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.25) !important;">
                             <i class="fas fa-headphones" style="font-size: 16px;"></i>
                         </span>
                         <div>
-                            <h6 class="text-primary mb-0" style="font-size: 15px; font-weight: 700; letter-spacing: 0.5px; color: #3b82f6 !important;">IELTS Listening Practice Audio Track</h6>
-                            <small class="text-secondary" style="font-size: 12px;" id="listeningStatus">Status: Ready to play</small>
+                            <h6 class="mb-0" style="font-size: 15px; font-weight: 500; letter-spacing: 0.5px; color: #ffffff !important;">IELTS Listening Practice Audio Track</h6>
+                            <small style="font-size: 12px; color: rgba(255, 255, 255, 0.7) !important;" id="listeningStatus">Status: Ready to play</small>
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-primary text-dark fw-bold px-4 py-2 d-flex align-items-center gap-2" id="btnPlayListening" onclick="toggleListeningAudio(this)" style="border-radius: 50px; font-size: 13px; background-color: #3b82f6 !important; border: none; box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); transition: all 0.2s;">
+                        <button type="button" class="btn btn-light fw-bold px-4 py-2 d-flex align-items-center gap-2" id="btnPlayListening" onclick="toggleListeningAudio(this)" style="border-radius: 50px; font-size: 13px; background-color: #ffffff !important; border: none; color: #E31B23 !important; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); transition: all 0.2s;">
                             <i class="fas fa-play"></i> Play Audio
                         </button>
                     </div>
                 </div>
-                <div class="progress" style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);">
-                    <div class="progress-bar bg-primary" id="listeningProgressBar" role="progressbar" style="width: 0%; transition: width 0.1s linear; background-color: #3b82f6 !important;"></div>
+                <div class="progress" style="height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; border: none;">
+                    <div class="progress-bar" id="listeningProgressBar" role="progressbar" style="width: 0%; transition: width 0.1s linear; background-color: #ffffff !important;"></div>
                 </div>
             `;
             questionsPane.appendChild(playerCard);
@@ -3437,7 +3656,7 @@
         document.getElementById('readingQuestionsTitle').textContent = `Questions 1-${parsed.questions.length}`;
         
         // Update header details based on skill
-        let backBtn = document.querySelector('#readingWorkspace .btn-outline-primary');
+        let backBtn = document.getElementById('btnExitWorkspace');
         let headerTitle = document.querySelector('#readingWorkspace .reading-header-title');
         let headerBadge = document.querySelector('#readingWorkspace .badge');
         let submitBtn = document.getElementById('readingSubmitBtn');
@@ -3472,6 +3691,9 @@
         document.getElementById('chatSidebar').style.display = 'none';
         document.getElementById('chatMain').style.display = 'none';
         
+        document.getElementById('writingWorkspace').style.display = 'none';
+        document.getElementById('speakingWorkspace').style.display = 'none';
+
         let workspace = document.getElementById('readingWorkspace');
         workspace.style.display = 'flex';
         
@@ -3517,8 +3739,8 @@
             dot.classList.add('answered');
             
             // Subtle styling to show it is recorded
-            input.style.borderColor = '#0d6efd';
-            input.style.backgroundColor = 'rgba(13, 110, 253, 0.05)';
+            input.style.borderColor = '#E31B23';
+            input.style.backgroundColor = 'rgba(227, 27, 35, 0.05)';
         }
         
         updateReadingProgress();
@@ -3616,6 +3838,8 @@
         }
         stopReadingTimer();
         document.getElementById('readingWorkspace').style.display = 'none';
+        document.getElementById('writingWorkspace').style.display = 'none';
+        document.getElementById('speakingWorkspace').style.display = 'none';
         
         document.getElementById('chatSidebar').style.display = 'flex';
         document.getElementById('chatMain').style.display = 'flex';
@@ -3915,8 +4139,8 @@
             document.getElementById('readingTimerClock').style.color = '#ef4444';
             document.getElementById('readingTimerClock').parentElement.style.borderColor = '#ef4444';
         } else {
-            document.getElementById('readingTimerClock').style.color = '#fff';
-            document.getElementById('readingTimerClock').parentElement.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+            document.getElementById('readingTimerClock').style.color = '#E31B23';
+            document.getElementById('readingTimerClock').parentElement.style.borderColor = 'rgba(227, 27, 35, 0.3)';
         }
     }
 
@@ -4062,14 +4286,20 @@
         document.getElementById('writingWordCount').textContent = 'Word count: 0';
         
         // Set dynamic active circle id to the navigation dot
-        let navCircle = document.querySelector('.nav-circle-light');
-        if (navCircle) navCircle.id = 'writingNavCircle';
+        let navCircle = document.getElementById('writingNavCircle');
+        if (navCircle) {
+            navCircle.classList.remove('answered');
+            navCircle.classList.add('unanswered');
+        }
         
         updateWritingWordCount();
         
         document.getElementById('chatSidebar').style.display = 'none';
         document.getElementById('chatMain').style.display = 'none';
         
+        document.getElementById('readingWorkspace').style.display = 'none';
+        document.getElementById('speakingWorkspace').style.display = 'none';
+
         let workspace = document.getElementById('writingWorkspace');
         workspace.style.display = 'flex';
         
@@ -4107,7 +4337,7 @@
                 clockEl.parentElement.style.borderColor = '#ef4444';
             } else {
                 clockEl.style.color = '#E31B23';
-                clockEl.parentElement.style.borderColor = '#E31B23';
+                clockEl.parentElement.style.borderColor = 'rgba(227, 27, 35, 0.3)';
             }
         }
     }
@@ -4126,20 +4356,18 @@
         let navCircle = document.getElementById('writingNavCircle');
         
         if (words > 0) {
-            if (answeredStatus) answeredStatus.textContent = '1/1 Answered';
-            if (unansweredStatus) unansweredStatus.textContent = '0/1 Unanswered';
+            if (answeredStatus) answeredStatus.textContent = '1 Answered';
+            if (unansweredStatus) unansweredStatus.textContent = '0 Unanswered';
             if (navCircle) {
-                navCircle.style.backgroundColor = '#E31B23';
-                navCircle.style.borderColor = '#E31B23';
-                navCircle.style.color = '#ffffff';
+                navCircle.classList.remove('unanswered');
+                navCircle.classList.add('answered');
             }
         } else {
-            if (answeredStatus) answeredStatus.textContent = '0/1 Answered';
-            if (unansweredStatus) unansweredStatus.textContent = '1/1 Unanswered';
+            if (answeredStatus) answeredStatus.textContent = '0 Answered';
+            if (unansweredStatus) unansweredStatus.textContent = '1 Unanswered';
             if (navCircle) {
-                navCircle.style.backgroundColor = '#e0f2fe';
-                navCircle.style.borderColor = '#0284c7';
-                navCircle.style.color = '#0369a1';
+                navCircle.classList.remove('answered');
+                navCircle.classList.add('unanswered');
             }
         }
     }
@@ -4273,7 +4501,9 @@
 
     function exitWritingMode(shouldClear = true) {
         stopWritingTimer();
+        document.getElementById('readingWorkspace').style.display = 'none';
         document.getElementById('writingWorkspace').style.display = 'none';
+        document.getElementById('speakingWorkspace').style.display = 'none';
         
         document.getElementById('chatSidebar').style.display = 'flex';
         document.getElementById('chatMain').style.display = 'flex';
@@ -4301,10 +4531,13 @@
     let speakingTimeRemaining = 120; // 2 minutes
     let recognition = null;
     let isRecording = false;
+    let userWantsRecording = false;
     let baseTranscript = '';
 
     function initSpeechRecognition() {
         if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            let text = document.getElementById('speakingMicStatusText');
+            if (text) text.textContent = 'Status: Web Speech API Not Supported (Use Chrome/Edge)';
             alert("Web Speech API is not supported in this browser. Please use Google Chrome or Microsoft Edge.");
             return null;
         }
@@ -4326,7 +4559,7 @@
                 dot.style.backgroundColor = '#ef4444';
                 dot.classList.add('animate-pulse');
             }
-            if (text) text.textContent = 'Status: Recording...';
+            if (text) text.textContent = 'Status: Listening... Speak clearly';
             if (btn) {
                 btn.innerHTML = '<i class="fas fa-stop"></i> Stop Recording';
                 btn.style.setProperty('background-color', '#ef4444', 'important');
@@ -4339,6 +4572,27 @@
             let text = document.getElementById('speakingMicStatusText');
             let btn = document.getElementById('btnToggleSpeakingMic');
             
+            // If user did not manually click stop, automatically restart recognition so short pauses don't cut off recording
+            if (userWantsRecording) {
+                const textarea = document.getElementById('speakingTextarea');
+                if (textarea) {
+                    baseTranscript = textarea.value.trim();
+                    if (baseTranscript !== '') {
+                        baseTranscript += ' ';
+                    }
+                }
+                setTimeout(() => {
+                    if (userWantsRecording && recognition) {
+                        try {
+                            recognition.start();
+                        } catch (e) {
+                            console.log("Auto-restart recognition attempt:", e.message);
+                        }
+                    }
+                }, 300);
+                return;
+            }
+
             if (dot) {
                 dot.style.backgroundColor = '#64748b';
                 dot.classList.remove('animate-pulse');
@@ -4363,11 +4617,24 @@
         };
 
         rec.onerror = (event) => {
-            console.error('Speech recognition error:', event.error);
-            if (event.error === 'not-allowed') {
-                alert('Microphone access blocked. Please enable microphone permissions in your browser.');
+            console.warn('Speech recognition error event:', event.error);
+            // Ignore non-fatal errors like 'no-speech' or 'aborted' without popping up annoying alerts
+            if (event.error === 'no-speech' || event.error === 'aborted') {
+                return;
+            }
+            
+            if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                userWantsRecording = false;
+                let text = document.getElementById('speakingMicStatusText');
+                if (text) text.textContent = 'Status: Microphone Blocked / HTTPS Required';
+                alert('Microphone access blocked. Please allow microphone access in browser settings and ensure you are accessing via HTTPS or localhost.');
+            } else if (event.error === 'audio-capture') {
+                userWantsRecording = false;
+                let text = document.getElementById('speakingMicStatusText');
+                if (text) text.textContent = 'Status: No Microphone Found';
+                alert('No microphone was found or microphone is in use by another application.');
             } else {
-                alert('Speech recognition error: ' + event.error);
+                console.error('Speech recognition error:', event.error);
             }
         };
 
@@ -4378,14 +4645,14 @@
         if (recognition) {
             const selectEl = document.getElementById('speakingLanguageSelect');
             if (selectEl) {
-                const wasRecording = isRecording;
-                if (wasRecording) {
-                    recognition.stop();
-                }
+                const wasRecording = userWantsRecording || isRecording;
+                userWantsRecording = false;
+                try { recognition.stop(); } catch(e){}
                 recognition.lang = selectEl.value;
                 console.log("Updated speech recognition language to:", recognition.lang);
                 if (wasRecording) {
                     setTimeout(() => {
+                        userWantsRecording = true;
                         try {
                             recognition.start();
                         } catch (e) {
@@ -4404,9 +4671,11 @@
             }
             if (!recognition) return;
 
-            if (isRecording) {
-                recognition.stop();
+            if (isRecording || userWantsRecording) {
+                userWantsRecording = false;
+                try { recognition.stop(); } catch(e){}
             } else {
+                userWantsRecording = true;
                 const textarea = document.getElementById('speakingTextarea');
                 baseTranscript = textarea ? textarea.value.trim() : '';
                 if (baseTranscript !== '') {
@@ -4416,7 +4685,13 @@
                 if (selectEl) {
                     recognition.lang = selectEl.value;
                 }
-                recognition.start();
+                try {
+                    recognition.start();
+                } catch (e) {
+                    if (e.name !== 'InvalidStateError') {
+                        console.error("Start error:", e);
+                    }
+                }
             }
         } catch (e) {
             console.error("Speech recognition start failed:", e);
@@ -4426,8 +4701,9 @@
 
     function initSpeakingWorkspace(responseText) {
         window.speechSynthesis.cancel();
-        if (recognition && isRecording) {
-            recognition.stop();
+        userWantsRecording = false;
+        if (recognition) {
+            try { recognition.stop(); } catch(e){}
         }
 
         let cleanText = responseText.replace(/<exercise skill="speaking"[^>]*>/i, '').replace(/<\/exercise>/i, '');
@@ -4457,9 +4733,35 @@
         let wordCountEl = document.getElementById('speakingWordCount');
         if (wordCountEl) wordCountEl.textContent = 'Word count: 0';
         
+        let navCircle = document.getElementById('speakingNavCircle');
+        if (navCircle) {
+            navCircle.classList.remove('answered');
+            navCircle.classList.add('unanswered');
+        }
+        
+        // Reset panels and footer visibility for the new task
+        let inputArea = document.getElementById('speakingInputArea');
+        if (inputArea) inputArea.style.setProperty('display', 'flex', 'important');
+        
+        let evalArea = document.getElementById('speakingEvaluationArea');
+        if (evalArea) evalArea.style.setProperty('display', 'none', 'important');
+        
+        let loadingArea = document.getElementById('speakingEvaluationLoading');
+        if (loadingArea) loadingArea.style.setProperty('display', 'none', 'important');
+        
+        let footerEl = document.getElementById('speakingFooter');
+        if (footerEl) footerEl.style.setProperty('display', 'flex', 'important');
+        
+        updateSpeakingWordCount();
+        
         document.getElementById('chatSidebar').style.display = 'none';
         document.getElementById('chatMain').style.display = 'none';
         
+        let rw = document.getElementById('readingWorkspace');
+        if (rw) rw.style.display = 'none';
+        let ww = document.getElementById('writingWorkspace');
+        if (ww) ww.style.display = 'none';
+
         let workspace = document.getElementById('speakingWorkspace');
         if (workspace) workspace.style.display = 'flex';
         
@@ -4500,7 +4802,7 @@
                 clockEl.parentElement.style.borderColor = '#ef4444';
             } else {
                 clockEl.style.color = '#E31B23';
-                clockEl.parentElement.style.borderColor = '#E31B23';
+                clockEl.parentElement.style.borderColor = 'rgba(227, 27, 35, 0.3)';
             }
         }
     }
@@ -4516,16 +4818,41 @@
             let words = text ? text.split(/\s+/).length : 0;
             let wordCountEl = document.getElementById('speakingWordCount');
             if (wordCountEl) wordCountEl.textContent = `Word count: ${words}`;
+            
+            let answeredStatus = document.getElementById('speakingFooterAnsweredStatus');
+            let unansweredStatus = document.getElementById('speakingFooterUnansweredStatus');
+            let navCircle = document.getElementById('speakingNavCircle');
+            
+            if (words > 0) {
+                if (answeredStatus) answeredStatus.textContent = '1 Answered';
+                if (unansweredStatus) unansweredStatus.textContent = '0 Unanswered';
+                if (navCircle) {
+                    navCircle.classList.remove('unanswered');
+                    navCircle.classList.add('answered');
+                }
+            } else {
+                if (answeredStatus) answeredStatus.textContent = '0 Answered';
+                if (unansweredStatus) unansweredStatus.textContent = '1 Unanswered';
+                if (navCircle) {
+                    navCircle.classList.remove('answered');
+                    navCircle.classList.add('unanswered');
+                }
+            }
         }
     }
 
     function exitSpeakingMode() {
-        if (recognition && isRecording) {
-            recognition.stop();
+        userWantsRecording = false;
+        if (recognition) {
+            try { recognition.stop(); } catch(e){}
         }
         stopSpeakingTimer();
-        let workspace = document.getElementById('speakingWorkspace');
-        if (workspace) workspace.style.display = 'none';
+        let rw = document.getElementById('readingWorkspace');
+        if (rw) rw.style.display = 'none';
+        let ww = document.getElementById('writingWorkspace');
+        if (ww) ww.style.display = 'none';
+        let sw = document.getElementById('speakingWorkspace');
+        if (sw) sw.style.display = 'none';
         
         document.getElementById('chatSidebar').style.display = 'flex';
         document.getElementById('chatMain').style.display = 'flex';
@@ -4549,8 +4876,9 @@
     }
 
     function submitSpeakingAnswer() {
-        if (recognition && isRecording) {
-            recognition.stop();
+        userWantsRecording = false;
+        if (recognition) {
+            try { recognition.stop(); } catch(e){}
         }
         stopSpeakingTimer();
         
@@ -4562,27 +4890,17 @@
             return;
         }
         
-        let submitBtn = document.getElementById('speakingSubmitBtn');
-        let originalHtml = submitBtn ? submitBtn.innerHTML : '';
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Submitting...`;
-        }
+        // Hide transcription input area
+        let inputArea = document.getElementById('speakingInputArea');
+        if (inputArea) inputArea.style.setProperty('display', 'none', 'important');
         
-        let welcomeView = document.getElementById('welcomeView');
-        let chatMessages = document.getElementById('chatMessages');
-        if (welcomeView && welcomeView.style.display !== 'none') {
-            welcomeView.style.display = 'none';
-            if (chatMessages) chatMessages.style.display = 'flex';
-        }
+        // Hide footer
+        let footerEl = document.getElementById('speakingFooter');
+        if (footerEl) footerEl.style.setProperty('display', 'none', 'important');
         
-        appendMessage("Submitted Speech Answer:\n" + answerText, 'user');
-        showLoader();
-        
-        let workspace = document.getElementById('speakingWorkspace');
-        if (workspace) workspace.style.display = 'none';
-        document.getElementById('chatSidebar').style.display = 'flex';
-        document.getElementById('chatMain').style.display = 'flex';
+        // Show evaluation loading
+        let loadingArea = document.getElementById('speakingEvaluationLoading');
+        if (loadingArea) loadingArea.style.setProperty('display', 'flex', 'important');
         
         fetch("{{ route('ai.submit_answer') }}", {
             method: 'POST',
@@ -4595,23 +4913,18 @@
             })
         })
         .then(response => {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalHtml;
-            }
-            
             if (!response.ok) {
                 return response.json().then(err => { throw new Error(err.error || 'Server error'); });
             }
             return response.json();
         })
         .then(data => {
-            hideLoader();
+            // Hide loading state
+            if (loadingArea) loadingArea.style.setProperty('display', 'none', 'important');
+            
             if (data.success) {
-                let finalReply = data.reply || `### 📊 Evaluation\n\n**Score:** ${data.attempt.score}\n\n${data.attempt.feedback}`;
-                appendMessage(finalReply, 'assistant');
+                // Save to sidebar history
                 addAttemptToHistorySidebar(data.attempt);
-                
                 historyData[data.attempt.id] = {
                     id: data.attempt.id,
                     skill: data.attempt.skill.toLowerCase(),
@@ -4621,38 +4934,56 @@
                     feedback: data.attempt.feedback
                 };
                 
-                let modalLabel = document.getElementById('readingResultsModalLabel');
-                if (modalLabel) modalLabel.innerHTML = `<i class="fas fa-poll-h me-2"></i> Speaking Evaluation Completed`;
+                // Show evaluation area
+                let evalArea = document.getElementById('speakingEvaluationArea');
+                if (evalArea) evalArea.style.setProperty('display', 'flex', 'important');
                 
-                let scoreEl = document.getElementById('readingResultScore');
-                if (scoreEl) scoreEl.textContent = data.attempt.score;
-                
-                let feedbackEl = document.getElementById('readingResultFeedback');
-                if (feedbackEl) {
-                    if (typeof marked !== 'undefined') {
-                        feedbackEl.innerHTML = marked.parse(data.attempt.feedback || '');
-                    } else {
-                        feedbackEl.textContent = data.attempt.feedback || '';
-                    }
+                // Render scoring and observation report
+                let reportEl = document.getElementById('speakingObservationReport');
+                if (reportEl) {
+                    let feedbackHtml = typeof marked !== 'undefined' ? marked.parse(data.attempt.feedback || '') : data.attempt.feedback;
+                    
+                    reportEl.innerHTML = `
+                        <!-- Band Score Badge -->
+                        <div class="d-flex align-items-center justify-content-between p-3 mb-4 rounded" style="background: rgba(227, 27, 35, 0.05); border: 1.5px solid rgba(227, 27, 35, 0.15);">
+                            <span class="fw-bold text-primary" style="font-family: 'Fraunces', serif; font-size: 15px;">Estimated Speaking Band Score:</span>
+                            <span class="badge bg-primary px-3 py-2 fw-extrabold fs-14" style="border-radius: 50px; color: #ffffff !important;">${data.attempt.score}</span>
+                        </div>
+                        
+                        <!-- Observation & Observations Feedback -->
+                        <div class="speaking-feedback-content text-secondary fs-14" style="line-height: 1.6;">
+                            ${feedbackHtml}
+                        </div>
+                        
+                        <!-- Action Row -->
+                        <div class="d-flex justify-content-end gap-3 mt-4 pt-3 border-top border-secondary-subtle">
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="exitSpeakingMode()" style="border-radius: 20px; font-weight: 500; padding: 8px 20px;">
+                                <i class="fas fa-comment"></i> Back to Chat
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary text-white" onclick="triggerNextSpeakingTest()" style="border-radius: 20px; font-weight: 500; padding: 8px 20px; background-color: #E31B23 !important; border: none;">
+                                <i class="fas fa-arrow-right"></i> Next Cue Card
+                            </button>
+                        </div>
+                    `;
                 }
-                
-                let resultsModal = new bootstrap.Modal(document.getElementById('readingResultsModal'));
-                resultsModal.show();
             } else {
                 alert("An error occurred while evaluating your speaking answer.");
                 exitSpeakingMode();
             }
         })
         .catch(error => {
-            hideLoader();
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalHtml;
-            }
+            // Hide loading state
+            if (loadingArea) loadingArea.style.setProperty('display', 'none', 'important');
+            
             console.error('Error:', error);
             alert("Network error: " + error.message);
             exitSpeakingMode();
         });
+    }
+
+    window.triggerNextSpeakingTest = function() {
+        exitSpeakingMode();
+        triggerPreset('Hello! I would like to practice Speaking.');
     }
 
     // Auto-trigger practice test if quick_start parameter is present in URL
