@@ -25,7 +25,7 @@
             <i class="bi bi-pencil me-1"></i> Edit Lesson
           </a>
 
-          <a href="{{ route('teacher.course_lessons_user.index', $lesson->course_id) }}"
+          <a href="{{ route('teacher.course-lessons', $lesson->course_id) }}"
             class="btn btn-outline-secondary btn-sm mt-2 rounded-pill">
             <i class="bi bi-arrow-left me-1"></i> Back
           </a>

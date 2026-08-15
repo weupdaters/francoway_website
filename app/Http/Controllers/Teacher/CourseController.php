@@ -27,12 +27,23 @@ class CourseController extends Controller
     public function getUserCourses($user_id)
     {
         $alluserCourses = TeacherAssignUser::whereHas('course')
-        ->with('course')
-        ->where('teacher_id', auth()->id())
-        ->where('user_id', $user_id)
-        ->get();
+            ->with('course')
+            ->where('teacher_id', auth()->id())
+            ->where('user_id', $user_id)
+            ->get()
+            ->unique('course_id');
 
-        return view('teachers.course_lessons.index', compact('alluserCourses'));
+        if ($alluserCourses->isEmpty()) {
+            $alluserCourses = TeacherAssignUser::whereHas('course')
+                ->with('course')
+                ->where('teacher_id', auth()->id())
+                ->get()
+                ->unique('course_id');
+        }
+
+        $selectedCourseId = optional($alluserCourses->first())->course_id;
+
+        return view('teachers.course_lessons.index', compact('alluserCourses', 'selectedCourseId'));
     }
 
     /**
@@ -40,16 +51,19 @@ class CourseController extends Controller
      * Single Page:
      * Left = Courses
      * Right = Lessons (AJAX)
-     * URL: /teacher/course-lessons
+     * URL: /teacher/course-lessons/{course?}
      */
-    public function courseLessonPage()
+    public function courseLessonPage($course = null)
     {
-        $courses = TeacherAssignUser::whereHas('course')
+        $selectedCourseId = is_numeric($course) ? (int)$course : (is_object($course) ? $course->id : null);
+
+        $alluserCourses = TeacherAssignUser::whereHas('course')
             ->with('course')
             ->where('teacher_id', auth()->id())
-            ->get();
+            ->get()
+            ->unique('course_id');
 
-        return view('teachers.lessons.index', compact('courses'));
+        return view('teachers.course_lessons.index', compact('alluserCourses', 'selectedCourseId'));
     }
 
     /**

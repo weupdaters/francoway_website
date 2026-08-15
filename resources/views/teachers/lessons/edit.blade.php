@@ -227,11 +227,11 @@
 
             {{-- Section --}}
             <div class="mb-4">
-              <label class="form-label text-primary-indigo fw-bold fs-11 tracking-wider mb-2">SECTION *</label>
+              <label class="form-label text-primary-indigo fw-bold fs-11 tracking-wider mb-2">SECTION (OPTIONAL)</label>
               <div class="section-select-wrapper">
                 <div class="input-icon-group">
                   <i class="bi bi-grid-3x3-gap"></i>
-                  <select class="form-select" name="section_id" id="sectionSelect" required>
+                  <select class="form-select" name="section_id" id="sectionSelect">
                     <option value="">-- Select Section --</option>
                     @foreach ($lesson->course->sections as $section)
                       <option value="{{ $section->id }}" {{ $lesson->section_id == $section->id ? 'selected' : '' }}>
@@ -426,7 +426,7 @@
               <i class="bi bi-floppy fs-16"></i>
               Update Lesson
             </button>
-            <a href="{{ route('teacher.course_lessons_user.index', $course->id) }}" class="btn btn-outline-secondary w-100 py-2 rounded-12 fw-semibold fs-14 d-flex align-items-center justify-content-center mb-3">
+            <a href="{{ route('teacher.course-lessons', $course->id) }}" class="btn btn-outline-secondary w-100 py-2 rounded-12 fw-semibold fs-14 d-flex align-items-center justify-content-center mb-3">
               Cancel
             </a>
             <div class="d-flex align-items-center justify-content-center gap-2 text-success fs-13">

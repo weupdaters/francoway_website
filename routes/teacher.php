@@ -33,7 +33,7 @@ Route::middleware(['auth', 'role:teacher'])
         Route::get('/course-lessons/{user}/user', [CourseController::class, 'getUserCourses']) ->name('course_lessons_user.index');
 
         // (Optional) old combined page – agar already use ho rahi ho
-        Route::get('/course-lessons', [CourseController::class, 'courseLessonPage']) ->name('course-lessons');
+        Route::get('/course-lessons/{course?}', [CourseController::class, 'courseLessonPage'])->name('course-lessons');
 
         /*
         |--------------------------------------------------------------------------

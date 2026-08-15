@@ -1,5 +1,16 @@
 @php
-    $footerCourses = \App\Models\Course::where('status', 'published')->latest()->limit(6)->get();
+    $footerLocale = app()->getLocale();
+    $footerCoursesQuery = \App\Models\Course::where('status', 'published')->latest();
+    if ($footerLocale === 'fr') {
+        $footerCoursesQuery->where('lang', 'fr');
+    } else {
+        $footerCoursesQuery->where(function($q) {
+            $q->where('lang', 'en')
+              ->orWhereNull('lang')
+              ->orWhere('lang', '');
+        });
+    }
+    $footerCourses = $footerCoursesQuery->limit(6)->get();
 @endphp
 <!-- 9. FOOTER -->
 <footer class="bg-[#040E20] text-white pt-16 pb-8 border-t border-white/5 relative overflow-hidden">
@@ -47,9 +58,15 @@
                 @forelse($footerCourses as $fc)
                     <li><a href="{{ route('courses.show', $fc->slug ?? $fc->id) }}" class="hover:text-red-500 hover:underline transition-all">{{ $fc->title }}</a></li>
                 @empty
-                    <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">French A1 - Beginner</a></li>
-                    <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">French A2 - Elementary</a></li>
-                    <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">French B1 - Intermediate</a></li>
+                    @if(app()->getLocale() === 'fr')
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">Français A1 - Débutant</a></li>
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">Français A2 - Élémentaire</a></li>
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">Français B1 - Intermédiaire</a></li>
+                    @else
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">English A1 - Beginner</a></li>
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">English A2 - Elementary</a></li>
+                        <li><a href="{{ route('courses.index') }}" class="hover:text-red-500 hover:underline transition-all">English B1 - Intermediate</a></li>
+                    @endif
                 @endforelse
             </ul>
         </div>

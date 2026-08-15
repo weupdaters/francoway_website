@@ -190,6 +190,14 @@ class HomeController extends Controller
                     'active_custom_prompt' => $course->has_custom_prompt ? $course->custom_prompt : null
                 ]);
             }
+        } elseif (!session()->has('active_course_id')) {
+            $latestCourse = Course::where('status', 'published')->where('has_custom_prompt', true)->latest()->first();
+            if ($latestCourse) {
+                session([
+                    'active_course_id' => $latestCourse->id,
+                    'active_custom_prompt' => $latestCourse->custom_prompt
+                ]);
+            }
         }
 
         return view('ai-practice', compact('settings', 'history'));
@@ -346,8 +354,7 @@ class HomeController extends Controller
 
         $systemPrompt = "You are FrancoWay's AI Study Assistant. Your goal is to help students practice their French or English language skills in 4 categories: Listening, Speaking, Writing, and Reading.
 
-If a student asks to discuss, introduce, prepare for, or start a Reading, Writing, or Listening module, you MUST immediately generate the actual exercise/passage/prompt wrapped inside the `<exercise skill=\"reading|writing|listening\">` tag. Do not output any introductory chat, greetings, or conversational questions before the tag for these skills; output the exercise block immediately so the student's interactive workspace opens right away.
-For the Speaking module, greet them warmly in English or French (depending on the course language or the language of the custom prompt), explain the format and guidelines, and ask if they are ready for you to generate the test/exercise.
+If a student asks to discuss, introduce, prepare for, or start a Reading, Writing, Listening, or Speaking module, you MUST immediately generate the actual exercise/passage/prompt/cue card wrapped inside the `<exercise skill=\"reading|writing|listening|speaking\">` tag. Do not output any introductory chat, greetings, or conversational questions before the tag for these skills; output the exercise block immediately so the student's interactive workspace opens right away.
 
 Whenever you generate a new practice task/exercise for the student, you MUST wrap the complete task content (including the answers key at the bottom) inside `<exercise skill=\"reading|listening|writing|speaking\">...</exercise>` tags.
 
@@ -423,18 +430,17 @@ Do not wrap normal chat dialogue, explanations, greetings, or evaluations in thi
         if ($customPrompt) {
             $systemPrompt .= "\n\nCUSTOM COURSE RULES/GUIDELINES FOR GENERATION AND EVALUATION:\n{$customPrompt}";
             $systemPrompt .= "\n\nCRITICAL DIRECTIVE FOR CUSTOM COURSE RULES/GUIDELINES:
-If these custom course rules/guidelines contain a specific text/passage, transcript, dialogue, questions list, or essay prompt, you MUST output them exactly as the exercise, wrapped inside the `<exercise skill=\"...\">` tag. Do not invent new questions or change the provided passage/questions/prompt unless explicitly requested. If there are no answers provided in the custom prompt guidelines, you MUST generate the correct answers yourself and include them under `### Answer Key` at the bottom inside the `<exercise>` block. Make sure to identify the correct skill (reading, listening, writing, speaking) from the custom prompt and set the skill attribute accordingly.";
+1. These custom course rules/guidelines provided by the admin have HIGHEST PRIORITY.
+2. If these guidelines contain specific instructions (such as testing verb conjugation, single-sentence questions, specific passages, custom rules, or specific question lists), you MUST follow these custom instructions exactly.
+3. Wrap the generated content inside `<exercise skill=\"{$targetSkill}\">...</exercise>`.
+4. If no answer key is explicitly written in the custom prompt guidelines, generate the correct answer key yourself at the bottom using `### Answer Key`.";
         }
 
         if ($targetSkill) {
             $systemPrompt .= "\n\nCRITICAL DIRECTIVE FOR TARGET MODULE '{$targetSkill}':
 1. You MUST generate ONLY a '{$targetSkill}' exercise wrapped in `<exercise skill=\"{$targetSkill}\">`.
-2. Even if the custom course rules/guidelines ask for a different exercise format, you MUST adapt those rules to fit the '{$targetSkill}' format.
-3. For Reading ('reading'): You MUST generate a full reading passage (minimum 150 words) and exactly 10 questions (numbered 1 to 10). Do NOT generate a single sentence or a speaking dialogue.
-4. For Listening ('listening'): You MUST generate a detailed transcript/dialogue (minimum 150 words) and exactly 10 questions (numbered 1 to 10).
-5. For Writing ('writing'): You MUST generate an essay prompt or writing task description.
-6. For Speaking ('speaking'): You MUST generate an oral topic or discussion prompt.
-7. You MUST NOT mix content from other modules. Do not generate reading passages when the active skill is writing or speaking, and do not generate speaking/oral prompts when the active skill is reading.";
+2. Follow the custom course rules/guidelines provided above for this module. Only if no custom prompt guideline is provided for this module, generate a default standard exercise format (e.g. 10 questions for reading/listening).
+3. Do NOT mix content from other modules. Do not generate reading passages when the active skill is writing or speaking.";
         }
 
         $systemPrompt .= "\n\nRules:
@@ -1098,7 +1104,7 @@ Your response MUST be in the following strict JSON format:
                 if ($prompt) return $prompt;
             }
 
-            // 2. Check Course custom_prompt JSON
+            // 2. Check Course custom_prompt JSON for activeCourseId
             if ($activeCourseId) {
                 $courseObj = Course::find($activeCourseId);
                 if ($courseObj && $courseObj->has_custom_prompt && $courseObj->custom_prompt) {
@@ -1109,22 +1115,24 @@ Your response MUST be in the following strict JSON format:
                 }
             }
 
-            // 3. Check Prompt model for global prompt for this skill (course_id IS NULL or any active prompt)
-            $globalPrompt = \App\Models\Prompt::where('skill', $targetSkill)
-                ->where('status', true)
-                ->where(function($q) use ($activeCourseId) {
-                    if ($activeCourseId) {
-                        $q->where('course_id', $activeCourseId)->orWhereNull('course_id');
-                    } else {
-                        $q->whereNull('course_id');
-                    }
-                })
-                ->latest()
-                ->value('prompt_text');
-            if ($globalPrompt) return $globalPrompt;
+            // 3. Fallback: Check Prompt model for any active prompt for this skill
+            $p = \App\Models\Prompt::where('skill', $targetSkill)->where('status', true)->latest()->value('prompt_text');
+            if ($p) return $p;
 
-            // 4. Fallback: Any active prompt for this skill in Prompt model
-            return \App\Models\Prompt::where('skill', $targetSkill)->where('status', true)->latest()->value('prompt_text');
+            // 4. Fallback: Check ANY published Course custom_prompt JSON for this skill
+            $coursesWithPrompt = Course::where('status', 'published')
+                ->where('has_custom_prompt', true)
+                ->whereNotNull('custom_prompt')
+                ->latest()
+                ->get();
+            foreach ($coursesWithPrompt as $cObj) {
+                $dec = json_decode($cObj->custom_prompt, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($dec) && !empty($dec[$targetSkill])) {
+                    return $dec[$targetSkill];
+                }
+            }
+
+            return null;
         }
 
         // If no target skill specified, aggregate all active module prompts

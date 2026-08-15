@@ -101,7 +101,7 @@
                                 </a>
 
                                 {{-- Delete --}}
-                                <form action="{{ route('teacher.lessons.destroy', [$course->id, $lesson->id]) }}"
+                                <form action="{{ route('teacher.ajax.lesson.destroy', $lesson->id) }}"
                                       method="POST">
                                     @csrf
                                     @method('DELETE')

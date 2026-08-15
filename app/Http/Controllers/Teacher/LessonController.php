@@ -125,7 +125,7 @@ class LessonController extends Controller
         $lesson->save();
 
         return redirect()
-            ->route('teacher.course_lessons_user.index', $course->id)
+            ->route('teacher.course-lessons', $course->id)
             ->with('success', 'Lesson created successfully');
     }
 
@@ -276,7 +276,7 @@ class LessonController extends Controller
         $lesson->save();
 
         return redirect()
-            ->route('teacher.lessons.show', $lesson->id)
+            ->route('teacher.course-lessons', $lesson->course_id)
             ->with('success', 'Lesson updated successfully');
     }
 

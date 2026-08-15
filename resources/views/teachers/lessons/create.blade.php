@@ -217,11 +217,11 @@
 
             {{-- Section --}}
             <div class="mb-4">
-              <label class="form-label text-primary-indigo fw-bold fs-11 tracking-wider mb-2">SECTION *</label>
+              <label class="form-label text-primary-indigo fw-bold fs-11 tracking-wider mb-2">SECTION (OPTIONAL)</label>
               <div class="section-select-wrapper">
                 <div class="input-icon-group">
                   <i class="bi bi-grid-3x3-gap"></i>
-                  <select class="form-select" name="section_id" id="sectionSelect" required>
+                  <select class="form-select" name="section_id" id="sectionSelect">
                     <option value="">-- Select Section --</option>
                     @foreach ($sections as $section)
                       <option value="{{ $section->id }}">{{ $section->title }}</option>

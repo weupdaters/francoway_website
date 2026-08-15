@@ -350,6 +350,20 @@
         </nav>
     </div>
 
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show rounded-12 mb-4" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show rounded-12 mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     {{-- Main Columns --}}
     <div class="row g-4">
 
@@ -526,10 +540,19 @@
     const noImageBanner = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f8fafc;stop-opacity:1"/><stop offset="100%" style="stop-color:%23e2e8f0;stop-opacity:1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/><g transform="translate(400, 220)" text-anchor="middle"><path d="M-24,-40 L24,-40 C32,-40 38,-34 38,-26 L38,26 C38,34 32,40 24,40 L-24,40 C-32,40 -38,34 -38,26 L-38,-26 C-38,-34 -32,-40 -24,-40 Z" fill="none" stroke="%2364748b" stroke-width="4" stroke-linejoin="round"/><circle cx="0" cy="0" r="14" fill="none" stroke="%2364748b" stroke-width="4"/><circle cx="20" cy="-22" r="4" fill="%2364748b"/><text x="0" y="85" fill="%23071530" font-family="Outfit, sans-serif" font-size="24" font-weight="800" letter-spacing="1">NO IMAGE AVAILABLE</text><text x="0" y="115" fill="%2364748b" font-family="Outfit, sans-serif" font-size="16" font-weight="500">FrancoWay Learning Portal</text></g></svg>';
 
     $(document).ready(function() {
-        // Auto-select the first course on page load if items exist
-        let firstCourseItem = $('#courseList [data-id]').first();
-        if (firstCourseItem.length > 0) {
-            firstCourseItem.trigger('click');
+        let initialCourseId = "{{ $selectedCourseId ?? '' }}";
+        let targetCourseItem = null;
+
+        if (initialCourseId) {
+            targetCourseItem = $('#courseList [data-id="' + initialCourseId + '"]');
+        }
+
+        if (!targetCourseItem || targetCourseItem.length === 0) {
+            targetCourseItem = $('#courseList [data-id]').first();
+        }
+
+        if (targetCourseItem.length > 0) {
+            targetCourseItem.trigger('click');
         }
     });
 
@@ -711,10 +734,17 @@
         confirmAction('Delete Lesson', 'Are you sure you want to delete this lesson?', 'Yes, delete it!', function() {
             $.ajax({
                 url: '/teacher/ajax/lesson/' + lessonId,
-                method: 'GET',
+                type: 'POST',
+                data: {
+                    _method: 'DELETE',
+                    _token: '{{ csrf_token() }}'
+                },
                 success: function(res) {
                     showToast('Lesson deleted successfully', 'success');
                     loadLessons(selectedCourse);
+                },
+                error: function(xhr) {
+                    showToast(xhr.responseJSON?.message || 'Failed to delete lesson', 'error');
                 }
             });
         });
