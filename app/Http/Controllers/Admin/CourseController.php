@@ -59,6 +59,7 @@ class CourseController extends Controller
 
         // 2. Validate input fields
         $data = $request->validate([
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'status' => 'required', // published / draft / 1 / 0
