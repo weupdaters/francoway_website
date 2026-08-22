@@ -18,9 +18,11 @@
                 </li>
         
                 <li class="breadcrumb-item">
-                <a href="{{ route('admin.courses.index') }}" class="d-flex align-items-center text-decoration-none">
-                    <span class="text-body fs-14 hover">Courses</span>
-                </a>
+                    <a href="{{ route('admin.courses.index') }}" class="d-flex align-items-center text-decoration-none">
+                        <i class="ri-book-open-line fs-15 text-primary me-1"></i>
+                        <span class="text-body fs-14 hover">Courses</span>
+                    </a>
+                </li>
                 <li class="breadcrumb-item active">
                     <span class="text-secondary">Edit Course</span>
                 </li>
@@ -28,10 +30,27 @@
         </nav>
     </div>
 
+    {{-- Validation Error Alert --}}
+    @if ($errors->any())
+      <div class="alert alert-danger alert-dismissible fade show rounded-10 border-0 mb-4 shadow-sm" role="alert">
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <i class="ri-error-warning-fill fs-20"></i>
+          <strong>Please fix the errors below:</strong>
+        </div>
+        <ul class="mb-0 ps-3">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
+
     {{-- MAIN FORM --}}
     <form action="{{ route('admin.courses.update', $course->slug ?? $course->id) }}"
           method="POST"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+          id="courseEditForm">
         @csrf
         @method('PUT')
 
@@ -44,61 +63,77 @@
 
                     {{-- Title --}}
                     <div class="mb-20">
-                        <label class="label fs-16 mb-2">Course Title</label>
+                        <label class="label fs-16 mb-2">Course Title <span class="text-danger">*</span></label>
                         <div class="form-floating">
                             <input type="text"
-                                   class="form-control"
+                                   class="form-control @error('title') is-invalid @enderror"
                                    name="title"
                                    value="{{ old('title', $course->title) }}"
-                                   placeholder="Course Title">
+                                   placeholder="Course Title" required>
                             <label>Course Title</label>
                         </div>
+                        @error('title')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Description --}}
                     <div class="form-group mb-20">
-                        <label class="label fs-16">Course Description</label>
+                        <label class="label fs-16 mb-2">Course Description <span class="text-danger">*</span></label>
                         <textarea name="description"
-                                  class="form-control"
-                                  style="height:163px;">{{ old('description', $course->description) }}</textarea>
+                                  class="form-control @error('description') is-invalid @enderror"
+                                  style="height:163px;" required>{{ old('description', $course->description) }}</textarea>
+                        @error('description')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Price --}}
                     <div class="mb-20">
-                        <label class="label fs-16 mb-2">Course Price</label>
+                        <label class="label fs-16 mb-2">Course Price ($ / CAD / USD) <span class="text-danger">*</span></label>
                         <div class="form-floating">
                             <input type="text"
-                                   class="form-control"
+                                   class="form-control @error('price') is-invalid @enderror"
                                    name="price"
                                    value="{{ old('price', $course->price) }}"
-                                   placeholder="Enter rate">
-                            <label>Enter rate</label>
+                                   placeholder="e.g. 200 (Enter 0 for free course)" required>
+                            <label>e.g. 200 (Enter 0 for free course)</label>
                         </div>
+                        <small class="text-muted fs-12 d-block mt-1">Enter numeric value, e.g. 200 or 0 for Free course.</small>
+                        @error('price')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Thumbnail --}}
                     <div class="form-group mb-4 only-file-upload">
-                        <label class="label fs-16 text-secondary">Course Avatar</label>
-                        <input type="file" class="form-control" name="thumbnail">
+                        <label class="label fs-16 text-secondary mb-2">Course Avatar / Thumbnail</label>
+                        <input type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" accept="image/*">
                         @if($course->thumbnail)
-                            <small class="text-secondary d-block mt-1">
-                                Current: {{ $course->thumbnail }}
-                            </small>
+                            <div class="d-flex align-items-center gap-2 mt-2">
+                                <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="Thumbnail" class="rounded-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                <small class="text-secondary">Current file: {{ basename($course->thumbnail) }}</small>
+                            </div>
                         @endif
+                        @error('thumbnail')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Cover Image --}}
                     <div class="form-group mb-4 only-file-upload">
-                        <label class="label fs-16 text-secondary">Course Cover Image</label>
-                        <input type="file" class="form-control" name="cover_image">
+                        <label class="label fs-16 text-secondary mb-2">Course Cover Image</label>
+                        <input type="file" class="form-control @error('cover_image') is-invalid @enderror" name="cover_image" accept="image/*">
                         @if($course->cover_image)
-                            <small class="text-secondary d-block mt-1">
-                                Current: {{ $course->cover_image }}
-                            </small>
+                            <div class="d-flex align-items-center gap-2 mt-2">
+                                <img src="{{ asset('storage/' . $course->cover_image) }}" alt="Cover Image" class="rounded-2" style="width: 80px; height: 45px; object-fit: cover;">
+                                <small class="text-secondary">Current file: {{ basename($course->cover_image) }}</small>
+                            </div>
                         @endif
+                        @error('cover_image')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
-
-
 
                     @php
                         $prompts = [];
@@ -193,7 +228,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -204,11 +238,14 @@
 
                     {{-- Status --}}
                     <div class="mb-20">
-                        <label class="label fs-16 mb-2">Status</label>
-                        <select class="form-select" name="status">
-                            <option value="1" {{ $course->status == 1 ? 'selected' : '' }}>Published</option>
-                            <option value="0" {{ $course->status == 0 ? 'selected' : '' }}>Draft</option>
+                        <label class="label fs-16 mb-2">Status <span class="text-danger">*</span></label>
+                        <select class="form-select @error('status') is-invalid @enderror" name="status">
+                            <option value="1" {{ old('status', $course->status ? '1' : '0') == '1' || old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                            <option value="0" {{ old('status', $course->status ? '1' : '0') == '0' || old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
                         </select>
+                        @error('status')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Language --}}
@@ -223,19 +260,23 @@
                     {{-- Trial Video --}}
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">Trial Video</label>
-                        <input type="file" class="form-control" name="trial_video">
+                        <input type="file" class="form-control @error('trial_video') is-invalid @enderror" name="trial_video" accept="video/*">
                         @if($course->trial_video)
                             <small class="text-secondary d-block mt-1">
-                                Current: {{ $course->trial_video }}
+                                <i class="ri-video-line me-1"></i> Current video: {{ basename($course->trial_video) }}
                             </small>
                         @endif
+                        @error('trial_video')
+                            <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Buttons --}}
-                    <div class="d-flex justify-content-between gap-2">
+                    <div class="d-flex justify-content-between gap-2 mt-4">
                         <button type="submit"
-                                class="btn btn-primary fw-normal text-white">
-                            Update Course
+                                class="btn btn-primary fw-normal text-white px-4"
+                                id="updateCourseBtn">
+                            <i class="ri-check-line me-1"></i> Update Course
                         </button>
 
                         <a href="{{ route('admin.courses.index') }}"
@@ -251,6 +292,18 @@
     </form>
 
 </div>
+
+@push('scripts')
+<script>
+  document.getElementById('courseEditForm')?.addEventListener('submit', function() {
+    const btn = document.getElementById('updateCourseBtn');
+    if (btn) {
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Updating...';
+      btn.classList.add('disabled');
+    }
+  });
+</script>
+@endpush
 
 @endsection
 

@@ -50,14 +50,21 @@ class CourseController extends Controller
     // =========================
     public function store(Request $request)
     {
+        // 1. Sanitize Price (strip currency symbols/letters if entered like '$200' or '200 Dollar')
+        if ($request->has('price')) {
+            $rawPrice = (string) $request->input('price');
+            $cleanedPrice = preg_replace('/[^0-9.]/', '', $rawPrice);
+            $request->merge(['price' => $cleanedPrice === '' ? '0' : $cleanedPrice]);
+        }
+
+        // 2. Validate input fields
         $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'status' => 'required', // published / draft
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'trial_video' => 'nullable',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'status' => 'required', // published / draft / 1 / 0
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:10240',
+            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:10240',
+            'trial_video' => 'nullable|file|mimes:mp4,mov,ogg,qt,webm,avi,mkv|max:102400',
             'prompts' => 'nullable|array',
             'lang' => 'nullable|string|in:en,fr',
         ]);
@@ -65,6 +72,10 @@ class CourseController extends Controller
         if (empty($data['lang'])) {
             $data['lang'] = app()->getLocale();
         }
+
+        // 3. Safe Boolean Conversion for MySQL TINYINT
+        $statusInput = $request->input('status');
+        $data['status'] = in_array($statusInput, ['published', '1', 1, true, 'true', 'Published'], true) ? 1 : 0;
 
         $prompts = $request->input('prompts', []);
         $cleanPrompts = [
@@ -86,13 +97,8 @@ class CourseController extends Controller
         $data['has_custom_prompt'] = $hasCustomPrompt;
         $data['custom_prompt'] = $hasCustomPrompt ? json_encode($cleanPrompts) : null;
 
-
-
         // ✅ ADMIN creates course → teacher_id NULL
         $data['teacher_id'] = null;
-
-        // ✅ SLUG AUTO GENERATE (UNIQUE)
-        $data['slug'] = Str::slug($request->title) . '-' . time();
 
         // 📂 File uploads
         if ($request->hasFile('thumbnail')) {
@@ -111,7 +117,7 @@ class CourseController extends Controller
 
         return redirect()
             ->route('admin.courses.index')
-            ->with('success', 'Course created successfully');
+            ->with('success', 'Course created successfully.');
     }
 
     public function show(Course $course)
@@ -130,17 +136,29 @@ class CourseController extends Controller
     // =========================
     public function update(Request $request, Course $course)
     {
+        // 1. Sanitize Price
+        if ($request->has('price')) {
+            $rawPrice = (string) $request->input('price');
+            $cleanedPrice = preg_replace('/[^0-9.]/', '', $rawPrice);
+            $request->merge(['price' => $cleanedPrice === '' ? '0' : $cleanedPrice]);
+        }
+
+        // 2. Validate input fields
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required',
-            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
             'status' => 'required',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'trial_video' => 'nullable',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:10240',
+            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:10240',
+            'trial_video' => 'nullable|file|mimes:mp4,mov,ogg,qt,webm,avi,mkv|max:102400',
             'prompts' => 'nullable|array',
             'lang' => 'nullable|string|in:en,fr',
         ]);
+
+        // 3. Safe Boolean Conversion for MySQL TINYINT
+        $statusInput = $request->input('status');
+        $data['status'] = in_array($statusInput, ['published', '1', 1, true, 'true', 'Published'], true) ? 1 : 0;
 
         $prompts = $request->input('prompts', []);
         $cleanPrompts = [
@@ -161,11 +179,6 @@ class CourseController extends Controller
 
         $data['has_custom_prompt'] = $hasCustomPrompt;
         $data['custom_prompt'] = $hasCustomPrompt ? json_encode($cleanPrompts) : null;
-
-        // 🔁 Update slug if title changed or if slug is currently empty
-        if ($course->title !== $request->title || empty($course->slug)) {
-            $data['slug'] = Str::slug($request->title) . '-' . $course->id;
-        }
 
         // 🔁 Handle file uploads + delete old files
         foreach (['thumbnail', 'cover_image', 'trial_video'] as $file) {
@@ -187,7 +200,7 @@ class CourseController extends Controller
 
         return redirect()
             ->route('admin.courses.index')
-            ->with('success', 'Course updated successfully');
+            ->with('success', 'Course updated successfully.');
     }
 
     public function updatePrompt(Request $request, Course $course)

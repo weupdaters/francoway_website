@@ -17,8 +17,8 @@
           </li>
          
           <li class="breadcrumb-item">
-          <a href="{{ route('admin.courses.index') }}" class="d-flex align-items-center text-decoration-none">
-              <i class="ri-home-8-line fs-15 text-primary me-1"></i>
+            <a href="{{ route('admin.courses.index') }}" class="d-flex align-items-center text-decoration-none">
+              <i class="ri-book-open-line fs-15 text-primary me-1"></i>
               <span class="text-body fs-14 hover">Courses</span>
             </a>
           </li>
@@ -29,8 +29,24 @@
       </nav>
     </div>
 
+    {{-- Validation Error Alert --}}
+    @if ($errors->any())
+      <div class="alert alert-danger alert-dismissible fade show rounded-10 border-0 mb-4 shadow-sm" role="alert">
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <i class="ri-error-warning-fill fs-20"></i>
+          <strong>Please fix the errors below:</strong>
+        </div>
+        <ul class="mb-0 ps-3">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
+
     {{-- MAIN FORM --}}
-    <form action="{{ route('admin.courses.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.courses.store') }}" method="POST" enctype="multipart/form-data" id="courseCreateForm">
       @csrf
 
       <div class="row">
@@ -42,73 +58,87 @@
 
             {{-- Course Title --}}
             <div class="mb-20">
-              <label class="label fs-16 mb-2">Course Title</label>
+              <label class="label fs-16 mb-2">Course Title <span class="text-danger">*</span></label>
               <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput1" name="title" value="{{ old('title') }}"
-                  placeholder="Course Title">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="floatingInput1" name="title" value="{{ old('title') }}"
+                  placeholder="Course Title" required>
                 <label for="floatingInput1">Course Title</label>
               </div>
+              @error('title')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
-
-
 
             {{-- Description --}}
             <div class="form-group mb-20">
-              <label class="label fs-16">Course Description</label>
-              <textarea name="description" class="form-control" style="height:163px;">{{ old('description') }}</textarea>
+              <label class="label fs-16 mb-2">Course Description <span class="text-danger">*</span></label>
+              <textarea name="description" class="form-control @error('description') is-invalid @enderror" style="height:163px;" placeholder="Write course overview, syllabus, learning outcomes..." required>{{ old('description') }}</textarea>
+              @error('description')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
 
             {{-- Price --}}
             <div class="mb-20">
-              <label class="label fs-16 mb-2">Course Price</label>
+              <label class="label fs-16 mb-2">Course Price ($ / CAD / USD) <span class="text-danger">*</span></label>
               <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput3" name="price" value="{{ old('price') }}"
-                  placeholder="Enter rate">
-                <label for="floatingInput3">Enter rate</label>
+                <input type="text" class="form-control @error('price') is-invalid @enderror" id="floatingInput3" name="price" value="{{ old('price') }}"
+                  placeholder="e.g. 200 (Enter 0 for free course)" required>
+                <label for="floatingInput3">e.g. 200 (Enter 0 for free course)</label>
               </div>
+              <small class="text-muted fs-12 d-block mt-1">Enter numeric value, e.g. 200 or 0 for Free course.</small>
+              @error('price')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
 
             {{-- Thumbnail --}}
             <div class="form-group mb-4 only-file-upload" id="file-upload">
-              <label class="label fs-16 text-secondary">Course Avatar</label>
-              <div class="form-control h-100 text-center position-relative p-4 p-lg-5">
+              <label class="label fs-16 text-secondary mb-2">Course Avatar / Thumbnail</label>
+              <div class="form-control h-100 text-center position-relative p-4 p-lg-5 @error('thumbnail') border-danger @enderror">
                 <div class="product-upload">
                   <label class="file-upload mb-0">
                     <i class="ri-folder-image-line bg-primary bg-opacity-10 p-2 rounded-1 text-primary"></i>
-                    <span class="d-block text-body fs-14">
+                    <span class="d-block text-body fs-14 mt-2" id="thumbnail-filename">
                       Drag and drop an image or
                       <span class="text-primary text-decoration-underline">Browse</span>
                     </span>
+                    <span class="d-block text-muted fs-12 mt-1">Supported: JPG, PNG, WEBP, GIF (Max: 10MB)</span>
                   </label>
                   <label class="position-absolute top-0 bottom-0 start-0 end-0 cursor">
-                    <input class="form__file bottom-0" type="file" name="thumbnail"
-                      accept="image/jpeg, image/png, image/gif">
+                    <input class="form__file bottom-0" type="file" name="thumbnail" id="thumbnailInput"
+                      accept="image/jpeg, image/png, image/webp, image/gif" onchange="displayFileName(this, 'thumbnail-filename')">
                   </label>
                 </div>
               </div>
+              @error('thumbnail')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
 
             {{-- Cover Image --}}
             <div class="form-group mb-4 only-file-upload">
-              <label class="label fs-16 text-secondary">Course Cover Image</label>
-              <div class="form-control h-100 text-center position-relative p-4 p-lg-5">
+              <label class="label fs-16 text-secondary mb-2">Course Cover Image</label>
+              <div class="form-control h-100 text-center position-relative p-4 p-lg-5 @error('cover_image') border-danger @enderror">
                 <div class="product-upload">
                   <label class="file-upload mb-0">
                     <i class="ri-image-line bg-primary bg-opacity-10 p-2 rounded-1 text-primary"></i>
-                    <span class="d-block text-body fs-14">
+                    <span class="d-block text-body fs-14 mt-2" id="cover-filename">
                       Drag and drop cover image or
                       <span class="text-primary text-decoration-underline">Browse</span>
                     </span>
+                    <span class="d-block text-muted fs-12 mt-1">Supported: JPG, PNG, WEBP, GIF (Max: 10MB)</span>
                   </label>
                   <label class="position-absolute top-0 bottom-0 start-0 end-0 cursor">
-                    <input class="form__file bottom-0" type="file" name="cover_image"
-                      accept="image/jpeg, image/png, image/gif">
+                    <input class="form__file bottom-0" type="file" name="cover_image" id="coverImageInput"
+                      accept="image/jpeg, image/png, image/webp, image/gif" onchange="displayFileName(this, 'cover-filename')">
                   </label>
                 </div>
               </div>
+              @error('cover_image')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
-
-
 
             {{-- Custom AI Prompts --}}
             <div class="mb-4">
@@ -195,11 +225,14 @@
 
             {{-- Status --}}
             <div class="mb-20">
-              <label class="label fs-16 mb-2">Status</label>
-              <select class="form-select" name="status">
-                <option value="published">Published</option>
-                <option value="draft">Draft</option>
+              <label class="label fs-16 mb-2">Status <span class="text-danger">*</span></label>
+              <select class="form-select @error('status') is-invalid @enderror" name="status">
+                <option value="1" {{ old('status', '1') == '1' || old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                <option value="0" {{ old('status') == '0' || old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
               </select>
+              @error('status')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
 
             {{-- Language --}}
@@ -213,27 +246,30 @@
             {{-- Trial Video --}}
             <div class="mb-20">
               <label class="label fs-16 mb-2">Trial Video (Preview)</label>
-              <div class="form-control h-100 text-center position-relative p-4">
+              <div class="form-control h-100 text-center position-relative p-4 @error('trial_video') border-danger @enderror">
                 <div class="product-upload">
                   <label class="file-upload mb-0">
                     <i class="ri-video-line bg-primary bg-opacity-10 p-2 rounded-1 text-primary"></i>
-                    <span class="d-block text-body fs-14">
+                    <span class="d-block text-body fs-14 mt-2" id="video-filename">
                       Upload trial video
                       <span class="text-primary text-decoration-underline">Browse</span>
                     </span>
+                    <span class="d-block text-muted fs-12 mt-1">Supported: MP4, WebM, MOV (Max: 100MB)</span>
                   </label>
                   <label class="position-absolute top-0 bottom-0 start-0 end-0 cursor">
-                    <input class="form__file bottom-0" type="file" name="trial_video" accept="video/*">
+                    <input class="form__file bottom-0" type="file" name="trial_video" id="trialVideoInput" accept="video/*" onchange="displayFileName(this, 'video-filename')">
                   </label>
                 </div>
               </div>
+              @error('trial_video')
+                <div class="text-danger fs-13 mt-1">{{ $message }}</div>
+              @enderror
             </div>
 
-
             {{-- Buttons --}}
-            <div class="d-flex justify-content-between gap-2">
-              <button type="submit" class="btn btn-primary fw-normal text-white">
-                Save Course
+            <div class="d-flex justify-content-between gap-2 mt-4">
+              <button type="submit" class="btn btn-primary fw-normal text-white px-4" id="saveCourseBtn">
+                <i class="ri-save-line me-1"></i> Save Course
               </button>
 
               <a href="{{ route('admin.courses.index') }}" class="btn btn-outline-border-color text-secondary fw-normal">
@@ -248,6 +284,29 @@
     </form>
 
   </div>
+
+  @push('scripts')
+  <script>
+    function displayFileName(input, targetId) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.innerHTML = `<strong class="text-success"><i class="ri-checkbox-circle-fill me-1"></i> ${file.name}</strong> <span class="text-muted">(${fileSizeMB} MB)</span>`;
+        }
+      }
+    }
+
+    document.getElementById('courseCreateForm')?.addEventListener('submit', function() {
+      const btn = document.getElementById('saveCourseBtn');
+      if (btn) {
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Saving...';
+        btn.classList.add('disabled');
+      }
+    });
+  </script>
+  @endpush
 @endsection
 
 @push('styles')
